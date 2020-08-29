@@ -6,12 +6,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-
-@Entity
-@Table(name = "stores")
 /**
  *Stores class
  */
+@Entity
+@Table(name = "stores")
 public class Store implements Serializable {
 
   /**

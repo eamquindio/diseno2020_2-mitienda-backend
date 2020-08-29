@@ -7,11 +7,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "products_store")
 /**
  * Store's product class
  */
+@Entity
+@Table(name = "products_store")
 public class ProductStore implements Serializable {
 
   /**
