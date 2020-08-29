@@ -9,20 +9,38 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "categories")
+/**
+ * Category's class
+ */
 public class Category implements Serializable {
 
+  /**
+   * Category's constructor
+   */
   public Category() {
   }
 
+  /**
+   * Category's primary key
+   */
   @Id
   private String id;
 
+  /**
+   * Category's icon
+   */
   private String icon;
 
+  /**
+   * Store to which category belongs
+   */
   @ManyToOne
   @JoinColumn(name = "id_store", referencedColumnName = "id")
   private Store store;
 
+  /**
+   * Category's name
+   */
   private String name;
 
 }
