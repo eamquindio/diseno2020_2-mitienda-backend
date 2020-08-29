@@ -9,26 +9,50 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "products_store")
+/**
+ * Store's product class
+ */
 public class ProductStore implements Serializable {
 
+  /**
+   * Store's product constructor
+   */
   public ProductStore() {
   }
 
+  /**
+   * Store's product Primary key
+   */
   @Id
   private String id;
 
+  /**
+   * Product of the store
+   */
   @ManyToOne
   @JoinColumn(name = "id_product", referencedColumnName = "id")
   private Product product;
 
+  /**
+   * Store's stock products quantity
+   */
   private int stock;
 
+  /**
+   * product's price in the store
+   */
   private double price;
 
+  /**
+   * The store's product category
+   */
   @ManyToOne
   @JoinColumn(name = "id_category", referencedColumnName = "id")
   private Category category;
 
+  /**
+   * Store of the product
+   */
   @ManyToOne
   @JoinColumn(name = "id_store", referencedColumnName = "id")
   private Store store;
