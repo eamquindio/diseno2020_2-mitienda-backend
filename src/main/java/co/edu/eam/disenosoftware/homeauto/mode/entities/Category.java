@@ -7,11 +7,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "categories")
 /**
  * Category's class
  */
+@Entity
+@Table(name = "categories")
 public class Category implements Serializable {
 
   /**

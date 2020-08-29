@@ -6,11 +6,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "shopping_cart_products")
 /**
  * Shopping cart's product class
  */
+@Entity
+@Table(name = "shopping_cart_products")
 public class ShoppingCartProduct implements Serializable {
 
   /**
