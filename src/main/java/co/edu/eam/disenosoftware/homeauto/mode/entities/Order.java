@@ -10,11 +10,11 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Table(name = "orders")
 /**
  * Order's class
  */
+@Entity
+@Table(name = "orders")
 public class Order implements Serializable {
 
   /**

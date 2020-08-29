@@ -9,11 +9,11 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
 
-@Entity
-@Table(name = "shopping_carts")
 /**
  * Shopping cart´s class
  */
+@Entity
+@Table(name = "shopping_carts")
 public class ShoppingCart implements Serializable {
 
   /**

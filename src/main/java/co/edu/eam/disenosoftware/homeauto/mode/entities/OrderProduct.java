@@ -6,11 +6,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "order_products")
 /**
  * Order's products class
  */
+@Entity
+@Table(name = "order_products")
 public class OrderProduct implements Serializable {
 
   /**
