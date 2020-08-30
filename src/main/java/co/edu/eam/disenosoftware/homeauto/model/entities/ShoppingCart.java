@@ -31,7 +31,7 @@ public class ShoppingCart implements Serializable {
   /**
    * Shopping Cart's Product
    */
-  @OneToMany(mappedBy ="product")
+  @OneToMany(mappedBy = "product")
   private List<ShoppingCartProduct> product;
 
   /**

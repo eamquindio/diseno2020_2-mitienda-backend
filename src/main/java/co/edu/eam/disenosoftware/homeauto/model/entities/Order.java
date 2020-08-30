@@ -26,7 +26,7 @@ public class Order implements Serializable {
   /**
    * Order's products
    */
-  @OneToMany(mappedBy ="order")
+  @OneToMany(mappedBy = "order")
   private List<OrderProduct> product;
 
   /**
