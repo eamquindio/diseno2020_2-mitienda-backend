@@ -1,6 +1,7 @@
 package co.edu.eam.disenosoftware.homeauto.mode.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -18,6 +19,12 @@ public class ShoppingCartProduct implements Serializable {
    */
   public ShoppingCartProduct() {
   }
+
+  /**
+   * Shopping cart's products primary key
+   */
+  @Id
+  private String id;
 
   /**
    * product´s shopping cart
