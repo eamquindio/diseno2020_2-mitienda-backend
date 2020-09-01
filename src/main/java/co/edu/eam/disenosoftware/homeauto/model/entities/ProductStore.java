@@ -18,7 +18,7 @@ public class ProductStore implements Serializable {
    * Product's store primary key
    */
   @Id
-  private String id;
+  private Long id;
 
   /**
    * Product of the store's - Foreign key

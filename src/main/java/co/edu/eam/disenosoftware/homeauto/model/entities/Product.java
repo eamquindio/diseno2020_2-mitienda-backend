@@ -16,7 +16,7 @@ public class Product implements Serializable {
    * Product's primary key
    */
   @Id
-  private String id;
+  private Long id;
 
   /**
    * Product's image

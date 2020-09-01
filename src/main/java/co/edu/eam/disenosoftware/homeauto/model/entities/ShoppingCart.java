@@ -19,7 +19,7 @@ public class ShoppingCart implements Serializable {
    * Shopping Cart's primary key
    */
   @Id
-  private String id;
+  private Long id;
 
   /**
    * Store of the shopping cart - Foreign key

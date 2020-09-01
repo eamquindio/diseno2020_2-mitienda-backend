@@ -17,7 +17,7 @@ public class Store implements Serializable {
    * Store's primary key
    */
   @Id
-  private String id;
+  private Long id;
 
   /**
    * Store's name

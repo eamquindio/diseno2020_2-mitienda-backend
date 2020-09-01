@@ -18,7 +18,7 @@ public class Category implements Serializable {
    * Category primary key
    */
   @Id
-  private String id;
+  private Long id;
 
   /**
    * Category icon
