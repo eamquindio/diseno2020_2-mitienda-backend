@@ -15,7 +15,7 @@ import java.io.Serializable;
 public class Category implements Serializable {
 
   /**
-   * Category primary key
+   * Category - Primary key
    */
   @Id
   private Long id;

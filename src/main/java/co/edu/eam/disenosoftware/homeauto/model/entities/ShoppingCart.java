@@ -15,8 +15,9 @@ import java.util.List;
 @Entity
 @Table(name = "shopping_carts")
 public class ShoppingCart implements Serializable {
+
   /**
-   * Shopping Cart's primary key
+   * Shopping Cart's - Primary key
    */
   @Id
   private Long id;

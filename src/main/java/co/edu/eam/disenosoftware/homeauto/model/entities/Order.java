@@ -18,7 +18,7 @@ import java.util.List;
 public class Order implements Serializable {
 
   /**
-   * Order's primary key
+   * Order's - Primary key
    */
   @Id
   private Long id;

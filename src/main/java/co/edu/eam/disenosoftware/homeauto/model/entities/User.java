@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class User implements Serializable {
 
   /**
-   * User's primary key
+   * User's - Primary key
    */
   @Id
   private Long id;

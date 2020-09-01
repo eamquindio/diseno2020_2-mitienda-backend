@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class Store implements Serializable {
 
   /**
-   * Store's primary key
+   * Store's - Primary key
    */
   @Id
   private Long id;
