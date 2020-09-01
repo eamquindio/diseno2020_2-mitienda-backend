@@ -22,7 +22,7 @@ public class User implements Serializable {
    * User's primary key
    */
   @Id
-  private String id;
+  private Long id;
 
   /**
    * User's username

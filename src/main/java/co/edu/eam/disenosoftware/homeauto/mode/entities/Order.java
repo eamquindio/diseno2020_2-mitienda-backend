@@ -27,7 +27,7 @@ public class Order implements Serializable {
    * Order's primary key
    */
   @Id
-  private String id;
+  private Long id;
 
   /**
    * List of products from the order
