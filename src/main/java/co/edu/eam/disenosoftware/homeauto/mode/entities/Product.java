@@ -22,7 +22,7 @@ public class Product implements Serializable {
    * Product's Primary key
    */
   @Id
-  private String id;
+  private Long id;
 
   /**
    * Product's image

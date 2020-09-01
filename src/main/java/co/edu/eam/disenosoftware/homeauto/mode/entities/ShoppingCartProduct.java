@@ -24,7 +24,7 @@ public class ShoppingCartProduct implements Serializable {
    * Shopping cart's products primary key
    */
   @Id
-  private String id;
+  private Long id;
 
   /**
    * product´s shopping cart
