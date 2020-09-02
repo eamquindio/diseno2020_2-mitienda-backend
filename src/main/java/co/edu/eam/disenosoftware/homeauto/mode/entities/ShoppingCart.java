@@ -45,7 +45,7 @@ public class ShoppingCart implements Serializable {
    * Shopping cart´s user (owner)
    */
   @ManyToOne
-  @JoinColumn(name = "id:user", referencedColumnName = "id")
+  @JoinColumn(name = "id_user", referencedColumnName = "id")
   private User user;
 
 }
