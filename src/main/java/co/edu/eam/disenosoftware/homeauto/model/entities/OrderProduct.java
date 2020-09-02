@@ -5,13 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * Order for product's: class
  */
 @Entity
 @Table(name = "tb_order_product")
-public class OrderProduct {
+public class OrderProduct implements Serializable {
   /**
    * Order for product's: product
    */

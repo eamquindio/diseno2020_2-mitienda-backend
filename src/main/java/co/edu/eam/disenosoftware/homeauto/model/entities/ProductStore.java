@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 
 /**
@@ -14,7 +15,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tb_product_store")
-public class ProductStore {
+public class ProductStore implements Serializable {
 
   /**
    * Product store's id

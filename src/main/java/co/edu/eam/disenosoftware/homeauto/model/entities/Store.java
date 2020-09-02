@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 
 /**
@@ -11,7 +12,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tb_store")
-public class Store {
+public class Store implements Serializable {
 
   /**
    * Store's id

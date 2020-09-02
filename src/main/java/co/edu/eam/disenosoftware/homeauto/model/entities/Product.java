@@ -4,13 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 /**
  * Product's class
  */
 @Entity
 @Table(name = "tb_product")
-public class Product {
+public class Product implements Serializable {
   /**
    * Product's Id
    */

@@ -8,6 +8,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "tb_order")
-public class Order {
+public class Order implements Serializable {
   /**
    * Order's id
    */

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 
 /**
@@ -12,7 +13,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "tb_shopping_cart_product")
-public class ShoppingCartProduct {
+public class ShoppingCartProduct implements Serializable {
   /**
    * Shopping cart product: product from store
    */
