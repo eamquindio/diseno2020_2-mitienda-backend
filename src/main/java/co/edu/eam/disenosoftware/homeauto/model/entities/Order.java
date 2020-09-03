@@ -45,7 +45,7 @@ public class Order implements Serializable {
    */
   @ManyToOne
   @JoinColumn(name = "user_id", referencedColumnName = "id")
-  private User userName;
+  private User user;
 
   /**
    * Order's state

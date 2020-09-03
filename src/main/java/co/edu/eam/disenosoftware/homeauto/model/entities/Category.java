@@ -29,11 +29,11 @@ public class Category implements Serializable {
   private String icon;
 
   /**
-   * Categories icon
+   * Categories store
    */
   @ManyToOne
   @JoinColumn(name = "id_store", referencedColumnName = "id")
-  private Store storeId;
+  private Store store;
 
   /**
    * Categories name

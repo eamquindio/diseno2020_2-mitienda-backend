@@ -2,6 +2,7 @@ package co.edu.eam.disenosoftware.homeauto.model.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -14,6 +15,13 @@ import java.io.Serializable;
 @Entity
 @Table(name = "tb_shopping_cart_product")
 public class ShoppingCartProduct implements Serializable {
+
+  /**
+   * Shopping cart's products primary key
+   */
+  @Id
+  @Column(name = "shopping_cart_product_id")
+  private Long id;
   /**
    * Shopping cart product: product from store
    */

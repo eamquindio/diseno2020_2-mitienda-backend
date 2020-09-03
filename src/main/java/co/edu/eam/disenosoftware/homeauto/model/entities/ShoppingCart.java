@@ -29,11 +29,11 @@ public class ShoppingCart implements Serializable {
    * Shopping cart: store
    */
   @ManyToOne
-  @JoinColumn(name = "product_id", referencedColumnName = "id")
+  @JoinColumn(name = "store_id", referencedColumnName = "id")
   private Store store;
 
   /**
-   * Shopping cart: store
+   * Shopping cart: connection between Shopping cart to Shopping cart product
    */
   @OneToMany
   @JoinTable(name = "shopping_cart_to_shopping_cart_product",
@@ -43,9 +43,10 @@ public class ShoppingCart implements Serializable {
 
 
   /**
-   * Shopping cart: store
+   * Shopping cart: User
    */
-  @Column(name = "shopping_cart_user")
+  @ManyToOne
+  @JoinColumn(name = "user_id", referencedColumnName = "id")
   private User user;
 
   /**
