@@ -27,7 +27,7 @@ public class Order implements Serializable {
   /**
   * Objet Store
   */
-  @OneToMany
+  @ManyToOne
   @JoinColumn(name = "id_store", referencedColumnName = "id")
   private Store store;
 
