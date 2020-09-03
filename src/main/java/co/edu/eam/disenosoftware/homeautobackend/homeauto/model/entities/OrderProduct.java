@@ -1,0 +1,35 @@
+package co.edu.eam.disenosoftware.homeautobackend.homeauto.model.entities;
+
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "OrderProducts")
+public class OrderProduct {
+
+  /**
+   * OrderProducts products
+   */
+  @ManyToOne
+  @JoinColumn(name = "productStore", referencedColumnName = "id")
+  private ProductStore product_store;
+
+  /**
+   * OrderProdcuts quantity
+   */
+  private int quantity;
+
+  /**
+   * OrderProducts state
+   */
+  private String state;
+
+  /**
+   * Constructor
+   */
+  public OrderProduct() {
+  }
+}
