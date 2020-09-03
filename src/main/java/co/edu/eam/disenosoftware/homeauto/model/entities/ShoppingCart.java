@@ -23,7 +23,7 @@ public class ShoppingCart implements Serializable {
    */
   @Id
   @Column(name = "shopping_cart_id")
-  private String id;
+  private Long id;
 
   /**
    * Shopping cart: store

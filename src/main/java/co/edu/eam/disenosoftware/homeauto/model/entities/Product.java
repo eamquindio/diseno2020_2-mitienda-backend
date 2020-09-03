@@ -17,7 +17,7 @@ public class Product implements Serializable {
    */
   @Id
   @Column(name = "product_id")
-  private String id;
+  private Long id;
   /**
    * Product's image
    */

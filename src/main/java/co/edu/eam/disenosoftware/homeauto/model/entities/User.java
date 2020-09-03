@@ -19,7 +19,7 @@ public class User implements Serializable {
    */
   @Id
   @Column(name = "user_id")
-  private String id;
+  private Long id;
 
   /**
    * User's name

@@ -20,7 +20,7 @@ public class Category implements Serializable {
    */
   @Id
   @Column(name = "category_id")
-  private String id;
+  private Long id;
 
   /**
    * Categories icon

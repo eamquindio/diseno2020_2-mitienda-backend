@@ -23,7 +23,7 @@ public class Order implements Serializable {
    */
   @Id
   @Column(name = "order_id")
-  private String id;
+  private Long id;
   /**
    * Order: list of product's
    */

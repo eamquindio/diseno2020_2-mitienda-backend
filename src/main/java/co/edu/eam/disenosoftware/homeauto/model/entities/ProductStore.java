@@ -22,7 +22,7 @@ public class ProductStore implements Serializable {
    */
   @Id
   @Column(name = "product_store_id")
-  private String id;
+  private Long id;
 
   /**
    * Product store's: product
