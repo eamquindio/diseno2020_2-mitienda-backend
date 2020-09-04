@@ -1,4 +1,4 @@
-package co.edu.eam.disenosoftware.homeauto.mode.entities;
+package co.edu.eam.disenosoftware.homeautobackend.model.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,12 +13,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "shopping_cart_products")
 public class ShoppingCartProduct implements Serializable {
-
-  /**
-   * Shopping cart's product constructor
-   */
-  public ShoppingCartProduct() {
-  }
 
   /**
    * Shopping cart's products primary key
@@ -44,5 +38,11 @@ public class ShoppingCartProduct implements Serializable {
    * Shopping cart's product's quantity
    */
   private int quantity;
+
+  /**
+   * Shopping cart's product constructor
+   */
+  public ShoppingCartProduct() {
+  }
 
 }

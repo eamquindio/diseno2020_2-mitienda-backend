@@ -1,4 +1,4 @@
-package co.edu.eam.disenosoftware.homeauto.mode.entities;
+package co.edu.eam.disenosoftware.homeautobackend.model.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,12 +12,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "stores")
 public class Store implements Serializable {
-
-  /**
-   *Store's constructor
-   */
-  public Store() {
-  }
 
   /**
    *Store's primary key
@@ -70,5 +64,11 @@ public class Store implements Serializable {
    *Store's password
    */
   private String password;
+
+  /**
+   *Store's constructor
+   */
+  public Store() {
+  }
 
 }

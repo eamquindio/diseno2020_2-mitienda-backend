@@ -1,4 +1,4 @@
-package co.edu.eam.disenosoftware;
+package co.edu.eam.disenosoftware.homeautobackend;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

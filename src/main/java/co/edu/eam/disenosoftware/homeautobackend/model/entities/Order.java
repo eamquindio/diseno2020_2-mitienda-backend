@@ -1,4 +1,4 @@
-package co.edu.eam.disenosoftware.homeauto.mode.entities;
+package co.edu.eam.disenosoftware.homeautobackend.model.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,12 +16,6 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 public class Order implements Serializable {
-
-  /**
-   * Order's constructor
-   */
-  public Order() {
-  }
 
   /**
    * Order's primary key
@@ -58,5 +52,11 @@ public class Order implements Serializable {
    * Order's date
    */
   private Date date;
+
+  /**
+   * Order's constructor
+   */
+  public Order() {
+  }
 
 }
