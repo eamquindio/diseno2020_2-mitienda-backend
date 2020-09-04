@@ -18,7 +18,11 @@ import java.util.List;
 public class Order implements Serializable {
 
   /**
+<<<<<<< HEAD:src/main/java/co/edu/eam/disenosoftware/homeautobackend/model/entities/Order.java
    * Order's - Primary key
+=======
+   * Order's primary key
+>>>>>>> 216ac10... corrigiendo estructuracion del proyecto (carpetas y entidades):src/main/java/co/edu/eam/disenosoftware/homeauto/mode/entities/Order.java
    */
   @Id
   private Long id;
@@ -58,4 +62,8 @@ public class Order implements Serializable {
    */
   public Order() {
   }
+<<<<<<< HEAD:src/main/java/co/edu/eam/disenosoftware/homeautobackend/model/entities/Order.java
+=======
+
+>>>>>>> 216ac10... corrigiendo estructuracion del proyecto (carpetas y entidades):src/main/java/co/edu/eam/disenosoftware/homeauto/mode/entities/Order.java
 }

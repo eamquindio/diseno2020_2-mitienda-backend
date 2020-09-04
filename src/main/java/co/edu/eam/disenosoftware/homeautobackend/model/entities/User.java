@@ -13,7 +13,11 @@ import java.io.Serializable;
 public class User implements Serializable {
 
   /**
+<<<<<<< HEAD:src/main/java/co/edu/eam/disenosoftware/homeautobackend/model/entities/User.java
    * User's - Primary key
+=======
+   * User's primary key
+>>>>>>> 216ac10... corrigiendo estructuracion del proyecto (carpetas y entidades):src/main/java/co/edu/eam/disenosoftware/homeauto/mode/entities/User.java
    */
   @Id
   private Long id;
@@ -46,6 +50,17 @@ public class User implements Serializable {
   /**
    * User's constructor
    */
+<<<<<<< HEAD:src/main/java/co/edu/eam/disenosoftware/homeautobackend/model/entities/User.java
   public User() {
   }
+=======
+  private String name;
+
+  /**
+   * User's constructor
+   */
+  public User() {
+  }
+
+>>>>>>> 216ac10... corrigiendo estructuracion del proyecto (carpetas y entidades):src/main/java/co/edu/eam/disenosoftware/homeauto/mode/entities/User.java
 }

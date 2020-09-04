@@ -13,7 +13,11 @@ import java.io.Serializable;
 public class Product implements Serializable {
 
   /**
+<<<<<<< HEAD:src/main/java/co/edu/eam/disenosoftware/homeautobackend/model/entities/Product.java
    * Product's - Primary key
+=======
+   * Product's Primary key
+>>>>>>> 216ac10... corrigiendo estructuracion del proyecto (carpetas y entidades):src/main/java/co/edu/eam/disenosoftware/homeauto/mode/entities/Product.java
    */
   @Id
   private Long id;
@@ -33,4 +37,8 @@ public class Product implements Serializable {
    */
   public Product() {
   }
+<<<<<<< HEAD:src/main/java/co/edu/eam/disenosoftware/homeautobackend/model/entities/Product.java
+=======
+
+>>>>>>> 216ac10... corrigiendo estructuracion del proyecto (carpetas y entidades):src/main/java/co/edu/eam/disenosoftware/homeauto/mode/entities/Product.java
 }

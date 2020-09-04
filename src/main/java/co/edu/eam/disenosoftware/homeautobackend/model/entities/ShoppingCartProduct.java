@@ -15,7 +15,11 @@ import java.io.Serializable;
 public class ShoppingCartProduct implements Serializable {
 
   /**
+<<<<<<< HEAD:src/main/java/co/edu/eam/disenosoftware/homeautobackend/model/entities/ShoppingCartProduct.java
    * Shopping Cart's Product's - Primary key
+=======
+   * Shopping cart's products primary key
+>>>>>>> 216ac10... corrigiendo estructuracion del proyecto (carpetas y entidades):src/main/java/co/edu/eam/disenosoftware/homeauto/mode/entities/ShoppingCartProduct.java
    */
   @Id
   private Long id;
@@ -40,8 +44,16 @@ public class ShoppingCartProduct implements Serializable {
   private int quantity;
 
   /**
+<<<<<<< HEAD:src/main/java/co/edu/eam/disenosoftware/homeautobackend/model/entities/ShoppingCartProduct.java
    * Shopping Cart's Product constructor
    */
   public ShoppingCartProduct() {
   }
+=======
+   * Shopping cart's product constructor
+   */
+  public ShoppingCartProduct() {
+  }
+
+>>>>>>> 216ac10... corrigiendo estructuracion del proyecto (carpetas y entidades):src/main/java/co/edu/eam/disenosoftware/homeauto/mode/entities/ShoppingCartProduct.java
 }

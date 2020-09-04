@@ -15,7 +15,11 @@ import java.io.Serializable;
 public class Category implements Serializable {
 
   /**
+<<<<<<< HEAD:src/main/java/co/edu/eam/disenosoftware/homeautobackend/model/entities/Category.java
    * Category - Primary key
+=======
+   * Category's primary key
+>>>>>>> 216ac10... corrigiendo estructuracion del proyecto (carpetas y entidades):src/main/java/co/edu/eam/disenosoftware/homeauto/mode/entities/Category.java
    */
   @Id
   private Long id;
@@ -40,6 +44,17 @@ public class Category implements Serializable {
   /**
    * Category constructor
    */
+<<<<<<< HEAD:src/main/java/co/edu/eam/disenosoftware/homeautobackend/model/entities/Category.java
   public Category() {
   }
+=======
+  private String name;
+
+  /**
+   * Category's constructor
+   */
+  public Category() {
+  }
+
+>>>>>>> 216ac10... corrigiendo estructuracion del proyecto (carpetas y entidades):src/main/java/co/edu/eam/disenosoftware/homeauto/mode/entities/Category.java
 }

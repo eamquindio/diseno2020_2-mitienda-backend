@@ -14,7 +14,11 @@ import java.io.Serializable;
 public class Store implements Serializable {
 
   /**
+<<<<<<< HEAD:src/main/java/co/edu/eam/disenosoftware/homeautobackend/model/entities/Store.java
    * Store's - Primary key
+=======
+   *Store's primary key
+>>>>>>> 216ac10... corrigiendo estructuracion del proyecto (carpetas y entidades):src/main/java/co/edu/eam/disenosoftware/homeauto/mode/entities/Store.java
    */
   @Id
   private Long id;
@@ -66,8 +70,16 @@ public class Store implements Serializable {
   private  String password;
 
   /**
+<<<<<<< HEAD:src/main/java/co/edu/eam/disenosoftware/homeautobackend/model/entities/Store.java
    * Store's constructor
    */
   public Store() {
   }
+=======
+   *Store's constructor
+   */
+  public Store() {
+  }
+
+>>>>>>> 216ac10... corrigiendo estructuracion del proyecto (carpetas y entidades):src/main/java/co/edu/eam/disenosoftware/homeauto/mode/entities/Store.java
 }
