@@ -21,7 +21,9 @@ public class ShoppingCartProduct implements Serializable {
    */
   @Id
   private Long id;
-
+  /**
+   * Shopping cart's product foreign key
+   */
   @ManyToOne
   @JoinColumn(name = "shopping_cart_id", referencedColumnName = "id")
   private ShoppingCart shoppingCart;
