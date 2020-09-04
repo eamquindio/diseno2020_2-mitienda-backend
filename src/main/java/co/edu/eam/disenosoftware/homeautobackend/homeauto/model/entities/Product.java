@@ -4,9 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Entidad products
+ */
 @Entity
 @Table(name = "products")
-public class Product{
+public class Product {
 
   /**
    * Primary Key
@@ -27,6 +30,6 @@ public class Product{
   /**
    * Constructor
    */
-  public Product(){
+  public Product() {
   }
 }

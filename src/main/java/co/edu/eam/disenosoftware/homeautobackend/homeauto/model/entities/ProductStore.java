@@ -4,12 +4,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * Entidad productStore
+ */
 @Entity
 @Table(name = "product_store")
-public class ProductStore{
+public class ProductStore {
 
   /**
    * Primary Key
@@ -50,6 +52,6 @@ public class ProductStore{
   /**
    * Constructor
    */
-  public ProductStore(){
+  public ProductStore() {
   }
 }

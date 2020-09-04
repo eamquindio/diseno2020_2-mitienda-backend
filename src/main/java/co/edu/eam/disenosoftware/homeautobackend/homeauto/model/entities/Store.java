@@ -5,9 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Entidad store
+ */
 @Entity
 @Table(name = "stores")
-public class Store{
+public class Store {
 
   /**
    * Primary Key
@@ -64,6 +67,6 @@ public class Store{
   /**
    * Constructor
    */
-  public Store(){
+  public Store() {
   }
 }

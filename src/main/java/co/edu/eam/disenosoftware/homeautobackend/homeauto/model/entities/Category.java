@@ -4,9 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Entidad categorys
+ */
 @Entity
 @Table(name = "categorys")
-public class Category{
+public class Category {
 
   /**
    * Primary Key
@@ -32,6 +35,6 @@ public class Category{
   /**
    * Constructor
    */
-  public Category(){
+  public Category() {
   }
 }

@@ -3,13 +3,15 @@ package co.edu.eam.disenosoftware.homeautobackend.homeauto.model.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.List;
 
+/**
+ * Entidad user
+ */
 @Entity
 @Table(name = "users")
-public class User{
+public class User {
 
   /**
    * Primary Key
@@ -51,12 +53,11 @@ public class User{
   /**
    * Users order
    */
-  @OneToMany(mappedBy = "user_name")
   private List<Order> order;
 
   /**
    * Constructor
    */
-  public User(){
+  public User() {
   }
 }

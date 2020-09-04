@@ -7,9 +7,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.List;
 
+/**
+ * Entidad shoppingCart
+ */
 @Entity
 @Table(name = "Shoppings_Cart")
-public class ShoppingCart{
+public class ShoppingCart {
 
   /**
    * Primary Key
@@ -37,6 +40,6 @@ public class ShoppingCart{
   /**
    * Constructor
    */
-  public ShoppingCart(){
+  public ShoppingCart() {
   }
 }

@@ -5,9 +5,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * Entidad ShoppingCartProduct
+ */
 @Entity
 @Table(name = "shopping_cart_products")
-public class ShoppingCartProduct{
+public class ShoppingCartProduct {
 
   /**
    * ShoppingCartProduct product
@@ -24,6 +27,6 @@ public class ShoppingCartProduct{
   /**
    * Constructor
    */
-  public ShoppingCartProduct(){
+  public ShoppingCartProduct() {
   }
 }

@@ -1,17 +1,20 @@
 package co.edu.eam.disenosoftware.homeautobackend.homeauto.model.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Entidad orders
+ */
 @Entity
 @Table(name = "orders")
-public class Order{
+public class Order {
 
   /**
    * Primary Key
@@ -22,8 +25,8 @@ public class Order{
   /**
    * List of OrderProducts
    */
-  @OneToMany(mappedBy = "order_id")
-  private List<OrderProduct> order_product;
+  @Column(name = "order_products")
+  private List<OrderProduct> orderProduct;
 
   /**
    * Orders store
@@ -52,6 +55,6 @@ public class Order{
   /**
    * Constructor
    */
-  public Order(){
+  public Order() {
   }
 }

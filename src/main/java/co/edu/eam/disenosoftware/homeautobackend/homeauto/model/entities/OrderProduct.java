@@ -3,12 +3,14 @@ package co.edu.eam.disenosoftware.homeautobackend.homeauto.model.entities;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * Entidad orderProducts
+ */
 @Entity
 @Table(name = "order_products")
-public class OrderProduct{
+public class OrderProduct {
 
   /**
    * OrderProducts products
@@ -30,6 +32,6 @@ public class OrderProduct{
   /**
    * Constructor
    */
-  public OrderProduct(){
+  public OrderProduct() {
   }
 }
