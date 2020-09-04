@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "stores")
-public class Store {
+public class Store{
 
   /**
    * Primary Key
@@ -44,7 +44,7 @@ public class Store {
    * Store isOpen
    */
   @Column(name = "is_open")
-  private boolean is_open;
+  private boolean isOpen;
 
   /**
    * Store phone
@@ -64,6 +64,6 @@ public class Store {
   /**
    * Constructor
    */
-  public Store() {
+  public Store(){
   }
 }

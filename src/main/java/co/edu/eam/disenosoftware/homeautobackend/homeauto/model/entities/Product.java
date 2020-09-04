@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "products")
-public class Product {
+public class Product{
 
   /**
    * Primary Key
@@ -27,6 +27,6 @@ public class Product {
   /**
    * Constructor
    */
-  public Product() {
+  public Product(){
   }
 }

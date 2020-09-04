@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User{
 
   /**
    * Primary Key
@@ -57,6 +57,6 @@ public class User {
   /**
    * Constructor
    */
-  public User() {
+  public User(){
   }
 }

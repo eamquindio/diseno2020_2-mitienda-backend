@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "order_products")
-public class OrderProduct {
+public class OrderProduct{
 
   /**
    * OrderProducts products
@@ -30,6 +30,6 @@ public class OrderProduct {
   /**
    * Constructor
    */
-  public OrderProduct() {
+  public OrderProduct(){
   }
 }

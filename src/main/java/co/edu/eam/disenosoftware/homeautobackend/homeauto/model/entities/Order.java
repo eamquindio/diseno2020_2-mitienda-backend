@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "orders")
-public class Order {
+public class Order{
 
   /**
    * Primary Key
@@ -52,6 +52,6 @@ public class Order {
   /**
    * Constructor
    */
-  public Order() {
+  public Order(){
   }
 }

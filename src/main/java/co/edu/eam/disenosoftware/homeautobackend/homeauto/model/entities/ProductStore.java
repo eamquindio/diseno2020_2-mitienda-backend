@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "product_store")
-public class ProductStore {
+public class ProductStore{
 
   /**
    * Primary Key
@@ -50,6 +50,6 @@ public class ProductStore {
   /**
    * Constructor
    */
-  public ProductStore() {
+  public ProductStore(){
   }
 }

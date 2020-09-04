@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "categorys")
-public class Category {
+public class Category{
 
   /**
    * Primary Key
@@ -32,6 +32,6 @@ public class Category {
   /**
    * Constructor
    */
-  public Category() {
+  public Category(){
   }
 }
