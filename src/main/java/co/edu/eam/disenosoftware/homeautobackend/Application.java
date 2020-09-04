@@ -1,6 +1,6 @@
-package co.edu.eam.disenosoftware;
+package co.edu.eam.disenosoftware.homeautobackend;
 
-import org.springframework.boot.CommandLineRunner;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Runner class.
  */
 @SpringBootApplication
-public class Application implements CommandLineRunner {
+public class Application {
 
   /**
    * Main method.
@@ -20,8 +20,5 @@ public class Application implements CommandLineRunner {
   }
 
 
-  @java.lang.Override
-  public void run(java.lang.String... args) throws Exception {
 
-  }
 }

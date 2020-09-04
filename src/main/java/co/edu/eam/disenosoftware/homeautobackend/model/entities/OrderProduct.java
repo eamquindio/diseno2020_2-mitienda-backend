@@ -1,4 +1,4 @@
-package co.edu.eam.disenosoftware.homeauto.model.entities;
+package co.edu.eam.disenosoftware.homeautobackend.model.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -10,7 +10,7 @@ import java.io.Serializable;
  * Class Product
  */
 @Entity
-@Table(name = "order_product")
+@Table(name = "order_products")
 public class OrderProduct implements Serializable {
 
   /**

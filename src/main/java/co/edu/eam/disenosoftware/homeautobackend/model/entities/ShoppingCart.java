@@ -1,4 +1,4 @@
-package co.edu.eam.disenosoftware.homeauto.model.entities;
+package co.edu.eam.disenosoftware.homeautobackend.model.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,7 +13,7 @@ import java.util.List;
  * Class Shopping Cart
  */
 @Entity
-@Table(name = "shopping_cart")
+@Table(name = "shopping_carts")
 public class ShoppingCart implements Serializable {
 
   /**

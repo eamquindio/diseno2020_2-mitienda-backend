@@ -1,4 +1,4 @@
-package co.edu.eam.disenosoftware.homeauto.model.entities;
+package co.edu.eam.disenosoftware.homeautobackend.model.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -11,7 +11,7 @@ import java.io.Serializable;
  * Class Product Store
  */
 @Entity
-@Table(name = "product_store")
+@Table(name = "product_stores")
 public class ProductStore implements Serializable {
 
   /**
