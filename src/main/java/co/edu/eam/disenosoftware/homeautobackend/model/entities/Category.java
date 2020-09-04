@@ -1,4 +1,4 @@
-package co.edu.eam.disenosoftware.homeauto.mode.entities;
+package co.edu.eam.disenosoftware.homeautobackend.model.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,12 +13,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "categories")
 public class Category implements Serializable {
-
-  /**
-   * Category's constructor
-   */
-  public Category() {
-  }
 
   /**
    * Category's primary key
@@ -42,5 +36,11 @@ public class Category implements Serializable {
    * Category's name
    */
   private String name;
+
+  /**
+   * Category's constructor
+   */
+  public Category() {
+  }
 
 }

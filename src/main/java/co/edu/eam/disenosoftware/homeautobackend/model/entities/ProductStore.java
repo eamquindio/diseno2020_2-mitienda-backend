@@ -1,4 +1,4 @@
-package co.edu.eam.disenosoftware.homeauto.mode.entities;
+package co.edu.eam.disenosoftware.homeautobackend.model.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,12 +13,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "products_store")
 public class ProductStore implements Serializable {
-
-  /**
-   * Store's product constructor
-   */
-  public ProductStore() {
-  }
 
   /**
    * Store's product Primary key
@@ -56,5 +50,11 @@ public class ProductStore implements Serializable {
   @ManyToOne
   @JoinColumn(name = "id_store", referencedColumnName = "id")
   private Store store;
+
+  /**
+   * Store's product constructor
+   */
+  public ProductStore() {
+  }
 
 }
