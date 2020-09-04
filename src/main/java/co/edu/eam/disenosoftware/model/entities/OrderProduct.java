@@ -1,38 +1,40 @@
-package co.edu.eam.disenosoftware.homeauto.model.entities;
+package co.edu.eam.disenosoftware.model.entities;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
- * entities orderProduct
+ * Entities orderProduct
  */
 
 @Entity
-@Table(name = "tb_order_product")
+@Table(name = "order_products")
 public class OrderProduct implements Serializable {
 
   /**
    * product order product
    */
 
-  @Column(name = "orderProduct_product")
   private ProductStore product;
 
   /**
    * product order quantity
    */
 
-  @Column(name = "orderProduct_quantity")
   private int quantity;
 
   /**
    * product status on order
    */
 
-  @Column(name = "orderProduct_state")
   private String state;
+
+  @ManyToOne
+  @JoinColumn(name = "id_order", referencedColumnName = "id")
+  private Order orders;
 
   /**
    * order Product builder

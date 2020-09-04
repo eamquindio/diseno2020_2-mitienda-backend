@@ -1,47 +1,44 @@
-package co.edu.eam.disenosoftware.homeauto.model.entities;
+package co.edu.eam.disenosoftware.model.entities;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
 
 /**
- * entities shoppingCart
+ * Entities shoppingCart
  */
 
 @Entity
-@Table(name = "tb_shoppingCart")
+@Table(name = "shoppingCarts")
 public class ShoppingCart implements Serializable {
 
   /**
-   * id shoppingCart primary key
+   * Id shoppingCart primary key
    */
 
   @Id
-  @Column(name = "shoppingCart_id")
   private Long id;
 
   /**
    * shopping cart from the store
    */
 
-  @Column(name = "shoppingCart_store")
   private Store store;
 
   /**
    * ShoppingCartProduct
    */
 
-  @Column(name = "shoppingCart_product")
+  @OneToMany(mappedBy = "shoppingCart")
   private List<ShoppingCartProduct> product;
 
   /**
    * Store's name
    */
 
-  @Column(name = "shoppingCart_user")
   private User user;
 
   /**

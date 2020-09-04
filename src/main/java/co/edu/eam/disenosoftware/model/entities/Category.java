@@ -1,46 +1,41 @@
-package co.edu.eam.disenosoftware.homeauto.model.entities;
+package co.edu.eam.disenosoftware.model.entities;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
- * entities category
+ * Entities category
  */
 
 @Entity
-@Table(name = "tb_category")
+@Table(name = "categories")
 public class Category implements Serializable {
 
   /**
-   * id category primary key
+   * Id category primary key
    */
 
   @Id
-  @Column(name = "category_id")
   private Long id;
 
   /**
    * icon category
    */
 
-  @Column(name = "category_icon")
   private String icon;
 
   /**
    * store category
    */
 
-  @Column(name = "category_store")
   private Store store;
 
   /**
    * name category
    */
 
-  @Column(name = "category_name")
   private String name;
 
   /**
@@ -49,4 +44,5 @@ public class Category implements Serializable {
 
   public Category() {
   }
+
 }

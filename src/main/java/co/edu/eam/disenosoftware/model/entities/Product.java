@@ -1,40 +1,40 @@
-package co.edu.eam.disenosoftware.homeauto.model.entities;
+package co.edu.eam.disenosoftware.model.entities;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.List;
 
 /**
- * entities product
+ * Entities product
  */
 
 @Entity
-@Table(name = "tb_product")
+@Table(name = "products")
 public class Product implements Serializable {
 
   /**
-   * id product primary key
+   * Id product primary key
    */
-
   @Id
-  @Column(name = "product_id")
   private Long id;
 
   /**
    * product image
    */
 
-  @Column(name = "product_image")
   private String image;
 
   /**
    * product name
    */
 
-  @Column(name = "product_name")
   private String name;
+
+  @OneToMany(mappedBy = "product")
+  private List<ProductStore> productStores;
 
   /**
    * product builder
