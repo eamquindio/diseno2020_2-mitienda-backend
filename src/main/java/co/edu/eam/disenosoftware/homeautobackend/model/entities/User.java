@@ -1,4 +1,4 @@
-package co.edu.eam.disenosoftware.homeauto.model.entities;
+package co.edu.eam.disenosoftware.homeautobackend.model.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,7 +9,7 @@ import java.io.Serializable;
  * class user
  */
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User implements Serializable {
 
   /**

@@ -1,17 +1,17 @@
-package co.edu.eam.disenosoftware.homeauto.model.entities;
+package co.edu.eam.disenosoftware.homeautobackend.model.entities;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
  * class product store
  */
 @Entity
-@Table(name = "product_store")
+@Table(name = "products_store")
 public class ProductStore implements Serializable {
 
   /**
@@ -23,7 +23,7 @@ public class ProductStore implements Serializable {
   /**
    * mapped product
    */
-  @OneToMany
+  @ManyToOne
   @JoinColumn(name = "id_product", referencedColumnName = "id")
   private Product product;
 
@@ -40,14 +40,14 @@ public class ProductStore implements Serializable {
   /**
    * mapped category
    */
-  @OneToMany
+  @ManyToOne
   @JoinColumn(name = "id_category", referencedColumnName = "id")
   private Category category;
 
   /**
    * mapped store
    */
-  @OneToMany
+  @ManyToOne
   @JoinColumn(name = "id_store", referencedColumnName = "id")
   private Store store;
 

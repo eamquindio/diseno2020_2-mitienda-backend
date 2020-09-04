@@ -1,8 +1,9 @@
-package co.edu.eam.disenosoftware.homeauto.model.entities;
+package co.edu.eam.disenosoftware.homeautobackend.model.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 
@@ -10,14 +11,20 @@ import java.io.Serializable;
  * class order product
  */
 @Entity
-@Table(name = "order_product")
+@Table(name = "order_products")
 public class OrderProduct implements Serializable {
+
+  /**
+   * id class order
+   */
+  @Id
+  private Long id;
 
   /**
    * mapped order product
    */
-  @OneToMany
-  @JoinColumn(name = "id_order_product", referencedColumnName = "id")
+  @ManyToOne
+  @JoinColumn(name = "id_product_store", referencedColumnName = "id")
   private ProductStore product;
 
   /**
