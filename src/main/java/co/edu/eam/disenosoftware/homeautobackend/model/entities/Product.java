@@ -1,4 +1,4 @@
-package co.edu.eam.disenosoftware.homeauto.model.entities;
+package co.edu.eam.disenosoftware.homeautobackend.model.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -33,5 +33,4 @@ public class Product implements Serializable {
    */
   public Product() {
   }
-
 }

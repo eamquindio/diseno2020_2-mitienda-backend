@@ -1,4 +1,4 @@
-package co.edu.eam.disenosoftware.homeauto.model.entities;
+package co.edu.eam.disenosoftware.homeautobackend.model.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -70,5 +70,4 @@ public class Store implements Serializable {
    */
   public Store() {
   }
-
 }

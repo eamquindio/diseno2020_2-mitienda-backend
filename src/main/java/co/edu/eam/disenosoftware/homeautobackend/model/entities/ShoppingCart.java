@@ -1,4 +1,4 @@
-package co.edu.eam.disenosoftware.homeauto.model.entities;
+package co.edu.eam.disenosoftware.homeautobackend.model.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -6,7 +6,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -14,7 +13,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "shopping_carts")
-public class ShoppingCart implements Serializable {
+public class ShoppingCart {
 
   /**
    * Shopping Cart's - Primary key
@@ -32,7 +31,7 @@ public class ShoppingCart implements Serializable {
   /**
    * Shopping Cart's Product
    */
-  @OneToMany(mappedBy = "product")
+  @OneToMany(mappedBy = "shoppingCart")
   private List<ShoppingCartProduct> product;
 
   /**
@@ -47,5 +46,4 @@ public class ShoppingCart implements Serializable {
    */
   public ShoppingCart() {
   }
-
 }
