@@ -8,7 +8,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ProductsStore")
+@Table(name = "product_store")
 public class ProductStore {
 
   /**
@@ -21,7 +21,7 @@ public class ProductStore {
    * ProductStores product
    */
   @ManyToOne
-  @JoinColumn(name = "product", referencedColumnName = "id")
+  @JoinColumn(name = "product_id", referencedColumnName = "id")
   private Product product;
 
   /**
@@ -38,7 +38,7 @@ public class ProductStore {
    * ProductStores category
    */
   @ManyToOne
-  @JoinColumn(name = "category", referencedColumnName = "id")
+  @JoinColumn(name = "category_id", referencedColumnName = "id")
   private Category category;
 
 

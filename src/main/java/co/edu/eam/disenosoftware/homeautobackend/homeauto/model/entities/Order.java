@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "Orders")
+@Table(name = "orders")
 public class Order {
 
   /**
@@ -22,22 +22,22 @@ public class Order {
   /**
    * List of OrderProducts
    */
-  @OneToMany(mappedBy = "order")
+  @OneToMany(mappedBy = "order_id")
   private List<OrderProduct> order_product;
 
   /**
    * Orders store
    */
   @ManyToOne
-  @JoinColumn(name = "store", referencedColumnName = "id")
+  @JoinColumn(name = "store_id", referencedColumnName = "id")
   private Store store;
 
   /**
    * Orders user
    */
   @ManyToOne
-  @JoinColumn(name = "userName", referencedColumnName = "id")
-  private User user_name;
+  @JoinColumn(name = "user_Name", referencedColumnName = "id")
+  private User userName;
 
   /**
    * Orders state

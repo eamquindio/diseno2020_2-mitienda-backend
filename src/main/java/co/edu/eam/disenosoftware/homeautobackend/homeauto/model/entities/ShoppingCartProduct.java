@@ -6,14 +6,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ShoppingCartProducts")
+@Table(name = "shopping_cart_products")
 public class ShoppingCartProduct {
 
   /**
    * ShoppingCartProduct product
    */
   @ManyToOne
-  @JoinColumn(name = "product", referencedColumnName = "id")
+  @JoinColumn(name = "product_id", referencedColumnName = "id")
   private ProductStore product;
 
   /**

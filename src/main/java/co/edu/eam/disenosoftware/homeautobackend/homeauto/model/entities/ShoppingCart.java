@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "ShoppingsCart")
+@Table(name = "Shoppings_Cart")
 public class ShoppingCart {
 
   /**
@@ -21,7 +21,7 @@ public class ShoppingCart {
    * ShoppingCart store
    */
   @ManyToOne
-  @JoinColumn(name = "store", referencedColumnName = "id")
+  @JoinColumn(name = "store_id", referencedColumnName = "id")
   private Store store;
 
   /**

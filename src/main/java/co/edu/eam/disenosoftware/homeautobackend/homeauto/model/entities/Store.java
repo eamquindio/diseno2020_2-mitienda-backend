@@ -1,11 +1,12 @@
 package co.edu.eam.disenosoftware.homeautobackend.homeauto.model.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Stores")
+@Table(name = "stores")
 public class Store {
 
   /**
@@ -42,6 +43,7 @@ public class Store {
   /**
    * Store isOpen
    */
+  @Column(name = "is_open")
   private boolean is_open;
 
   /**

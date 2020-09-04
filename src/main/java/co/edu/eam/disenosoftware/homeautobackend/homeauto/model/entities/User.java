@@ -1,5 +1,6 @@
 package co.edu.eam.disenosoftware.homeautobackend.homeauto.model.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -7,7 +8,7 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 public class User {
 
   /**
@@ -19,7 +20,8 @@ public class User {
   /**
    * Users UserName
    */
-  private String user_Name;
+  @Column(name = "user_name")
+  private String userName;
 
   /**
    * Users phone

@@ -7,15 +7,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "OrderProducts")
+@Table(name = "order_products")
 public class OrderProduct {
 
   /**
    * OrderProducts products
    */
   @ManyToOne
-  @JoinColumn(name = "productStore", referencedColumnName = "id")
-  private ProductStore product_store;
+  @JoinColumn(name = "product_store", referencedColumnName = "id")
+  private ProductStore productStore;
 
   /**
    * OrderProdcuts quantity
