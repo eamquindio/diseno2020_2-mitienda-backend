@@ -1,6 +1,7 @@
 package co.edu.eam.disenosoftware.homeautobackend.model.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -31,9 +32,14 @@ public class OrderProduct implements Serializable {
   private String state;
 
   /**
+   * ID OrderProduct
+   */
+  @Id
+  private Long id;
+
+  /**
    * Constructor Order Productor
    */
-
   public OrderProduct() {
   }
 }
