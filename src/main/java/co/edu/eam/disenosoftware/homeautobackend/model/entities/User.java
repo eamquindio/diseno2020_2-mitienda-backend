@@ -39,11 +39,6 @@ public class User implements Serializable {
   private String password;
 
   /**
-   * User's address
-   */
-  private String address;
-
-  /**
    * User's name
    */
   private String name;
