@@ -28,6 +28,13 @@ public class OrderProduct implements Serializable {
   private ProductStore product;
 
   /**
+   * Order for product's: order
+   */
+  @ManyToOne
+  @JoinColumn(name = "id_order", referencedColumnName = "id")
+  private Order order;
+
+  /**
    * Order for product's: quantity
    */
 
