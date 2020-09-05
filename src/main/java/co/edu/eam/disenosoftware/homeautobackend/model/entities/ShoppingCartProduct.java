@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 
@@ -28,7 +27,7 @@ public class ShoppingCartProduct implements Serializable {
    relation with entity product store
    */
   @ManyToOne
-  @JoinColumn(name = "product_store_code", referencedColumnName = "code")
+  @JoinColumn(name = "id_product_store", referencedColumnName = "code")
   private ProductStore productStore;
 
   /**
@@ -39,7 +38,8 @@ public class ShoppingCartProduct implements Serializable {
   /**
    Relation one to many with shopping cart
    */
-  @OneToMany
+  @ManyToOne
+  @JoinColumn(name = "id_shopping_cart", referencedColumnName = "id")
   private ShoppingCart shoppingCart;
 
   /**

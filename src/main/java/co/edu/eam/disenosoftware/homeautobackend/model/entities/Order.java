@@ -29,21 +29,21 @@ public class Order implements Serializable {
   /**
    List of orders products
    */
-  @OneToMany
+  @OneToMany(mappedBy = "order")
   private List<OrderProduct> orderProducts;
 
   /**
    Strore's relation with order
    */
   @ManyToOne
-  @JoinColumn(name = "store_id", referencedColumnName = "id")
+  @JoinColumn(name = "id_store", referencedColumnName = "id")
   private Store store;
 
   /**
    User's relation with order
    */
   @ManyToOne
-  @JoinColumn(name = "user_id", referencedColumnName = "id")
+  @JoinColumn(name = "id_user", referencedColumnName = "id")
   private User user;
 
   /**
@@ -56,6 +56,9 @@ public class Order implements Serializable {
    */
   private Date date;
 
+  /**
+   Builder of Order
+   */
   public Order() {
   }
 }

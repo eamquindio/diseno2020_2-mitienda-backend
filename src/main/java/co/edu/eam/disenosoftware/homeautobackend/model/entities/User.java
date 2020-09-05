@@ -1,5 +1,6 @@
 package co.edu.eam.disenosoftware.homeautobackend.model.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -23,6 +24,7 @@ public class User implements Serializable {
   /**
    user's username
    */
+  @Column(name = "user_name")
   private String userName;
 
   /**

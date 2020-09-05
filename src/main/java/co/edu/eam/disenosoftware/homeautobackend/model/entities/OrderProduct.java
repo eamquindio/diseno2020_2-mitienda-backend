@@ -27,7 +27,7 @@ public class OrderProduct implements Serializable {
    Relation with product store
    */
   @ManyToOne
-  @JoinColumn(name = "product_store_code", referencedColumnName = "code")
+  @JoinColumn(name = "id_product_store", referencedColumnName = "code")
   private ProductStore product;
 
   /**
@@ -44,7 +44,7 @@ public class OrderProduct implements Serializable {
    Relation with order
    */
   @ManyToOne
-  @JoinColumn(name = "order_id", referencedColumnName = "id")
+  @JoinColumn(name = "id_order", referencedColumnName = "id")
   private Order order;
 
   /**

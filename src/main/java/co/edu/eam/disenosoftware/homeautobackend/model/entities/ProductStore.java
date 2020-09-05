@@ -27,7 +27,7 @@ public class ProductStore implements Serializable {
    Relation with product
    */
   @ManyToOne
-  @JoinColumn(name = "product_id", referencedColumnName = "id")
+  @JoinColumn(name = "id_product", referencedColumnName = "id")
   private Product product;
 
   /**
@@ -44,14 +44,14 @@ public class ProductStore implements Serializable {
    Relation with entity category
    */
   @ManyToOne
-  @JoinColumn(name = "category_id", referencedColumnName = "id")
+  @JoinColumn(name = "category")
   private Category category;
 
   /**
    Relation with entity store
    */
   @ManyToOne
-  @JoinColumn(name = "store_id", referencedColumnName = "id")
+  @JoinColumn(name = "store")
   private Store store;
 
   /**

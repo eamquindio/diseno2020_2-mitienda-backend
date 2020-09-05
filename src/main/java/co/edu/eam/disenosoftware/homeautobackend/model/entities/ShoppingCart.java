@@ -35,14 +35,14 @@ public class ShoppingCart implements Serializable {
   /**
    Relation one to many with a list of shopping cart product
    */
-  @OneToMany
+  @OneToMany(mappedBy = "shoppingCart")
   private List<ShoppingCartProduct> shoppingCartProducts;
 
   /**
    Relation with user
    */
   @ManyToOne
-  @JoinColumn(name = "user_id", referencedColumnName = "id")
+  @JoinColumn(name = "id_user", referencedColumnName = "id")
   private User user;
 
   /**

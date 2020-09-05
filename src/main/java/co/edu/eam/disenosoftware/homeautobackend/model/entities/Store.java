@@ -1,5 +1,6 @@
 package co.edu.eam.disenosoftware.homeautobackend.model.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -49,6 +50,7 @@ public class Store implements Serializable {
   /**
    store's open
    */
+  @Column(name = "is_open")
   private boolean isOpen;
 
   /**
