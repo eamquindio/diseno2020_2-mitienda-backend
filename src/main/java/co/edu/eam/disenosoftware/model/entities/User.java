@@ -57,6 +57,9 @@ public class User implements Serializable {
 
   private String name;
 
+  /**
+   * OneToOne order
+   */
   @OneToOne
   private Order orders;
 

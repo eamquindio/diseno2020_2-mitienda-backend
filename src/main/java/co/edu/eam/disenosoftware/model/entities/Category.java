@@ -44,5 +44,4 @@ public class Category implements Serializable {
 
   public Category() {
   }
-
 }

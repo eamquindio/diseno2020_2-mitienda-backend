@@ -24,7 +24,7 @@ public class ProductStore implements Serializable {
   private Long id;
 
   /**
-   * store product store
+   * store product store llave foranea
    */
 
   private Product product;
@@ -45,15 +45,26 @@ public class ProductStore implements Serializable {
    * product store shop
    */
 
+  @ManyToOne
+  @JoinColumn(name = "id_store", referencedColumnName = "id")
   private Store store;
 
+  /**
+   * ManyToOne category
+   */
   @ManyToOne
   @JoinColumn(name = "category_id", referencedColumnName = "id")
   private Category category;
 
+  /**
+   * mappedBy productStore
+   */
   @OneToMany(mappedBy = "productStore")
   private List<ShoppingCartProduct> shoppingCartProducts;
 
+  /**
+   * ManyToOne products
+   */
   @ManyToOne
   @JoinColumn(name = "product_id", referencedColumnName = "id")
   private Product products;

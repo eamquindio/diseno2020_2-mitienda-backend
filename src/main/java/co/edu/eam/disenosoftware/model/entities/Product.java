@@ -33,7 +33,6 @@ public class Product implements Serializable {
 
   private String name;
 
-  @OneToMany(mappedBy = "product")
   private List<ProductStore> productStores;
 
   /**

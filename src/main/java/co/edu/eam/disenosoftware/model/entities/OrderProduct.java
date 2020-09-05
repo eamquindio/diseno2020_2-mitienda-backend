@@ -18,6 +18,8 @@ public class OrderProduct implements Serializable {
    * product order product
    */
 
+  @ManyToOne
+  @JoinColumn(name = "id_product", referencedColumnName = "id")
   private ProductStore product;
 
   /**
@@ -32,6 +34,9 @@ public class OrderProduct implements Serializable {
 
   private String state;
 
+  /**
+   * ManyToOne orders
+   */
   @ManyToOne
   @JoinColumn(name = "id_order", referencedColumnName = "id")
   private Order orders;

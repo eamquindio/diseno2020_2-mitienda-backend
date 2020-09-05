@@ -44,7 +44,6 @@ public class ShoppingCart implements Serializable {
   /**
    * builder of the store
    */
-
   public ShoppingCart() {
   }
 }

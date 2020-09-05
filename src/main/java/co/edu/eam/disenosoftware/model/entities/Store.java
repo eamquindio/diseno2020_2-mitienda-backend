@@ -77,7 +77,6 @@ public class Store implements Serializable {
   /**
    * store builder
    */
-
   public Store() {
   }
 }

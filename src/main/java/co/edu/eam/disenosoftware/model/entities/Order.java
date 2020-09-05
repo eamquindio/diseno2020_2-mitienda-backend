@@ -29,6 +29,8 @@ public class Order implements Serializable {
    * store order
    */
 
+  @ManyToOne
+  @JoinColumn(name = "id_store", referencedColumnName = "id")
   private Store store;
 
   /**
@@ -49,11 +51,17 @@ public class Order implements Serializable {
 
   private Date date;
 
+  /**
+   * mappedBy order
+   */
   @OneToMany(mappedBy = "order")
   private List<OrderProduct> orderProducts;
 
+  /**
+   * ManyToOne user
+   */
   @ManyToOne
-  @JoinColumn(name = "id_users" , referencedColumnName = "id")
+  @JoinColumn(name = "id_users", referencedColumnName = "id")
   private User users;
 
   /**

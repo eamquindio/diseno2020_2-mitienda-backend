@@ -41,6 +41,9 @@ public class ShoppingCartProduct implements Serializable {
   @JoinColumn(name = "id_product", referencedColumnName = "id")
   private ProductStore productStore;
 
+  /**
+   * ManyToOne shoppingCart
+   */
   @ManyToOne
   @JoinColumn(name = "id_shoppingCart", referencedColumnName = "id")
   private ShoppingCart shoppingCart;
