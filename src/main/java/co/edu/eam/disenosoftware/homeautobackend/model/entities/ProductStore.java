@@ -14,7 +14,7 @@ import java.io.Serializable;
 /**
  Table's name
  */
-@Table(name = "protucts_store")
+@Table(name = "protuct_stores")
 public class ProductStore implements Serializable {
 
   /**
@@ -44,14 +44,14 @@ public class ProductStore implements Serializable {
    Relation with entity category
    */
   @ManyToOne
-  @JoinColumn(name = "category")
+  @JoinColumn(name = "id_category", referencedColumnName = "id")
   private Category category;
 
   /**
    Relation with entity store
    */
   @ManyToOne
-  @JoinColumn(name = "store")
+  @JoinColumn(name = "id_store", referencedColumnName = "id")
   private Store store;
 
   /**
