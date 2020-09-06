@@ -71,7 +71,7 @@ public class ProductRepository {
    * @return list of similar product names
    */
   public List<Product> getProductsName(String name) {
-    String queryStr = " SELECT n FROM Room n WHERE LOWER(n.name) LIKE LOWER(:name)";
+    String queryStr = " SELECT n FROM Room n WHERE LOWER(n.Product.name) LIKE LOWER(:name)";
     Query query = em.createQuery(queryStr);
     query.setParameter("name", "%" + name + "%");
     return query.getResultList();
