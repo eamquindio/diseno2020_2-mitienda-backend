@@ -22,6 +22,54 @@ public class ShoppingCartRepository {
   @PersistenceContext
   private EntityManager em;
 
+
+  /**
+   *Add a product order
+   * @param shoppingCartRepository product order to create
+   */
+  public void create(ShoppingCartRepository shoppingCartRepository) {
+
+    em.persist(shoppingCartRepository);
+
+  }
+
+  /**
+   *Add a product order
+   * @param id primary key
+   * @return a room or null if not exist
+   *
+   */
+  public ShoppingCartRepository find(Long id) {
+
+    return em.find(ShoppingCartRepository.class, id);
+
+  }
+
+  /**
+   * Edit a shoppingCartRepository
+   * @param shoppingCartRepository shoppingCartRepository to edit
+   */
+  public void edit(ShoppingCartRepository shoppingCartRepository) {
+
+    em.merge(shoppingCartRepository);
+
+  }
+
+  /**
+   *Delete a room
+   * @param id primary key
+   * @return room deleted or null if not exists
+   *
+   */
+  public ShoppingCartRepository delete(Long id) {
+
+    ShoppingCartRepository shoppingCartRepository = find(id);
+
+    em.remove(shoppingCartRepository);
+
+    return shoppingCartRepository;
+  }
+
   /**
    * A function for list all shoppingCart
    * @param idUser parameter to evaluate
@@ -37,4 +85,5 @@ public class ShoppingCartRepository {
 
     return query.getResultList();
   }
+
 }
