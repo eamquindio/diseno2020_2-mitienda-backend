@@ -11,52 +11,51 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Order Class
+ *  Order's class
  */
 @Entity
 @Table(name = "orders")
 public class Order implements Serializable {
 
  /**
-  * Mappeado Order
+  * Order's - Primary key
   */
+ @Id
+ private Long id;
 
-  @OneToMany(mappedBy = "order")
-  private List<OrderProduct> product;
-
-  /**
-  * Objet Store
+ /**
+  * Order's products
   */
-  @ManyToOne
-  @JoinColumn(name = "id_store", referencedColumnName = "id")
-  private Store store;
+ @OneToMany(mappedBy = "order")
+ private List<OrderProduct> product;
 
-  /**
-  * user order
+ /**
+  * Store's order - Foreign key
   */
-  @ManyToOne
-  @JoinColumn(name = "id_user", referencedColumnName = "id")
-  private User user;
+ @ManyToOne
+ @JoinColumn(name = "id_store", referencedColumnName = "id")
+ private Store store;
 
-  /**
-  * state Order
+ /**
+  * User's order - Foreign key
   */
-  private String state;
+ @ManyToOne
+ @JoinColumn(name = "id_user", referencedColumnName = "id")
+ private User user;
 
-  /**
-  * Order Date
+ /**
+  * Order's state
   */
-  private Date date;
+ private String state;
 
-  /**
-  * ID order
+ /**
+  * Order's date
   */
-  @Id
-  private Long id;
+ private Date date;
 
-  /**
-  * Order Constructor
+ /**
+  * Order's constructor
   */
-  public Order() {
-  }
+ public Order() {
+ }
 }

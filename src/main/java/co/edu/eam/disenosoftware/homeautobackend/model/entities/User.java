@@ -6,50 +6,45 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
- * Class User
+ * User's class
  */
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
 
   /**
-   * User username
-   */
-  private String userName;
-
-  /**
-   * Phone user
-   */
-  private String phone;
-
-  /**
-   * user email
-   */
-  private String email;
-
-  /**
-   * user password
-   */
-  private String password;
-
-  /**
-   * user address
-   */
-  private String address;
-
-  /**
-   * user name
-   */
-  private String name;
-
-  /**
-   * user id
+   * User's - Primary key
    */
   @Id
   private Long id;
 
   /**
-   * user contructor
+   * User's username
+   */
+  private String username;
+
+  /**
+   * User's phone
+   */
+  private String phone;
+
+  /**
+   * User's email
+   */
+  private String email;
+
+  /**
+   * User's password
+   */
+  private String password;
+
+  /**
+   * User's name
+   */
+  private String name;
+
+  /**
+   * User's constructor
    */
   public User() {
   }

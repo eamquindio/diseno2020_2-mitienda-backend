@@ -8,51 +8,51 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
- * Class Product Store
+ * Product's store class
  */
 @Entity
-@Table(name = "product_stores")
+@Table(name = "products_store")
 public class ProductStore implements Serializable {
 
   /**
-   * Id product Store
+   * Product's store - Primary key
+   */
+  @Id
+  private Long id;
+
+  /**
+   * Product of the store's - Foreign key
    */
   @ManyToOne
   @JoinColumn(name = "id_product", referencedColumnName = "id")
   private Product product;
 
   /**
-   * Stock product Store
+   * Product's store stock
    */
   private int stock;
 
   /**
-   * Product Store Price
+   * Product's store price
    */
   private double price;
 
   /**
-   * Id category
+   * Category of the store product's - Foreign key
    */
   @ManyToOne
   @JoinColumn(name = "id_category", referencedColumnName = "id")
   private Category category;
 
   /**
-   * ID store
+   * Store of the product - Foreign key
    */
   @ManyToOne
   @JoinColumn(name = "id_store", referencedColumnName = "id")
   private Store store;
 
   /**
-   * ID Product Store
-   */
-  @Id
-  private Long id;
-
-  /**
-   * Constructor Product Store
+   * Product's store constructor
    */
   public ProductStore() {
   }

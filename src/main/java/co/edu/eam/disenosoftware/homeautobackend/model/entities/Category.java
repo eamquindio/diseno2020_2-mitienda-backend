@@ -1,6 +1,5 @@
 package co.edu.eam.disenosoftware.homeautobackend.model.entities;
 
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -9,38 +8,37 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
- * Clase categoria
+ * Category class
  */
 @Entity
-@Table(name = "categorys")
+@Table(name = "categories")
 public class Category implements Serializable {
 
   /**
-   * Icono de Categoria
+   * Category - Primary key
    */
+  @Id
+  private Long id;
 
+  /**
+   * Category icon
+   */
   private String icon;
 
   /**
-   * Categoria de Tienda
+   * Category name
+   */
+  private String name;
+
+  /**
+   * Store categories - Foreign key
    */
   @ManyToOne
   @JoinColumn(name = "id_store", referencedColumnName = "id")
   private Store store;
 
   /**
-   * Nombre Categoria
-   */
-  private String name;
-
-  /**
-   * Id categoria
-   */
-  @Id
-  private Long id;
-
-  /**
-   * Constructor Categoria
+   * Category constructor
    */
   public Category() {
   }

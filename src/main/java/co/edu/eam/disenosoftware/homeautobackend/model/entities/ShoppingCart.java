@@ -10,40 +10,40 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Class Shopping Cart
+ * Shopping Cart's class
  */
 @Entity
 @Table(name = "shopping_carts")
 public class ShoppingCart implements Serializable {
 
   /**
-   * ID store
+   * Shopping Cart's - Primary key
+   */
+  @Id
+  private Long id;
+
+  /**
+   * Store of the shopping cart - Foreign key
    */
   @ManyToOne
   @JoinColumn(name = "id_store", referencedColumnName = "id")
   private Store store;
 
   /**
-   * Product Shopping Cart
+   * Shopping Cart's Product
    */
-  @OneToMany(mappedBy = "product")
+  @OneToMany(mappedBy = "shoppingCart")
   private List<ShoppingCartProduct> product;
 
   /**
-   * ID user
+   * User of the shopping cart - Foreign Key
    */
   @ManyToOne
   @JoinColumn(name = "id_user", referencedColumnName = "id")
   private User user;
 
   /**
-   * ID Shopping Cart
-   */
-  @Id
-  private Long id;
-
-  /**
-   * Constructor Shopping Store
+   * Shopping Cart's constructor
    */
   public ShoppingCart() {
   }

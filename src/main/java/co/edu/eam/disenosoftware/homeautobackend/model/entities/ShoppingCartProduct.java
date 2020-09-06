@@ -8,35 +8,40 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
- * Class Shopping Card Product
+ * Shopping Cart's Product class
  */
 @Entity
 @Table(name = "shopping_cart_products")
 public class ShoppingCartProduct implements Serializable {
 
   /**
-   * ID product Store
+   * Shopping Cart's Product's - Primary key
+   */
+  @Id
+  private Long id;
+
+  /**
+   * Shopping cart of the product shopping cart's - Foreign Key
+   */
+  @ManyToOne
+  @JoinColumn(name = "id_shopping_cart", referencedColumnName = "id")
+  private ShoppingCart shoppingCart;
+
+  /**
+   * Shopping Cart's Product
    */
   @ManyToOne
   @JoinColumn(name = "id_product_store", referencedColumnName = "id")
   private ProductStore product;
 
   /**
-   * quantity Shopping Cart Product
+   * Shopping Cart's Product quantity
    */
   private int quantity;
 
-
   /**
-   * ID ShoppingCardProduct
+   * Shopping Cart's Product constructor
    */
-  @Id
-  private Long id;
-
-  /**
-   * Constructor Shopping Cart Product
-   */
-
   public ShoppingCartProduct() {
   }
 }

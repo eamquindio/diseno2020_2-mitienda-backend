@@ -7,62 +7,68 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
- * Class Store
+ * Store's class
  */
 @Entity
 @Table(name = "stores")
 public class Store implements Serializable {
 
   /**
-   * Store Name
-   */
-  private String name;
-
-  /**
-   * Owner Store
-   */
-  private String owner;
-
-  /**
-   * address Store
-   */
-  private String address;
-
-  /**
-   * image Store
-   */
-  private String image;
-
-  /**
-   * Disponibility Store
-   */
-  @Column(name = "is_open")
-  private boolean isOpen;
-
-  /**
-   * Phone Store
-   */
-  private String phone;
-
-  /**
-   * email Store
-   */
-  private String email;
-
-  /**
-   * password Store
-   */
-  private String password;
-
-  /**
-   * ID store
+   * Store's - Primary key
    */
   @Id
   private Long id;
 
   /**
-   * Constructor Store
+   * Store's name
+   */
+  private String name;
+
+  /**
+   * Store's owner
+   */
+  private String owner;
+
+  /**
+   * Store's address
+   */
+  private String address;
+
+  /**
+   * Store's image
+   */
+  private String image;
+
+  /**
+   * Store's delivery
+   */
+  private boolean delivery;
+
+  /**
+   * Store's is open
+   */
+  @Column(name = "is_open")
+  private boolean isOpen;
+
+  /**
+   * Store's phone
+   */
+  private String phone;
+
+  /**
+   * Store's email
+   */
+  private String email;
+
+  /**
+   * Store's password
+   */
+  private  String password;
+
+  /**
+   * Store's constructor
    */
   public Store() {
   }
 }
+

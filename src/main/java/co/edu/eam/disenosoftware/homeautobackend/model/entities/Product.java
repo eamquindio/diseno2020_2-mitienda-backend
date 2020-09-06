@@ -6,31 +6,32 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
- * Class Product
+ * Product's class
  */
 @Entity
 @Table(name = "products")
 public class Product implements Serializable {
 
   /**
-   * Product Image
-   */
-  private String image;
-
-  /**
-   * Product Name
-   */
-  private String name;
-
-  /**
-   * ID Product
+   * Product's - Primary key
    */
   @Id
   private Long id;
 
   /**
-   * Product Constructor
+   * Product's image
+   */
+  private String image;
+
+  /**
+   * Product's name
+   */
+  private String name;
+
+  /**
+   * Product's constructor
    */
   public Product() {
   }
 }
+

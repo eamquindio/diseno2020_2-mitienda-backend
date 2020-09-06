@@ -8,37 +8,44 @@ import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
- * Class Product
+ * Order's products class
  */
 @Entity
 @Table(name = "order_products")
 public class OrderProduct implements Serializable {
 
   /**
-   * ID order Product
-   */
-  @ManyToOne
-  @JoinColumn(name = "id_order_product", referencedColumnName = "id")
-  private ProductStore product;
-
-  /**
-   * Quantity Order Product
-   */
-  private int quantity;
-
-  /**
-   * State order Product
-   */
-  private String state;
-
-  /**
-   * ID OrderProduct
+   * Order's products - Primary key
    */
   @Id
   private Long id;
 
   /**
-   * Constructor Order Productor
+   * Order of the products - Foreign Key
+   */
+  @ManyToOne
+  @JoinColumn(name = "id_order", referencedColumnName = "id")
+  private Order order;
+
+  /**
+   * Store's product of the order - Foreign Key
+   */
+  @ManyToOne
+  @JoinColumn(name = "id_product", referencedColumnName = "id")
+  private ProductStore productStore;
+
+  /**
+   * Order's products quantity
+   */
+  private int quantity;
+
+  /**
+   * Order's products state
+   */
+  private String state;
+
+  /**
+   * Order's products constructor
    */
   public OrderProduct() {
   }
