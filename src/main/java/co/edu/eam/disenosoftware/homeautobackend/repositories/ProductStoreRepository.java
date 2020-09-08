@@ -1,6 +1,8 @@
 package co.edu.eam.disenosoftware.homeautobackend.repositories;
 
 import co.edu.eam.disenosoftware.homeautobackend.model.entities.ProductStore;
+import co.edu.eam.disenosoftware.homeautobackend.model.entities.ProductStore;
+import co.edu.eam.disenosoftware.homeautobackend.model.entities.User;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +23,42 @@ public class ProductStoreRepository {
    */
   @PersistenceContext
   private EntityManager em;
+
+  /**
+   * Create a productStore
+   */
+  public void create(ProductStore productStore){
+    em.persist(productStore);
+  }
+
+  /**
+   * Find a ProductStore by primary key
+   * @param id
+   * @return a ProductStore or null if not exists
+   */
+  public ProductStore find(Long id){
+    return em.find(ProductStore.class, id);
+  }
+
+  /**
+   * Edit productStore
+   * @param productStore
+   */
+  public void edit(ProductStore productStore){
+    em.merge(productStore);
+  }
+
+  /**
+   * Delete a productStore
+   * @param id
+   * @return productStore deleted or null if not exists
+   */
+  public ProductStore delete(Long id){
+
+    ProductStore productStore = find(id);
+    em.remove(productStore);
+    return productStore;
+  }
 
   /**
    *Find and return the products of the store that has the id sent
