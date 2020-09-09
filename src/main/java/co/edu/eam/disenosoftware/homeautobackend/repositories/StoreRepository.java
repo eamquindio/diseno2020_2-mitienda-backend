@@ -70,4 +70,17 @@ public class StoreRepository {
     Query query = em.createQuery(queryStr);
     return query.getResultList();
   }
+
+  /**
+   * Method to find store by email
+   * @param email parameter to find
+   * @return store
+   */
+  public Store getStoreByEmail(String email) {
+    String queryStr = "SELECT m FROM Store m WHERE m.email = :storeEmail";
+    Query query = em.createQuery(queryStr);
+    query.setParameter("storeEmail", email);
+    List<Store> list = query.getResultList();
+    return list.get(0);
+  }
 }

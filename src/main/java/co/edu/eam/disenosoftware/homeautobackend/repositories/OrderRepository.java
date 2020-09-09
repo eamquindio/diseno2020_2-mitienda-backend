@@ -23,6 +23,49 @@ public class OrderRepository {
   private EntityManager em;
 
   /**
+   * Create a order
+   *
+   * @param order order to Create.
+   */
+  public void create(Order order) {
+    em.persist(order);
+  }
+
+  /**
+   * Find a order by primary key
+   *
+   * @param id primary key
+   * @return a order or null if not exists
+   */
+  public Order find(Long id) {
+    return em.find(Order.class, id);
+  }
+
+  /**
+   * Edit a order
+   *
+   * @param order order to Edit.
+   */
+  public void edit(Order order) {
+    em.merge(order);
+  }
+
+  /**
+   * Delete a order
+   *
+   * @param id primary key
+   * @return a order or null if not exists
+   */
+  public Order delete(Long id) {
+    Order order = find(id);
+    if (order != null) {
+      em.remove(order);
+    }
+    return order;
+  }
+
+
+  /**
    * Method to find current orders for a specific user
    * @param idUser User id parameter
    * @return List of current orders for a specific user
@@ -35,4 +78,7 @@ public class OrderRepository {
     query.setParameter("id", idUser);
     return query.getResultList();
   }
+
+
+
 }
