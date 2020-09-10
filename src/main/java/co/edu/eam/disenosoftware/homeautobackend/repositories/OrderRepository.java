@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 /**
- * ORders Repository
+ * Orders Repository
  */
 @Component
 @Transactional
@@ -90,5 +90,4 @@ public class OrderRepository {
     query.setParameter("value", id);
     return query.getResultList();
   }
-
 }
