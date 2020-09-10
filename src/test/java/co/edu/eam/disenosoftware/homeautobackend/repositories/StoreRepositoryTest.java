@@ -21,6 +21,16 @@ public class StoreRepositoryTest {
   @PersistenceContext
   private EntityManager em;
 
+  @BeforeEach
+  public void setup() {
+    em.createQuery("delete from Store");
+  }
+
+  @Test
+  public void test() {
+    Assertions.assertTrue(true);
+  }
+
   @Test
   public void createNotExistingStoreTest(){
     storeRepository.create(new Store(1L,"Tiendita1"));
@@ -76,16 +86,6 @@ public class StoreRepositoryTest {
 
     Store storeToAssert = storeRepository.find(1L);
     Assertions.assertEquals("TiendaUno", storeToAssert.getName());
-  }
-
-  @BeforeEach
-  public void setup() {
-    em.createQuery("delete from Store");
-  }
-
-  @Test
-  public void test() {
-    Assertions.assertTrue(true);
   }
 
 }

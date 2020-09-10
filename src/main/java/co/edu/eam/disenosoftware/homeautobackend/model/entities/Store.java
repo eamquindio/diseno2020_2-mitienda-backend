@@ -71,6 +71,10 @@ public class Store implements Serializable {
   public Store() {
   }
 
+  /**
+   * Store's constructor with params
+   * @param id primary key
+   */
   public Store(Long id) {
     this.id = id;
   }
@@ -85,21 +89,6 @@ public class Store implements Serializable {
     this.name = name;
   }
 
-  /**
-   * Store's Get Id method
-   * @return Id
-   */
-  public Long getId() {
-    return id;
-  }
-
-  /**
-   * Store's Set Id method
-   * @param id , id we want to set
-   */
-  public void setId(Long id) {
-    this.id = id;
-  }
 
   /**
    * Get Store's name

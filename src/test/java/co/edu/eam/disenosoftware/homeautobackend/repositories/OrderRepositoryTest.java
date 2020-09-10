@@ -23,6 +23,16 @@ public class OrderRepositoryTest {
   @PersistenceContext
   private EntityManager em;
 
+  @BeforeEach
+  public void setup() {
+    em.createQuery("delete from Order");
+  }
+
+  @Test
+  public void test() {
+    Assertions.assertTrue(true);
+  }
+
   @Test
   public void getOrdersInCourseByUserIdTest(){
 
@@ -39,19 +49,6 @@ public class OrderRepositoryTest {
 
     List<Order> ordersInCourseListToAssert = orderRepository.getOrdersInCourseByUserId(2L);
     Assertions.assertEquals(2, ordersInCourseListToAssert.size());
-    System.out.println(ordersInCourseListToAssert);
-
-  }
-
-
-  @BeforeEach
-  public void setup() {
-    em.createQuery("delete from Order");
-  }
-
-  @Test
-  public void test() {
-    Assertions.assertTrue(true);
   }
 
 }

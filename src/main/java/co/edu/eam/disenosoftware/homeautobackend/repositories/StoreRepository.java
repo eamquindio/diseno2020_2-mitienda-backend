@@ -24,6 +24,7 @@ public class StoreRepository {
 
   /**
    * Add a Store
+   *
    * @param store Store to create
    */
   public void create(Store store) {
@@ -32,6 +33,7 @@ public class StoreRepository {
 
   /**
    * Find a Store by primary key
+   *
    * @param id Primary key
    * @return a object Store or null if no exists
    */
@@ -41,6 +43,7 @@ public class StoreRepository {
 
   /**
    * Edit a Store
+   *
    * @param store Store to edit
    */
   public void edit(Store store) {
@@ -49,6 +52,7 @@ public class StoreRepository {
 
   /**
    * Delete a Store finding it
+   *
    * @param id primary key
    * @return Store deleted or null if not exist
    */
