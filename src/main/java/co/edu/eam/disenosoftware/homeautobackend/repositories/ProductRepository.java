@@ -1,7 +1,9 @@
 package co.edu.eam.disenosoftware.homeautobackend.repositories;
+
 import co.edu.eam.disenosoftware.homeautobackend.model.entities.Product;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -21,6 +23,7 @@ public class ProductRepository {
 
   /**
    * Product's create function
+   *
    * @param product , a product's object
    */
   public void create(Product product) {
@@ -54,10 +57,11 @@ public class ProductRepository {
    */
   public Product delete(Long id) {
     Product product = find(id);
-    em.remove(product);
+    if (product != null) {
+      em.remove(product);
+    }
     return product;
   }
-
 
 
 }
