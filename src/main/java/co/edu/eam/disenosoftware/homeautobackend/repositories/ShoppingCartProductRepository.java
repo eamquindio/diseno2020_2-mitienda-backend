@@ -52,7 +52,9 @@ public class ShoppingCartProductRepository {
    */
   public ShoppingCartProduct delete(Long id) {
     ShoppingCartProduct shoppingCartProduct = find(id);
-    em.remove(shoppingCartProduct);
+    if (shoppingCartProduct != null) {
+      em.remove(shoppingCartProduct);
+    }
     return shoppingCartProduct;
   }
 
