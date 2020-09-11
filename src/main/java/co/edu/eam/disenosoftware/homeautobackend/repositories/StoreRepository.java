@@ -54,7 +54,9 @@ public class StoreRepository {
    */
   public Store delete(Long id) {
     Store store = find(id);
-    em.remove(store);
+    if (store != null) {
+      em.remove(store);
+    }
     return store;
   }
 
