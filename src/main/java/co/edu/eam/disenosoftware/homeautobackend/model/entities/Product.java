@@ -29,8 +29,29 @@ public class Product implements Serializable {
   private String name;
 
   /**
-   * Product's constructor
+   * Product's constructors
    */
   public Product() {
   }
+
+  public Product(Long id) {
+    this.id = id;
+  }
+
+  /**
+   * Product's Get Id method
+   * @return Id
+   */
+  public Long getId() {
+    return id;
+  }
+
+  /**
+   * Product's Set Id method
+   * @param id , id we want to set
+   */
+  public void setId(Long id) {
+    this.id = id;
+  }
+
 }

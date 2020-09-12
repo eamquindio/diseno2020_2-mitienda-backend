@@ -66,8 +66,29 @@ public class Store implements Serializable {
   private  String password;
 
   /**
-   * Store's constructor
+   * Store's constructors
    */
   public Store() {
   }
+
+  public Store(Long id) {
+    this.id = id;
+  }
+
+  /**
+   * Store's Get Id method
+   * @return Id
+   */
+  public Long getId() {
+    return id;
+  }
+
+  /**
+   * Store's Set Id method
+   * @param id , id we want to set
+   */
+  public void setId(Long id) {
+    this.id = id;
+  }
+
 }

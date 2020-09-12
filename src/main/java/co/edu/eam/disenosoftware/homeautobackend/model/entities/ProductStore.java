@@ -52,8 +52,37 @@ public class ProductStore implements Serializable {
   private Store store;
 
   /**
-   * Product's store constructor
+   * Product's store constructors
    */
   public ProductStore() {
+  }
+
+  public ProductStore(Long id, Product product, int stock, double price, Category category, Store store) {
+    this.id = id;
+    this.product = product;
+    this.stock = stock;
+    this.price = price;
+    this.category = category;
+    this.store = store;
+  }
+
+  public ProductStore(Long id) {
+    this.id = id;
+  }
+
+  /**
+   * ProductStores's Get Id method
+   * @return Id
+   */
+  public Long getId() {
+    return id;
+  }
+
+  /**
+   * ProductStores's Set Id method
+   * @param id , id we want to set
+   */
+  public void setId(Long id) {
+    this.id = id;
   }
 }
