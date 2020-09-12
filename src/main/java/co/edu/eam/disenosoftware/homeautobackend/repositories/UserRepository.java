@@ -63,8 +63,10 @@ public class UserRepository {
     return user;
   }
 
-  /*
+  /**
    * Consulta que buscar User por Email
+   * @param email parametro para seleccionar usuarios por Email
+   * @return list
    */
   public User getUserByEmail(String email){
     String queryStr = "SELECT u FROM User u where u.email = :Reemail";

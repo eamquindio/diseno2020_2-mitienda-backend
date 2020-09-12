@@ -1,8 +1,6 @@
 package co.edu.eam.disenosoftware.homeautobackend.repositories;
 
 import co.edu.eam.disenosoftware.homeautobackend.model.entities.ProductStore;
-import co.edu.eam.disenosoftware.homeautobackend.model.entities.ProductStore;
-import co.edu.eam.disenosoftware.homeautobackend.model.entities.User;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +12,7 @@ import java.util.List;
 /**
  * product store Repository
  */
-@Component
+@Component // Para definir que esta es una clase que springboot va a instanciar
 @Transactional
 public class ProductStoreRepository {
 
@@ -26,6 +24,7 @@ public class ProductStoreRepository {
 
   /**
    * Create a productStore
+   * @param productStore parametro para el create
    */
   public void create(ProductStore productStore){
     em.persist(productStore);
