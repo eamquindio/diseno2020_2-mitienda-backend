@@ -75,5 +75,4 @@ public class ProductStoreRepositoryTest {
     //Test Verification
     Assertions.assertEquals(3, productStores.size());
   }
-
 }
