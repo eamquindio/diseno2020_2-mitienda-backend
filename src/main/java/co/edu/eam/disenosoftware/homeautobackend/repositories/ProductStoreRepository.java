@@ -27,7 +27,7 @@ public class ProductStoreRepository {
    * @param id , Foreign key
    * @return List of Products of the Store with the id that has been sent
    */
-  public List<ProductStore> getAllProductsOfStore(Long id) {
+  public List<ProductStore> getProductsStoreByStoreId(Long id) {
     String queryStr = "SELECT ps FROM ProductStore ps WHERE ps.store.id = :id";
     Query query = em.createQuery(queryStr);
     query.setParameter("id", id);

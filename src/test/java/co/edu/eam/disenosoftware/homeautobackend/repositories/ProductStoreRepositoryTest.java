@@ -39,7 +39,7 @@ public class ProductStoreRepositoryTest {
    * Method getAllProductsOfStoreTest Test
    */
   @Test
-  public void getAllProductsOfStoreTest() {
+  public void getProductsStoreByStoreId() {
     //Preparing Test
     Store store = new Store(1L);
     Store store1 = new Store(2L);
@@ -70,7 +70,7 @@ public class ProductStoreRepositoryTest {
     em.persist(productStore4);
 
     //Testing Code
-    List<ProductStore> productStores = repository.getAllProductsOfStore(1L);
+    List<ProductStore> productStores = repository.getProductsStoreByStoreId(1L);
 
     //Test Verification
     Assertions.assertEquals(3, productStores.size());
