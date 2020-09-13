@@ -52,7 +52,9 @@ public class UserAddressRepository {
    */
   public UserAddress delete(Long id) {
     UserAddress userAddress = find(id);
-    em.remove(userAddress);
+    if (userAddress != null) {
+      em.remove(userAddress);
+    }
     return userAddress;
   }
 
