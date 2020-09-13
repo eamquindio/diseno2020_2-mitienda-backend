@@ -38,8 +38,28 @@ public class Category implements Serializable {
   private Store store;
 
   /**
-   * Category constructor
+   * Category's constructors
    */
   public Category() {
+  }
+
+  public Category(Long id) {
+    this.id = id;
+  }
+
+  /**
+   * category's Get Id method
+   * @return id
+   */
+  public Long getId() {
+    return id;
+  }
+
+  /**
+   * category's Set method
+   * @param id , id we want to set
+   */
+  public void setId(Long id) {
+    this.id = id;
   }
 }

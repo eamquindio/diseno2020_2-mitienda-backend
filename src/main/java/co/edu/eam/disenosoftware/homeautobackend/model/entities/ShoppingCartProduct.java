@@ -44,4 +44,75 @@ public class ShoppingCartProduct implements Serializable {
    */
   public ShoppingCartProduct() {
   }
+
+  public ShoppingCartProduct(Long id, ShoppingCart shoppingCart, ProductStore product, int quantity) {
+    this.id = id;
+    this.shoppingCart = shoppingCart;
+    this.product = product;
+    this.quantity = quantity;
+  }
+
+  /**
+   * ShoppingCartProducts's Get Id method
+   * @return id
+   */
+  public Long getId() {
+    return id;
+  }
+
+  /**
+   * ShoppingCartProducts's Set Id method
+   * @param id , id we want to set
+   */
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  /**
+   * ShoppingCartProducts's Get Shopping Cart method
+   * @return Shopping Cart
+   */
+  public ShoppingCart getShoppingCart() {
+    return shoppingCart;
+  }
+
+  /**
+   * ShoppingCartProducts's Set Shopping Cart method
+   * @param shoppingCart , Shopping cart we want to set
+   */
+  public void setShoppingCart(ShoppingCart shoppingCart) {
+    this.shoppingCart = shoppingCart;
+  }
+
+  /**
+   * ShoppingCartProducts's Get Product method
+   * @return Product
+   */
+  public ProductStore getProduct() {
+    return product;
+  }
+
+  /**
+   * ShoppingCartProducts's Set Product method
+   * @param product , product we want to set
+   */
+  public void setProduct(ProductStore product) {
+    this.product = product;
+  }
+
+  /**
+   * ShoppingCartProducts's Get Quantity method
+   * @return Quantity
+   */
+  public int getQuantity() {
+    return quantity;
+  }
+
+  /**
+   * ShoppingCartProducts's Set Quantity method
+   * @param quantity , Quantity we want to set
+   */
+  public void setQuantity(int quantity) {
+    this.quantity = quantity;
+  }
 }
