@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.List;
 
 /**
  * Users address Repository
@@ -58,5 +60,16 @@ public class UserAddressRepository {
     return userAddress;
   }
 
+  /**
+   * List all the users addresses
+   * @return list of users addreses
+   */
+  public List<UserAddress> getAllUsersAddresses() {
+    String quertyStr = "SELECT userAddress FROM UserAddress userAddress";
+
+    Query query = em.createQuery(quertyStr);
+
+    return query.getResultList();
+  }
 
 }
