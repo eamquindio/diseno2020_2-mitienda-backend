@@ -25,11 +25,11 @@ public class ShoppingCartRepository {
 
   /**
    *Add a product order
-   * @param shoppingCartRepository product order to create
+   * @param shoppingCart product order to create
    */
-  public void create(ShoppingCartRepository shoppingCartRepository) {
+  public void create(ShoppingCart shoppingCart) {
 
-    em.persist(shoppingCartRepository);
+    em.persist(shoppingCart);
 
   }
 
@@ -39,35 +39,50 @@ public class ShoppingCartRepository {
    * @return a room or null if not exist
    *
    */
-  public ShoppingCartRepository find(Long id) {
+  public ShoppingCart  find(Long id) {
 
-    return em.find(ShoppingCartRepository.class, id);
+    ShoppingCart shoppingCart = em.find(ShoppingCart.class, id);
+
+
+    if (shoppingCart != null) {
+
+      return shoppingCart;
+
+    } else {
+
+      return   null;
+    }
 
   }
 
   /**
-   * Edit a shoppingCartRepository
-   * @param shoppingCartRepository shoppingCartRepository to edit
+   * Edit a shoppingCart
+   * @param shoppingCart shoppingCart to edit
    */
-  public void edit(ShoppingCartRepository shoppingCartRepository) {
+  public void edit(ShoppingCart shoppingCart) {
 
-    em.merge(shoppingCartRepository);
+    em.merge(shoppingCart);
 
   }
 
   /**
-   *Delete a room
+   *Delete a  ShoppingCart
    * @param id primary key
    * @return room deleted or null if not exists
    *
    */
-  public ShoppingCartRepository delete(Long id) {
+  public ShoppingCart delete(Long id) {
 
-    ShoppingCartRepository shoppingCartRepository = find(id);
+    ShoppingCart shoppingCart = find(id);
 
-    em.remove(shoppingCartRepository);
+    if (shoppingCart != null) {
 
-    return shoppingCartRepository;
+      em.remove(shoppingCart);
+
+    }
+
+    return shoppingCart;
+
   }
 
   /**
