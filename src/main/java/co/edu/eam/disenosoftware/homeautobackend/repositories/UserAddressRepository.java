@@ -39,7 +39,7 @@ public class UserAddressRepository {
     UserAddress userAddress = em.find(UserAddress.class, id);
     if (userAddress != null) {
       return userAddress;
-    }else{
+    } else {
       return null;
     }
   }
