@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 /**
- * Orders Repository
+ * ORders Repository
  */
 @Component
 @Transactional
