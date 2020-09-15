@@ -37,4 +37,13 @@ public class UserAddress implements Serializable {
    */
   public UserAddress() {
   }
+
+  /**
+   * Constructor with params
+   */
+  public UserAddress(Long id, User user, String address) {
+    this.id = id;
+    this.user = user;
+    this.address = address;
+  }
 }

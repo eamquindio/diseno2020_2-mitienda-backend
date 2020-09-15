@@ -79,6 +79,17 @@ public class OrderRepository {
     return query.getResultList();
   }
 
+  /**
+   *Method to find the finishs' orders
+   *@param id prime key of the user
+   *@return list of orders finished from one user
+   */
+  public List<Order> getFinishedOrdersByUserId(Long id) {
+    String quertyStr = "SELECT order FROM Order order WHERE order.state = 'finished' AND order.user.id = :value";
+    Query query = em.createQuery(quertyStr);
+    query.setParameter("value", id);
+    return query.getResultList();
+  }
 
 
 }
