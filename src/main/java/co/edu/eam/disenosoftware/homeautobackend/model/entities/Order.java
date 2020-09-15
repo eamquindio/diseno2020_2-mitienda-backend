@@ -58,4 +58,112 @@ public class Order implements Serializable {
    */
   public Order() {
   }
+
+  /**
+   * Order's constructor with params
+   */
+  public Order(Long id, List<OrderProduct> product, Store store, User user, String state, Date date) {
+    this.id = id;
+    this.product = product;
+    this.store = store;
+    this.user = user;
+    this.state = state;
+    this.date = date;
+  }
+
+  /**
+   * Order's Get Id method
+   * @return id
+   */
+  public Long getId() {
+    return id;
+  }
+
+  /**
+   * Order's set Id method
+   * @param  id address
+   */
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  /**
+   * Order's Get products' list method
+   * @return product
+   */
+  public List<OrderProduct> getProduct() {
+    return product;
+  }
+
+  /**
+   * Order's set products' list method
+   * @param  product list
+   */
+  public void setProduct(List<OrderProduct> product) {
+    this.product = product;
+  }
+
+  /**
+   * Order's Get store method
+   * @return store
+   */
+  public Store getStore() {
+    return store;
+  }
+
+  /**
+   * Order's set store
+   * @param  store object store
+   */
+  public void setStore(Store store) {
+    this.store = store;
+  }
+
+  /**
+   * Order's Get User method
+   * @return user
+   */
+  public User getUser() {
+    return user;
+  }
+
+  /**
+   * Order's set User
+   * @param  user object user
+   */
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  /**
+   * Order's Get state method
+   * @return state
+   */
+  public String getState() {
+    return state;
+  }
+
+  /**
+   * Order's set state
+   * @param  state of order
+   */
+  public void setState(String state) {
+    this.state = state;
+  }
+
+  /**
+   * Order's Get date method
+   * @return date
+   */
+  public Date getDate() {
+    return date;
+  }
+
+  /**
+   * Order's set date
+   * @param  date time
+   */
+  public void setDate(Date date) {
+    this.date = date;
+  }
 }
