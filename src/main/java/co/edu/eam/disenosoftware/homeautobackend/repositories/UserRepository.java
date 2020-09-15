@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.List;
 
 /**
  * users Repository
@@ -21,7 +23,7 @@ public class UserRepository {
   private EntityManager em;
 
   /**
-   * Create a room
+   * Create a user
    * @param user user to Create.
    */
   public void create(User user) {
@@ -59,5 +61,19 @@ public class UserRepository {
     }
 
     return user;
+  }
+
+  /**
+   * Consulta que buscar User por Email
+   * @param email parametro para seleccionar usuarios por Email
+   * @return list
+   */
+  public User getUserByEmail(String email) {
+    String queryStr = "SELECT u FROM User u where u.email = :Reemail";
+    Query query = em.createQuery(queryStr);
+    query.setParameter("Reemail", email);
+
+    List<User> list = query.getResultList();
+    return list.get(0);
   }
 }
