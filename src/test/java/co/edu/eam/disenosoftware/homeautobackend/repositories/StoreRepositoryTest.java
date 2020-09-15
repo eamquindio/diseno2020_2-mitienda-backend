@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Transactional
 @SpringBootTest
@@ -86,6 +87,16 @@ public class StoreRepositoryTest {
 
     Store storeToAssert = storeRepository.find(1L);
     Assertions.assertEquals("TiendaUno", storeToAssert.getName());
+  }
+
+  @Test
+  public void testForGetAllStores() {
+    Store storeA = new Store(1L,"first");
+    Store storeB = new Store(2L,"second");
+    em.persist(storeA);
+    em.persist(storeB);
+    List<Store> storeTest = storeRepository.getAllStores();
+    Assertions.assertEquals(2, storeTest.size());
   }
 
 }
