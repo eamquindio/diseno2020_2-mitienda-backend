@@ -28,7 +28,7 @@ public class ShoppingCartRepository {
    * @param idStore parameter to evaluate
    * @return List shoppingCart
    */
-  private List<ShoppingCart> getAlShoppingCartByUser(Long idUser, Long idStore) {
+  private List<ShoppingCart> getAlShoppingCartByUserIdAndStoreId(Long idUser, Long idStore) {
     String queryStr = "SELECT shopping FROM ShoppingCart shopping "
             + " WHERE shopping.user.id = :userId AND shopping.store.id = :storeId";
     Query query = em.createQuery(queryStr);
