@@ -1,6 +1,5 @@
 package co.edu.eam.disenosoftware.homeautobackend.repositories;
 
-import co.edu.eam.disenosoftware.homeautobackend.model.entities.ShoppingCart;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
