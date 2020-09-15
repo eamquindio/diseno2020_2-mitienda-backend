@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.List;
 
 
 /**
@@ -63,5 +65,15 @@ public class ProductRepository {
     return product;
   }
 
-
+  /**
+   *search products by name
+   * @param name product name is requested
+   * @return list of similar product names
+   */
+  public List<Product> getProductsByName(String name) {
+    String queryStr = " SELECT n FROM Product n WHERE LOWER(n.name) LIKE LOWER(:name)";
+    Query query = em.createQuery(queryStr);
+    query.setParameter("name", "%" + name + "%");
+    return query.getResultList();
+  }
 }
