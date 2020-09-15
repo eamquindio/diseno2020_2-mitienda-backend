@@ -68,7 +68,7 @@ public class UserRepository {
    * @param email parametro para seleccionar usuarios por Email
    * @return list
    */
-  public User getUserByEmail(String email){
+  public User getUserByEmail(String email) {
     String queryStr = "SELECT u FROM User u where u.email = :Reemail";
     Query query = em.createQuery(queryStr);
     query.setParameter("Reemail", email);
