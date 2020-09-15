@@ -19,7 +19,7 @@ public class UserRepositoryTest {
 
   @PersistenceContext
   private EntityManager em;
-  
+
   @BeforeEach
   public void setup() {
     em.createQuery("delete from User");

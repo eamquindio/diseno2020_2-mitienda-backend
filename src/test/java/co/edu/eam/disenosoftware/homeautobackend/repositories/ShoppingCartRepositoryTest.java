@@ -21,13 +21,6 @@ public class ShoppingCartRepositoryTest {
   @PersistenceContext
   private EntityManager em;
 
-  @Test
-  public void getAlShoppingCartByUserIdAndStoreId(){
-
-    User user = new User(1L, "pedro");
-    em.persist();
-  }
-
   @BeforeEach
   public void setup() {
     em.createQuery("delete from ShoppingCart");
