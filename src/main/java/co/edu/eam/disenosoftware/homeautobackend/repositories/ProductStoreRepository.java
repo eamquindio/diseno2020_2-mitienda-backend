@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * product store Repository
  */
-@Component // Para definir que esta es una clase que springboot va a instanciar
+@Component
 @Transactional
 public class ProductStoreRepository {
 
@@ -26,33 +26,33 @@ public class ProductStoreRepository {
    * Create a productStore
    * @param productStore parametro para el create
    */
-  public void create(ProductStore productStore){
+  public void create(ProductStore productStore) {
     em.persist(productStore);
   }
 
   /**
    * Find a ProductStore by primary key
-   * @param id
+   * @param id parametro id del find
    * @return a ProductStore or null if not exists
    */
-  public ProductStore find(Long id){
+  public ProductStore find(Long id) {
     return em.find(ProductStore.class, id);
   }
 
   /**
    * Edit productStore
-   * @param productStore
+   * @param productStore parametro para edit
    */
-  public void edit(ProductStore productStore){
+  public void edit(ProductStore productStore) {
     em.merge(productStore);
   }
 
   /**
    * Delete a productStore
-   * @param id
+   * @param id parametro para delete
    * @return productStore deleted or null if not exists
    */
-  public ProductStore delete(Long id){
+  public ProductStore delete(Long id) {
 
     ProductStore productStore = find(id);
     em.remove(productStore);

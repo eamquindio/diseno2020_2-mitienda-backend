@@ -52,7 +52,7 @@ public class ProductStore implements Serializable {
   private Store store;
 
   /**
-   * Product's store constructors
+   * Product's store constructor
    */
   public ProductStore() {
   }
@@ -71,18 +71,101 @@ public class ProductStore implements Serializable {
   }
 
   /**
-   * ProductStores's Get Id method
-   * @return Id
+   * ProductStore getId
+   * @return id
    */
   public Long getId() {
     return id;
   }
 
   /**
-   * ProductStores's Set Id method
-   * @param id , id we want to set
+   * ProductStore setId
+   * @param id parametro id
    */
   public void setId(Long id) {
     this.id = id;
   }
+
+  /**
+   * ProductStore getProduct
+   * @return product
+   */
+  public Product getProduct() {
+    return product;
+  }
+
+  /**
+   * ProductStore setProduct
+   * @param product parametro product
+   */
+  public void setProduct(Product product) {
+    this.product = product;
+  }
+
+  /**
+   * ProductStore getStock
+   * @return stock
+   */
+  public int getStock() {
+    return stock;
+  }
+
+  /**
+   * ProductStore setStock
+   * @param stock parametro
+   */
+  public void setStock(int stock) {
+    this.stock = stock;
+  }
+
+  /**
+   * ProductStore getPrice
+   * @return price
+   */
+  public double getPrice() {
+    return price;
+  }
+
+  /**
+   * ProductStore setPrice
+   * @param price parametro
+   */
+  public void setPrice(double price) {
+    this.price = price;
+  }
+
+  /**
+   * ProductStore getCategory
+   * @return category
+   */
+  public Category getCategory() {
+    return category;
+  }
+
+  /**
+   * ProductStore setCategory
+   * @param category parametro
+   */
+  public void setCategory(Category category) {
+    this.category = category;
+  }
+
+  /**
+   * ProductStore getStore
+   * @return store
+   */
+  public Store getStore() {
+    return store;
+  }
+
+  /**
+   * ProductStore setStore
+   * @param store parametro
+   */
+  public void setStore(Store store) {
+    this.store = store;
+  }
+
+
+
 }
