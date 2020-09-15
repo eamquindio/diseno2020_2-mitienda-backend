@@ -34,6 +34,9 @@ public class UserAddressRepositoryTest {
     Assertions.assertTrue(true);
   }
 
+  /**
+   * Test for createNotExistingUserAddress without a sql
+   */
   @Test
   public void createNotExistingUserAddressTest() {
     //codigo probando Long id, String username
@@ -52,6 +55,9 @@ public class UserAddressRepositoryTest {
     Assertions.assertEquals(1L, userAddressToAssert.getId());
   }
 
+  /**
+   * Test for findExistingUserAddress with a sql
+   */
   @Test
   @Sql({"/testdata/find_existing_address.sql"})
   public void findExistingUserAddressTest() {
@@ -63,6 +69,9 @@ public class UserAddressRepositoryTest {
     Assertions.assertEquals(2L, userAddressToAssert.getId());
   }
 
+  /**
+   * Test for findNotExistingAddress with a sql
+   */
   @Test
   @Sql({"/testdata/find_not_existing_address.sql"})
   public void findNotExistingAddressTest() {
@@ -73,6 +82,9 @@ public class UserAddressRepositoryTest {
     Assertions.assertNull(userAddressToAssert);
   }
 
+  /**
+   * Test for updateExistingUserAddress with a sql
+   */
   @Test
   @Sql({"/testdata/update_existing_user_address.sql"})
   public void updateExistingUserAddressTest() {
@@ -87,9 +99,12 @@ public class UserAddressRepositoryTest {
     Assertions.assertEquals("Nueva dirección", userAddressToAssert.getAddress());
   }
 
+  /**
+   * Test for deleteExistingUserAddress with a sql
+   */
   @Test
   @Sql({"/testdata/delete_existing_user_address.sql"})
-  public void deleteExistingUserAddress() {
+  public void deleteExistingUserAddressTest() {
     //codigo prueba
     UserAddress userAddress = userAddressRepository.find(1L);
 
@@ -103,9 +118,12 @@ public class UserAddressRepositoryTest {
     Assertions.assertEquals(userAddress, deleteUserAddress);
   }
 
+  /**
+   * Test for deleteNoExistingUserAddres with a sql
+   */
   @Test
   @Sql({"/testdata/delete_not_existing_user_address.sql"})
-  public void deleteNotExistingUserAddres() {
+  public void deleteNotExistingUserAddresTest() {
     //codigo prueba
     UserAddress userAddressToAssert = userAddressRepository.delete(3L);
 
@@ -113,6 +131,9 @@ public class UserAddressRepositoryTest {
     Assertions.assertNull(userAddressToAssert);
   }
 
+  /**
+   * Test for getAllUsersAddresses with a sql
+   */
   @Test
   @Sql({"/testdata/get_all_users_addresses.sql"})
   public void getAllUsersAddressesTest() {

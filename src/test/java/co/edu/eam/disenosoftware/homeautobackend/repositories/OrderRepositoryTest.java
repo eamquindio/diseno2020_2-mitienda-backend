@@ -35,6 +35,9 @@ public class OrderRepositoryTest {
     Assertions.assertTrue(true);
   }
 
+  /**
+   * Test for getFinishedOrdersByUserId with a sql
+   */
   @Test
   public void getOrdersInCourseByUserIdTest(){
 
