@@ -36,7 +36,12 @@ public class UserAddressRepository {
    * @return a userAddres or null if not exist
    */
   public UserAddress find(Long id) {
-    return em.find(UserAddress.class, id);
+    UserAddress userAddress = em.find(UserAddress.class, id);
+    if (userAddress != null) {
+      return userAddress;
+    }else{
+      return null;
+    }
   }
 
   /**
