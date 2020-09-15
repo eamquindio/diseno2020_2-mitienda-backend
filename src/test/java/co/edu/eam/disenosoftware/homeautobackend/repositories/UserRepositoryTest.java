@@ -83,7 +83,7 @@ public class UserRepositoryTest {
     userRepository.edit(user);
 
     User userToAssert = userRepository.find(1L);
-    Assertions.assertEquals("pedro"), userToAssert.getName());
+    Assertions.assertEquals("pedro"), userToAssert.getName();
 
   }
 
