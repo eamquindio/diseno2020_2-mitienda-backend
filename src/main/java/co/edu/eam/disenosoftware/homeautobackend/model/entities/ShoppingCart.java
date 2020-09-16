@@ -60,7 +60,21 @@ public class ShoppingCart implements Serializable {
   }
 
   /**
+   * ShoppingCart constructors with id, store, user
+   *
+   * @param id    , id
+   * @param store , store
+   * @param user  , user
+   */
+  public ShoppingCart(Long id, Store store, User user) {
+    this.id = id;
+    this.store = store;
+    this.user = user;
+  }
+
+  /**
    * ShoppingCart's Get Id method
+   *
    * @return Id
    */
   public Long getId() {
