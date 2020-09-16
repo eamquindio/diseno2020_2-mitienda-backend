@@ -39,7 +39,7 @@ public class UserRepositoryTest {
     User userToAssert = userRepository.find(1L);
 
     Assertions.assertNotNull(userToAssert);
-    Assertions.assertEquals("username", userToAssert.getName());
+    Assertions.assertEquals("username", userToAssert.getUsername());
   }
 
   @Test
@@ -50,7 +50,7 @@ public class UserRepositoryTest {
     User deleteUser = userRepository.delete(1L);
 
     Assertions.assertNotNull(deleteUser);
-    Assertions.assertEquals("user1", deleteUser.getName());
+    Assertions.assertEquals("user1", deleteUser.getUsername());
 
     User userToAssert = em.find(User.class, 1L);
     Assertions.assertNull(userToAssert);
@@ -71,7 +71,7 @@ public class UserRepositoryTest {
     User userToAssert = userRepository.find(1L);
 
     Assertions.assertNotNull(userToAssert);
-    Assertions.assertEquals("username", userToAssert.getName());
+    Assertions.assertEquals("username", userToAssert.getUsername());
   }
 
   @Test

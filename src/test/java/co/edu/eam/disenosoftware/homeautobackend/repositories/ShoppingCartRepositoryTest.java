@@ -41,8 +41,11 @@ public class ShoppingCartRepositoryTest {
     em.persist(user);
 
     Store store = new Store(1L);
+    em.persist(store);
 
     ShoppingCart shoppingCart = new ShoppingCart(1L, store, user);
+    em.persist(shoppingCart);
+
     List<ShoppingCart> shoppingCartList = repository.getAlShoppingCartByUserIdAndStoreId(1L, 1L);
     Assertions.assertEquals(1, shoppingCartList.size());
   }
