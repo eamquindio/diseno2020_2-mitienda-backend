@@ -57,6 +57,7 @@ public class ShoppingCart implements Serializable {
 
   public ShoppingCart(Long id) {
     this.id = id;
+
   }
 
   /**

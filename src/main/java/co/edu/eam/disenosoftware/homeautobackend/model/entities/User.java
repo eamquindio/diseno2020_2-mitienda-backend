@@ -67,6 +67,7 @@ public class User implements Serializable {
     this.username = username;
   }
 
+
   /**
    * get id
    * @return id
