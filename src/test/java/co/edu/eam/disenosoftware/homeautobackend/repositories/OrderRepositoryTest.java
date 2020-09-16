@@ -1,12 +1,14 @@
 package co.edu.eam.disenosoftware.homeautobackend.repositories;
 
 import co.edu.eam.disenosoftware.homeautobackend.model.entities.Order;
+import co.edu.eam.disenosoftware.homeautobackend.model.entities.Order;
 import co.edu.eam.disenosoftware.homeautobackend.model.entities.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -49,6 +51,16 @@ public class OrderRepositoryTest {
 
     List<Order> ordersInCourseListToAssert = orderRepository.getOrdersInCourseByUserId(2L);
     Assertions.assertEquals(2, ordersInCourseListToAssert.size());
+  }
+
+  @Test
+  @Sql({"/testdata/get_finished_orders_by_user_id.sql"})
+  public void getFinishedOrdersByUserIdTest(){
+    //codigo prueba
+      List<Order> ordersFinishedToAssert = orderRepository.getFinishedOrdersByUserId(1L);
+
+    //resultado prueba
+    Assertions.assertEquals(5, ordersFinishedToAssert.size());
   }
 
 }
