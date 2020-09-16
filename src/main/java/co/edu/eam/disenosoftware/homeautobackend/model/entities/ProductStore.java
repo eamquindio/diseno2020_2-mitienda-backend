@@ -165,7 +165,4 @@ public class ProductStore implements Serializable {
   public void setStore(Store store) {
     this.store = store;
   }
-
-
-
 }

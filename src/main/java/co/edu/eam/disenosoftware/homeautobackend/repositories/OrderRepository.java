@@ -90,5 +90,4 @@ public class OrderRepository {
     query.setParameter("value", id);
     return query.getResultList();
   }
-
 }

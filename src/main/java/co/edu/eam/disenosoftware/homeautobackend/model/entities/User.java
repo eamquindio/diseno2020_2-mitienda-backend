@@ -52,6 +52,14 @@ public class User implements Serializable {
   /**
    * User's constructor
    * @param id primary key
+   */
+  public User(Long id) {
+    this.id = id;
+  }
+
+  /**
+   * User's constructor
+   * @param id primary key
    * @param username username to user
    */
   public User(Long id, String username) {
