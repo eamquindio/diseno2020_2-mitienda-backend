@@ -42,13 +42,8 @@ public class ShoppingCartRepositoryTest {
     User user=new User(20L);
     Store store=new Store(30L);
 
-
-
-
-
     ShoppingCart shoppingCart= new ShoppingCart(1L,store,user);
     repository.create(shoppingCart);
-
 
     ShoppingCart shoppingCartToAssert= repository.find(1L);
 
@@ -66,18 +61,15 @@ public class ShoppingCartRepositoryTest {
     User user=new User(20L);
     Store store=new Store(30L);
 
-
     ShoppingCart shoppingCart= new ShoppingCart(1L,store,user);
 
     repository.create(shoppingCart);
-
 
     ShoppingCart deleteShoppingCart=repository.delete(1L);
 
     Assertions.assertNotNull(deleteShoppingCart);
     Assertions.assertNotNull(shoppingCart);
     Assertions.assertEquals(shoppingCart,deleteShoppingCart);
-
 
   }
 
@@ -96,46 +88,33 @@ public class ShoppingCartRepositoryTest {
     User user=new User(20L);
     Store store=new Store(30L);
 
-
     ShoppingCart shoppingCart= new ShoppingCart(1L,store,user);
 
     em.persist(shoppingCart);
 
     ShoppingCart shoppingCartToAssert=repository.find(1L);
 
-
-
     Assertions.assertNotNull(shoppingCartToAssert);
     Assertions.assertEquals(1L, shoppingCartToAssert.getId());
     Assertions.assertEquals(shoppingCart, shoppingCartToAssert);
-
-
-
 
   }
 
   @Test
   public void findNotExistingShoppingCartTest() {
 
-
     ShoppingCart shoppingCartToAssert = repository.find(1L);
 
     Assertions.assertNull(shoppingCartToAssert);
-
 
   }
 
   @Test
   public void updateExistingShoppingCartTest() {
-    //Preparing Test
-
 
     User user = new User(20L);
     Store store = new Store(30L);
     User user2=new User(22L);
-
-
-
 
     em.persist(store);
     em.persist(user);
@@ -144,12 +123,10 @@ public class ShoppingCartRepositoryTest {
     ShoppingCart shoppingCart= new ShoppingCart(1L,store,user);
     em.persist(shoppingCart);
 
-
     shoppingCart.setUser(user2);
     repository.edit(shoppingCart);
 
     ShoppingCart shoppingCartToAssert = repository.find(1L);
-
     Assertions.assertNotNull(shoppingCartToAssert);
     Assertions.assertEquals(22L, shoppingCartToAssert.getUser().getId());
   }

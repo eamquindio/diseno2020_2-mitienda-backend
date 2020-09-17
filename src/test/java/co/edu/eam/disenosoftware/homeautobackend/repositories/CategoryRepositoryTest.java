@@ -54,26 +54,10 @@ public class CategoryRepositoryTest {
     em.persist(category3);
     em.persist(category4);
 
-
-
     List<Category> categories = repository.getCategoryByStoreId(1L);
 
     Assertions.assertEquals(3, categories.size());
 
-
-
-
-
-
-
-
-
-
-
-
   }
-
-
-
 
 }
