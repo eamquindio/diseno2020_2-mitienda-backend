@@ -74,9 +74,8 @@ public class Order implements Serializable {
   /**
    * Order's constructor with params
    */
-  public Order(Long id, List<OrderProduct> product, Store store, User user, String state, Date date) {
+  public Order(Long id, Store store, User user, String state, Date date) {
     this.id = id;
-    this.product = product;
     this.store = store;
     this.user = user;
     this.state = state;
