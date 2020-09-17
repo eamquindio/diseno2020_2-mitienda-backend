@@ -57,7 +57,7 @@ public class ShoppingCartRepositoryTest {
     Assertions.assertNotNull(shoppingCartToAssert);
     Assertions.assertEquals(1L,shoppingCartToAssert.getId());
     Assertions.assertEquals(20L,user.getId());
-    Assertions.assertEquals(30L,store.getId());
+
 
   }
 
