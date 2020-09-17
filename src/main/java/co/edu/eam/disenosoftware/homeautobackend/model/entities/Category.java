@@ -49,7 +49,7 @@ public class Category implements Serializable {
 
   public Category(Long id, Store store) {
     this.id = id;
-    this.store= store;
+    this.store = store;
   }
 
   /**
