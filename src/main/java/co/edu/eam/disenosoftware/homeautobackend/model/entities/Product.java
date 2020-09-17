@@ -29,21 +29,24 @@ public class Product implements Serializable {
   private String name;
 
   /**
-   * Product's constructors
+   * Product's constructors clear
    */
   public Product() {
   }
 
+  /**
+   * Product's constructor to Id
+   * @param id , id parameter
+   */
   public Product(Long id) {
     this.id = id;
   }
 
   /**
-   * The product's constructor with params
-   *
-   * @param id    ,product's id
-   * @param image , product's image
-   * @param name  , product's name
+   * Product's constructor
+   * @param id , id parameter
+   * @param image , image parameter
+   * @param name , name parameter
    */
   public Product(Long id, String image, String name) {
     this.id = id;
@@ -104,4 +107,5 @@ public class Product implements Serializable {
   public void setName(String name) {
     this.name = name;
   }
+
 }

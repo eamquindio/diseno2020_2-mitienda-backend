@@ -71,6 +71,10 @@ public class Order implements Serializable {
     this.state = state;
   }
 
+  public Order(Long id) {
+    this.id = id;
+  }
+
   /**
    * Order's constructor with params
    */
@@ -177,4 +181,5 @@ public class Order implements Serializable {
   public void setDate(Date date) {
     this.date = date;
   }
+
 }

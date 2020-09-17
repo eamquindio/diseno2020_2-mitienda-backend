@@ -10,10 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Transactional
 @SpringBootTest
-public class PRoductRepositoryTest {
+public class ProductRepositoryTest {
 
   @Autowired
   private ProductRepository repository;
@@ -94,6 +95,17 @@ public class PRoductRepositoryTest {
     Product testProduct = repository.find(1L);
 
     Assertions.assertEquals("HALO",testProduct.getName());
+  }
+
+  @Test
+  public void getProductsByNameTest(){
+    //SELECT n FROM Product n WHERE LOWER(n.name) LIKE LOWER(:name)
+    Product product = new Product(1L, "imageProduct", "sugar");
+    em.persist(product);
+
+    List<Product> products = repository.getProductsByName("sugar");
+
+    Assertions.assertEquals(1, products.size());
   }
 
 }
