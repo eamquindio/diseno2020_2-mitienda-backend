@@ -1,11 +1,11 @@
 package co.edu.eam.disenosoftware.homeautobackend.repositories;
 
-import co.edu.eam.disenosoftware.homeautobackend.model.entities.Store;
-import co.edu.eam.disenosoftware.homeautobackend.model.entities.User;
 import co.edu.eam.disenosoftware.homeautobackend.model.entities.Product;
 import co.edu.eam.disenosoftware.homeautobackend.model.entities.ProductStore;
 import co.edu.eam.disenosoftware.homeautobackend.model.entities.ShoppingCart;
 import co.edu.eam.disenosoftware.homeautobackend.model.entities.ShoppingCartProduct;
+import co.edu.eam.disenosoftware.homeautobackend.model.entities.Store;
+import co.edu.eam.disenosoftware.homeautobackend.model.entities.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,21 +39,6 @@ public class ShoppingCartRepositoryTest {
   }
 
   @Test
-  public void getAlShoppingCartByUserIdAndStoreId() {
-
-    User user = new User(1L, "pedro");
-    em.persist(user);
-
-    Store store = new Store(1L);
-    em.persist(store);
-
-    ShoppingCart shoppingCart = new ShoppingCart(1L, store, user);
-    em.persist(shoppingCart);
-
-    List<ShoppingCart> shoppingCartList = repository.getAlShoppingCartByUserIdAndStoreId(1L, 1L);
-    Assertions.assertEquals(1, shoppingCartList.size());
-  }
-  @Test
   public void createNoExistingShoppingCartTest(){
 
     User user=new User(20L);
@@ -72,7 +57,7 @@ public class ShoppingCartRepositoryTest {
     Assertions.assertNotNull(shoppingCartToAssert);
     Assertions.assertEquals(1L,shoppingCartToAssert.getId());
     Assertions.assertEquals(20L,user.getId());
-
+    Assertions.assertEquals(30L,store.getId());
 
   }
 
@@ -107,7 +92,7 @@ public class ShoppingCartRepositoryTest {
 
   }
 
-  @Test
+
   public void findExistingShoppingTest(){
 
     User user=new User(20L);
