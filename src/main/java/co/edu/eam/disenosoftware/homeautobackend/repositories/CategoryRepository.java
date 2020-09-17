@@ -30,7 +30,7 @@ public class CategoryRepository {
    */
   public List<Category> getCategoryByStoreId(Long id) {
 
-    String quertyStr = "SELECT category FROM Category WHERE category.store.id = :id";
+    String quertyStr = "SELECT category FROM Category category WHERE category.store.id = :id";
 
     Query query = em.createQuery(quertyStr);
 
@@ -38,9 +38,5 @@ public class CategoryRepository {
 
     return query.getResultList();
   }
-
-
-
-
 
 }

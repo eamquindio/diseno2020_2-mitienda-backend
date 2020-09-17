@@ -48,12 +48,7 @@ public class ShoppingCart implements Serializable {
   public ShoppingCart() {
   }
 
-  public ShoppingCart(Long id, Store store, List<ShoppingCartProduct> product, User user) {
-    this.id = id;
-    this.store = store;
-    this.product = product;
-    this.user = user;
-  }
+
 
   public ShoppingCart(Long id) {
     this.id = id;

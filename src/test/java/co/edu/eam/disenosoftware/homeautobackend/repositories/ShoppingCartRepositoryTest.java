@@ -1,7 +1,6 @@
 package co.edu.eam.disenosoftware.homeautobackend.repositories;
 
-import co.edu.eam.disenosoftware.homeautobackend.model.entities.Product;
-import co.edu.eam.disenosoftware.homeautobackend.model.entities.ProductStore;
+
 import co.edu.eam.disenosoftware.homeautobackend.model.entities.ShoppingCart;
 import co.edu.eam.disenosoftware.homeautobackend.model.entities.ShoppingCartProduct;
 import co.edu.eam.disenosoftware.homeautobackend.model.entities.Store;
@@ -15,8 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Transactional
 @SpringBootTest
@@ -43,12 +41,12 @@ public class ShoppingCartRepositoryTest {
 
     User user=new User(20L);
     Store store=new Store(30L);
-    List<ShoppingCartProduct> shoppingCartProductList=new ArrayList<>();
 
 
 
 
-    ShoppingCart shoppingCart= new ShoppingCart(1L,store,shoppingCartProductList,user);
+
+    ShoppingCart shoppingCart= new ShoppingCart(1L,store,user);
     repository.create(shoppingCart);
 
 
@@ -67,9 +65,9 @@ public class ShoppingCartRepositoryTest {
 
     User user=new User(20L);
     Store store=new Store(30L);
-    List<ShoppingCartProduct> shoppingCartProductList=new ArrayList<>();
 
-    ShoppingCart shoppingCart= new ShoppingCart(1L,store,shoppingCartProductList,user);
+
+    ShoppingCart shoppingCart= new ShoppingCart(1L,store,user);
 
     repository.create(shoppingCart);
 
@@ -88,18 +86,18 @@ public class ShoppingCartRepositoryTest {
 
     ShoppingCart shoppingCartDelete=repository.delete(1L);
 
-    Assertions.assertNotNull(shoppingCartDelete);
+    Assertions.assertNull(shoppingCartDelete);
 
   }
 
-
+  @Test
   public void findExistingShoppingTest(){
 
     User user=new User(20L);
     Store store=new Store(30L);
-    List<ShoppingCartProduct> shoppingCartProductList=new ArrayList<>();
 
-    ShoppingCart shoppingCart= new ShoppingCart(1L,store,shoppingCartProductList,user);
+
+    ShoppingCart shoppingCart= new ShoppingCart(1L,store,user);
 
     em.persist(shoppingCart);
 
@@ -132,26 +130,28 @@ public class ShoppingCartRepositoryTest {
     //Preparing Test
 
 
-    User user=new User(20L);
-    Store store=new Store(30L);
-    List<ShoppingCartProduct> shoppingCartProductList=new ArrayList<>();
+    User user = new User(20L);
+    Store store = new Store(30L);
+    User user2=new User(22L);
+
 
 
 
     em.persist(store);
     em.persist(user);
+    em.persist(user2);
 
-    ShoppingCart shoppingCart= new ShoppingCart(1L,store,shoppingCartProductList,user);
+    ShoppingCart shoppingCart= new ShoppingCart(1L,store,user);
     em.persist(shoppingCart);
 
 
-    shoppingCart.setId(2L);
+    shoppingCart.setUser(user2);
     repository.edit(shoppingCart);
 
-    ShoppingCart shoppingCartToAssert = repository.find(2L);
+    ShoppingCart shoppingCartToAssert = repository.find(1L);
 
     Assertions.assertNotNull(shoppingCartToAssert);
-    Assertions.assertEquals(2L, shoppingCartToAssert.getId());
+    Assertions.assertEquals(22L, shoppingCartToAssert.getUser().getId());
   }
 
 }

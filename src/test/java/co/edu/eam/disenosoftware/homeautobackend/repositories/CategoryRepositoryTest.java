@@ -41,12 +41,13 @@ public class CategoryRepositoryTest {
   Store store= new Store(1L);
     Store store2= new Store(2L);
 
-  em.persist(store);
+    em.persist(store);
+    em.persist(store2);
 
     Category category1=new Category(1L,store);
-    Category category2=new Category(1L,store2);
-    Category category3=new Category(1L,store);
-    Category category4=new Category(2L,store);
+    Category category2=new Category(2L,store2);
+    Category category3=new Category(3L,store);
+    Category category4=new Category(4L,store);
 
     em.persist(category1);
     em.persist(category2);
