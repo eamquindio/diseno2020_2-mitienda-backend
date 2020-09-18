@@ -2,6 +2,7 @@ package co.edu.eam.disenosoftware.homeautobackend.repositories;
 
 import co.edu.eam.disenosoftware.homeautobackend.model.entities.Order;
 import co.edu.eam.disenosoftware.homeautobackend.model.entities.OrderProduct;
+import co.edu.eam.disenosoftware.homeautobackend.model.entities.Product;
 import co.edu.eam.disenosoftware.homeautobackend.model.entities.ProductStore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,7 +37,11 @@ public class OrderProductRepositoryTest {
   @Test
   public void createNotExistOrderProductTest(){
     Order order = new Order(12L);
+    em.persist(order);
+    Product product = new Product(11L);
+    em.persist(product);
     ProductStore productStore = new ProductStore(10L);
+    em.persist(productStore);
     OrderProduct orderProduct = new OrderProduct(1L, order, productStore, 21, "activo");
     repository.create(orderProduct);
 
@@ -49,6 +54,7 @@ public class OrderProductRepositoryTest {
   @Test
   public void deleteExistingOrderProductTest(){
     Order order = new Order(12L);
+    em.persist(order);
     ProductStore productStore = new ProductStore(10L);
     repository.create(new OrderProduct(1L, order, productStore, 21, "activo"));
 
@@ -69,7 +75,11 @@ public class OrderProductRepositoryTest {
   @Test
   public void findExistingOrderProductTest(){
     Order order = new Order(12L);
+    em.persist(order);
+    Product product = new Product(11L);
+    em.persist(product);
     ProductStore productStore = new ProductStore(10L);
+    em.persist(productStore);
     OrderProduct orderProduct = new OrderProduct(1L, order, productStore, 21, "activo");
     em.persist(orderProduct);
 
@@ -88,7 +98,11 @@ public class OrderProductRepositoryTest {
   @Test
   public void updateOrderProductTest(){
     Order order = new Order(12L);
+    em.persist(order);
+    Product product = new Product(11L);
+    em.persist(product);
     ProductStore productStore = new ProductStore(10L);
+    em.persist(productStore);
     OrderProduct orderProduct = new OrderProduct(1L, order, productStore, 21, "activo");
     em.persist(orderProduct);
 
