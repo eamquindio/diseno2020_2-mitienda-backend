@@ -51,7 +51,9 @@ public class OrderProductRepository {
    */
   public OrderProduct delete(Long id) {
     OrderProduct orderProduct = find(id);
-    em.remove(orderProduct);
+    if (orderProduct != null) {
+      em.remove(orderProduct);
+    }
     return orderProduct;
   }
 }
