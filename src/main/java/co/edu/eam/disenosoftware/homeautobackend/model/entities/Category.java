@@ -47,6 +47,11 @@ public class Category implements Serializable {
     this.id = id;
   }
 
+  public Category(Long id, Store store) {
+    this.id = id;
+    this.store = store;
+  }
+
   /**
    * category's Get Id method
    * @return id
