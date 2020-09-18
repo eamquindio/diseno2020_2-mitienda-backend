@@ -71,6 +71,7 @@ public class Store implements Serializable {
   public Store() {
   }
 
+
   /**
    * Store's constructor with params
    * @param id primary key

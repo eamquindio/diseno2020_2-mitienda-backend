@@ -57,6 +57,7 @@ public class ProductStore implements Serializable {
   public ProductStore() {
   }
 
+
   public ProductStore(Long id, Product product, int stock, double price, Category category, Store store) {
     this.id = id;
     this.product = product;

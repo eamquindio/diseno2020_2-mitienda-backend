@@ -75,4 +75,112 @@ public class ProductStoreRepositoryTest {
     //Test Verification
     Assertions.assertEquals(3, productStores.size());
   }
+
+  /**
+   * Test createNoExistingProductStoreTest
+   */
+  @Test
+  public void createNoExistingProductStoreTest(){
+    Product product = new Product(111L);
+    em.persist(product);
+    Store store = new Store(115L);
+    em.persist(store);
+    Category category = new Category(113L);
+    em.persist(category);
+
+
+    ProductStore productStore = new ProductStore(1L, product, 12, 1200, category, store);
+    em.persist(productStore);
+    repository.create(productStore);
+
+    ProductStore productStoreToAssert = repository.find(1L);
+
+    Assertions.assertNotNull(productStoreToAssert);
+    Assertions.assertEquals(1L, productStoreToAssert.getId());
+    Assertions.assertEquals(111L, productStoreToAssert.getProduct().getId());
+    Assertions.assertEquals(115L, productStoreToAssert.getStore().getId());
+    Assertions.assertEquals(113L, productStoreToAssert.getCategory().getId());
+  }
+
+  /**
+   * Test findExistingProductStoreTest
+   */
+  @Test
+  public void findExistingProductStoreTest(){
+    Product product = new Product(111L);
+    em.persist(product);
+    Store store = new Store(115L);
+    em.persist(store);
+    Category category = new Category(113L);
+    em.persist(category);
+
+    ProductStore productStore = new ProductStore(1L, product, 12, 1200, category, store);
+    em.persist(productStore);
+
+    ProductStore productStoreToAssert = repository.find(1L);
+    Assertions.assertNotNull(productStoreToAssert);
+    Assertions.assertEquals(1L, productStoreToAssert.getId());
+    Assertions.assertEquals(productStore, productStoreToAssert);
+  }
 }
+
+  /**
+   * Test findNotExistingProductStoreTest
+   */
+  @Test
+  public void findNotExistingProductStoreTest(){
+    ProductStore productStoreToAssert = repository.find(1L);
+    Assertions.assertNull(productStoreToAssert);
+  }
+
+  /**
+   * Test updateExistingProductStoreTest
+   */
+  @Test
+  public void updateExistingProductStoreTest(){
+    Product product = new Product(111L);
+    em.persist(product);
+    Store store = new Store(115L);
+    em.persist(store);
+    Category category = new Category(113L);
+    em.persist(category);
+
+    ProductStore productStore = new ProductStore(1L, product, 12, 1200, category, store);
+    em.persist(productStore);
+
+    productStore.setPrice(2000);
+    repository.edit(productStore);
+
+    ProductStore productStoreToAssert = repository.find(1L);
+
+    Assertions.assertNotNull(productStoreToAssert);
+    Assertions.assertEquals(2000, productStoreToAssert.getPrice());
+  }
+
+  /**
+   * Test deleteExistingProductStoreTest
+   */
+  @Test
+  public void deleteExistingProductStoreTest(){
+    Product product = new Product(111L);
+    Store store = new Store(115L);
+    Category category = new Category(113L);
+
+
+    ProductStore productStore = new ProductStore(1L, product, 12, 1200, category, store);
+    repository.create(productStore);
+
+    ProductStore deletedProductStore = repository.delete(1L);
+
+    ProductStore productStoreToAssert = repository.find(1L);
+
+    Assertions.assertNull(productStoreToAssert);
+    Assertions.assertNotNull(deletedProductStore);
+    Assertions.assertEquals(productStore, deletedProductStore);
+  }
+
+
+}
+
+
+
