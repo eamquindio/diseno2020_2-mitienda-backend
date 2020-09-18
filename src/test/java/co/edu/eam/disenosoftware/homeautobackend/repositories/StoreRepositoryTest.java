@@ -99,4 +99,12 @@ public class StoreRepositoryTest {
     Assertions.assertEquals(2, storeTest.size());
   }
 
+  @Test
+  public void getStoreByEmailTest(){
+    Store store = new Store(1L,"tienda1@gmail.com","tienda1");
+    storeRepository.create(store);
+    Store storeToAssert = storeRepository.getStoreByEmail("tienda1@gmail.com");
+    Assertions.assertEquals("tienda1@gmail.com",storeToAssert.getEmail());
+  }
+
 }

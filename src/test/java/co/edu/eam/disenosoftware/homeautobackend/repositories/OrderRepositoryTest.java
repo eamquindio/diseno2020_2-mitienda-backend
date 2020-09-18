@@ -2,7 +2,9 @@ package co.edu.eam.disenosoftware.homeautobackend.repositories;
 
 import co.edu.eam.disenosoftware.homeautobackend.model.entities.Order;
 import co.edu.eam.disenosoftware.homeautobackend.model.entities.Order;
+import co.edu.eam.disenosoftware.homeautobackend.model.entities.OrderProduct;
 import co.edu.eam.disenosoftware.homeautobackend.model.entities.User;
+import org.aspectj.weaver.ast.Or;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,6 +41,82 @@ public class OrderRepositoryTest {
    * Test for getFinishedOrdersByUserId with a sql
    */
   @Test
+  public void createNotExistingOrderTest(){
+    User user = new User(1L);
+    em.persist(user);
+
+    Order order = new Order(2L,user,"in_progress");
+
+    orderRepository.create(order);
+
+    Order orderToAssert = orderRepository.find(2L);
+    Assertions.assertNotNull(orderToAssert);
+    Assertions.assertEquals(2L,orderToAssert.getId());
+    Assertions.assertEquals(1L,orderToAssert.getUser().getId());
+  }
+
+  @Test
+  public void deleteExistingOrderTest(){
+    User user = new User();
+
+    Order order = new Order(1L,user,"in_progress");
+
+    orderRepository.create(order);
+
+    Order deleteOrder = orderRepository.delete(1L);
+
+    Order orderToAssert = orderRepository.find(1L);
+
+    Assertions.assertNull(orderToAssert);
+    Assertions.assertNotNull(deleteOrder);
+    Assertions.assertEquals(order, deleteOrder);
+  }
+
+  @Test
+  public void deleteNotExistingOrderTest(){
+    Order deletedOrder = orderRepository.delete(1L);
+    Assertions.assertNull(deletedOrder);
+  }
+
+  @Test
+  public void findExistingOrderTest(){
+    User user = new User(1L);
+    em.persist(user);
+
+    Order order = new Order(2L,user,"in_progress");
+    em.persist(order);
+
+    Order orderToAssert = orderRepository.find(2L);
+
+    Assertions.assertNotNull(orderToAssert);
+    Assertions.assertEquals(2L, orderToAssert.getId());
+    Assertions.assertEquals(order, orderToAssert);
+  }
+
+  @Test
+  public void findNotExistingOrderTest(){
+    Order orderToAssert = orderRepository.find(1L);
+    Assertions.assertNull(orderToAssert);
+  }
+
+  @Test
+  public void updateExistingOrderTest(){
+    User user = new User(1L);
+    em.persist(user);
+
+    Order order = new Order(2L,user,"in_progress");
+    em.persist(order);
+
+    order.setState("done");
+    orderRepository.edit(order);
+
+    Order orderToAssert = orderRepository.find(2L);
+
+    Assertions.assertNotNull(orderToAssert);
+    Assertions.assertEquals("done",orderToAssert.getState());
+  }
+
+  @Test
   public void getOrdersInCourseByUserIdTest(){
 
     User user = new User(1L);
@@ -65,5 +143,7 @@ public class OrderRepositoryTest {
     //resultado prueba
     Assertions.assertEquals(5, ordersFinishedToAssert.size());
   }
+
+
 
 }

@@ -89,6 +89,18 @@ public class Store implements Serializable {
     this.name = name;
   }
 
+  /**
+   * Store's constructor with params
+   * @param id primary key
+   * @param email Store's email
+   * @param name Store's name
+   */
+  public Store(Long id, String email, String name) {
+    this.id = id;
+    this.email = email;
+    this.name = name;
+  }
+
 
   /**
    * Get Store's name
@@ -107,4 +119,22 @@ public class Store implements Serializable {
   }
 
 
+
+  /**
+   * Get Store's email
+   * @return Store's email
+   */
+  public String getEmail()  {
+    return email;
+  }
+
+  /**
+   * Set Store's email
+   * @param email Store's email
+   */
+  public void setEmail(String email) {
+    this.email = email;
+  }
 }
+
+
