@@ -122,7 +122,7 @@ public class ProductStoreRepositoryTest {
     Assertions.assertEquals(1L, productStoreToAssert.getId());
     Assertions.assertEquals(productStore, productStoreToAssert);
   }
-}
+
 
   /**
    * Test findNotExistingProductStoreTest
@@ -178,8 +178,6 @@ public class ProductStoreRepositoryTest {
     Assertions.assertNotNull(deletedProductStore);
     Assertions.assertEquals(productStore, deletedProductStore);
   }
-
-
 }
 
 

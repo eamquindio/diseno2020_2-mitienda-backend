@@ -71,6 +71,13 @@ public class Store implements Serializable {
   public Store() {
   }
 
+  /**
+   * Get id
+   * @return id
+   */
+  public Long getId() {
+    return id;
+  }
 
   /**
    * Store's constructor with params
