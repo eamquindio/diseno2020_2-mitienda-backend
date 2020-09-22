@@ -20,4 +20,8 @@ public class Routes {
    */
   public static final String GET_ALL_STORES = "";
 
+  public static final String ORDERS_PATH = BASE_PATH + "/orders";
+
+  public static final String GET_ORDER = "/{orderId}";
+
 }

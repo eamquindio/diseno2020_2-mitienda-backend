@@ -1,6 +1,10 @@
 package co.edu.eam.disenosoftware.mitienda.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,6 +22,7 @@ public class OrderProduct implements Serializable {
    * Order's products - Primary key
    */
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   /**
@@ -25,6 +30,7 @@ public class OrderProduct implements Serializable {
    */
   @ManyToOne
   @JoinColumn(name = "id_order", referencedColumnName = "id")
+  @JsonBackReference
   private Order order;
 
   /**

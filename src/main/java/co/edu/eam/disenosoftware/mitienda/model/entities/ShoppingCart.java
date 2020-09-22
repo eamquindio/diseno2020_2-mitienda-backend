@@ -1,6 +1,8 @@
 package co.edu.eam.disenosoftware.mitienda.model.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -32,7 +34,7 @@ public class ShoppingCart implements Serializable {
   /**
    * Shopping Cart's Product
    */
-  @OneToMany(mappedBy = "shoppingCart")
+  @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private List<ShoppingCartProduct> product;
 
   /**
