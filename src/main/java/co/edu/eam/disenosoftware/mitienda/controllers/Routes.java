@@ -8,11 +8,16 @@ public class Routes {
   /**
    * base uri
    */
-  public static final String BASE_PATH = "/api/";
+  public static final String BASE_PATH = "/api";
 
   /**
    * stores base uri
    */
-  public static final String STORES_PATH = "/stores";
+  public static final String STORES_PATH = BASE_PATH + "/stores";
+
+  /**
+   * get all stores
+   */
+  public static final String GET_ALL_STORES = "";
 
 }

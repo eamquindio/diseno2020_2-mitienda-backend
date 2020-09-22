@@ -27,7 +27,7 @@ public class StoresController {
    *
    * @return return all stores
    */
-  @GetMapping(path = "/")
+  @GetMapping(path = Routes.GET_ALL_STORES)
   public List<Store> getStores() {
     return storeRepository.getAllStores();
   }
