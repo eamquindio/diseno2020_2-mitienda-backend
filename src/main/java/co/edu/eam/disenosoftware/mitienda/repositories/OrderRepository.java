@@ -72,9 +72,10 @@ public class OrderRepository {
    * @return List of current orders for a specific user
    */
   public List<Order> getOrdersInCourseByUserId(Long idUser) {
-    String queryStr = "SELECT order FROM Order order WHERE "
-            + "order.user.id = :id AND order.state = 'in_progress' "
-            + "OR order.user.id = :id AND order.state = 'created'";
+    String queryStr = "SELECT o FROM Order o WHERE "
+            + " (o.state = 'in_progress' OR o.state = 'created') "
+            + " AND o.user.id = :id";
+
     Query query = em.createQuery(queryStr);
     query.setParameter("id", idUser);
     return query.getResultList();

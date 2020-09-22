@@ -54,6 +54,11 @@ public class Order implements Serializable {
   private Date date;
 
   /**
+   * orders total value
+   */
+  private Double totalValue;
+
+  /**
    * Order's constructor
    */
   public Order() {
