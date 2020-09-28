@@ -1,5 +1,9 @@
 package co.edu.eam.disenosoftware.mitienda.services;
 
+import co.edu.eam.disenosoftware.mitienda.exceptions.BusinessException;
+import co.edu.eam.disenosoftware.mitienda.model.entities.OrderProduct;
+import co.edu.eam.disenosoftware.mitienda.repositories.OrderProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,4 +13,33 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class OrderProductService {
+
+  /**
+   * orderProductRepository to find the order product
+   */
+  @Autowired
+  private OrderProductRepository orderProductRepository;
+
+  /**
+   * method to check if an order product is in state "pending"
+   * @param idOrderProduct id to find
+   */
+  public void checkOrderProductById(Long idOrderProduct) {
+
+    OrderProduct orderProductFind = orderProductRepository.find(idOrderProduct);
+
+    String state = "";
+
+    if (orderProductFind == null) {
+      throw new BusinessException("El producto de la orden no fue encontrado.", null);
+    } else {
+      state = orderProductFind.getState();
+    }
+    if (state.equals("pending")) {
+      orderProductFind.setState("checked");
+      orderProductRepository.edit(orderProductFind);
+    } else {
+      throw new BusinessException("Solo se pueden checkear los productos en estado pending.", null);
+    }
+  }
 }
