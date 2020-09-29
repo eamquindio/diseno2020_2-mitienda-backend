@@ -1,7 +1,5 @@
 package co.edu.eam.disenosoftware.mitienda.repositories;
 
-import co.edu.eam.disenosoftware.mitienda.model.entities.ProductStore;
-import co.edu.eam.disenosoftware.mitienda.model.entities.ShoppingCart;
 import co.edu.eam.disenosoftware.mitienda.model.entities.ShoppingCartProduct;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
