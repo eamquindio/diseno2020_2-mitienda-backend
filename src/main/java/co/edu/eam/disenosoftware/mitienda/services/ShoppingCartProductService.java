@@ -2,6 +2,7 @@ package co.edu.eam.disenosoftware.mitienda.services;
 
 import co.edu.eam.disenosoftware.mitienda.exceptions.BusinessException;
 import co.edu.eam.disenosoftware.mitienda.exceptions.ErrorCodesEnum;
+import co.edu.eam.disenosoftware.mitienda.model.entities.ShoppingCart;
 import co.edu.eam.disenosoftware.mitienda.model.entities.ShoppingCartProduct;
 import co.edu.eam.disenosoftware.mitienda.repositories.ProductStoreRepository;
 import co.edu.eam.disenosoftware.mitienda.repositories.ShoppingCartProductRepository;
@@ -55,7 +56,15 @@ public class ShoppingCartProductService {
 
     if (products.size() == 1) {
       shoppingCartRepository.delete(idShoppingCart);
+      shoppingCartProductRepository.delete(idShoppingCartProduct);
+    } else {
+      ShoppingCartProduct delete = shoppingCartProductRepository.delete(idShoppingCartProduct);
+      ShoppingCart shoppingCart = shoppingCartRepository.find(idShoppingCart);
+
+      double totalValue = shoppingCart.getTotalValue() - delete.getProduct().getPrice() * delete.getQuantity();
+
+      shoppingCart.setTotalValue(totalValue);
+      shoppingCartRepository.edit(shoppingCart);
     }
-    shoppingCartProductRepository.delete(idShoppingCartProduct);
   }
 }

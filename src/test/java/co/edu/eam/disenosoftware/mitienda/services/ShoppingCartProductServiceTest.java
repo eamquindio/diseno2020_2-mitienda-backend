@@ -37,11 +37,14 @@ public class ShoppingCartProductServiceTest {
   @Test
   @Sql({"/testdata/remove_product_from_shopping_cart.sql"})
   public void removeProductFromShoppingCartTest() {
-
     shoppingCartProductService.removeProductFromShoppingCart(1L,1L);
 
     ShoppingCartProduct shoppingCartProductToAssert = shoppingCartProductRepository.find(1L);
     Assertions.assertNull(shoppingCartProductToAssert);
+
+    ShoppingCart shoppingCartToAssert = shoppingCartRepository.find(1L);
+    Assertions.assertNotNull(shoppingCartToAssert);
+    Assertions.assertEquals(1900,shoppingCartToAssert.getTotalValue());
   }
 
   @Test
@@ -61,6 +64,5 @@ public class ShoppingCartProductServiceTest {
   public void shoppingCartProductIsNotExisting(){
     BusinessException exception = Assertions.assertThrows(BusinessException.class, () -> shoppingCartProductService.removeProductFromShoppingCart(1L,1L));
     Assertions.assertEquals(ErrorCodesEnum.SHOPPING_CART_PRODUCT_NOT_FOUND, exception.getCode());
-
   }
 }

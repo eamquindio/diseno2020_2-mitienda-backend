@@ -42,8 +42,6 @@ public class ShoppingCartProduct implements Serializable {
    */
   private int quantity;
 
-
-
   /**
    * Shopping Cart's Product constructor
    */
@@ -134,5 +132,4 @@ public class ShoppingCartProduct implements Serializable {
   public void setQuantity(int quantity) {
     this.quantity = quantity;
   }
-
 }
