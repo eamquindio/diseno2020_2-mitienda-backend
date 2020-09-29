@@ -43,6 +43,11 @@ public class ShoppingCart implements Serializable {
   private User user;
 
   /**
+   * orders total value
+   */
+  private Double totalValue;
+
+  /**
    * Shopping Cart's constructors
    */
   public ShoppingCart() {
@@ -137,5 +142,21 @@ public class ShoppingCart implements Serializable {
    */
   public void setUser(User user) {
     this.user = user;
+  }
+
+  /**
+   * get the shopping cart total value
+   * @return shopping cart total value
+   */
+  public Double getTotalValue() {
+    return totalValue;
+  }
+
+  /**
+   * Set the shopping cart total value
+   * @param totalValue shopping cart total value
+   */
+  public void setTotalValue(Double totalValue) {
+    this.totalValue = totalValue;
   }
 }

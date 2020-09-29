@@ -39,10 +39,7 @@ public class ShoppingCartProduct implements Serializable {
    */
   private int quantity;
 
-  /**
-   * orders total value
-   */
-  private Double totalValue;
+
 
   /**
    * Shopping Cart's Product constructor
@@ -129,19 +126,4 @@ public class ShoppingCartProduct implements Serializable {
     this.quantity = quantity;
   }
 
-  /**
-   * get the shopping cart total value
-   * @return shopping cart total value
-   */
-  public Double getTotalValue() {
-    return totalValue;
-  }
-
-  /**
-   * Set the shopping cart total value
-   * @param totalValue shopping cart total value
-   */
-  public void setTotalValue(Double totalValue) {
-    this.totalValue = totalValue;
-  }
 }
