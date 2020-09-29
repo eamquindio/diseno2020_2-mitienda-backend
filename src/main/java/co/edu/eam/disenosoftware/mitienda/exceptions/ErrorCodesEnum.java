@@ -7,7 +7,7 @@ public enum ErrorCodesEnum {
   /**
    * code for not found error
    */
-  NOT_FOUND("not_found"),;
+  NOT_FOUND("0000"),; //ejemplo....
 
   /**
    * error code
