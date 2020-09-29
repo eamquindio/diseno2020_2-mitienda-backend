@@ -36,7 +36,7 @@ public class OrderProductRepository {
    * @param id primary key
    * @return a product order or a null if it doesn't exist
    */
-  public OrderProduct find(Long id) {
+  public OrderProduct find(Long  id) {
     return em.find(OrderProduct.class, id);
   }
 
