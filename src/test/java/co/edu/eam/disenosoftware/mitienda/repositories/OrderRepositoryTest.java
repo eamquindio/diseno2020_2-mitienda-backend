@@ -34,9 +34,6 @@ public class OrderRepositoryTest {
     Assertions.assertTrue(true);
   }
 
-  /**
-   * Test for getFinishedOrdersByUserId with a sql
-   */
   @Test
   public void createNotExistingOrderTest(){
     User user = new User(1L);
@@ -131,16 +128,15 @@ public class OrderRepositoryTest {
     Assertions.assertEquals(2, ordersInCourseListToAssert.size());
   }
 
+  /**
+   * Test for getFinishedOrdersByUserId with a sql
+   */
   @Test
   @Sql({"/testdata/get_finished_orders_by_user_id.sql"})
   public void getFinishedOrdersByUserIdTest(){
-    //codigo prueba
-      List<Order> ordersFinishedToAssert = orderRepository.getFinishedOrdersByUserId(1L);
 
-    //resultado prueba
+    List<Order> ordersFinishedToAssert = orderRepository.getFinishedOrdersByUserId(1L);
+
     Assertions.assertEquals(5, ordersFinishedToAssert.size());
   }
-
-
-
 }

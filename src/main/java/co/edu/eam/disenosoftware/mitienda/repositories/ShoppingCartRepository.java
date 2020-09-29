@@ -87,14 +87,13 @@ public class ShoppingCartRepository {
    * @param idStore parameter to evaluate
    * @return List shoppingCart
    */
-  public List<ShoppingCart> getAlShoppingCartByUserIdAndStoreId(Long idUser, Long idStore) {
+  public ShoppingCart getShoppingCartByUserIdAndStoreId(Long idUser, Long idStore) {
     String queryStr = "SELECT shopping FROM ShoppingCart shopping "
             + " WHERE shopping.user.id = :userId AND shopping.store.id = :storeId";
     Query query = em.createQuery(queryStr);
     query.setParameter("userId", idUser);
     query.setParameter("storeId", idStore);
-
-    return query.getResultList();
+    List<ShoppingCart> list = query.getResultList();
+    return list.get(0);
   }
-
 }

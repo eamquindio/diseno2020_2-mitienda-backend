@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.List;
 
 /**
  * shopping cart product Repository
@@ -60,6 +62,19 @@ public class ShoppingCartProductRepository {
       em.remove(shoppingCartProduct);
     }
     return shoppingCartProduct;
+  }
+
+  /**
+   * Get all shopping cart products
+   * @param idShoppingCart , Identifier Shopping Cart's
+   * @return List of shopping cart products of the Shopping Cart's with the id that has been sent
+   */
+  public List<ShoppingCartProduct> getShoppingCartProductsByShoppingCartId(Long idShoppingCart) {
+    String queryStr = "SELECT scp FROM ShoppingCartProduct scp WHERE "
+            + " scp.shoppingCart.id = :id";
+    Query query = em.createQuery(queryStr);
+    query.setParameter("id", idShoppingCart);
+    return query.getResultList();
   }
 
 }

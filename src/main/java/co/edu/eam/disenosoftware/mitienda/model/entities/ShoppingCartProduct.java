@@ -1,6 +1,8 @@
 package co.edu.eam.disenosoftware.mitienda.model.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,6 +20,7 @@ public class ShoppingCartProduct implements Serializable {
    * Shopping Cart's Product's - Primary key
    */
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   /**
@@ -54,8 +57,14 @@ public class ShoppingCartProduct implements Serializable {
     this.quantity = quantity;
   }
 
+  public ShoppingCartProduct(ShoppingCart shoppingCart, ProductStore product, int quantity) {
+    this.shoppingCart = shoppingCart;
+    this.product = product;
+    this.quantity = quantity;
+  }
+
   /**
-   * ShoppingCartProducts's Get Id method
+   * ShoppingCartProduct's Get Id method
    *
    * @return id
    */
@@ -64,7 +73,7 @@ public class ShoppingCartProduct implements Serializable {
   }
 
   /**
-   * ShoppingCartProducts's Set Id method
+   * ShoppingCartProduct's Set Id method
    *
    * @param id , id we want to set
    */
@@ -73,7 +82,7 @@ public class ShoppingCartProduct implements Serializable {
   }
 
   /**
-   * ShoppingCartProducts's Get Shopping Cart method
+   * ShoppingCartProduct's Get Shopping Cart method
    *
    * @return Shopping Cart
    */
@@ -82,7 +91,7 @@ public class ShoppingCartProduct implements Serializable {
   }
 
   /**
-   * ShoppingCartProducts's Set Shopping Cart method
+   * ShoppingCartProduct's Set Shopping Cart method
    *
    * @param shoppingCart , Shopping cart we want to set
    */
@@ -91,7 +100,7 @@ public class ShoppingCartProduct implements Serializable {
   }
 
   /**
-   * ShoppingCartProducts's Get Product method
+   * ShoppingCartProduct's Get Product method
    *
    * @return Product
    */
@@ -100,7 +109,7 @@ public class ShoppingCartProduct implements Serializable {
   }
 
   /**
-   * ShoppingCartProducts's Set Product method
+   * ShoppingCartProduct's Set Product method
    *
    * @param product , product we want to set
    */
@@ -109,7 +118,7 @@ public class ShoppingCartProduct implements Serializable {
   }
 
   /**
-   * ShoppingCartProducts's Get Quantity method
+   * ShoppingCartProduct's Get Quantity method
    *
    * @return Quantity
    */
@@ -118,7 +127,7 @@ public class ShoppingCartProduct implements Serializable {
   }
 
   /**
-   * ShoppingCartProducts's Set Quantity method
+   * ShoppingCartProduct's Set Quantity method
    *
    * @param quantity , Quantity we want to set
    */
