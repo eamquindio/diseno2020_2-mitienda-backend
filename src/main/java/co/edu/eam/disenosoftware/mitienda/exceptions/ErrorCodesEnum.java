@@ -7,7 +7,7 @@ public enum ErrorCodesEnum {
   /**
    * code for not found error
    */
-  NOT_FOUND("0000"), //ejemplo....
+  NOT_FOUND("0000"),//ejemplo....
   /**
    * Shopping cart product not found
    */
@@ -19,11 +19,7 @@ public enum ErrorCodesEnum {
   /**
    * Exception when shopping cart doesnt exist
    */
-  SHOPPING_CART_NOT_FOUND("0004"),
-  /**
-   * Exception When Shopping Cart Product Doesnt exist
-   */
-  SHOPPING_CART_PRODUCT_NOT_FOUND("0005");
+  SHOPPING_CART_NOT_FOUND("0004");
 
   /**
    * error code
