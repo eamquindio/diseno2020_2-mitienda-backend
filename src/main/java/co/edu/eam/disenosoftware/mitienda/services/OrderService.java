@@ -2,7 +2,6 @@ package co.edu.eam.disenosoftware.mitienda.services;
 
 import co.edu.eam.disenosoftware.mitienda.exceptions.BusinessException;
 import co.edu.eam.disenosoftware.mitienda.exceptions.ErrorCodesEnum;
-import co.edu.eam.disenosoftware.mitienda.exceptions.NotFoundException;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
 import co.edu.eam.disenosoftware.mitienda.model.entities.OrderProduct;
 import co.edu.eam.disenosoftware.mitienda.model.entities.ShoppingCart;
@@ -62,14 +61,14 @@ public class OrderService {
 
     ShoppingCart shoppingCart = shoppingCartRepository.find(shoppingCartId);
     if (shoppingCart == null) {
-      throw new NotFoundException("Shopping Cart doesn't Exist.", ErrorCodesEnum.NOT_FOUND);
+      throw new BusinessException("Shopping Cart doesn't Exist.", ErrorCodesEnum.SHOPPING_CART_NOT_FOUND);
     }
 
     Store store = shoppingCart.getStore();
     User user = shoppingCart.getUser();
 
     if (shoppingCart.getProduct().size() == 0) {
-      throw new NotFoundException("Shopping Cart Products NOT Found.", ErrorCodesEnum.NOT_FOUND);
+      throw new BusinessException("Shopping Cart Products NOT Found.", ErrorCodesEnum.SHOPPING_CART_PRODUCT_NOT_FOUND);
     }
 
     final int top = 5;

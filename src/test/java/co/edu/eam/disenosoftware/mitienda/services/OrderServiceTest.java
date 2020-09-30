@@ -2,7 +2,6 @@ package co.edu.eam.disenosoftware.mitienda.services;
 
 import co.edu.eam.disenosoftware.mitienda.exceptions.BusinessException;
 import co.edu.eam.disenosoftware.mitienda.exceptions.ErrorCodesEnum;
-import co.edu.eam.disenosoftware.mitienda.exceptions.NotFoundException;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
 import co.edu.eam.disenosoftware.mitienda.model.entities.OrderProduct;
 import co.edu.eam.disenosoftware.mitienda.repositories.OrderProductRepository;
@@ -82,9 +81,9 @@ public class OrderServiceTest {
     List<Order> orderToAssertTwo = repository.getOrdersInCourseByUserId(1L);
     try{
         service.createOrderByShoppingCart(1L);
-    }catch (NotFoundException e){
+    }catch (BusinessException e){
       Assertions.assertEquals("Shopping Cart doesn't Exist.", e.getMessage());
-      Assertions.assertEquals(ErrorCodesEnum.NOT_FOUND, e.getErrorCode());
+      Assertions.assertEquals(ErrorCodesEnum.SHOPPING_CART_NOT_FOUND, e.getCode());
     }
 
     List<Order> orderToAssertThree = repository.getOrdersInCourseByUserId(1L);
@@ -100,9 +99,9 @@ public class OrderServiceTest {
     //Test Code
     try{
       service.createOrderByShoppingCart(1L);
-    }catch (NotFoundException e){
+    }catch (BusinessException e){
       Assertions.assertEquals("Shopping Cart Products NOT Found.", e.getMessage());
-      Assertions.assertEquals(ErrorCodesEnum.NOT_FOUND, e.getErrorCode());
+      Assertions.assertEquals(ErrorCodesEnum.SHOPPING_CART_PRODUCT_NOT_FOUND, e.getCode());
     }
 
     List<Order> orderToAssertThree = repository.getOrdersInCourseByUserId(1L);
