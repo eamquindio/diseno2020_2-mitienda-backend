@@ -73,7 +73,7 @@ public class OrderRepository {
    */
   public List<Order> getOrdersInCourseByUserId(Long idUser) {
     String queryStr = "SELECT o FROM Order o WHERE "
-            + " o.state = 'in_progress'AND o.user.id = :id OR o.state = 'created' "
+            + " (o.state = 'in_progress' OR o.state = 'created') "
             + " AND o.user.id = :id";
 
     Query query = em.createQuery(queryStr);
