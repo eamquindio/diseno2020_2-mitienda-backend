@@ -2,17 +2,18 @@ package co.edu.eam.disenosoftware.mitienda.repositories;
 
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
 import co.edu.eam.disenosoftware.mitienda.model.entities.OrderProduct;
-import co.edu.eam.disenosoftware.mitienda.model.entities.Product;
 import co.edu.eam.disenosoftware.mitienda.model.entities.ProductStore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Transactional
 @SpringBootTest
@@ -20,6 +21,12 @@ public class OrderProductRepositoryTest {
 
   @Autowired
   private OrderProductRepository repository;
+
+  @Autowired
+  private OrderRepository orderRepository;
+
+  @Autowired
+  private ProductStoreRepository productStoreRepository;
 
   @PersistenceContext
   private EntityManager em;
@@ -35,28 +42,24 @@ public class OrderProductRepositoryTest {
   }
 
   @Test
+  @Sql("/testdata/create_not_existing_order_product_text.sql")
   public void createNotExistOrderProductTest(){
-    Order order = new Order(12L);
-    em.persist(order);
-    Product product = new Product(11L);
-    em.persist(product);
-    ProductStore productStore = new ProductStore(10L);
-    em.persist(productStore);
-    OrderProduct orderProduct = new OrderProduct(1L, order, productStore, 21, "activo");
+    Order order = orderRepository.find(12L);
+    ProductStore productStore = productStoreRepository.find(11L);
+
+    OrderProduct orderProduct = new OrderProduct(order, productStore, 21, "activo");
+
     repository.create(orderProduct);
 
-    OrderProduct orderProductToAssert = repository.find(1L);
+    List<OrderProduct> orderProductToAssert = em.createQuery("SELECT op FROM OrderProduct op").getResultList();
 
-    Assertions.assertNotNull(orderProductToAssert);
-    Assertions.assertEquals(21, orderProductToAssert.getQuantity());
+    Assertions.assertNotNull(orderProductToAssert.get(orderProductToAssert.size()-1));
+    Assertions.assertEquals(21, orderProductToAssert.get(orderProductToAssert.size()-1).getQuantity());
   }
 
   @Test
+  @Sql("/testdata/delete_and_find_existing_order_product_test.sql")
   public void deleteExistingOrderProductTest(){
-    Order order = new Order(12L);
-    em.persist(order);
-    ProductStore productStore = new ProductStore(10L);
-    repository.create(new OrderProduct(1L, order, productStore, 21, "activo"));
 
     OrderProduct deleteOrderProduct = repository.delete(1L);
     Assertions.assertNotNull(deleteOrderProduct);
@@ -73,15 +76,8 @@ public class OrderProductRepositoryTest {
   }
 
   @Test
+  @Sql("/testdata/delete_and_find_existing_order_product_test.sql")
   public void findExistingOrderProductTest(){
-    Order order = new Order(12L);
-    em.persist(order);
-    Product product = new Product(11L);
-    em.persist(product);
-    ProductStore productStore = new ProductStore(10L);
-    em.persist(productStore);
-    OrderProduct orderProduct = new OrderProduct(1L, order, productStore, 21, "activo");
-    em.persist(orderProduct);
 
     OrderProduct orderProductToAssert = repository.find(1L);
 
@@ -96,15 +92,10 @@ public class OrderProductRepositoryTest {
   }
 
   @Test
+  @Sql("/testdata/update_order_product_test.sql")
   public void updateOrderProductTest(){
-    Order order = new Order(12L);
-    em.persist(order);
-    Product product = new Product(11L);
-    em.persist(product);
-    ProductStore productStore = new ProductStore(10L);
-    em.persist(productStore);
-    OrderProduct orderProduct = new OrderProduct(1L, order, productStore, 21, "activo");
-    em.persist(orderProduct);
+
+    OrderProduct orderProduct = repository.find(1L);
 
     orderProduct.setQuantity(24);
     repository.edit(orderProduct);

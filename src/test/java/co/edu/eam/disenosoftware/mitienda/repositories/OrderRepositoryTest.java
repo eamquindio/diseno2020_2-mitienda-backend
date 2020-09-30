@@ -1,6 +1,7 @@
 package co.edu.eam.disenosoftware.mitienda.repositories;
 
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
+import co.edu.eam.disenosoftware.mitienda.model.entities.Store;
 import co.edu.eam.disenosoftware.mitienda.model.entities.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Date;
 import java.util.List;
 
 @Transactional
@@ -20,6 +22,12 @@ public class OrderRepositoryTest {
 
   @Autowired
   private OrderRepository orderRepository;
+
+  @Autowired
+  private StoreRepository storeRepository;
+
+  @Autowired
+  private UserRepository userRepository;
 
   @PersistenceContext
   private EntityManager em;
@@ -35,27 +43,26 @@ public class OrderRepositoryTest {
   }
 
   @Test
+  @Sql("/testdata/create_not_existing_order_test.sql")
   public void createNotExistingOrderTest(){
-    User user = new User(1L);
-    em.persist(user);
 
-    Order order = new Order(2L,user,"in_progress");
+    Store store = storeRepository.find(1L);
+    User user = userRepository.find(1L);
+
+    Order order = new Order(store, user, "created", new Date());
 
     orderRepository.create(order);
 
-    Order orderToAssert = orderRepository.find(2L);
+    List<Order> orderToAssert = em.createQuery("SELECT o FROM Order o").getResultList();
     Assertions.assertNotNull(orderToAssert);
-    Assertions.assertEquals(2L,orderToAssert.getId());
-    Assertions.assertEquals(1L,orderToAssert.getUser().getId());
+    Assertions.assertEquals("created",orderToAssert.get(orderToAssert.size()-1).getState());
+    Assertions.assertEquals(1L,orderToAssert.get(orderToAssert.size()-1).getStore().getId());
+    Assertions.assertEquals(1L,orderToAssert.get(orderToAssert.size()-1).getUser().getId());
   }
 
   @Test
+  @Sql("/testdata/find_update_delete_existing_order_test.sql")
   public void deleteExistingOrderTest(){
-    User user = new User();
-
-    Order order = new Order(1L,user,"in_progress");
-
-    orderRepository.create(order);
 
     Order deleteOrder = orderRepository.delete(1L);
 
@@ -63,7 +70,6 @@ public class OrderRepositoryTest {
 
     Assertions.assertNull(orderToAssert);
     Assertions.assertNotNull(deleteOrder);
-    Assertions.assertEquals(order, deleteOrder);
   }
 
   @Test
@@ -73,18 +79,15 @@ public class OrderRepositoryTest {
   }
 
   @Test
+  @Sql("/testdata/find_update_delete_existing_order_test.sql")
   public void findExistingOrderTest(){
-    User user = new User(1L);
-    em.persist(user);
 
-    Order order = new Order(2L,user,"in_progress");
-    em.persist(order);
-
-    Order orderToAssert = orderRepository.find(2L);
+    Order orderToAssert = orderRepository.find(1L);
 
     Assertions.assertNotNull(orderToAssert);
-    Assertions.assertEquals(2L, orderToAssert.getId());
-    Assertions.assertEquals(order, orderToAssert);
+    Assertions.assertEquals(1L, orderToAssert.getId());
+    Assertions.assertEquals(1L, orderToAssert.getUser().getId());
+    Assertions.assertEquals(1L, orderToAssert.getStore().getId());
   }
 
   @Test
@@ -94,37 +97,23 @@ public class OrderRepositoryTest {
   }
 
   @Test
+  @Sql("/testdata/find_update_delete_existing_order_test.sql")
   public void updateExistingOrderTest(){
-    User user = new User(1L);
-    em.persist(user);
-
-    Order order = new Order(2L,user,"in_progress");
-    em.persist(order);
+    Order order = orderRepository.find(1L);
 
     order.setState("done");
     orderRepository.edit(order);
 
-    Order orderToAssert = orderRepository.find(2L);
+    Order orderToAssert = orderRepository.find(1L);
 
     Assertions.assertNotNull(orderToAssert);
     Assertions.assertEquals("done",orderToAssert.getState());
   }
 
   @Test
+  @Sql("/testdata/get_order_in_course_by_user_id_test.sql")
   public void getOrdersInCourseByUserIdTest(){
-
-    User user = new User(1L);
-    User userTwo = new User(2L);
-
-    em.persist(user);
-    em.persist(userTwo);
-
-    em.persist(new Order(1L,user,"in_progress"));
-    em.persist(new Order(2L,user,"created"));
-    em.persist(new Order(3L,userTwo,"in_progress"));
-    em.persist(new Order(4L,userTwo,"created"));
-
-    List<Order> ordersInCourseListToAssert = orderRepository.getOrdersInCourseByUserId(2L);
+    List<Order> ordersInCourseListToAssert = orderRepository.getOrdersInCourseByUserId(1L);
     Assertions.assertEquals(2, ordersInCourseListToAssert.size());
   }
 

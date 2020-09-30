@@ -11,7 +11,11 @@ public enum ErrorCodesEnum {
   /**
    * Shopping cart product not found
    */
-  SHOPPING_CART_PRODUCT_NOT_FOUND("0001");
+  SHOPPING_CART_PRODUCT_NOT_FOUND("0001"),
+  /**
+   *
+   */
+  ORDER_USER_EXCEED_FIVE("0003");
 
   /**
    * error code

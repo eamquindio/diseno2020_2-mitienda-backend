@@ -1,6 +1,8 @@
 package co.edu.eam.disenosoftware.mitienda.model.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,6 +20,7 @@ public class OrderProduct implements Serializable {
    * Order's products - Primary key
    */
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   /**
@@ -60,6 +63,22 @@ public class OrderProduct implements Serializable {
    * @param state        , state parameter
    */
   public OrderProduct(Long id, Order order, ProductStore productStore, int quantity, String state) {
+    this.id = id;
+    this.order = order;
+    this.productStore = productStore;
+    this.quantity = quantity;
+    this.state = state;
+  }
+
+  /**
+   * Order's products constructor
+   *
+   * @param order        , order parameter
+   * @param productStore , productStore parameter
+   * @param quantity     , quantity parameter
+   * @param state        , state parameter
+   */
+  public OrderProduct(Order order, ProductStore productStore, int quantity, String state) {
     this.id = id;
     this.order = order;
     this.productStore = productStore;
