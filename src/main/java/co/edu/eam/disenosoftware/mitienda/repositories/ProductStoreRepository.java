@@ -87,14 +87,18 @@ public class ProductStoreRepository {
    */
   public ProductStore getProductStoreByProductIdAndStoreId(Long productId, Long storeId) {
     String queryStr = "SELECT ps FROM ProductStore ps WHERE ps.id = :product_id AND ps.store.id = :store_id";
+
     Query query = em.createQuery(queryStr);
     query.setParameter("store_id", storeId);
     query.setParameter("product_id", productId);
+
     List<ProductStore> productStores = query.getResultList();
+
     if (productStores.size() == 0) {
       return null;
     } else {
       return productStores.get(0);
     }
+
   }
 }

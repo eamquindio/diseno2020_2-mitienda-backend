@@ -89,15 +89,17 @@ public class ShoppingCartRepository {
   public ShoppingCart getShoppingCartByUserIdAndStoreId(Long idUser, Long idStore) {
     String queryStr = "SELECT shopping FROM ShoppingCart shopping "
             + " WHERE shopping.user.id = :userId AND shopping.store.id = :storeId";
+
     Query query = em.createQuery(queryStr);
     query.setParameter("userId", idUser);
     query.setParameter("storeId", idStore);
+
     List<ShoppingCart> shoppingCarts = query.getResultList();
+
     if (shoppingCarts.size() == 0) {
       return null;
     } else {
       return shoppingCarts.get(0);
     }
   }
-
 }
