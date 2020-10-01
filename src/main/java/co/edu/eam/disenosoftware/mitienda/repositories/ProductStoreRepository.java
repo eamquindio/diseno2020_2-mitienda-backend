@@ -59,7 +59,9 @@ public class ProductStoreRepository {
   public ProductStore delete(Long id) {
 
     ProductStore productStore = find(id);
-    em.remove(productStore);
+    if (productStore != null) {
+      em.remove(productStore);
+    }
     return productStore;
   }
 
@@ -75,5 +77,4 @@ public class ProductStoreRepository {
     query.setParameter("id", id);
     return query.getResultList();
   }
-
 }

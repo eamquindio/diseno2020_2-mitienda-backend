@@ -1,6 +1,8 @@
 package co.edu.eam.disenosoftware.mitienda.model.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,6 +22,7 @@ public class ShoppingCart implements Serializable {
    * Shopping Cart's - Primary key
    */
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   /**
@@ -53,10 +56,8 @@ public class ShoppingCart implements Serializable {
   public ShoppingCart() {
   }
 
-
   public ShoppingCart(Long id) {
     this.id = id;
-
   }
 
   /**
@@ -68,6 +69,11 @@ public class ShoppingCart implements Serializable {
    */
   public ShoppingCart(Long id, Store store, User user) {
     this.id = id;
+    this.store = store;
+    this.user = user;
+  }
+
+  public ShoppingCart(Store store, User user) {
     this.store = store;
     this.user = user;
   }

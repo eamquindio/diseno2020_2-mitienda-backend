@@ -9,10 +9,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 
 @Transactional
@@ -36,67 +38,39 @@ public class ShoppingCartRepositoryTest {
   }
 
   @Test
+  @Sql({"/testdata/create_not_existing_shopping_cart.sql"})
   public void createNoExistingShoppingCartTest(){
-
-    User user=new User(20L);
-    Store store=new Store(30L);
-
-    ShoppingCart shoppingCart= new ShoppingCart(1L,store,user);
-    repository.create(shoppingCart);
-
     ShoppingCart shoppingCartToAssert= repository.find(1L);
 
     Assertions.assertNotNull(shoppingCartToAssert);
     Assertions.assertEquals(1L,shoppingCartToAssert.getId());
-    Assertions.assertEquals(20L,user.getId());
-
-
+    Assertions.assertEquals(20L,shoppingCartToAssert.getUser().getId());
   }
 
-
   @Test
+  @Sql({"/testdata/delete_existing_shopping_cart.sql"})
   public void deleteExistingShoppingCartTest(){
-
-    User user=new User(20L);
-    Store store=new Store(30L);
-
-    ShoppingCart shoppingCart= new ShoppingCart(1L,store,user);
-
-    repository.create(shoppingCart);
-
+    ShoppingCart shoppingCartToAssert =repository.find(1L);
     ShoppingCart deleteShoppingCart=repository.delete(1L);
-
     Assertions.assertNotNull(deleteShoppingCart);
-    Assertions.assertNotNull(shoppingCart);
-    Assertions.assertEquals(shoppingCart,deleteShoppingCart);
-
+    Assertions.assertNotNull(shoppingCartToAssert);
+    Assertions.assertEquals(shoppingCartToAssert,deleteShoppingCart);
   }
 
   @Test
   public void deleteNotExistingShoppingCartTest(){
-
     ShoppingCart shoppingCartDelete=repository.delete(1L);
 
     Assertions.assertNull(shoppingCartDelete);
-
   }
 
   @Test
+  @Sql({"/testdata/find_existing_shopping_cart.sql"})
   public void findExistingShoppingTest(){
-
-    User user=new User(20L);
-    Store store=new Store(30L);
-
-    ShoppingCart shoppingCart= new ShoppingCart(1L,store,user);
-
-    em.persist(shoppingCart);
-
     ShoppingCart shoppingCartToAssert=repository.find(1L);
 
     Assertions.assertNotNull(shoppingCartToAssert);
     Assertions.assertEquals(1L, shoppingCartToAssert.getId());
-    Assertions.assertEquals(shoppingCart, shoppingCartToAssert);
-
   }
 
   @Test
@@ -105,29 +79,17 @@ public class ShoppingCartRepositoryTest {
     ShoppingCart shoppingCartToAssert = repository.find(1L);
 
     Assertions.assertNull(shoppingCartToAssert);
-
   }
 
   @Test
+  @Sql({"/testdata/update_existing_shopping_cart.sql"})
   public void updateExistingShoppingCartTest() {
-
-    User user = new User(20L);
-    Store store = new Store(30L);
-    User user2=new User(22L);
-
-    em.persist(store);
-    em.persist(user);
-    em.persist(user2);
-
-    ShoppingCart shoppingCart= new ShoppingCart(1L,store,user);
-    em.persist(shoppingCart);
-
-    shoppingCart.setUser(user2);
+    ShoppingCart shoppingCart= repository.find(1L);
+    shoppingCart.setUser(em.find(User.class, 22L));
     repository.edit(shoppingCart);
 
     ShoppingCart shoppingCartToAssert = repository.find(1L);
     Assertions.assertNotNull(shoppingCartToAssert);
     Assertions.assertEquals(22L, shoppingCartToAssert.getUser().getId());
   }
-
 }

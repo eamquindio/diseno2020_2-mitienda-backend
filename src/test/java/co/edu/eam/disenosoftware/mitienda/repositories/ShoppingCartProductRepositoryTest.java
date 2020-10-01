@@ -8,10 +8,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Transactional
 @SpringBootTest
@@ -37,18 +39,8 @@ public class ShoppingCartProductRepositoryTest {
    * Create Method Test with a non existing shopping cart product
    */
   @Test
+  @Sql({"/testdata/create_not_existing_shopping_cart_product.sql"})
   public void createNotExistingShoppingCartProductTest() {
-    //Preparing Test
-    ShoppingCart shoppingCart = new ShoppingCart(20L);
-    ProductStore productStore = new ProductStore(58L);
-    em.persist(shoppingCart);
-    em.persist(productStore);
-
-    ShoppingCartProduct shoppingCartProduct = new ShoppingCartProduct(1L, shoppingCart, productStore, 10);
-
-    //Testing Code
-    repository.create(shoppingCartProduct);
-
     //Test Verification
     ShoppingCartProduct shoppingCartProductToAssert = repository.find(1L);
 
@@ -62,15 +54,9 @@ public class ShoppingCartProductRepositoryTest {
    * Delete Method Test with an existing shopping cart product
    */
   @Test
+  @Sql({"/testdata/delete_existing_shopping_cart_product.sql"})
   public void deleteExistingShoppingCartProductTest() {
-    //Preparing Test
-    ShoppingCart shoppingCart = new ShoppingCart();
-    ProductStore productStore = new ProductStore();
-
-    ShoppingCartProduct shoppingCartProduct = new ShoppingCartProduct(1L, shoppingCart, productStore, 10);
-
-    repository.create(shoppingCartProduct);
-
+    ShoppingCartProduct shoppingCartProduct = repository.find(1L);
     //Testing Code
     ShoppingCartProduct deletedShoppingCartProduct = repository.delete(1L);
 
@@ -99,24 +85,14 @@ public class ShoppingCartProductRepositoryTest {
    * Find Method Test with an existing shopping cart product
    */
   @Test
+  @Sql({"/testdata/find_existing_shopping_cart_product.sql"})
   public void findExistingShoppingCartProductTest() {
-    //Preparing Test
-    ShoppingCart shoppingCart = new ShoppingCart(20L);
-    ProductStore productStore = new ProductStore(58L);
-    em.persist(shoppingCart);
-    em.persist(productStore);
-
-    ShoppingCartProduct shoppingCartProduct = new ShoppingCartProduct(1L, shoppingCart, productStore, 10);
-
-    em.persist(shoppingCartProduct);
-
     //Testing Code
     ShoppingCartProduct shoppingCartProductToAssert = repository.find(1L);
 
     //Test Verification
     Assertions.assertNotNull(shoppingCartProductToAssert);
     Assertions.assertEquals(1L, shoppingCartProductToAssert.getId());
-    Assertions.assertEquals(shoppingCartProduct, shoppingCartProductToAssert);
   }
   /**
    * find Method Test with a non existing shopping cart product
@@ -134,16 +110,10 @@ public class ShoppingCartProductRepositoryTest {
    * Edit Method Test with an existing shopping cart product
    */
   @Test
+  @Sql({"/testdata/update_existing_shopping_cart_product.sql"})
   public void updateExistingShoppingCartProductTest() {
     //Preparing Test
-    ShoppingCart shoppingCart = new ShoppingCart(20L);
-    ProductStore productStore = new ProductStore(58L);
-    em.persist(shoppingCart);
-    em.persist(productStore);
-
-    ShoppingCartProduct shoppingCartProduct = new ShoppingCartProduct(1L, shoppingCart, productStore, 10);
-
-    em.persist(shoppingCartProduct);
+    ShoppingCartProduct shoppingCartProduct = repository.find(1L);
 
     //Testing Code
     shoppingCartProduct.setQuantity(20);
@@ -156,4 +126,10 @@ public class ShoppingCartProductRepositoryTest {
     Assertions.assertEquals(20, shoppingCartProductToAssert.getQuantity());
   }
 
+  @Test
+  @Sql({"/testdata/get_shopping_cart_products_by_shopping_cart_id.sql"})
+  public void getShoppingCartProductsByShoppingCartIdTest(){
+    List<ShoppingCartProduct> shoppingCartProductToAssert = repository.getShoppingCartProductsByShoppingCartId(1L);
+    Assertions.assertEquals(3, shoppingCartProductToAssert.size());
+  }
 }
