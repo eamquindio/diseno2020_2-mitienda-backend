@@ -13,10 +13,6 @@ public enum ErrorCodesEnum {
    */
   SHOPPING_CART_PRODUCT_NOT_FOUND("0001"),
   /**
-   * Exception When Shopping Cart Product Doesnt exist
-   */
-  SHOPPING_CART_PRODUCT_NOT_FOUND("0001"),
-  /**
    * Exception when User Exceed Five orders in progress
    */
   ORDER_USER_EXCEED_FIVE("0003"),
