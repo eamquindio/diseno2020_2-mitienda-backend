@@ -1,6 +1,9 @@
 package co.edu.eam.disenosoftware.mitienda.model.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,12 +24,13 @@ public class Order implements Serializable {
    * Order's - Primary key
    */
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   /**
    * Order's products
    */
-  @OneToMany(mappedBy = "order")
+  @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
   private List<OrderProduct> product;
 
   /**
@@ -86,6 +90,20 @@ public class Order implements Serializable {
    */
   public Order(Long id, Store store, User user, String state, Date date) {
     this.id = id;
+    this.store = store;
+    this.user = user;
+    this.state = state;
+    this.date = date;
+  }
+
+  /**
+   *
+   * @param store
+   * @param user
+   * @param state
+   * @param date
+   */
+  public Order(Store store, User user, String state, Date date) {
     this.store = store;
     this.user = user;
     this.state = state;
@@ -200,4 +218,21 @@ public class Order implements Serializable {
     this.date = date;
   }
 
+  /**
+   * Get Order's Total Value Method
+   *
+   * @return Total Value
+   */
+  public Double getTotalValue() {
+    return totalValue;
+  }
+
+  /**
+   * set Order's Total Value
+   *
+   * @param totalValue total Order Value
+   */
+  public void setTotalValue(Double totalValue) {
+    this.totalValue = totalValue;
+  }
 }
