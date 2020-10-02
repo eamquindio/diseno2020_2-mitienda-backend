@@ -81,19 +81,25 @@ public class ShoppingCartRepository {
   }
 
   /**
-   * A function for list all shoppingCart
-   *
-   * @param idUser  parameter to evaluate
-   * @param idStore parameter to evaluate
-   * @return List shoppingCart
+   * Get shopping cart by user and store id's
+   * @param idUser , user id
+   * @param idStore , store id
+   * @return , return shopping cart
    */
   public ShoppingCart getShoppingCartByUserIdAndStoreId(Long idUser, Long idStore) {
     String queryStr = "SELECT shopping FROM ShoppingCart shopping "
             + " WHERE shopping.user.id = :userId AND shopping.store.id = :storeId";
+
     Query query = em.createQuery(queryStr);
     query.setParameter("userId", idUser);
     query.setParameter("storeId", idStore);
-    List<ShoppingCart> list = query.getResultList();
-    return list.get(0);
+
+    List<ShoppingCart> shoppingCarts = query.getResultList();
+
+    if (shoppingCarts.size() == 0) {
+      return null;
+    } else {
+      return shoppingCarts.get(0);
+    }
   }
 }

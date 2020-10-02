@@ -74,6 +74,12 @@ public class ShoppingCart implements Serializable {
     this.user = user;
   }
 
+  /**
+   * ShoppingCart constructor with store, user
+   *
+   * @param store , store
+   * @param user  , user
+   */
   public ShoppingCart(Store store, User user) {
     this.store = store;
     this.user = user;

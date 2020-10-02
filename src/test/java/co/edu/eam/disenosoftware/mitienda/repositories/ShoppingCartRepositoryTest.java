@@ -2,7 +2,6 @@ package co.edu.eam.disenosoftware.mitienda.repositories;
 
 
 import co.edu.eam.disenosoftware.mitienda.model.entities.ShoppingCart;
-import co.edu.eam.disenosoftware.mitienda.model.entities.Store;
 import co.edu.eam.disenosoftware.mitienda.model.entities.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
 
 
 @Transactional
