@@ -86,81 +86,62 @@ public class ShoppingCartProductServiceTest {
   }
 
   @Test
+  @Sql({"/testdata/create_shopping_cart_does_not_exist_test.sql"})
   public void createShoppingCartProductTest() {
 
-    Store store = new Store(1L);
-    storeRepository.create(store);
+    shoppingCartProductService.createShoppingCartProduct(1L, 1L, 1L, 2);
 
-    User user = new User(1L);
-    userRepository.create(user);
-
-    Product product = new Product(1L);
-    em.persist(product);
-
-    Category category = new Category(1L);
-    em.persist(category);
-
-    ProductStore productStore = new ProductStore(1L, product, 10, 20.0, category, store);
-    productStoreRepository.create(productStore);
-
-    ShoppingCart shoppingCart = new ShoppingCart(store, user);
-    shoppingCartRepository.create(shoppingCart);
-
-    shoppingCartProductService.createShoppingCartProduct(store.getId(), product.getId(), user.getId(), 2);
-
-    List<ShoppingCartProduct> shoppingCartProductList = em.createQuery("SELECT s from ShoppingCartProduct s WHERE s.quantity = '2'").getResultList();
+    List<ShoppingCartProduct> shoppingCartProductList = em.createQuery("SELECT s from ShoppingCartProduct s WHERE s.shoppingCart.user.username = 'carlos'").getResultList();
     ShoppingCartProduct shoppingCartProductToAssert = shoppingCartProductList.get(0);
+
     Assertions.assertNotNull(shoppingCartProductToAssert);
-    Assertions.assertEquals(2, shoppingCartProductToAssert.getQuantity());
+    Assertions.assertEquals("carlos",shoppingCartProductToAssert.getShoppingCart().getUser().getUsername());
+
+    ShoppingCartProduct shoppingCartProductProvement = shoppingCartProductRepository.find(shoppingCartProductToAssert.getId());
+    Assertions.assertEquals(shoppingCartProductProvement.getId(),shoppingCartProductToAssert.getId());
 
   }
 
   @Test
+  @Sql({"/testdata/product_store_does_not_exist_test.sql"})
   public void productStoreDoesNotExistTest() {
-    Store store = new Store(1L);
-    storeRepository.create(store);
 
-    User user = new User(1L);
-    userRepository.create(user);
-
-    Product product = new Product(1L);
-    em.persist(product);
-    Category category = new Category(1L);
-    em.persist(category);
-    ProductStore productStore = new ProductStore(1L, product, 10, 20.0, category, store);
-
-
-    ShoppingCart shoppingCart = new ShoppingCart(store, user);
-    shoppingCartRepository.create(shoppingCart);
-
-    BusinessException exception = Assertions.assertThrows(BusinessException.class, () -> shoppingCartProductService.createShoppingCartProduct(store.getId(), product.getId(), user.getId(), 2));
+    BusinessException exception = Assertions.assertThrows(BusinessException.class, () -> shoppingCartProductService.createShoppingCartProduct(1L, 1L, 1L, 2));
     Assertions.assertEquals(ErrorCodesEnum.PRODUCT_STORE_NOT_FOUNDED, exception.getCode());
   }
 
   @Test
+  @Sql({"/testdata/shopping_cart_does_not_exist_test.sql"})
   public void shoppingCartDoesNotExistTest() {
-    Store store = new Store(1L);
-    storeRepository.create(store);
 
-    User user = new User(1L,"carlos");
-    userRepository.create(user);
+    shoppingCartProductService.createShoppingCartProduct(1L, 1L, 1L, 2);
 
-    Product product = new Product(1L);
-    em.persist(product);
-    Category category = new Category(1L);
-    em.persist(category);
-    ProductStore productStore = new ProductStore(1L, product, 10, 20.0, category, store);
-    productStoreRepository.create(productStore);
+    List<ShoppingCartProduct> shoppingCartProductList = em.createQuery("SELECT s FROM ShoppingCartProduct s WHERE s.shoppingCart.user.username = 'carlos'").getResultList();
 
-
-    shoppingCartProductService.createShoppingCartProduct(store.getId(), product.getId(), user.getId(), 2);
-    List<ShoppingCartProduct> shoppingCartProductList = em.createQuery("SELECT s FROM ShoppingCartProduct s WHERE s.quantity= '2'").getResultList();
     ShoppingCartProduct shoppingCartProductToAssert = shoppingCartProductList.get(0);
 
-    List<ShoppingCart> shoppingCartList = em.createQuery("SELECT s FROM ShoppingCart s WHERE s.user.username = 'carlos'").getResultList();
-    ShoppingCart shoppingCartToAssert = shoppingCartList.get(0);
-    Assertions.assertNotNull(shoppingCartToAssert);
     Assertions.assertNotNull(shoppingCartProductToAssert);
-    Assertions.assertEquals(shoppingCartToAssert, shoppingCartProductToAssert.getShoppingCart());
+    Assertions.assertEquals("carlos",shoppingCartProductToAssert.getShoppingCart().getUser().getUsername());
+
+    ShoppingCartProduct shoppingCartProductProvement = shoppingCartProductRepository.find(shoppingCartProductToAssert.getId());
+    Assertions.assertEquals(shoppingCartProductProvement.getShoppingCart().getId(), shoppingCartProductToAssert.getShoppingCart().getId());
+    Assertions.assertEquals(shoppingCartProductProvement.getId(), shoppingCartProductToAssert.getId());
   }
+
+  @Test
+  @Sql({"/testdata/user_does_not_exist_test.sql"})
+  public void UserDoesNotExistTest() {
+
+    BusinessException exception = Assertions.assertThrows(BusinessException.class, () -> shoppingCartProductService.createShoppingCartProduct(1L, 1L, 1L, 2));
+    Assertions.assertEquals(ErrorCodesEnum.USER_NOT_FOUNDED, exception.getCode());
+  }
+
+  @Test
+  @Sql({"/testdata/store_does_not_exist_test.sql"})
+  public void StoreDoesNotExistTest() {
+
+    BusinessException exception = Assertions.assertThrows(BusinessException.class, () -> shoppingCartProductService.createShoppingCartProduct(1L, 1L, 1L, 2));
+    Assertions.assertEquals(ErrorCodesEnum.STORE_NOT_FOUNDED, exception.getCode());
+  }
+
 }

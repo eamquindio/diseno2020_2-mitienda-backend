@@ -57,7 +57,8 @@ public class ShoppingCartProductService {
 
   /**
    * Remove Shopping Cart product from Shopping Cart
-   * @param idShoppingCart Shopping Cart identifier
+   *
+   * @param idShoppingCart        Shopping Cart identifier
    * @param idShoppingCartProduct Shopping Cart Product identifier
    */
   public void removeProductFromShoppingCart(Long idShoppingCart, Long idShoppingCartProduct) {
@@ -88,15 +89,25 @@ public class ShoppingCartProductService {
 
   /**
    * Add a product over shopping cart
-   * @param storeId , store id
+   *
+   * @param storeId   , store id
    * @param productId , product id
-   * @param userId , user id
-   * @param quantity , quantity of products
+   * @param userId    , user id
+   * @param quantity  , quantity of products
    */
   public void createShoppingCartProduct(Long storeId, Long productId, Long userId, int quantity) {
 
     User user = userRepository.find(userId);
     Store store = storeRepository.find(storeId);
+
+
+    if (user == null) {
+      throw new BusinessException("El usuario no existe", ErrorCodesEnum.USER_NOT_FOUNDED);
+    }
+
+    if (store == null) {
+      throw new BusinessException("La tienda no existe", ErrorCodesEnum.STORE_NOT_FOUNDED);
+    }
 
     ShoppingCart shoppingCartOne = shoppingCartRepository.getShoppingCartByUserIdAndStoreId(userId, storeId);
 
