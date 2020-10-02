@@ -59,6 +59,8 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'org.postgresql:postgresql'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    compile group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.4.7'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 test {
