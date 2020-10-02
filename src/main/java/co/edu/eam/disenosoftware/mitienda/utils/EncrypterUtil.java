@@ -4,7 +4,11 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * EncrypterUtil class
+ */
 public class EncrypterUtil {
+
   /**
    * Method to password MD5
    * @param input parameter to input
@@ -15,9 +19,9 @@ public class EncrypterUtil {
       MessageDigest md = MessageDigest.getInstance("MD5");
       byte[] messageDigest = md.digest(input.getBytes());
       BigInteger number = new BigInteger(1, messageDigest);
-      int value = 16;
+      final int value = 16;
       String hashtext = number.toString(value);
-      int value2=32;
+      final int value2 = 32;
       while (hashtext.length() < value2) {
         hashtext = "0" + hashtext;
       }

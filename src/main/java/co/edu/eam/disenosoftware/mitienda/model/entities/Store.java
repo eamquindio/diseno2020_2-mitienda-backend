@@ -233,7 +233,7 @@ public class Store implements Serializable {
 
   /**
    * Set store's open
-   * @param open
+   * @param open open store's
    */
   public void setOpen(boolean open) {
     isOpen = open;

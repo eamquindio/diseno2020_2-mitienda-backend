@@ -16,6 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class StoreService {
 
+  /**
+   * StoreRepository storeRepository
+   */
   @Autowired
   private StoreRepository storeRepository;
 
@@ -31,18 +34,18 @@ public class StoreService {
   public void registerStore(String name, String owner, String address, String phone, String email, String password) {
     Store nameToFind = storeRepository.getStoreByName(name);
 
-    if(nameToFind!=null){
+    if (nameToFind != null) {
       throw new BusinessException("Ya existe el nombre ingresado", ErrorCodesEnum.STORE_NAME_ALREADY_REGISTER);
     }
 
     Store emailToFind = storeRepository.getStoreByEmail(email);
 
-    if(emailToFind!=null){
+    if (emailToFind != null) {
       throw new BusinessException("Ya existe el email ingresado", ErrorCodesEnum.STORE_EMAIL_ALREADY_REGISTER);
     }
 
     String passwordMD5 = EncrypterUtil.getMD5(password);
-    Store store=new Store(name, owner, address, phone, email, passwordMD5);
+    Store store = new Store(name, owner, address, phone, email, passwordMD5);
     storeRepository.create(store);
   }
 
@@ -55,7 +58,7 @@ public class StoreService {
   public Boolean loginStore(String email, String password) {
     Store emailToFind = storeRepository.getStoreByEmail(email);
 
-    if(emailToFind==null){
+    if (emailToFind == null) {
       throw new BusinessException("email or password incorrect", ErrorCodesEnum.LOGIN_INCORRECT);
     }
 
