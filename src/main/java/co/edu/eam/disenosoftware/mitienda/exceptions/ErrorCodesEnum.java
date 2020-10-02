@@ -17,7 +17,6 @@ public enum ErrorCodesEnum {
    */
   PRODUCT_STORE_NOT_FOUNDED("0002"),
   /**
-<<<<<<< HEAD
    * Exception when User Exceed Five orders in progress
    */
   NUMBER_OF_ORDERS_EXCEDED("0003"),
@@ -29,16 +28,15 @@ public enum ErrorCodesEnum {
   /**
    * Shopping cart is empty
     */
-  SHOPPING_CART_EMPTY("0005"),;
-=======
-   * User is not founded
-   */
-  USER_NOT_FOUNDED("0003"),
+  SHOPPING_CART_EMPTY("0005"),
   /**
    * Store is not founded
    */
-  STORE_NOT_FOUNDED("0004");
->>>>>>> eb4bbff... Adding an user and store null validation and changing test to sql format
+  STORE_NOT_FOUNDED("0006"),
+  /**
+   * User is not founded
+   */
+  USER_NOT_FOUNDED("0007");
 
   /**
    * error code

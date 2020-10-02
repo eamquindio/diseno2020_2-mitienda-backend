@@ -66,7 +66,7 @@ public class ShoppingCartProductService {
     ShoppingCartProduct shoppingCartProduct = shoppingCartProductRepository.find(idShoppingCartProduct);
 
     if (shoppingCartProduct == null) {
-      throw new BusinessException("El producto no existe", ErrorCodesEnum.NUMBER_OF_ORDERS_EXCEDED);
+      throw new BusinessException("El producto no existe", ErrorCodesEnum.SHOPPING_CART_PRODUCT_NOT_FOUND);
     }
 
     List<ShoppingCartProduct> products =

@@ -82,7 +82,7 @@ public class ShoppingCartProductServiceTest {
   @Sql({"/testdata/shopping_cart_product_is_not_existing.sql"})
   public void shoppingCartProductIsNotExisting(){
     BusinessException exception = Assertions.assertThrows(BusinessException.class, () -> shoppingCartProductService.removeProductFromShoppingCart(1L,1L));
-    Assertions.assertEquals(ErrorCodesEnum.NUMBER_OF_ORDERS_EXCEDED, exception.getCode());
+    Assertions.assertEquals(ErrorCodesEnum.SHOPPING_CART_PRODUCT_NOT_FOUND, exception.getCode());
   }
 
   @Test
