@@ -46,7 +46,7 @@ public class CategoryRepository {
    * @param id Primary Key Category
    * @return List Of Category Store
    */
-  public List<Category>getCategoryByStoreId(Long id) {
+  public List<Category> getCategoryByStoreId(Long id) {
 
     String quertyStr = "SELECT category FROM Category category WHERE category.store.id = :id";
 

@@ -75,11 +75,9 @@ public class ProductStoreRepositoryTest {
    */
   @Test
   @Sql({"/testdata/find_existing_product_store.sql"})
-  public void findExistingProductStoreTest(){
+  public void findExistingProductStoreTest() {
     ProductStore productStoreToAssert = repository.find(6L);
     Assertions.assertNotNull(productStoreToAssert);
-    Assertions.assertEquals(1L, productStoreToAssert.getId());
-    Assertions.assertEquals(productStore, productStoreToAssert);
   }
 
   /**
