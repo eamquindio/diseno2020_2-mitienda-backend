@@ -1,6 +1,8 @@
 package co.edu.eam.disenosoftware.mitienda.model.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,6 +20,7 @@ public class Category implements Serializable {
    * Category - Primary key
    */
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   /**
@@ -41,6 +44,12 @@ public class Category implements Serializable {
    * Category's constructors
    */
   public Category() {
+  }
+
+  public Category(String icon, String name, Store store) {
+    this.icon = icon;
+    this.name = name;
+    this.store = store;
   }
 
   public Category(Long id, String icon, String name, Store store) {

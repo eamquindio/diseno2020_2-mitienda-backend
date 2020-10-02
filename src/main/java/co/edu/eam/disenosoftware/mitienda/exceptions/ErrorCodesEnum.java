@@ -36,7 +36,23 @@ public enum ErrorCodesEnum {
   /**
    * User is not founded
    */
-  USER_NOT_FOUNDED("0007");
+  USER_NOT_FOUNDED("0007"),
+  /**
+   * code for not found store
+   */
+  NOT_FOUND_STORE("0008"),
+  /**
+   * code for name category in use
+   */
+  NAME_CATEGORY_IN_USE("0009"),
+  /**
+   * code for not found product
+   */
+  NOT_FOUND_PRODUCT("0010"),
+  /**
+   * code for not found category
+   */
+  NOT_FOUND_CATEGORY("0011");
 
   /**
    * error code

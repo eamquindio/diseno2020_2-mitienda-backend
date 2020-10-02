@@ -1,6 +1,8 @@
 package co.edu.eam.disenosoftware.mitienda.model.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,6 +20,7 @@ public class ProductStore implements Serializable {
    * Product's store - Primary key
    */
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   /**
@@ -55,6 +58,14 @@ public class ProductStore implements Serializable {
    * Product's store constructor
    */
   public ProductStore() {
+  }
+
+  public ProductStore(Product product, int stock, double price, Category category, Store store) {
+    this.product = product;
+    this.stock = stock;
+    this.price = price;
+    this.category = category;
+    this.store = store;
   }
 
   public ProductStore(Long id, Product product, int stock, double price, Category category, Store store) {
