@@ -116,9 +116,7 @@ public class OrderService {
       throw new BusinessException("La orden no fue encontrada", ErrorCodesEnum.ORDER_NOT_FOUND);
     }
 
-    List<OrderProduct> orderProducts = em.createQuery("SELECT op FROM OrderProduct op WHERE op.order.id =:value")
-            .setParameter("value", idOrder)
-            .getResultList();
+    List<OrderProduct> orderProducts = orderProductRepository.getAllOrderProductsByIdOrder(idOrder);
 
     if (orderProducts.size() == 0) {
       throw new BusinessException("La orden no tiene elementos", ErrorCodesEnum.ORDER_DOES_NOT_HAVE_ELEMENTS);
