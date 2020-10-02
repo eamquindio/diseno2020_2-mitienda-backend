@@ -57,6 +57,6 @@ public class ProductStoreServiceTest {
   public void createProduct(){
     service.createProduct(3L, 1L, 2L, 15, 2000);
     List<ProductStore> productStores= em.createQuery("SELECT productStore FROM ProductStore productStore ").getResultList();
-    Assertions.assertNotEquals(0, productStores.size());
+    Assertions.assertEquals(1,productStores.size());
   }
 }

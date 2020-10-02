@@ -37,11 +37,15 @@ public class CategoryService {
    */
   public void createCategory(String icon, Long storeId, String name) {
     Store store = repositoryStore.find(storeId);
+
     if (store == null) {
+
       throw new BusinessException("No se encontro la store", ErrorCodesEnum.NOT_FOUND_STORE);
     }
     Category category = categoryRepository.getCategoryByStoreIdAndName(storeId, name);
+
     if (category != null) {
+
       throw new BusinessException("El nombre de la category esta en uso", ErrorCodesEnum.NAME_CATEGORY_IN_USE);
     }
     Category newCategory = new Category(icon, name, store);

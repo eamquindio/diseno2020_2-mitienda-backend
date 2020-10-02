@@ -75,8 +75,11 @@ public class CategoryRepository {
     List<Category> list = query.getResultList();
 
     if (list.size() != 0) {
+
       return list.get(0);
+
     } else {
+
       return null;
     }
   }
