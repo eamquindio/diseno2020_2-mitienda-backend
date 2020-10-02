@@ -107,4 +107,71 @@ public class OrderServiceTest {
     Assertions.assertEquals(orderToAssertTwo, orderToAssertThree);
   }
 
+  @Test
+  public void finalizeOrderWithNotFoundOrderTest() {
+    BusinessException exception = Assertions.assertThrows(BusinessException.class,
+            () ->service.finalizeOrder(32L));
+
+    Assertions.assertEquals("La orden no fue encontrada",exception.getMessage());
+    Assertions.assertEquals(ErrorCodesEnum.ORDER_NOT_FOUND,exception.getCode());
+  }
+
+  @Test
+  @Sql({"/testdata/finalized_order_without_order_products.sql"})
+  public void finalizedOrderWithoutOrderProducts() {
+
+    List<Order> orders = em.createQuery("SELECT o FROM Order o")
+            .getResultList();
+
+    Order order = orders.get(orders.size()-1);
+
+    BusinessException exception = Assertions.assertThrows(BusinessException.class,
+            () ->service.finalizeOrder(order.getId()));
+
+    Assertions.assertEquals("La orden no tiene elementos",exception.getMessage());
+    Assertions.assertEquals(ErrorCodesEnum.ORDER_DOES_NOT_HAVE_ELEMENTS,exception.getCode());
+  }
+
+  @Test
+  @Sql({"/testdata/finalized_order_with_not_already_order.sql"})
+  public void finalizedOrderWithNotAlreadyOrder () {
+
+    List<Order> orders = em.createQuery("SELECT o FROM Order o")
+            .getResultList();
+
+    Order order = orders.get(orders.size()-1);
+
+    OrderProduct orderProduct1 = new OrderProduct(2,"ready",order);
+    OrderProduct orderProduct2 = new OrderProduct(4,"pending",order);
+    OrderProduct orderProduct3 = new OrderProduct(5,"ready",order);
+
+    em.persist(orderProduct1);
+    em.persist(orderProduct2);
+    em.persist(orderProduct3);
+
+    BusinessException exception = Assertions.assertThrows(BusinessException.class,
+            () ->service.finalizeOrder(order.getId()));
+
+    Assertions.assertEquals("Ningún producto puede estar en estado pending",exception.getMessage());
+    Assertions.assertEquals(ErrorCodesEnum.ORDER_IS_NOT_READY,exception.getCode());
+  }
+
+  @Test
+  @Sql({"/testdata/finalized_order.sql"})
+  public void finalizedOrder () {
+
+    List<Order> orders = em.createQuery("SELECT o FROM Order o")
+            .getResultList();
+
+    Order order = orders.get(orders.size()-1);
+    OrderProduct orderProduct1 = new OrderProduct(2,"ready",order);
+    OrderProduct orderProduct2 = new OrderProduct(4,"ready",order);
+    OrderProduct orderProduct3 = new OrderProduct(5,"ready",order);
+    em.persist(orderProduct1);
+    em.persist(orderProduct2);
+    em.persist(orderProduct3);
+    service.finalizeOrder(order.getId());
+
+    Assertions.assertEquals("finished",order.getState());
+  }
 }

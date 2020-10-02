@@ -71,12 +71,10 @@ public class Order implements Serializable {
   /**
    * Order's constructor
    *
-   * @param id    primary key
    * @param user  user's order foreign key
    * @param state order's state
    */
-  public Order(Long id, User user, String state) {
-    this.id = id;
+  public Order(User user, String state) {
     this.user = user;
     this.state = state;
   }

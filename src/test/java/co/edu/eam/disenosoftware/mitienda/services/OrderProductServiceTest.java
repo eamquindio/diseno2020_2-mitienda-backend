@@ -1,12 +1,14 @@
 package co.edu.eam.disenosoftware.mitienda.services;
 
 import co.edu.eam.disenosoftware.mitienda.exceptions.BusinessException;
+import co.edu.eam.disenosoftware.mitienda.exceptions.ErrorCodesEnum;
 import co.edu.eam.disenosoftware.mitienda.model.entities.OrderProduct;
 import co.edu.eam.disenosoftware.mitienda.repositories.OrderProductRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -24,49 +26,45 @@ public class OrderProductServiceTest {
   private EntityManager em;
 
   @Test
+  @Sql({"/testdata/check_order_product_by_not_exist_id.sql"})
   public void checkOrderProductByNotExistIdTest () {
-    OrderProduct orderProduct = new OrderProduct(2,"pending");
-    em.persist(orderProduct);
-    Long orderProductId = orderProduct.getId();
-
-    Exception exception = Assertions.assertThrows(BusinessException.class,
+    BusinessException exception = Assertions.assertThrows(BusinessException.class,
             () ->service.checkOrderProductById(32L));
 
     Assertions.assertEquals("El producto de la orden no fue encontrado.",exception.getMessage());
+    Assertions.assertEquals(ErrorCodesEnum.ORDER_PRODUCT_NOT_FOUND,exception.getCode());
   }
 
   @Test
+  @Sql({"/testdata/check_order_product_by_id_without_state_pending.sql"})
   public void checkOrderProductByIdWithoutStatePendingTest () {
-    OrderProduct orderProduct = new OrderProduct(2,"initial");
-    em.persist(orderProduct);
-    Long orderProductId = orderProduct.getId();
 
-    List <OrderProduct> orderProducts = em.createQuery("SELECT op FROM OrderProduct op WHERE op.id = :value")
-            .setParameter("value",orderProductId).getResultList();
+    List <OrderProduct> orderProducts = em.createQuery("SELECT op FROM OrderProduct op")
+            .getResultList();
 
-    orderProduct = orderProducts.get(0);
+    OrderProduct orderProduct = orderProducts.get(0);
 
-    Assertions.assertEquals(orderProduct.getQuantity(),2);
-    Assertions.assertEquals(orderProduct.getState(),"initial");
+    Assertions.assertEquals(orderProduct.getQuantity(),3);
+    Assertions.assertEquals(orderProduct.getState(),"canceled");
 
-    Exception exception = Assertions.assertThrows(BusinessException.class,
-            () ->service.checkOrderProductById(orderProductId));
-    Assertions.assertEquals("Solo se pueden checkear los productos en estado pending.",exception.getMessage());
+    BusinessException exception = Assertions.assertThrows(BusinessException.class,
+            () ->service.checkOrderProductById(orderProduct.getId()));
+    Assertions.assertEquals("Solo son validos los productos en estado pending.",exception.getMessage());
+    Assertions.assertEquals(ErrorCodesEnum.ORDER_PRODUCT_IS_NOT_PENDING,exception.getCode());
   }
 
   @Test
+  @Sql({"/testdata/check_order_product_by_id.sql"})
   public void checkOrderProductByIdTest () {
-    OrderProduct orderProduct = new OrderProduct(2,"pending");
-    em.persist(orderProduct);
-    Long orderProductId = orderProduct.getId();
+    List <OrderProduct> orderProducts = em.createQuery("SELECT op FROM OrderProduct op").getResultList();
 
-    List <OrderProduct> orderProducts = em.createQuery("SELECT op FROM OrderProduct op WHERE op.id = :value")
-            .setParameter("value",orderProductId).getResultList();
+    OrderProduct orderProduct = orderProducts.get(orderProducts.size()-1);
 
-    orderProduct = orderProducts.get(0);
 
-    Assertions.assertEquals(orderProduct.getQuantity(),2);
+
+    Assertions.assertEquals(orderProduct.getQuantity(),3);
     Assertions.assertEquals(orderProduct.getState(),"pending");
+    Assertions.assertEquals(orderProduct.getOrder().getId(), 22L);
   }
 
 }
