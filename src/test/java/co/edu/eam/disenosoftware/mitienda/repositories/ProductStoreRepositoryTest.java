@@ -78,8 +78,9 @@ public class ProductStoreRepositoryTest {
   public void findExistingProductStoreTest(){
     ProductStore productStoreToAssert = repository.find(6L);
     Assertions.assertNotNull(productStoreToAssert);
+    Assertions.assertEquals(1L, productStoreToAssert.getId());
+    Assertions.assertEquals(productStore, productStoreToAssert);
   }
-
 
   /**
    * Test findNotExistingProductStoreTest
@@ -114,6 +115,3 @@ public class ProductStoreRepositoryTest {
     Assertions.assertNotNull(deletedProductStore);
   }
 }
-
-
-

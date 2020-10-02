@@ -3,7 +3,9 @@ package co.edu.eam.disenosoftware.mitienda.repositories;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Store;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -86,6 +88,28 @@ public class StoreRepository {
     Query query = em.createQuery(queryStr);
     query.setParameter("storeEmail", email);
     List<Store> list = query.getResultList();
-    return list.get(0);
+    if (list.size()!=0) {
+      return list.get(0);
+    }else{
+      return null;
+    }
+  }
+
+  /**
+   * Method to find store by nme
+   *
+   * @param name parameter to find
+   * @return store
+   */
+  public Store getStoreByName(String name) {
+    String queryStr = "SELECT m FROM Store m WHERE m.name = :storeName";
+    Query query = em.createQuery(queryStr);
+    query.setParameter("storeName", name);
+    List<Store> list = query.getResultList();
+    if(list.size()!=0) {
+      return list.get(0);
+    }else {
+      return null;
+    }
   }
 }
