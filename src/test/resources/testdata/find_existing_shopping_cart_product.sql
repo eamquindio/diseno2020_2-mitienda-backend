@@ -6,3 +6,4 @@ INSERT INTO public.categories (id, "icon", "name", id_store) VALUES(10,'icono','
 INSERT INTO public.products (id, "image", "name") VALUES(1,'imagen','nombre');
 INSERT INTO public.products_store (id, price, stock, id_category, id_product, id_store) VALUES(58,100,1000,10,1,1);
 INSERT INTO public.shopping_cart_products (id, quantity, id_product_store,id_shopping_cart) VALUES(1,10,58,20);
+

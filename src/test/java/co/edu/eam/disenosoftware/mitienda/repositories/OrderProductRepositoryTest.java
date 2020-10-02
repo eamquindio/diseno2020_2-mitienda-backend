@@ -2,6 +2,7 @@ package co.edu.eam.disenosoftware.mitienda.repositories;
 
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
 import co.edu.eam.disenosoftware.mitienda.model.entities.OrderProduct;
+import co.edu.eam.disenosoftware.mitienda.model.entities.Product;
 import co.edu.eam.disenosoftware.mitienda.model.entities.ProductStore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

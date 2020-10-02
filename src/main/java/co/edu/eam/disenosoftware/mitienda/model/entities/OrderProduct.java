@@ -70,14 +70,6 @@ public class OrderProduct implements Serializable {
     this.state = state;
   }
 
-  /**
-   * Order's products constructor
-   *
-   * @param order        , order parameter
-   * @param productStore , productStore parameter
-   * @param quantity     , quantity parameter
-   * @param state        , state parameter
-   */
   public OrderProduct(Order order, ProductStore productStore, int quantity, String state) {
     this.order = order;
     this.productStore = productStore;

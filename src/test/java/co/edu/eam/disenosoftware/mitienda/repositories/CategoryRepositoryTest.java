@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -35,28 +36,17 @@ public class CategoryRepositoryTest {
 
 
   @Test
+  @Sql({"/testdata/get_category_by_store_id.sql"})
   public void getCategoryByStoreIdTest(){
+    List<Category>categories = repository.getCategoryByStoreId(1L);
+    Assertions.assertEquals(1,categories.size());
+  }
 
-  Store store= new Store(1L);
-    Store store2= new Store(2L);
-
-    em.persist(store);
-    em.persist(store2);
-
-    Category category1=new Category(1L,store);
-    Category category2=new Category(2L,store2);
-    Category category3=new Category(3L,store);
-    Category category4=new Category(4L,store);
-
-    em.persist(category1);
-    em.persist(category2);
-    em.persist(category3);
-    em.persist(category4);
-
-    List<Category> categories = repository.getCategoryByStoreId(1L);
-
-    Assertions.assertEquals(3, categories.size());
-
+  @Test
+  @Sql({"/testdata/get_category_by_store_id_and_name.sql"})
+  public void getCategoryByStoreIdAndNameTest(){
+    Category categoryToAssert = repository.getCategoryByStoreIdAndName(1L,"category1");
+    Assertions.assertNotNull(categoryToAssert);
   }
 
 }
