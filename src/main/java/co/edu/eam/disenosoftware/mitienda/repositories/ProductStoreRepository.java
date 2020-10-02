@@ -94,11 +94,6 @@ public class ProductStoreRepository {
 
     List<ProductStore> productStores = query.getResultList();
 
-    if (productStores.size() == 0) {
-      return null;
-    } else {
-      return productStores.get(0);
-    }
-
+    return productStores.size() != 0 ? productStores.get(0) : null;
   }
 }
