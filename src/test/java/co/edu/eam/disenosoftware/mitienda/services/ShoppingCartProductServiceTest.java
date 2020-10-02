@@ -133,7 +133,7 @@ public class ShoppingCartProductServiceTest {
     ShoppingCart shoppingCart = new ShoppingCart(store, user);
     shoppingCartRepository.create(shoppingCart);
 
-    BusinessException exception = Assertions.assertThrows(BusinessException.class, () -> service.createShoppingCartProduct(store.getId(), product.getId(), user.getId(), 2));
+    BusinessException exception = Assertions.assertThrows(BusinessException.class, () -> shoppingCartProductService.createShoppingCartProduct(store.getId(), product.getId(), user.getId(), 2));
     Assertions.assertEquals(ErrorCodesEnum.PRODUCT_STORE_NOT_FOUNDED, exception.getCode());
   }
 

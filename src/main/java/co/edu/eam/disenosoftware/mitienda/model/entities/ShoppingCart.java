@@ -62,17 +62,6 @@ public class ShoppingCart implements Serializable {
   }
 
   /**
-   * ShoppingCart constructor with id, store, user
-   *
-   * @param store , store
-   * @param user  , user
-   */
-  public ShoppingCart(Store store, User user) {
-    this.store = store;
-    this.user = user;
-  }
-
-  /**
    * ShoppingCart constructors with id, store, user
    *
    * @param id    , id
@@ -85,6 +74,12 @@ public class ShoppingCart implements Serializable {
     this.user = user;
   }
 
+  /**
+   * ShoppingCart constructor with store, user
+   *
+   * @param store , store
+   * @param user  , user
+   */
   public ShoppingCart(Store store, User user) {
     this.store = store;
     this.user = user;
