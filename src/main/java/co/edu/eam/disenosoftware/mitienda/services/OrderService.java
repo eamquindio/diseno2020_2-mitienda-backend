@@ -55,13 +55,6 @@ public class OrderService {
   private OrderRepository orderRepository;
 
   /**
-   * entity manager to extract the list
-   */
-  @PersistenceContext
-  private EntityManager em;
-
-
-  /**
    * Create an order by the shopping cart
    * @param shoppingCartId id of the shoppingCart that we are
    *                       going to use to create the order
