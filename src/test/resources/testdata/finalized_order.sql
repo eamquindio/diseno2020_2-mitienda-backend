@@ -13,7 +13,11 @@ INSERT INTO public.products_store (id, price, stock, id_category, id_product, id
 INSERT INTO public.products_store (id, price, stock, id_category, id_product, id_store) VALUES(3, 100, 20, 1, 3, 1);
 
 
-INSERT INTO public.orders ("date", state, id_store, id_user) VALUES('2016-06-22 19:10:25-07', 'in course', 1, 1);
+INSERT INTO public.orders (id,"date", state, id_store, id_user) VALUES(1,'2016-06-22 19:10:25-07', 'in course', 1, 1);
+
+INSERT INTO public.order_products (id, quantity, state, id_order, id_product) VALUES(1, 4, 'ready', 1, 1);
+INSERT INTO public.order_products (id, quantity, state, id_order, id_product) VALUES(2, 4, 'ready', 1, 2);
+INSERT INTO public.order_products (id, quantity, state, id_order, id_product) VALUES(3, 4, 'ready', 1, 3);
 
 
 

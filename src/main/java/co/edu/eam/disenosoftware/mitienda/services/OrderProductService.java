@@ -28,11 +28,13 @@ public class OrderProductService {
   public void checkOrderProductById(Long idOrderProduct) {
     OrderProduct orderProductFind = orderProductRepository.find(idOrderProduct);
     String state = "";
+
     if (orderProductFind == null) {
       throw new BusinessException("El producto de la orden no fue encontrado.", ErrorCodesEnum.ORDER_PRODUCT_NOT_FOUND);
-    } else {
-      state = orderProductFind.getState();
     }
+
+    state = orderProductFind.getState();
+
     if (state.equals("pending")) {
       orderProductFind.setState("checked");
       orderProductRepository.edit(orderProductFind);
@@ -40,5 +42,6 @@ public class OrderProductService {
       throw new BusinessException("Solo son validos los productos en estado pending.",
               ErrorCodesEnum.ORDER_PRODUCT_IS_NOT_PENDING);
     }
+
   }
 }

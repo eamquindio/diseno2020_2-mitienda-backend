@@ -125,19 +125,22 @@ public class OrderService {
     }
 
     boolean validarEstado = true;
+
     for (OrderProduct orderProduct: orderProducts) {
+
       if (orderProduct.getState().equals("pending")) {
         validarEstado = false;
         break;
       }
+
     }
 
     if (!validarEstado) {
       throw new BusinessException("Ningún producto puede estar en estado pending", ErrorCodesEnum.ORDER_IS_NOT_READY);
-    } else {
-      order.setState("finished");
-      orderRepository.edit(order);
     }
+
+    order.setState("finished");
+    orderRepository.edit(order);
 
   }
 

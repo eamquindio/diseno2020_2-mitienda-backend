@@ -22,6 +22,9 @@ public class OrderProductServiceTest {
   @Autowired
   private OrderProductService service;
 
+  @Autowired
+  private OrderProductRepository orderProductRepository;
+
   @PersistenceContext
   private EntityManager em;
 
@@ -60,10 +63,13 @@ public class OrderProductServiceTest {
 
     OrderProduct orderProduct = orderProducts.get(orderProducts.size()-1);
 
+    service.checkOrderProductById(orderProduct.getId());
 
+    OrderProduct orderProductToAssert = orderProductRepository.find(orderProduct.getId());
 
+    Assertions.assertEquals(orderProduct.getId(),orderProductToAssert.getId());
     Assertions.assertEquals(orderProduct.getQuantity(),3);
-    Assertions.assertEquals(orderProduct.getState(),"pending");
+    Assertions.assertEquals(orderProduct.getState(),"checked");
     Assertions.assertEquals(orderProduct.getOrder().getId(), 22L);
   }
 

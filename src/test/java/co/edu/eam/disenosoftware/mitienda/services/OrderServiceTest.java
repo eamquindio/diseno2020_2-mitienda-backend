@@ -136,21 +136,8 @@ public class OrderServiceTest {
   @Sql({"/testdata/finalized_order_with_not_already_order.sql"})
   public void finalizedOrderWithNotAlreadyOrder () {
 
-    List<Order> orders = em.createQuery("SELECT o FROM Order o")
-            .getResultList();
-
-    Order order = orders.get(orders.size()-1);
-
-    OrderProduct orderProduct1 = new OrderProduct(2,"ready",order);
-    OrderProduct orderProduct2 = new OrderProduct(4,"pending",order);
-    OrderProduct orderProduct3 = new OrderProduct(5,"ready",order);
-
-    em.persist(orderProduct1);
-    em.persist(orderProduct2);
-    em.persist(orderProduct3);
-
     BusinessException exception = Assertions.assertThrows(BusinessException.class,
-            () ->service.finalizeOrder(order.getId()));
+            () ->service.finalizeOrder(1L));
 
     Assertions.assertEquals("Ningún producto puede estar en estado pending",exception.getMessage());
     Assertions.assertEquals(ErrorCodesEnum.ORDER_IS_NOT_READY,exception.getCode());
@@ -160,18 +147,11 @@ public class OrderServiceTest {
   @Sql({"/testdata/finalized_order.sql"})
   public void finalizedOrder () {
 
-    List<Order> orders = em.createQuery("SELECT o FROM Order o")
-            .getResultList();
+    service.finalizeOrder(1L);
 
-    Order order = orders.get(orders.size()-1);
-    OrderProduct orderProduct1 = new OrderProduct(2,"ready",order);
-    OrderProduct orderProduct2 = new OrderProduct(4,"ready",order);
-    OrderProduct orderProduct3 = new OrderProduct(5,"ready",order);
-    em.persist(orderProduct1);
-    em.persist(orderProduct2);
-    em.persist(orderProduct3);
-    service.finalizeOrder(order.getId());
+    Order orderToAssert = repository.find(1l);
 
-    Assertions.assertEquals("finished",order.getState());
+    Assertions.assertEquals("finished",orderToAssert.getState());
   }
+
 }
