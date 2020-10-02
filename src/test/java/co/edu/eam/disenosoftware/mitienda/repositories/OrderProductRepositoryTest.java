@@ -2,7 +2,6 @@ package co.edu.eam.disenosoftware.mitienda.repositories;
 
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
 import co.edu.eam.disenosoftware.mitienda.model.entities.OrderProduct;
-import co.edu.eam.disenosoftware.mitienda.model.entities.Product;
 import co.edu.eam.disenosoftware.mitienda.model.entities.ProductStore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -105,17 +104,4 @@ public class OrderProductRepositoryTest {
     Assertions.assertEquals(24, orderProductAssert.getQuantity());
   }
 
-  @Test
-  @Sql({"/testdata/get_all_order_products_by_not_found_id_order.sql"})
-  public void getAllOrderProductsByNotFoundIdOrder () {
-    List<OrderProduct> orderProducts = repository.getAllOrderProductsByIdOrder(3L);
-    Assertions.assertEquals(0,orderProducts.size());
-  }
-
-  @Test
-  @Sql({"/testdata/get_all_order_products_by_found_id_order.sql"})
-  public void getAllOrderProductsByFoundIdOrder () {
-    List<OrderProduct> orderProducts = repository.getAllOrderProductsByIdOrder(1L);
-    Assertions.assertEquals(3,orderProducts.size());
-  }
 }
