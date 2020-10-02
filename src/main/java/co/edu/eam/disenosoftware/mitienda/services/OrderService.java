@@ -5,6 +5,7 @@ import co.edu.eam.disenosoftware.mitienda.exceptions.ErrorCodesEnum;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
 import co.edu.eam.disenosoftware.mitienda.model.entities.OrderProduct;
 import co.edu.eam.disenosoftware.mitienda.model.entities.ShoppingCart;
+import co.edu.eam.disenosoftware.mitienda.model.entities.ShoppingCartProduct;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Store;
 import co.edu.eam.disenosoftware.mitienda.model.entities.User;
 import co.edu.eam.disenosoftware.mitienda.repositories.OrderProductRepository;
@@ -68,25 +69,22 @@ public class OrderService {
     User user = shoppingCart.getUser();
 
     if (shoppingCart.getProduct().size() == 0) {
-      throw new BusinessException("Shopping Cart Products NOT Found.", ErrorCodesEnum.SHOPPING_CART_PRODUCT_NOT_FOUND);
+      throw new BusinessException("Shopping Cart Products NOT Found.", ErrorCodesEnum.SHOPPING_CART_EMPTY);
     }
 
     final int top = 5;
     if (!(orderRepository.getOrdersInCourseByUserId(user.getId()).size() < top)) {
-      throw new BusinessException("User's Orders Exceed five.", ErrorCodesEnum.ORDER_USER_EXCEED_FIVE);
+      throw new BusinessException("User's Orders Exceed five.", ErrorCodesEnum.NUMBER_OF_ORDERS_EXCEDED);
     }
 
     Order order = new Order(store, user, "created", new Date());
 
     List<OrderProduct> orderProducts = new ArrayList<>();
-    for (int i = 0; i < shoppingCart.getProduct().size(); i++) {
-      OrderProduct orderProduct = new OrderProduct(order, shoppingCart.getProduct().get(i).getProduct(),
-              shoppingCart.getProduct().get(i).getQuantity(), "pending");
+    for (ShoppingCartProduct shoppingCartProduct:shoppingCart.getProduct()) {
+      OrderProduct orderProduct = new OrderProduct(order, shoppingCartProduct.getProduct(),
+              shoppingCartProduct.getQuantity(), "pending");
       orderProducts.add(orderProduct);
-    }
-
-    for (int i = 0; i < orderProducts.size(); i++) {
-      totalValue += (orderProducts.get(i).getProductStore().getPrice() * orderProducts.get(i).getQuantity());
+      totalValue += (shoppingCartProduct.getProduct().getPrice() * shoppingCartProduct.getQuantity());
     }
 
     order.setProduct(orderProducts);

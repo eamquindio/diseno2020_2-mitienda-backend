@@ -11,11 +11,11 @@ public enum ErrorCodesEnum {
   /**
    * Shopping cart product not found
    */
-  SHOPPING_CART_PRODUCT_NOT_FOUND("0001"),
+  SHOPPING_CART_EMPTY("0001"),
   /**
    * Exception when User Exceed Five orders in progress
    */
-  ORDER_USER_EXCEED_FIVE("0003"),
+  NUMBER_OF_ORDERS_EXCEDED("0003"),
   /**
    * Exception when shopping cart doesnt exist
    */

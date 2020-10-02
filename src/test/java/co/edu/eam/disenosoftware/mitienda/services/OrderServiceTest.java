@@ -67,7 +67,7 @@ public class OrderServiceTest {
       }
     }catch (BusinessException e){
       Assertions.assertEquals("User's Orders Exceed five.", e.getMessage());
-      Assertions.assertEquals(ErrorCodesEnum.ORDER_USER_EXCEED_FIVE, e.getCode());
+      Assertions.assertEquals(ErrorCodesEnum.NUMBER_OF_ORDERS_EXCEDED, e.getCode());
     }
 
     List<Order> orderToAssert = repository.getOrdersInCourseByUserId(1L);
@@ -79,12 +79,11 @@ public class OrderServiceTest {
   public void createOrderWithoutShoppingCartTest() {
     //Test Code
     List<Order> orderToAssertTwo = repository.getOrdersInCourseByUserId(1L);
-    try{
-        service.createOrderByShoppingCart(1L);
-    }catch (BusinessException e){
-      Assertions.assertEquals("Shopping Cart doesn't Exist.", e.getMessage());
-      Assertions.assertEquals(ErrorCodesEnum.SHOPPING_CART_NOT_FOUND, e.getCode());
-    }
+
+      BusinessException exception = Assertions.assertThrows(BusinessException.class, () -> service.createOrderByShoppingCart(1L));
+      Assertions.assertEquals("Shopping Cart doesn't Exist.", exception.getMessage());
+      Assertions.assertEquals(ErrorCodesEnum.SHOPPING_CART_NOT_FOUND, exception.getCode());
+
 
     List<Order> orderToAssertThree = repository.getOrdersInCourseByUserId(1L);
     List<Order> orderToAssert = repository.getOrdersInCourseByUserId(1L);
@@ -97,12 +96,10 @@ public class OrderServiceTest {
   public void createOrderWithoutShoppingCartProductsTest() {
     List<Order> orderToAssertTwo = repository.getOrdersInCourseByUserId(1L);
     //Test Code
-    try{
-      service.createOrderByShoppingCart(1L);
-    }catch (BusinessException e){
-      Assertions.assertEquals("Shopping Cart Products NOT Found.", e.getMessage());
-      Assertions.assertEquals(ErrorCodesEnum.SHOPPING_CART_PRODUCT_NOT_FOUND, e.getCode());
-    }
+      BusinessException exception = Assertions.assertThrows(BusinessException.class, () -> service.createOrderByShoppingCart(1L));
+
+      Assertions.assertEquals("Shopping Cart Products NOT Found.", exception.getMessage());
+      Assertions.assertEquals(ErrorCodesEnum.SHOPPING_CART_EMPTY, exception.getCode());
 
     List<Order> orderToAssertThree = repository.getOrdersInCourseByUserId(1L);
     List<Order> orderToAssert = repository.getOrdersInCourseByUserId(1L);

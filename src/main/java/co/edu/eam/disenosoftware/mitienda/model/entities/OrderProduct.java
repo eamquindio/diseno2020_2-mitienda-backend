@@ -79,7 +79,6 @@ public class OrderProduct implements Serializable {
    * @param state        , state parameter
    */
   public OrderProduct(Order order, ProductStore productStore, int quantity, String state) {
-    this.id = id;
     this.order = order;
     this.productStore = productStore;
     this.quantity = quantity;
