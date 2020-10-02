@@ -52,8 +52,27 @@ public enum ErrorCodesEnum {
   /**
    * code for not found category
    */
-  NOT_FOUND_CATEGORY("0011");
-
+  NOT_FOUND_CATEGORY("0011"),
+  /**
+   * code for not order product found error
+   */
+  ORDER_PRODUCT_NOT_FOUND("0012"),
+  /**
+   * code for not order product pendind error
+   */
+  ORDER_PRODUCT_IS_NOT_PENDING("0013"),
+  /**
+   * code for not order found error
+   */
+  ORDER_NOT_FOUND("0014"),
+  /**
+   * code for order withour elements
+   */
+  ORDER_DOES_NOT_HAVE_ELEMENTS("0015"),
+  /**
+   * code for not existing order
+   */
+  ORDER_IS_NOT_READY("0016");
   /**
    * error code
    */

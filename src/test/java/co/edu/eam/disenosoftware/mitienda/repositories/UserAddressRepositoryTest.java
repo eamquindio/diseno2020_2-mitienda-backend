@@ -1,5 +1,6 @@
 package co.edu.eam.disenosoftware.mitienda.repositories;
 
+import co.edu.eam.disenosoftware.mitienda.model.entities.OrderProduct;
 import co.edu.eam.disenosoftware.mitienda.model.entities.User;
 import co.edu.eam.disenosoftware.mitienda.model.entities.UserAddress;
 import org.junit.jupiter.api.Assertions;
@@ -38,21 +39,17 @@ public class UserAddressRepositoryTest {
    * Test for createNotExistingUserAddress without a sql
    */
   @Test
+  @Sql({"/testdata/create_not_existing_user_address.sql"})
   public void createNotExistingUserAddressTest() {
-    //codigo probando Long id, String username
-    User user = new User(1L, "Usuario 1");
-    UserAddress userAddress = new UserAddress(1L, user, "Calle 13");
-    em.persist(user);
-    em.persist(userAddress);
+    List <UserAddress> usersAddresses = em.createQuery("SELECT ua FROM UserAddress ua")
+            .getResultList();
 
-    //codigo prueba
-    userAddressRepository.create(userAddress);
-
+    Long idUserAddress = usersAddresses.get(usersAddresses.size()-1).getId();
     //resultado prueba
-    UserAddress userAddressToAssert = userAddressRepository.find(1L);
+    UserAddress userAddressToAssert = userAddressRepository.find(idUserAddress);
 
     Assertions.assertNotNull(userAddressToAssert);
-    Assertions.assertEquals(1L, userAddressToAssert.getId());
+    Assertions.assertEquals(idUserAddress, userAddressToAssert.getId());
   }
 
   /**

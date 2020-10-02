@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 /**
  * OrderProduct Repository
@@ -60,5 +61,18 @@ public class OrderProductRepository {
       em.remove(orderProduct);
     }
     return orderProduct;
+  }
+
+  /**
+   * delete a order product
+   *
+   * @param idOrder primary key order
+   * @return list of orderProducts by idOrder
+   */
+  public List<OrderProduct> getAllOrderProductsByIdOrder(Long idOrder) {
+    List<OrderProduct> orderProducts = em.createQuery("SELECT op FROM OrderProduct op WHERE op.order.id =:value")
+            .setParameter("value", idOrder)
+            .getResultList();
+    return orderProducts;
   }
 }

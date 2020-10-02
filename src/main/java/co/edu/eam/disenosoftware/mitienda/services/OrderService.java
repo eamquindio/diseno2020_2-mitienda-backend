@@ -93,4 +93,43 @@ public class OrderService {
     orderRepository.create(order);
 
   }
+
+  /**
+   * method to check if an order is ready to end
+   * @param idOrder id to find
+   */
+  public void finalizeOrder(Long idOrder) {
+
+    Order order = orderRepository.find(idOrder);
+
+    if (order == null) {
+      throw new BusinessException("La orden no fue encontrada", ErrorCodesEnum.ORDER_NOT_FOUND);
+    }
+
+    List<OrderProduct> orderProducts = orderProductRepository.getAllOrderProductsByIdOrder(idOrder);
+
+    if (orderProducts.size() == 0) {
+      throw new BusinessException("La orden no tiene elementos", ErrorCodesEnum.ORDER_DOES_NOT_HAVE_ELEMENTS);
+    }
+
+    boolean validarEstado = true;
+
+    for (OrderProduct orderProduct: orderProducts) {
+
+      if (orderProduct.getState().equals("pending")) {
+        validarEstado = false;
+        break;
+      }
+
+    }
+
+    if (!validarEstado) {
+      throw new BusinessException("Ningún producto puede estar en estado pending", ErrorCodesEnum.ORDER_IS_NOT_READY);
+    }
+
+    order.setState("finished");
+    orderRepository.edit(order);
+
+  }
+
 }
