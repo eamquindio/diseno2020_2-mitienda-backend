@@ -111,8 +111,19 @@ public enum ErrorCodesEnum {
   /**
    * password is not the same
    */
-  PASSWORD_IS_NOT_THE_SAME("0024"),;
-
+  PASSWORD_IS_NOT_THE_SAME("0024"),
+  /**
+   * code for can not add product to Order
+   */
+  PRODUCT_CAN_NOT_BE_ADDED("0025"),
+  /**
+   * code for can not associated store to productstore
+   */
+  NOT_ASSOCIATED_STORE("0026"),
+  /**
+   * code for have been excited total value
+   */
+  PRODUCT_EXCIT_TOTALVALUE("0027"),;
 
   /**
    * error code

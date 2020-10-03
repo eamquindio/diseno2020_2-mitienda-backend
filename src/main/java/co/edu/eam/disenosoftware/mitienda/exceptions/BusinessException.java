@@ -28,3 +28,4 @@ public class BusinessException extends RuntimeException {
     return code;
   }
 }
+

@@ -6,6 +6,8 @@ import co.edu.eam.disenosoftware.mitienda.model.entities.OrderProduct;
 import co.edu.eam.disenosoftware.mitienda.repositories.OrderProductRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
+import co.edu.eam.disenosoftware.mitienda.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
@@ -73,4 +75,51 @@ public class OrderProductServiceTest {
     Assertions.assertEquals(orderProduct.getOrder().getId(), 22L);
   }
 
+
+  @Autowired
+  private OrderRepository orderRepository;
+
+  @Test
+  @Sql({"/testdata/adding_product_to_order_product_can_not_adding_product.sql"})
+  public void addingProductToOrderProductCannotAddProductTest(){
+
+
+     BusinessException exception = Assertions.assertThrows(BusinessException.class,
+            () ->service.addingProductToOrderProduct(77L,1L,1));
+     Assertions.assertEquals("El product no puede ser agregado", exception.getMessage());
+     Assertions.assertEquals(ErrorCodesEnum.PRODUCT_CAN_NOT_BE_ADDED, exception.getCode());
+
+  }
+
+  @Test
+  @Sql({"/testdata/adding_product_to_order_product.sql"})
+  public void addingProductToOrderProductTest(){
+
+    OrderProduct orderProduct= service.addingProductToOrderProduct(77L,1L,1);
+    Order order=orderRepository.find(1L);
+    Assertions.assertEquals(1,order.getProduct().get(1).getQuantity());
+
+  }
+
+  @Test
+  @Sql({"/testdata/adding_product_to_order_product_store_is_not_the_same_at_product_store.sql"})
+  public void addingProductToOrderProductStoreIsNotTheSameAtProductStoreTest(){
+
+    BusinessException exception = Assertions.assertThrows(BusinessException.class,
+            () ->service.addingProductToOrderProduct(77L,1L,1));
+    Assertions.assertEquals("La Orden no fue encontrada", exception.getMessage());
+    Assertions.assertEquals(ErrorCodesEnum.NOT_ASSOCIATED_STORE, exception.getCode());
+
+  }
+
+  @Test
+  @Sql({"/testdata/adding_product_to_order_product_total_value_of_product_exceed_10_porcent_of_total_value_order.sql"})
+  public void addingProductToOrderProductTotalValueOfProductExceed10PorcentOfTotalValueOrderTest(){
+
+    BusinessException exception = Assertions.assertThrows(BusinessException.class,
+            () ->service.addingProductToOrderProduct(77L,1L,1));
+    Assertions.assertEquals("El total del product excede el 10% del total de la Orden", exception.getMessage());
+    Assertions.assertEquals(ErrorCodesEnum.PRODUCT_EXCIT_TOTALVALUE, exception.getCode());
+
+  }
 }

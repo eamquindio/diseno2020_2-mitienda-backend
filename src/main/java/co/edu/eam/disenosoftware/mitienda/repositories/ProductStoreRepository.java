@@ -96,4 +96,29 @@ public class ProductStoreRepository {
 
     return productStores.size() != 0 ? productStores.get(0) : null;
   }
+  /**
+   * find and get associated the productstore  with store
+   *
+   * @param idStore , Foreign key
+   * @param idProduct , Foreign key
+   * @return List of Products of the store that is associated
+   */
+  public ProductStore getProductStoreByIdStoreAndProductId(Long idStore, Long idProduct) {
+    String queryStr = "SELECT ps FROM ProductStore ps WHERE ps.store.id = :idStore AND ps.product.id = :idProduct";
+    Query query = em.createQuery(queryStr);
+    query.setParameter("idStore", idStore);
+    query.setParameter("idProduct", idProduct);
+    List<ProductStore> queryResult = query.getResultList();
+
+    if (queryResult.size() == 0) {
+      return null;
+    } else {
+      return  queryResult.get(0);
+    }
+
+
+
+
+  }
+
 }
