@@ -74,6 +74,7 @@ public class OrderProductService {
     Order orderToFind = ordenRepository.find(idOrder);
 
 
+
     if (orderToFind.getState().equals("canceled") || orderToFind.getState().equals("finished")) {
 
       throw new BusinessException("El product no puede ser agregado",
@@ -89,24 +90,23 @@ public class OrderProductService {
       throw new BusinessException("La Orden no fue encontrada", ErrorCodesEnum.NOT_ASSOCIATED_STORE);
     }
 
-    for (int i = 0; i < orderToFind.getProduct().size(); i++) {
+    for (OrderProduct product:orderToFind.getProduct()) {
 
-      if (idProduct == orderToFind.getProduct().get(i).getId()) {
+      if (idProduct == product.getId()) {
+        product.setQuantity(product.getQuantity() + quantity);
 
-        orderToFind.getProduct().get(i).setQuantity(orderToFind.getProduct().get(i).getQuantity() + quantity);
-
-        if (orderToFind.getProduct().get(i).getProductStore().getPrice()
-                 * orderToFind.getProduct().get(i).getQuantity()
+        if (product.getProductStore().getPrice()
+                 * product.getQuantity()
                  > orderToFind.getTotalValue() * porcent) {
           throw new BusinessException("El total del product excede el 10% del total de la Orden",
                    ErrorCodesEnum.PRODUCT_EXCIT_TOTALVALUE);
         }
         ordenRepository.edit(orderToFind);
-        return orderToFind.getProduct().get(i);
+
+        return product;
+
       }
-
     }
-
     if (productStoreToFind.getPrice() * quantity > orderToFind.getTotalValue() * porcent) {
       throw new BusinessException("El total del product excede el 10% del total de la Orden",
                ErrorCodesEnum.PRODUCT_EXCIT_TOTALVALUE);
@@ -115,7 +115,6 @@ public class OrderProductService {
     OrderProduct orderProduct = new OrderProduct(1L, orderToFind, productStoreToFind, quantity, "created");
     orderToFind.getProduct().add(orderProduct);
     ordenRepository.edit(orderToFind);
-
     return orderProduct;
   }
 
