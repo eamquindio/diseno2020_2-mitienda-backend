@@ -110,11 +110,7 @@ public class ProductStoreRepository {
     query.setParameter("idProduct", idProduct);
     List<ProductStore> queryResult = query.getResultList();
 
-    if (queryResult.size() == 0) {
-      return null;
-    } else {
-      return  queryResult.get(0);
-    }
+    return queryResult.size() != 0 ? queryResult.get(0) : null;
 
 
 
