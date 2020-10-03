@@ -1,6 +1,8 @@
 package co.edu.eam.disenosoftware.mitienda.model.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -16,6 +18,7 @@ public class User implements Serializable {
    * User's - Primary key
    */
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   /**
@@ -69,6 +72,21 @@ public class User implements Serializable {
     this.username = username;
   }
 
+  /**
+   * User's constructor
+   * @param username, username
+   * @param phone, phone
+   * @param email, email
+   * @param password, password
+   * @param name, name
+   */
+  public User(String username, String phone, String email, String password, String name) {
+    this.username = username;
+    this.phone = phone;
+    this.email = email;
+    this.password = password;
+    this.name = name;
+  }
 
   /**
    * get id
