@@ -111,10 +111,6 @@ public class ProductStoreRepository {
     List<ProductStore> queryResult = query.getResultList();
 
     return queryResult.size() != 0 ? queryResult.get(0) : null;
-
-
-
-
   }
 
 }

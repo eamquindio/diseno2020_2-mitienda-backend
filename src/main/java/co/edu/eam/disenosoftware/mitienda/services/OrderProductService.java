@@ -107,9 +107,6 @@ public class OrderProductService {
 
     }
 
-
-
-
     if (productStoreToFind.getPrice() * quantity > orderToFind.getTotalValue() * porcent) {
       throw new BusinessException("El total del product excede el 10% del total de la Orden",
                ErrorCodesEnum.PRODUCT_EXCIT_TOTALVALUE);
