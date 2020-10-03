@@ -73,6 +73,7 @@ public enum ErrorCodesEnum {
    * code for not existing order
    */
   ORDER_IS_NOT_READY("0016"),
+
   /**
    * store name already register
    */
@@ -84,7 +85,33 @@ public enum ErrorCodesEnum {
   /**
    * login incorrect
    */
-  LOGIN_INCORRECT("0019");
+  LOGIN_INCORRECT("0019"),
+
+
+  /**
+   * email already exist
+   */
+  EMAIL_ALREADY_EXIST("0020"),
+
+  /**
+   * username already exist
+   */
+  USERNAME_ALREADY_EXIST("0021"),
+
+  /**
+   * the user name does not exist
+   */
+  THE_USER_NAME_DOES_NOT_EXIST("0022"),
+
+  /**
+   * username is not the same
+   */
+  USERNAME_IS_NOT_THE_SAME("0023"),
+
+  /**
+   * password is not the same
+   */
+  PASSWORD_IS_NOT_THE_SAME("0024"),;
 
 
   /**

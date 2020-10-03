@@ -79,6 +79,23 @@ public class UserRepository {
     query.setParameter("Reemail", email);
 
     List<User> list = query.getResultList();
-    return list.get(0);
+
+    return list.isEmpty() ? null : list.get(0);
+  }
+
+  /**
+   * Consulta que buscar User por Username
+   *
+   * @param username parametro para seleccionar usuarios por username
+   * @return list
+   */
+  public User getUserByUserName(String username) {
+    String queryStr = "SELECT u FROM User u where u.username = :username";
+    Query query = em.createQuery(queryStr);
+    query.setParameter("username", username);
+
+    List<User> list = query.getResultList();
+
+    return list.isEmpty() ? null : list.get(0);
   }
 }
