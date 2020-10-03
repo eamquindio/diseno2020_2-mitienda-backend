@@ -1,0 +1,2 @@
+INSERT INTO public.stores(id, address, delivery, email, image, is_open, "name", "owner", "password", phone)VALUES(1, 'Calle13', true, 'store1@gmail.com', 'image1.jpg', true, 'store1', 'chucho', '1234', '456789');
+INSERT INTO public.stores(id, address, delivery, email, image, is_open, "name", "owner", "password", phone)VALUES(2, 'Calle15', true, 'store2@gmail.com', 'image2.jpg', true, 'store2', 'negro', '5468', '86549');

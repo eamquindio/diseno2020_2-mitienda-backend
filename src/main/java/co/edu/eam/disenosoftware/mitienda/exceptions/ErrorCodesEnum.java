@@ -72,7 +72,21 @@ public enum ErrorCodesEnum {
   /**
    * code for not existing order
    */
-  ORDER_IS_NOT_READY("0016");
+  ORDER_IS_NOT_READY("0016"),
+  /**
+   * store name already register
+   */
+  STORE_NAME_ALREADY_REGISTER("0017"),
+  /**
+   * store email already register
+   */
+  STORE_EMAIL_ALREADY_REGISTER("0018"),
+  /**
+   * login incorrect
+   */
+  LOGIN_INCORRECT("0019");
+
+
   /**
    * error code
    */

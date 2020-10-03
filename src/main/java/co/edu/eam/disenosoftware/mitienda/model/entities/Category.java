@@ -46,14 +46,14 @@ public class Category implements Serializable {
   public Category() {
   }
 
-  public Category(String icon, String name, Store store) {
+  public Category(Long id, String icon, String name, Store store) {
+    this.id = id;
     this.icon = icon;
     this.name = name;
     this.store = store;
   }
 
-  public Category(Long id, String icon, String name, Store store) {
-    this.id = id;
+  public Category(String icon, String name, Store store) {
     this.icon = icon;
     this.name = name;
     this.store = store;

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -33,23 +34,22 @@ public class StoreRepositoryTest {
   }
 
   @Test
+  @Sql({"/testdata/create_not_existing_store.sql"})
   public void createNotExistingStoreTest(){
-    storeRepository.create(new Store(1L,"Tiendita1"));
-
-    Store storeToAssert = storeRepository.find(1L);
+    List<Store> stores = em.createQuery("SELECT s FROM Store s").getResultList();
+    Store storeToAssert = stores.get(stores.size()-1);
 
     Assertions.assertNotNull(storeToAssert);
-    Assertions.assertEquals("Tiendita1", storeToAssert.getName());
+    Assertions.assertEquals("store1", storeToAssert.getName());
   }
 
   @Test
+  @Sql({"/testdata/delete_existing_store.sql"})
   public void deleteExistingStoreTest(){
-    storeRepository.create(new Store(1L,"Tiendita1"));
-
     Store deletedStore = storeRepository.delete(1L);
 
     Assertions.assertNotNull(deletedStore);
-    Assertions.assertEquals("Tiendita1", deletedStore.getName());
+    Assertions.assertEquals("store1", deletedStore.getName());
 
     Store storeToAssert = storeRepository.find(1L);
     Assertions.assertNull(storeToAssert);
@@ -62,13 +62,12 @@ public class StoreRepositoryTest {
   }
 
   @Test
+  @Sql({"/testdata/find_existing_store.sql"})
   public void findExistingStoreTest(){
-    storeRepository.create(new Store(1L,"Tiendita1"));
-
     Store storeToAssert = storeRepository.find(1L);
 
     Assertions.assertNotNull(storeToAssert);
-    Assertions.assertEquals("Tiendita1", storeToAssert.getName());
+    Assertions.assertEquals("store1", storeToAssert.getName());
   }
 
   @Test
@@ -78,33 +77,34 @@ public class StoreRepositoryTest {
   }
 
   @Test
+  @Sql({"/testdata/update_store.sql"})
   public void updateStoreTest(){
-    Store store = new Store(1L,"Tiendita1");
-    storeRepository.create(store);
-
+    List<Store> stores = em.createQuery("SELECT s FROM Store s").getResultList();
+    Store store = stores.get(stores.size()-1);
     store.setName("TiendaUno");
     storeRepository.edit(store);
-
     Store storeToAssert = storeRepository.find(1L);
     Assertions.assertEquals("TiendaUno", storeToAssert.getName());
   }
 
   @Test
+  @Sql({"/testdata/test_for_get_all_store.sql"})
   public void testForGetAllStores() {
-    Store storeA = new Store(1L,"first");
-    Store storeB = new Store(2L,"second");
-    em.persist(storeA);
-    em.persist(storeB);
     List<Store> storeTest = storeRepository.getAllStores();
     Assertions.assertEquals(2, storeTest.size());
   }
 
   @Test
+  @Sql({"/testdata/get_store_by_email.sql"})
   public void getStoreByEmailTest(){
-    Store store = new Store(1L,"tienda1@gmail.com","tienda1");
-    storeRepository.create(store);
-    Store storeToAssert = storeRepository.getStoreByEmail("tienda1@gmail.com");
-    Assertions.assertEquals("tienda1@gmail.com",storeToAssert.getEmail());
+    Store storeToAssert = storeRepository.getStoreByEmail("store@gmail.com");
+    Assertions.assertEquals("store@gmail.com",storeToAssert.getEmail());
   }
 
+  @Test
+  @Sql({"/testdata/get_store_by_email.sql"})
+  public void getStoreByNameTest(){
+    Store storeToAssert = storeRepository.getStoreByName("store1");
+    Assertions.assertEquals("store1",storeToAssert.getName());
+  }
 }

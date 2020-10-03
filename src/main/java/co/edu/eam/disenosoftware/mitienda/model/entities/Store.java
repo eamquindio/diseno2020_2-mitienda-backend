@@ -2,6 +2,8 @@ package co.edu.eam.disenosoftware.mitienda.model.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -17,6 +19,7 @@ public class Store implements Serializable {
    * Store's - Primary key
    */
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   /**
@@ -91,6 +94,14 @@ public class Store implements Serializable {
 
   /**
    * Store's constructor with params
+   * @param name store's name
+   */
+  public Store(String name) {
+    this.name = name;
+  }
+
+  /**
+   * Store's constructor with params
    *
    * @param id   primary key
    * @param name Store's name
@@ -113,6 +124,14 @@ public class Store implements Serializable {
     this.name = name;
   }
 
+  public Store(String name, String owner, String address, String phone, String email, String password) {
+    this.name = name;
+    this.owner = owner;
+    this.address = address;
+    this.phone = phone;
+    this.email = email;
+    this.password = password;
+  }
 
   /**
    * Get Store's name
@@ -132,6 +151,125 @@ public class Store implements Serializable {
     this.name = name;
   }
 
+  /**
+   * Set Store's id
+   * @param id Store's id
+   */
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  /**
+   * Get Store's owner
+   * @return store's owner
+   */
+  public String getOwner() {
+    return owner;
+  }
+
+  /**
+   * Set store's owner
+   * @param owner store's owner
+   */
+  public void setOwner(String owner) {
+    this.owner = owner;
+  }
+
+  /**
+   * Get store's address
+   * @return store's address
+   */
+  public String getAddress() {
+    return address;
+  }
+
+  /**
+   * Set store's address
+   * @param address store's address
+   */
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
+  /**
+   * Get store's image
+   * @return store's image
+   */
+  public String getImage() {
+    return image;
+  }
+
+  /**
+   * Set store's image
+   * @param image store's image
+   */
+  public void setImage(String image) {
+    this.image = image;
+  }
+
+  /**
+   * boolean delivery
+   * @return delivery
+   */
+  public boolean isDelivery() {
+    return delivery;
+  }
+
+  /**
+   * Set Store's delivery
+   * @param delivery store's delivery
+   */
+  public void setDelivery(boolean delivery) {
+    this.delivery = delivery;
+  }
+
+  /**
+   * boolean open
+   * @return boolean
+   */
+  public boolean isOpen() {
+    return isOpen;
+  }
+
+  /**
+   * Set store's open
+   * @param open open store's
+   */
+  public void setOpen(boolean open) {
+    isOpen = open;
+  }
+
+  /**
+   * Get store's phone
+   * @return store's phone
+   */
+  public String getPhone() {
+    return phone;
+  }
+
+  /**
+   * Set store's phone
+   * @param phone store's phone
+   */
+  public void setPhone(String phone) {
+    this.phone = phone;
+  }
+
+  /**
+   * Get store's password
+   * @return store's password
+   */
+  public String getPassword() {
+    return password;
+  }
+
+  /**
+   * Set store's password
+   * @param password store's password
+   */
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
   /**
    * Get Store's email
