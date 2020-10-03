@@ -85,11 +85,8 @@ public class StoreRepository {
     Query query = em.createQuery(queryStr);
     query.setParameter("storeEmail", email);
     List<Store> list = query.getResultList();
-    if (list.size() != 0) {
-      return list.get(0);
-    } else {
-      return null;
-    }
+
+    return list.isEmpty() ? null : list.get(0);
   }
 
   /**
@@ -103,10 +100,7 @@ public class StoreRepository {
     Query query = em.createQuery(queryStr);
     query.setParameter("storeName", name);
     List<Store> list = query.getResultList();
-    if (list.size() != 0) {
-      return list.get(0);
-    } else {
-      return null;
-    }
+
+    return list.isEmpty() ? null : list.get(0);
   }
 }
