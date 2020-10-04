@@ -103,7 +103,7 @@ public class OrderProductRepositoryTest {
     OrderProduct orderProductAssert = repository.find(1L);
     Assertions.assertEquals(24, orderProductAssert.getQuantity());
   }
-
+    
   @Test
   @Sql({"/testdata/get_all_order_products_by_not_found_id_order.sql"})
   public void getAllProductsByNotFoundIdOrder () {
