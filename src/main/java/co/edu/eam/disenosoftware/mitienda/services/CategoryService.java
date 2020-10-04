@@ -3,12 +3,12 @@ package co.edu.eam.disenosoftware.mitienda.services;
 import co.edu.eam.disenosoftware.mitienda.exceptions.BusinessException;
 import co.edu.eam.disenosoftware.mitienda.exceptions.ErrorCodesEnum;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Category;
+import co.edu.eam.disenosoftware.mitienda.model.entities.Store;
 import co.edu.eam.disenosoftware.mitienda.repositories.CategoryRepository;
 import co.edu.eam.disenosoftware.mitienda.repositories.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import co.edu.eam.disenosoftware.mitienda.model.entities.Store;
 
 /**
  * Category service

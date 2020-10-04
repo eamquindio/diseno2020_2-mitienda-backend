@@ -1,5 +1,7 @@
 package co.edu.eam.disenosoftware.mitienda.exceptions;
 
+import org.springframework.http.HttpStatus;
+
 /**
  * Error codes for exceptions
  */
@@ -7,7 +9,7 @@ public enum ErrorCodesEnum {
   /**
    * code for not found error
    */
-  NOT_FOUND("0000"), //ejemplo....
+  NOT_FOUND("0000", HttpStatus.PRECONDITION_FAILED),
   /**
    * Shopping cart product not found
    */
@@ -119,8 +121,19 @@ public enum ErrorCodesEnum {
    */
   private String code;
 
+  /**
+   * http status code associated to this error
+   */
+  private HttpStatus status;
+
   ErrorCodesEnum(String code) {
     this.code = code;
+    status = HttpStatus.INTERNAL_SERVER_ERROR;
+  }
+
+  ErrorCodesEnum(String code, HttpStatus status) {
+    this.code = code;
+    this.status = status;
   }
 
   /**
@@ -129,5 +142,13 @@ public enum ErrorCodesEnum {
    */
   public String getCode() {
     return code;
+  }
+
+  /**
+   * Get the status code associated to this error
+   * @return http status code
+   */
+  public HttpStatus getStatus() {
+    return status;
   }
 }

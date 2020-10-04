@@ -3,6 +3,7 @@ package co.edu.eam.disenosoftware.mitienda.repositories;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Category;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
