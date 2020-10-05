@@ -84,22 +84,11 @@ public class Order implements Serializable {
   }
 
   /**
-   * Order's constructor with params
-   */
-  public Order(Long id, Store store, User user, String state, Date date) {
-    this.id = id;
-    this.store = store;
-    this.user = user;
-    this.state = state;
-    this.date = date;
-  }
-
-  /**
-   *
-   * @param store
-   * @param user
-   * @param state
-   * @param date
+   *  Method Order
+   * @param store Order Store
+   * @param user  Order User
+   * @param state Order State
+   * @param date Order Date
    */
   public Order(Store store, User user, String state, Date date) {
     this.store = store;
@@ -132,6 +121,7 @@ public class Order implements Serializable {
    * @return product
    */
   public List<OrderProduct> getProduct() {
+
     return product;
   }
 
@@ -205,15 +195,6 @@ public class Order implements Serializable {
    */
   public Date getDate() {
     return date;
-  }
-
-  /**
-   * Order's set date
-   *
-   * @param date time
-   */
-  public void setDate(Date date) {
-    this.date = date;
   }
 
   /**
