@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import javax.persistence.Query;
 
 /**
  * OrderProduct Repository
@@ -39,6 +40,28 @@ public class OrderProductRepository {
   public OrderProduct find(Long  id) {
     return em.find(OrderProduct.class, id);
   }
+
+  public List<OrderProduct> getOrderInOrderProduct() {
+    String queryStr = "SELECT l FROM OrderProduct l";
+    Query query = em.createQuery(queryStr);
+
+    return query.getResultList();
+  }
+
+  public OrderProduct getOrderProductByState(Long id) {
+    String queryStr = "SELECT op FROM OrderProduct op.id = :value WHERE op.id.state == 'PENDING' OR  op.id.state == 'CHECKED'";
+    Query query = em.createQuery(queryStr);
+    query.setParameter("value",id);
+
+    List<OrderProduct> list = query.getResultList();
+
+    if (list.size() != 0){
+      return list.get(0);
+    }else{
+      return null;
+    }
+  }
+
 
   /**
    * edit a product order

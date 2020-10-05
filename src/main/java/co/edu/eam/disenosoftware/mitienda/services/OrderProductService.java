@@ -13,6 +13,10 @@ import co.edu.eam.disenosoftware.mitienda.repositories.ProductStoreRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
+import java.util.List;
+
 /**
  * OrderProductService service
  */
@@ -116,4 +120,22 @@ public class OrderProductService {
     return orderProduct;
   }
 
+    @Autowired
+    private OrderProduct orderProduct;
+
+    public void delete(Long id){
+
+        List<OrderProduct> orderToFind = orderProductRepository.getOrderInOrderProduct();
+        if (orderToFind==null){
+            throw new BusinessException("No existe el orderProduct", ErrorCodesEnum.NOT_EXIST_ORDER_PRODUCT);
+        }
+
+        OrderProduct stateToFind = orderProductRepository.getOrderProductByState(id);
+        if (stateToFind == null){
+            throw new BusinessException("El estado no es 'PENDING' ni 'CHECKED'", ErrorCodesEnum.NOT_STATE);
+        }
+
+
+
+    }
 }

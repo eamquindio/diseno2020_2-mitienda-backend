@@ -125,7 +125,15 @@ public enum ErrorCodesEnum {
   /**
    * code for have been excited total value
    */
-  PRODUCT_EXCIT_TOTALVALUE("0027"),;
+  PRODUCT_EXCIT_TOTALVALUE("0027"),
+  /**
+   * code NOT_EXIST_ORDER_PRODUCT
+   */
+  NOT_EXIST_ORDER_PRODUCT("0028"),
+  /**
+   * code NOT_STATE
+   */
+  NOT_STATE("0029"); //ejemplo....
 
   /**
    * error code
