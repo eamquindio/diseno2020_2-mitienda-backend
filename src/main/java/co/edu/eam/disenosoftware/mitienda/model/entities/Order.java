@@ -79,6 +79,10 @@ public class Order implements Serializable {
     this.state = state;
   }
 
+  /**
+   * Orders constructor
+   * @param id
+   */
   public Order(Long id) {
     this.id = id;
   }
@@ -95,6 +99,22 @@ public class Order implements Serializable {
     this.user = user;
     this.state = state;
     this.date = date;
+  }
+
+  /**
+   * Order's Get totalValue method
+   * @return totalValue
+   */
+  public Double getTotalValue() {
+    return totalValue;
+  }
+
+  /**
+   * Order's set totalValue method
+   * @param totalValue totalValueParam
+   */
+  public void setTotalValue(Double totalValue) {
+    this.totalValue = totalValue;
   }
 
   /**
@@ -195,23 +215,5 @@ public class Order implements Serializable {
    */
   public Date getDate() {
     return date;
-  }
-
-  /**
-   * Get Order's Total Value Method
-   *
-   * @return Total Value
-   */
-  public Double getTotalValue() {
-    return totalValue;
-  }
-
-  /**
-   * set Order's Total Value
-   *
-   * @param totalValue total Order Value
-   */
-  public void setTotalValue(Double totalValue) {
-    this.totalValue = totalValue;
   }
 }

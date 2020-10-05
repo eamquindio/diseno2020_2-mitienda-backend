@@ -4,11 +4,11 @@ import co.edu.eam.disenosoftware.mitienda.exceptions.BusinessException;
 import co.edu.eam.disenosoftware.mitienda.exceptions.ErrorCodesEnum;
 import co.edu.eam.disenosoftware.mitienda.model.entities.OrderProduct;
 import co.edu.eam.disenosoftware.mitienda.repositories.OrderProductRepository;
+import co.edu.eam.disenosoftware.mitienda.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
 import co.edu.eam.disenosoftware.mitienda.model.entities.ProductStore;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Store;
-import co.edu.eam.disenosoftware.mitienda.repositories.OrderRepository;
 import co.edu.eam.disenosoftware.mitienda.repositories.ProductStoreRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -122,20 +122,60 @@ public class OrderProductService {
 
     @Autowired
     private OrderProduct orderProduct;
+  /**
+   * Autowired orderRepository
+   */
+  @Autowired
+  private OrderRepository orderRepository;
 
-    public void delete(Long id){
+  /**
+   * Method delete
+   *
+   * @param id param id
+   */
+  public void delete(Long id) {
 
-        List<OrderProduct> orderToFind = orderProductRepository.getOrderInOrderProduct();
-        if (orderToFind==null){
-            throw new BusinessException("No existe el orderProduct", ErrorCodesEnum.NOT_EXIST_ORDER_PRODUCT);
-        }
+      OrderProduct orderToFind = orderProductRepository.find(id);
 
-        OrderProduct stateToFind = orderProductRepository.getOrderProductByState(id);
-        if (stateToFind == null){
-            throw new BusinessException("El estado no es 'PENDING' ni 'CHECKED'", ErrorCodesEnum.NOT_STATE);
-        }
+      if (orderToFind == null) {
+          throw new BusinessException("No existe el orderProduct", ErrorCodesEnum.NOT_EXIST_ORDER_PRODUCT);
+      }
 
+      if (!(orderToFind.getState().equals("PENDING") || orderToFind.getState().equals("CHECKED"))) {
+          throw new BusinessException("El estado no es 'PENDING' ni 'CHECKED'", ErrorCodesEnum.NOT_STATE);
+      }
 
+      List<OrderProduct> list = orderProductRepository.getOrdersProductByIdOrder(orderToFind.getOrder().getId());
 
-    }
+      if (list.size() == 1) {
+          orderToFind.setState("REMOVED");
+          orderToFind.getOrder().setState("CANCELED");
+          orderProductRepository.edit(orderToFind);
+          orderRepository.edit(orderToFind.getOrder());
+      } else {
+          int contador = 0;
+
+          for (OrderProduct orderProduct1 : list) {
+
+              if (orderProduct1.getState().equals("REMOVED")) {
+                  contador++;
+              }
+          }
+
+          if (contador == (list.size() - 1)) {
+              orderToFind.setState("REMOVED");
+              orderToFind.getOrder().setState("CANCELED");
+              orderProductRepository.edit(orderToFind);
+              orderRepository.edit(orderToFind.getOrder());
+          } else {
+              orderToFind.setState("REMOVED");
+              orderProductRepository.edit(orderToFind);
+              Order order1 = orderToFind.getOrder();
+              Double newTotalValue = order1.getTotalValue()
+                      - (orderToFind.getProductStore().getPrice() * orderToFind.getQuantity());
+              order1.setTotalValue(newTotalValue);
+              orderRepository.edit(order1);
+          }
+      }
+  }
 }
