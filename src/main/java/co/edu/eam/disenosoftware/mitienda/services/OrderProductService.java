@@ -73,8 +73,6 @@ public class OrderProductService {
     final double porcent = 0.1;
     Order orderToFind = ordenRepository.find(idOrder);
 
-
-
     if (orderToFind.getState().equals("canceled") || orderToFind.getState().equals("finished")) {
 
       throw new BusinessException("El product no puede ser agregado",
@@ -92,7 +90,7 @@ public class OrderProductService {
 
     for (OrderProduct product:orderToFind.getProduct()) {
 
-      if (idProduct == product.getId()) {
+      if (productStoreToFind.getId() == product.getProductStore().getId()) {
         product.setQuantity(product.getQuantity() + quantity);
 
         if (product.getProductStore().getPrice()
@@ -112,7 +110,7 @@ public class OrderProductService {
                ErrorCodesEnum.PRODUCT_EXCIT_TOTALVALUE);
     }
 
-    OrderProduct orderProduct = new OrderProduct(1L, orderToFind, productStoreToFind, quantity, "created");
+    OrderProduct orderProduct = new OrderProduct(orderToFind, productStoreToFind, quantity, "created");
     orderToFind.getProduct().add(orderProduct);
     ordenRepository.edit(orderToFind);
     return orderProduct;

@@ -92,7 +92,7 @@ public class OrderProductServiceTest {
   }
 
   @Test
-  @Sql({"/testdata/adding_product_to_order_product.sql"})
+  @Sql({"/testdata/adding_product_to_order_product_is_not_existing.sql"})
   public void addingProductToOrderProductTest(){
 
     OrderProduct orderProduct= service.addingProductToOrderProduct(77L,1L,1);
@@ -122,4 +122,14 @@ public class OrderProductServiceTest {
     Assertions.assertEquals(ErrorCodesEnum.PRODUCT_EXCIT_TOTALVALUE, exception.getCode());
 
   }
+  @Test
+  @Sql({"/testdata/adding_product_to_order_product_is_existing.sql"})
+  public void addingProductToOrderProductIsNotRegister(){
+
+    OrderProduct orderProduct= service.addingProductToOrderProduct(77L,1L,1);
+    Order order=orderRepository.find(1L);
+    Assertions.assertEquals(2,order.getProduct().get(0).getQuantity());
+
+  }
+
 }
