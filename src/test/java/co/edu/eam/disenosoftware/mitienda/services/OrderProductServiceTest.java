@@ -132,4 +132,54 @@ public class OrderProductServiceTest {
 
   }
 
+  @Test
+  @Sql({"/testdata/not_existing_order_product_in_order.sql"})
+  public void noExistingOrderProductInOrderTest(){
+
+    BusinessException exception = Assertions.assertThrows(BusinessException.class,
+        () ->service.delete(2L));
+
+    Assertions.assertEquals("No existe el orderProduct",exception.getMessage());
+    Assertions.assertEquals(ErrorCodesEnum.NOT_EXIST_ORDER_PRODUCT,exception.getCode());
+  }
+
+  @Test
+  @Sql({"/testdata/order_product_in_state_pending_or_checked.sql"})
+  public void orderProductInStatePendingOrCheckedTest(){
+    BusinessException exception = Assertions.assertThrows(BusinessException.class,
+        () ->service.delete(2L));
+
+    Assertions.assertEquals("El estado no es 'PENDING' ni 'CHECKED'",exception.getMessage());
+    Assertions.assertEquals(ErrorCodesEnum.NOT_STATE,exception.getCode());
+  }
+
+  @Test
+  @Sql({"/testdata/only_one_order_product_in_the_order.sql"})
+  public void onlyOneOrderProductInTheOrderTest(){
+    OrderProduct orderProduct = orderProductRepository.find(2l);
+    service.delete(2L);
+
+    Assertions.assertEquals("REMOVED", orderProduct.getState());
+    Assertions.assertEquals("CANCELED", orderProduct.getOrder().getState());
+  }
+
+  @Test
+  @Sql({"/testdata/more_than_one_order_product_in_the_order.sql"})
+  public void moreThanOneOrderProductInTheOrderTest(){
+    OrderProduct orderProduct = orderProductRepository.find(3L);
+    service.delete(3L);
+
+    Assertions.assertEquals("REMOVED", orderProduct.getState());
+    Assertions.assertEquals("CANCELED", orderProduct.getOrder().getState());
+  }
+
+  @Test
+  @Sql({"/testdata/only_one_order_product_removed.sql"})
+  public void onlyOneOrderProductRemovedTest(){
+    OrderProduct orderProduct = orderProductRepository.find(3L);
+    service.delete(3L);
+
+    Assertions.assertEquals("REMOVED", orderProduct.getState());
+    Assertions.assertEquals(800, orderProduct.getOrder().getTotalValue());
+  }
 }

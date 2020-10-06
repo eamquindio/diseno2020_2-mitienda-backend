@@ -48,6 +48,12 @@ public class OrderProduct implements Serializable {
   private String state;
 
   /**
+   * OrdersProduct constructor default
+   */
+  public OrderProduct() {
+  }
+
+  /**
    * Order's products constructor
    * @param id
    * @param order

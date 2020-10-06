@@ -15,8 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import java.util.List;
-
 /**
  * OrderProductService service
  */
@@ -120,8 +118,6 @@ public class OrderProductService {
     return orderProduct;
   }
 
-    @Autowired
-    private OrderProduct orderProduct;
   /**
    * Autowired orderRepository
    */
@@ -135,47 +131,47 @@ public class OrderProductService {
    */
   public void delete(Long id) {
 
-      OrderProduct orderToFind = orderProductRepository.find(id);
+    OrderProduct orderToFind = orderProductRepository.find(id);
 
-      if (orderToFind == null) {
-          throw new BusinessException("No existe el orderProduct", ErrorCodesEnum.NOT_EXIST_ORDER_PRODUCT);
+    if (orderToFind == null) {
+      throw new BusinessException("No existe el orderProduct", ErrorCodesEnum.NOT_EXIST_ORDER_PRODUCT);
+    }
+
+    if (!(orderToFind.getState().equals("PENDING") || orderToFind.getState().equals("CHECKED"))) {
+      throw new BusinessException("El estado no es 'PENDING' ni 'CHECKED'", ErrorCodesEnum.NOT_STATE);
+    }
+
+    List<OrderProduct> list = orderProductRepository.getAllOrderProductsByIdOrder(orderToFind.getOrder().getId());
+
+    if (list.size() == 1) {
+      orderToFind.setState("REMOVED");
+      orderToFind.getOrder().setState("CANCELED");
+      orderProductRepository.edit(orderToFind);
+      orderRepository.edit(orderToFind.getOrder());
+    } else {
+      int contador = 0;
+
+      for (OrderProduct orderProduct1 : list) {
+
+        if (orderProduct1.getState().equals("REMOVED")) {
+          contador++;
+        }
       }
 
-      if (!(orderToFind.getState().equals("PENDING") || orderToFind.getState().equals("CHECKED"))) {
-          throw new BusinessException("El estado no es 'PENDING' ni 'CHECKED'", ErrorCodesEnum.NOT_STATE);
-      }
-
-      List<OrderProduct> list = orderProductRepository.getOrdersProductByIdOrder(orderToFind.getOrder().getId());
-
-      if (list.size() == 1) {
-          orderToFind.setState("REMOVED");
-          orderToFind.getOrder().setState("CANCELED");
-          orderProductRepository.edit(orderToFind);
-          orderRepository.edit(orderToFind.getOrder());
+      if (contador == (list.size() - 1)) {
+        orderToFind.setState("REMOVED");
+        orderToFind.getOrder().setState("CANCELED");
+        orderProductRepository.edit(orderToFind);
+        orderRepository.edit(orderToFind.getOrder());
       } else {
-          int contador = 0;
-
-          for (OrderProduct orderProduct1 : list) {
-
-              if (orderProduct1.getState().equals("REMOVED")) {
-                  contador++;
-              }
-          }
-
-          if (contador == (list.size() - 1)) {
-              orderToFind.setState("REMOVED");
-              orderToFind.getOrder().setState("CANCELED");
-              orderProductRepository.edit(orderToFind);
-              orderRepository.edit(orderToFind.getOrder());
-          } else {
-              orderToFind.setState("REMOVED");
-              orderProductRepository.edit(orderToFind);
-              Order order1 = orderToFind.getOrder();
-              Double newTotalValue = order1.getTotalValue()
+        orderToFind.setState("REMOVED");
+        orderProductRepository.edit(orderToFind);
+        Order order1 = orderToFind.getOrder();
+        Double newTotalValue = order1.getTotalValue()
                       - (orderToFind.getProductStore().getPrice() * orderToFind.getQuantity());
-              order1.setTotalValue(newTotalValue);
-              orderRepository.edit(order1);
-          }
+        order1.setTotalValue(newTotalValue);
+        orderRepository.edit(order1);
       }
+    }
   }
 }

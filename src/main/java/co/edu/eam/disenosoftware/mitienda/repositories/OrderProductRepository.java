@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import javax.persistence.Query;
 
 /**
  * OrderProduct Repository
@@ -42,22 +41,6 @@ public class OrderProductRepository {
   }
 
   /**
-   * getOrdersProductByIdOrder
-   * @param idOrder idOrder Param
-   * @return list
-   */
-  public List<OrderProduct> getOrdersProductByIdOrder(Long idOrder) {
-    String queryStr = "SELECT op FROM OrderProduct WHERE op.order.id = :value";
-    Query query = em.createQuery(queryStr);
-    query.setParameter("value", idOrder);
-
-    List<OrderProduct> list = query.getResultList();
-
-    return list;
-  }
-
-
-  /**
    * edit a product order
    *
    * @param orderProduct product order to edit
@@ -87,7 +70,7 @@ public class OrderProductRepository {
    * @return list of orderProducts by idOrder
    */
   public List<OrderProduct> getAllOrderProductsByIdOrder(Long idOrder) {
-    List<OrderProduct> orderProducts = em.createQuery("SELECT op FROM OrderProduct op WHERE op.order.id =:value")
+    List<OrderProduct> orderProducts = em.createQuery("SELECT opp FROM OrderProduct opp WHERE opp.order.id = :value")
             .setParameter("value", idOrder)
             .getResultList();
     return orderProducts;
