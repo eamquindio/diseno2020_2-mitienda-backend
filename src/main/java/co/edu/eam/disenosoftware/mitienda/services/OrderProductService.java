@@ -151,9 +151,9 @@ public class OrderProductService {
     } else {
       int contador = 0;
 
-      for (OrderProduct orderProduct1 : list) {
+      for (OrderProduct product : list) {
 
-        if (orderProduct1.getState().equals("REMOVED")) {
+        if (product.getState().equals("REMOVED")) {
           contador++;
         }
       }
@@ -166,11 +166,11 @@ public class OrderProductService {
       } else {
         orderToFind.setState("REMOVED");
         orderProductRepository.edit(orderToFind);
-        Order order1 = orderToFind.getOrder();
-        Double newTotalValue = order1.getTotalValue()
+        Order orderToUpdate = orderToFind.getOrder();
+        Double newTotalValue = orderToUpdate.getTotalValue()
                       - (orderToFind.getProductStore().getPrice() * orderToFind.getQuantity());
-        order1.setTotalValue(newTotalValue);
-        orderRepository.edit(order1);
+        orderToUpdate.setTotalValue(newTotalValue);
+        orderRepository.edit(orderToUpdate);
       }
     }
   }

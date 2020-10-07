@@ -156,30 +156,33 @@ public class OrderProductServiceTest {
   @Test
   @Sql({"/testdata/only_one_order_product_in_the_order.sql"})
   public void onlyOneOrderProductInTheOrderTest(){
-    OrderProduct orderProduct = orderProductRepository.find(2l);
     service.delete(2L);
 
-    Assertions.assertEquals("REMOVED", orderProduct.getState());
-    Assertions.assertEquals("CANCELED", orderProduct.getOrder().getState());
+    OrderProduct orderProductToAssert = orderProductRepository.find(2L);
+
+    Assertions.assertEquals("REMOVED", orderProductToAssert.getState());
+    Assertions.assertEquals("CANCELED", orderProductToAssert.getOrder().getState());
   }
 
   @Test
   @Sql({"/testdata/more_than_one_order_product_in_the_order.sql"})
   public void moreThanOneOrderProductInTheOrderTest(){
-    OrderProduct orderProduct = orderProductRepository.find(3L);
     service.delete(3L);
 
-    Assertions.assertEquals("REMOVED", orderProduct.getState());
-    Assertions.assertEquals("CANCELED", orderProduct.getOrder().getState());
+    OrderProduct orderProductToAssert = orderProductRepository.find(3L);
+
+    Assertions.assertEquals("REMOVED", orderProductToAssert.getState());
+    Assertions.assertEquals("CANCELED", orderProductToAssert.getOrder().getState());
   }
 
   @Test
   @Sql({"/testdata/only_one_order_product_removed.sql"})
   public void onlyOneOrderProductRemovedTest(){
-    OrderProduct orderProduct = orderProductRepository.find(3L);
     service.delete(3L);
 
-    Assertions.assertEquals("REMOVED", orderProduct.getState());
-    Assertions.assertEquals(800, orderProduct.getOrder().getTotalValue());
+    OrderProduct orderProductToAssert = orderProductRepository.find(3L);
+
+    Assertions.assertEquals("REMOVED", orderProductToAssert.getState());
+    Assertions.assertEquals(800, orderProductToAssert.getOrder().getTotalValue());
   }
 }
