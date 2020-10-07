@@ -36,7 +36,7 @@ public class OrderProductRepository {
    * @param id primary key
    * @return a product order or a null if it doesn't exist
    */
-  public OrderProduct find(Long id) {
+  public OrderProduct find(Long  id) {
     return em.find(OrderProduct.class, id);
   }
 
@@ -70,7 +70,7 @@ public class OrderProductRepository {
    * @return list of orderProducts by idOrder
    */
   public List<OrderProduct> getAllOrderProductsByIdOrder(Long idOrder) {
-    List<OrderProduct> orderProducts = em.createQuery("SELECT op FROM OrderProduct op WHERE op.order.id =:value")
+    List<OrderProduct> orderProducts = em.createQuery("SELECT opp FROM OrderProduct opp WHERE opp.order.id = :value")
             .setParameter("value", idOrder)
             .getResultList();
     return orderProducts;

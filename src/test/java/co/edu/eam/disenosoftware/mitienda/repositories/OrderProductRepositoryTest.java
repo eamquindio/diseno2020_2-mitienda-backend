@@ -1,5 +1,6 @@
 package co.edu.eam.disenosoftware.mitienda.repositories;
 
+import co.edu.eam.disenosoftware.mitienda.exceptions.BusinessException;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
 import co.edu.eam.disenosoftware.mitienda.model.entities.OrderProduct;
 import co.edu.eam.disenosoftware.mitienda.model.entities.ProductStore;
@@ -103,7 +104,7 @@ public class OrderProductRepositoryTest {
     OrderProduct orderProductAssert = repository.find(1L);
     Assertions.assertEquals(24, orderProductAssert.getQuantity());
   }
-
+    
   @Test
   @Sql({"/testdata/get_all_order_products_by_not_found_id_order.sql"})
   public void getAllProductsByNotFoundIdOrder () {
@@ -117,5 +118,4 @@ public class OrderProductRepositoryTest {
     List<OrderProduct> orderProducts = repository.getAllOrderProductsByIdOrder(1l);
     Assertions.assertEquals(3,orderProducts.size());
   }
-
 }
