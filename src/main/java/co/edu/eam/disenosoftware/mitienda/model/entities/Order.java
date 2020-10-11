@@ -1,5 +1,8 @@
 package co.edu.eam.disenosoftware.mitienda.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,6 +34,7 @@ public class Order implements Serializable {
    * Order's products
    */
   @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+  @JsonManagedReference
   private List<OrderProduct> product;
 
   /**

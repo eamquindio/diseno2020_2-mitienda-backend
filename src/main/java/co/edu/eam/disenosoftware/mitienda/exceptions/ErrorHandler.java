@@ -16,13 +16,12 @@ public class ErrorHandler {
 
   /**
    * BusinessException Error Handler
-   * @param req http request
    * @param exc business exception thrown
    * @return ErrorResponse
    */
   @ResponseBody
   @ExceptionHandler(BusinessException.class)
-  public ResponseEntity<ErrorResponse> handleBusinessException(HttpServletRequest req, BusinessException exc) {
+  public ResponseEntity<ErrorResponse> handleBusinessException(BusinessException exc) {
 
     ErrorCodesEnum errorCode = exc.getCode();
     ErrorResponse error = new ErrorResponse(errorCode.name(), errorCode.getCode());

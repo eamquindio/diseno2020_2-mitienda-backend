@@ -1,5 +1,8 @@
 package co.edu.eam.disenosoftware.mitienda.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,6 +29,7 @@ public class ShoppingCartProduct implements Serializable {
   /**
    * Shopping cart of the product shopping cart's - Foreign Key
    */
+  @JsonBackReference
   @ManyToOne
   @JoinColumn(name = "id_shopping_cart", referencedColumnName = "id")
   private ShoppingCart shoppingCart;

@@ -1,5 +1,8 @@
 package co.edu.eam.disenosoftware.mitienda.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -28,6 +31,7 @@ public class OrderProduct implements Serializable {
    */
   @ManyToOne
   @JoinColumn(name = "id_order", referencedColumnName = "id")
+  @JsonBackReference
   private Order order;
 
   /**

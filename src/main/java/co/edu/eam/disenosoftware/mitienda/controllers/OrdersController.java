@@ -6,16 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controller for stores entity
+ * Controller for orders entity
  */
 @RestController
-@RequestMapping(Routes.STORES_PATH)
-public class StoresController {
-
-  /**
-   * Store service
-   */
-  @Autowired
-  private StoreService storeService;
+public class OrdersController {
 
 }

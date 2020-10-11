@@ -1,5 +1,7 @@
 package co.edu.eam.disenosoftware.mitienda.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,6 +38,7 @@ public class ShoppingCart implements Serializable {
   /**
    * Shopping Cart's Product
    */
+  @JsonManagedReference
   @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL)
   private List<ShoppingCartProduct> product;
 
@@ -159,6 +162,7 @@ public class ShoppingCart implements Serializable {
 
   /**
    * get the shopping cart total value
+   *
    * @return shopping cart total value
    */
   public Double getTotalValue() {
@@ -167,9 +171,12 @@ public class ShoppingCart implements Serializable {
 
   /**
    * Set the shopping cart total value
+   *
    * @param totalValue shopping cart total value
    */
   public void setTotalValue(Double totalValue) {
     this.totalValue = totalValue;
   }
+
+
 }

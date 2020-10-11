@@ -91,7 +91,6 @@ public class OrderService {
     order.setTotalValue(totalValue);
 
     orderRepository.create(order);
-
   }
 
   /**

@@ -15,9 +15,4 @@ public class Routes {
    */
   public static final String STORES_PATH = BASE_PATH + "/stores";
 
-  /**
-   * get all stores
-   */
-  public static final String GET_ALL_STORES = "";
-
 }
