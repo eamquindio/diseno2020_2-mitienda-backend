@@ -131,4 +131,32 @@ public class OrderService {
 
   }
 
+  /**
+   * method to change statu's order to delived
+   * @param idOrder id to find
+   */
+  public void deliverOrder(Long idOrder) {
+
+    Order order = orderRepository.find(idOrder);
+
+    if (order == null) {
+
+      throw new BusinessException("Order does not exist.", ErrorCodesEnum.ORDER_NOT_FOUND);
+
+    } else {
+
+      if (order.getState().equals("finished")) {
+
+        order.setState("delivered");
+        orderRepository.edit(order);
+
+      } else {
+        throw new BusinessException("the state´s order is not finished", ErrorCodesEnum.ORDER_CAN_NOT_BE_DELIVERED);
+      }
+
+    }
+
+  }
+
+
 }

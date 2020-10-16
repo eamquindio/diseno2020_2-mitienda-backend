@@ -153,5 +153,39 @@ public class OrderServiceTest {
 
     Assertions.assertEquals("finished",orderToAssert.getState());
   }
+  @Test
+  @Sql({"/testdata/deliver_order.sql"})
+  public void deliverOrderTest(){
+
+    service.deliverOrder(1L);
+    Order orderToAssert=repository.find(1L);
+    Assertions.assertEquals("delivered",orderToAssert.getState());
+
+  }
+  @Test
+  @Sql({"/testdata/delive_order_state_not_finished.sql"})
+  public void deliveOrderStateNotFinishedTest(){
+
+    BusinessException exception = Assertions.assertThrows(BusinessException.class,
+            () ->service.deliverOrder(1L));
+
+    Assertions.assertEquals("the state´s order is not finished",exception.getMessage());
+    Assertions.assertEquals(ErrorCodesEnum.ORDER_CAN_NOT_BE_DELIVERED,exception.getCode());
+
+  }
+  @Test
+  @Sql({"/testdata/deliver_order_not_found.sql"})
+  public void deliverOrderNotFoundTest(){
+
+    BusinessException exception = Assertions.assertThrows(BusinessException.class,
+            () ->service.deliverOrder(2L));
+
+    Assertions.assertEquals("Order does not exist.",exception.getMessage());
+    Assertions.assertEquals(ErrorCodesEnum.ORDER_NOT_FOUND,exception.getCode());
+
+  }
 
 }
+
+
+

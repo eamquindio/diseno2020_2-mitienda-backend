@@ -26,7 +26,6 @@ public enum ErrorCodesEnum {
    * Exception when shopping cart doesnt exist
    */
   SHOPPING_CART_NOT_FOUND("0004"),
-
   /**
    * Shopping cart is empty
     */
@@ -75,7 +74,6 @@ public enum ErrorCodesEnum {
    * code for not existing order
    */
   ORDER_IS_NOT_READY("0016"),
-
   /**
    * store name already register
    */
@@ -88,13 +86,10 @@ public enum ErrorCodesEnum {
    * login incorrect
    */
   LOGIN_INCORRECT("0019"),
-
-
   /**
    * email already exist
    */
   EMAIL_ALREADY_EXIST("0020"),
-
   /**
    * username already exist
    */
@@ -135,8 +130,11 @@ public enum ErrorCodesEnum {
   /**
    * code for NOT_STATE
    */
-  NOT_STATE("0029"); //ejemplo....
-
+  NOT_STATE("0029"),
+  /**
+   * Order can not be delivered
+   */
+  ORDER_CAN_NOT_BE_DELIVERED("0030");
   /**
    * error code
    */
