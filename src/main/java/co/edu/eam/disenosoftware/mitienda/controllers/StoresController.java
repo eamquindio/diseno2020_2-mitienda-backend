@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Controller for stores entity
  */
 @RestController
-@RequestMapping(Routes.STORES_PATH)
+@RequestMapping("/api/stores")
 public class StoresController {
 
   /**
