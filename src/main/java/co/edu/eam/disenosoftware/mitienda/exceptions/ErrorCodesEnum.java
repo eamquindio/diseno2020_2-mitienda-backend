@@ -65,15 +65,15 @@ public enum ErrorCodesEnum {
   /**
    * code for not order found error
    */
-  ORDER_NOT_FOUND("0014"),
+  ORDER_NOT_FOUND("0014", HttpStatus.NOT_FOUND),
   /**
    * code for order withour elements
    */
-  ORDER_DOES_NOT_HAVE_ELEMENTS("0015"),
+  ORDER_DOES_NOT_HAVE_ELEMENTS("0015", HttpStatus.BAD_REQUEST),
   /**
    * code for not existing order
    */
-  ORDER_IS_NOT_READY("0016"),
+  ORDER_IS_NOT_READY("0016", HttpStatus.BAD_REQUEST),
   /**
    * store name already register
    */
