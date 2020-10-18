@@ -104,4 +104,15 @@ public class StoreRepository {
 
     return list.isEmpty() ? null : list.get(0);
   }
+
+  /**
+   * A get all stores if are open function
+   *
+   * @return , return all stores open in data base
+   */
+  public List<Store> getAllStoresOpen() {
+    String queryStr = "SELECT store FROM Store store WHERE store.isOpen = true";
+    Query query = em.createQuery(queryStr);
+    return query.getResultList();
+  }
 }

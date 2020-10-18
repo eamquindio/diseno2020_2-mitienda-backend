@@ -57,11 +57,11 @@ public enum ErrorCodesEnum {
   /**
    * code for not order product found error
    */
-  ORDER_PRODUCT_NOT_FOUND("0012"),
+  ORDER_PRODUCT_NOT_FOUND("0012", HttpStatus.NOT_FOUND),
   /**
    * code for not order product pendind error
    */
-  ORDER_PRODUCT_IS_NOT_PENDING("0013"),
+  ORDER_PRODUCT_IS_NOT_PENDING("0013", HttpStatus.PRECONDITION_FAILED),
   /**
    * code for not order found error
    */

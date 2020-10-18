@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Transactional
 @SpringBootTest
@@ -73,5 +74,12 @@ public class StoreServiceTest {
   public void loginStoreSuccessful() {
     boolean successful = service.loginStore("store@gmail.com", "1234");
     Assertions.assertEquals(true, successful);
+  }
+
+  @Test
+  @Sql({"/testdata/get_all_stores_open.sql"})
+  public void getAllStoresOpenTest () {
+    List<Store> storesToAssert = service.bringStoresOpen();
+    Assertions.assertEquals(2,storesToAssert.size());
   }
 }
