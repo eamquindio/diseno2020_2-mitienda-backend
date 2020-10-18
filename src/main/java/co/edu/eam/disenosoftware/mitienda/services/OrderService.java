@@ -165,7 +165,7 @@ public class OrderService {
    */
   public Order getOrderByID(Long id) {
     Order order = orderRepository.find(id);
-    if(order == null) {
+    if (order == null) {
       throw new BusinessException("Order not found", ErrorCodesEnum.ORDER_NOT_FOUND);
     }
     return order;

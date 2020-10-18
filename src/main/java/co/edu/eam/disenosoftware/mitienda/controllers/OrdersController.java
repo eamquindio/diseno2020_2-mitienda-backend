@@ -23,7 +23,9 @@ public class OrdersController {
   private OrderService orderService;
 
   /**
-   * Get Order By Id API
+   * get order by id API
+   * @param id to find
+   * @return order found
    */
   @GetMapping("/{id}")
   public Order getOrderById(@PathVariable("id") Long id) {
@@ -31,10 +33,11 @@ public class OrdersController {
   }
 
   /**
-   * end order by id API
+   * end order API
+   * @param id of order to end
    */
   @PatchMapping("/{id}/end")
-  public void endOrder(@PathVariable("id") Long id){
+  public void endOrder(@PathVariable("id") Long id) {
     orderService.finalizeOrder(id);
   }
 
