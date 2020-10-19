@@ -76,6 +76,7 @@ public class ProductStoreRepository {
     Query query = em.createQuery(queryStr);
     query.setParameter("id", id);
     return query.getResultList();
+
   }
 
   /**

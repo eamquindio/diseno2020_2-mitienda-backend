@@ -5,7 +5,7 @@ INSERT INTO public.stores(id, address, delivery, email, image, is_open, "name", 
 
 INSERT INTO public.stores(id, address, delivery, email, image, is_open, "name", "owner", "password", phone)VALUES(22, 'carrera 20', true, 'jose123.luis@gmail.com', 'imagen.png', true, 'Jose', 'Pedrito', '123','3105679723');
 
-INSERT INTO public.orders(id, "date", state, total_value, id_store, id_user)VALUES(1, '02/09/2020', 'pending', 1000, 2, 3);
+INSERT INTO public.orders(id, "date", state, total_value, id_store, id_user)VALUES(1, '2020-02-09', 'pending', 1000, 2, 3);
 
 
 INSERT INTO public.categories(id, icon, "name", id_store)VALUES(10, 'icon.png', 'pedro', 2);

@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * ProductStoreService service
  */
@@ -46,11 +48,12 @@ public class ProductStoreService {
 
   /**
    * Method to create a product
-   * @param productId param to find a product
-   * @param storeId param to find a store
+   *
+   * @param productId  param to find a product
+   * @param storeId    param to find a store
    * @param categoryId param to find a category
-   * @param stock param to set a stock to a product
-   * @param price param to set a price to a product
+   * @param stock      param to set a stock to a product
+   * @param price      param to set a price to a product
    */
   public void createProduct(Long productId, Long storeId, Long categoryId, int stock, double price) {
     Product product = repositoryProduct.find(productId);
@@ -73,5 +76,22 @@ public class ProductStoreService {
     }
     ProductStore productStore = new ProductStore(product, stock, price, category, store);
     repositoryProductStore.create(productStore);
+  }
+
+  /**
+   * this function brings the productStoreRepository class function that gets all
+   * the products in store by id
+   *
+   * @param storeId , the store id
+   * @return , list of productStore
+   */
+  public List<ProductStore> getAllProrudctStoreByStoreId(Long storeId) {
+
+    Store store = repositoryStore.find((storeId));
+
+    if (store == null) {
+      throw new BusinessException("No se encontro la store", ErrorCodesEnum.NOT_FOUND_STORE);
+    }
+    return repositoryProductStore.getProductsStoreByStoreId(storeId);
   }
 }
