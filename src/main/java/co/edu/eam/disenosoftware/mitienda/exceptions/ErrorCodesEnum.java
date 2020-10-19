@@ -103,24 +103,24 @@ public enum ErrorCodesEnum {
   /**
    * username is not the same
    */
-  USERNAME_IS_NOT_THE_SAME("0023"),
+  USERNAME_IS_NOT_THE_SAME("0023", HttpStatus.FORBIDDEN),
 
   /**
    * password is not the same
    */
-  PASSWORD_IS_NOT_THE_SAME("0024"),
+  PASSWORD_IS_NOT_THE_SAME("0024", HttpStatus.FORBIDDEN),
   /**
    * code for can not add product to Order
    */
-  PRODUCT_CAN_NOT_BE_ADDED("0025"),
+  PRODUCT_CAN_NOT_BE_ADDED("0025", HttpStatus.PRECONDITION_FAILED),
   /**
    * code for can not associated store to productstore
    */
-  NOT_ASSOCIATED_STORE("0026"),
+  NOT_ASSOCIATED_STORE("0026", HttpStatus.NOT_FOUND),
   /**
    * code for have been excited total value
    */
-  PRODUCT_EXCIT_TOTALVALUE("0027"),
+  PRODUCT_EXCIT_TOTALVALUE("0027", HttpStatus.PRECONDITION_FAILED),
 
   /**
    * code for NOT_EXIST_ORDER_PRODUCT

@@ -1,11 +1,8 @@
 package co.edu.eam.disenosoftware.mitienda.controllers;
 
-import co.edu.eam.disenosoftware.mitienda.exceptions.BusinessException;
-import co.edu.eam.disenosoftware.mitienda.exceptions.ErrorCodesEnum;
 import co.edu.eam.disenosoftware.mitienda.model.entities.User;
 import co.edu.eam.disenosoftware.mitienda.model.responses.ErrorResponse;
 import co.edu.eam.disenosoftware.mitienda.repositories.UserRepository;
-import co.edu.eam.disenosoftware.mitienda.utils.EncrypterUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -58,7 +55,6 @@ public class UserControllerTest {
 
     //4. hacer las asersion
     Assertions.assertEquals(HttpStatus.PRECONDITION_FAILED.value(), status);
-    System.out.println(body);
 
     ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
     Assertions.assertEquals("0021", error.getErrorCode());
@@ -88,7 +84,6 @@ public class UserControllerTest {
 
     //4. hacer las asersion
     Assertions.assertEquals(HttpStatus.PRECONDITION_FAILED.value(), status);
-    System.out.println(body);
 
     ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
     Assertions.assertEquals("0020", error.getErrorCode());
@@ -120,9 +115,71 @@ public class UserControllerTest {
 
     User user=userRepository.find(1L);
     Assertions.assertEquals(HttpStatus.OK.value(), status);
-    System.out.println(body);
 
     Assertions.assertEquals("Pedro",user.getName());
   }
 
+  @Test
+  @Sql({"/testdata/controllers/controller_user_login_test.sql"})
+  public void controllerUserLoginTest() throws Exception{
+    String jsonBody = "{\n" +
+            "    \"username\": \"nombreusuario\",\n" +
+            "    \"password\": \"12345\"\n" +
+            "}";
+    RequestBuilder request = MockMvcRequestBuilders.post("/api/users/login")
+            .contentType("application/json")
+            .content(jsonBody);
+
+    ResultActions result = mockMvc.perform(request);
+
+    String body = result.andReturn().getResponse().getContentAsString();
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(HttpStatus.OK.value(), status);
+    Assertions.assertEquals("true",body);
+  }
+
+  @Test
+  @Sql({"/testdata/controllers/controller_user_login_wrong_username_test.sql"})
+  public void controllerUserLoginWrongUsernameTest() throws Exception{
+    String jsonBody = "{\n" +
+            "    \"username\": \"nombreusuarioo\",\n" +
+            "    \"password\": \"12345\"\n" +
+            "}";
+    RequestBuilder request = MockMvcRequestBuilders.post("/api/users/login")
+            .contentType("application/json")
+            .content(jsonBody);
+
+    ResultActions result = mockMvc.perform(request);
+
+    String body = result.andReturn().getResponse().getContentAsString();
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(HttpStatus.FORBIDDEN.value(), status);
+
+    ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
+    Assertions.assertEquals("0023", error.getErrorCode());
+  }
+
+  @Test
+  @Sql({"/testdata/controllers/controller_user_login_wrong_password_test.sql"})
+  public void controllerUserLoginWrongPasswordTest() throws Exception{
+    String jsonBody = "{\n" +
+            "    \"username\": \"nombreusuario\",\n" +
+            "    \"password\": \"123456\"\n" +
+            "}";
+    RequestBuilder request = MockMvcRequestBuilders.post("/api/users/login")
+            .contentType("application/json")
+            .content(jsonBody);
+
+    ResultActions result = mockMvc.perform(request);
+
+    String body = result.andReturn().getResponse().getContentAsString();
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(HttpStatus.FORBIDDEN.value(), status);
+
+    ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
+    Assertions.assertEquals("0024", error.getErrorCode());
+  }
 }
