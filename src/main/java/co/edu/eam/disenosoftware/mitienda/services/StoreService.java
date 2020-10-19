@@ -76,7 +76,7 @@ public class StoreService {
    * Service get all stores open
    * @return stores opes
    */
-  public List<Store> bringStoresOpen() {
+  public List<Store> getOpenStores() {
     return storeRepository.getAllStoresOpen();
   }
 

@@ -53,9 +53,6 @@ public class OrderProductControllerTest {
 
     int numberStatus = result.andReturn().getResponse().getStatus();
 
-    OrderProduct orderProduct = orderProductRepository.find(1L);
-
-    Assertions.assertEquals("canceled",orderProduct.getState());
     Assertions.assertEquals(412,numberStatus);
   }
 

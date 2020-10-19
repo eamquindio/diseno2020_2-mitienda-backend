@@ -27,8 +27,8 @@ public class OrderProductController {
    * @param orderProductId id from order product
    */
   @PutMapping
-  @RequestMapping("/{order-product-id}/check-product")
-  public void checkOrderProduct(@PathVariable("order-product-id") Long orderProductId) {
+  @RequestMapping("/{orderProductId}/check-product")
+  public void checkOrderProduct(Long orderProductId) {
     orderProductService.checkOrderProductById(orderProductId);
   }
 
