@@ -79,7 +79,7 @@ public class StoreServiceTest {
   @Test
   @Sql({"/testdata/get_all_stores_open.sql"})
   public void getAllStoresOpenTest () {
-    List<Store> storesToAssert = service.bringStoresOpen();
+    List<Store> storesToAssert = service.getOpenStores();
     Assertions.assertEquals(2,storesToAssert.size());
   }
 }

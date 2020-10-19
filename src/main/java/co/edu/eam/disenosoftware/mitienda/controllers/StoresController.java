@@ -31,6 +31,6 @@ public class StoresController {
   @GetMapping
   @RequestMapping("/is-open")
   public List<Store> getAllStoresOpen() {
-    return storeService.bringStoresOpen();
+    return storeService.getOpenStores();
   }
 }
