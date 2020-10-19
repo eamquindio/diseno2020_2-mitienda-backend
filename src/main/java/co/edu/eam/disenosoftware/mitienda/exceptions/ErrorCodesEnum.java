@@ -13,11 +13,11 @@ public enum ErrorCodesEnum {
   /**
    * Shopping cart product not found
    */
-  SHOPPING_CART_PRODUCT_NOT_FOUND("0001", HttpStatus.FORBIDDEN),
+  SHOPPING_CART_PRODUCT_NOT_FOUND("0001", HttpStatus.NOT_FOUND),
   /**
    * Product store not found
    */
-  PRODUCT_STORE_NOT_FOUNDED("0002", HttpStatus.FORBIDDEN),
+  PRODUCT_STORE_NOT_FOUNDED("0002", HttpStatus.NOT_FOUND),
   /**
    * Exception when User Exceed Five orders in progress
    */
@@ -33,15 +33,15 @@ public enum ErrorCodesEnum {
   /**
    * Store is not founded
    */
-  STORE_NOT_FOUNDED("0006", HttpStatus.FORBIDDEN),
+  STORE_NOT_FOUNDED("0006", HttpStatus.NOT_FOUND),
   /**
    * User is not founded
    */
-  USER_NOT_FOUNDED("0007", HttpStatus.FORBIDDEN),
+  USER_NOT_FOUNDED("0007", HttpStatus.NOT_FOUND),
   /**
    * code for not found store
    */
-  NOT_FOUND_STORE("0008", HttpStatus.FORBIDDEN),
+  NOT_FOUND_STORE("0008", HttpStatus.NOT_FOUND),
   /**
    * code for name category in use
    */

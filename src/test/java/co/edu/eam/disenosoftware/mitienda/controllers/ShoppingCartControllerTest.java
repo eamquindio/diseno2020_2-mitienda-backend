@@ -108,7 +108,7 @@ public class ShoppingCartControllerTest {
     int status = result.andReturn().getResponse().getStatus();
 
 
-    Assertions.assertEquals(HttpStatus.FORBIDDEN.value(),status);
+    Assertions.assertEquals(HttpStatus.NOT_FOUND.value(),status);
 
     System.out.println(body);
 
@@ -135,7 +135,7 @@ public class ShoppingCartControllerTest {
     int status = result.andReturn().getResponse().getStatus();
 
 
-    Assertions.assertEquals(HttpStatus.FORBIDDEN.value(),status);
+    Assertions.assertEquals(HttpStatus.NOT_FOUND.value(),status);
 
     System.out.println(body);
 
@@ -162,7 +162,7 @@ public class ShoppingCartControllerTest {
     int status = result.andReturn().getResponse().getStatus();
 
 
-    Assertions.assertEquals(HttpStatus.FORBIDDEN.value(),status);
+    Assertions.assertEquals(HttpStatus.NOT_FOUND.value(),status);
 
     System.out.println(body);
 
