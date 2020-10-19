@@ -1,7 +1,5 @@
 package co.edu.eam.disenosoftware.mitienda.controllers;
 
-import co.edu.eam.disenosoftware.mitienda.exceptions.BusinessException;
-import co.edu.eam.disenosoftware.mitienda.exceptions.ErrorCodesEnum;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
 import co.edu.eam.disenosoftware.mitienda.repositories.OrderRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,8 +15,6 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -38,7 +34,7 @@ public class OrderControllerTest {
   private OrderRepository orderRepository;
 
   @Test
-  @Sql("/testdata/getExistingOrderById.sql")
+  @Sql("/testdata/controllers/getExistingOrderById.sql")
   public void getExistingOrderByID() throws Exception {
     //Crear la Peticion
     RequestBuilder request = MockMvcRequestBuilders.get("/api/orders/1");
@@ -57,6 +53,7 @@ public class OrderControllerTest {
     Assertions.assertEquals("finished", order.getState());
     Assertions.assertEquals(1l, order.getUser().getId());
     Assertions.assertEquals(1l, order.getStore().getId());
+    Assertions.assertEquals(HttpStatus.OK.value(), status);
   }
 
   @Test
@@ -68,11 +65,9 @@ public class OrderControllerTest {
     ResultActions result = mockMvc.perform(request);
 
     //Sacar los resultados de la peticion
-    String body = result.andReturn().getResponse().getContentAsString();
     int status = result.andReturn().getResponse().getStatus();
 
     //hacer las asersiones
-    Order order = objectMapper.readValue(body, Order.class);
 
     Assertions.assertEquals(HttpStatus.NOT_FOUND.value(), status);
   }
@@ -94,7 +89,7 @@ public class OrderControllerTest {
   }
 
   @Test
-  @Sql({"/testdata/finalized_order_without_order_products_controller.sql"})
+  @Sql({"/testdata/controllers/finalized_order_without_order_products_controller.sql"})
   public void finalizedOrderWithoutOrderProducts() throws Exception {
     //Crear la Peticion
     RequestBuilder request = MockMvcRequestBuilders.patch("/api/orders/1/end");
@@ -107,11 +102,11 @@ public class OrderControllerTest {
 
     //hacer las asersiones
 
-    Assertions.assertEquals(HttpStatus.BAD_REQUEST.value(), status);
+    Assertions.assertEquals(HttpStatus.PRECONDITION_FAILED.value(), status);
   }
 
   @Test
-  @Sql({"/testdata/finalized_order_with_not_already_order_controller.sql"})
+  @Sql({"/testdata/controllers/finalized_order_with_not_already_order_controller.sql"})
   public void finalizedOrderWithNotAlreadyOrder () throws Exception {
     //Crear la Peticion
     RequestBuilder request = MockMvcRequestBuilders.patch("/api/orders/1/end");
@@ -124,11 +119,11 @@ public class OrderControllerTest {
 
     //hacer las asersiones
 
-    Assertions.assertEquals(HttpStatus.BAD_REQUEST.value(), status);
+    Assertions.assertEquals(HttpStatus.PRECONDITION_FAILED.value(), status);
   }
 
   @Test
-  @Sql({"/testdata/finalized_order.sql"})
+  @Sql({"/testdata/controllers/finalized_order.sql"})
   public void finalizedOrder () throws Exception {
     //Crear la Peticion
     RequestBuilder request = MockMvcRequestBuilders.patch("/api/orders/1/end");
