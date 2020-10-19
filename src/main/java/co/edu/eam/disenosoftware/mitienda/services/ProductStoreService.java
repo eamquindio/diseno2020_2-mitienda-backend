@@ -85,7 +85,7 @@ public class ProductStoreService {
    * @param storeId , the store id
    * @return , list of productStore
    */
-  public List<ProductStore> getAllProrudctStoreByStoreId(Long storeId) {
+  public List<ProductStore> getAllProductStoreByStoreId(Long storeId) {
 
     Store store = repositoryStore.find((storeId));
 
