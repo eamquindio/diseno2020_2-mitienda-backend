@@ -67,7 +67,5 @@ public class ProductStoreControllerTest {
     int status = result.andReturn().getResponse().getStatus();
 
     Assertions.assertEquals(HttpStatus.NOT_FOUND.value(), status);
-
-
   }
 }

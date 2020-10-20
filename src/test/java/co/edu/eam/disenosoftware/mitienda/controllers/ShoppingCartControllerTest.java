@@ -55,15 +55,12 @@ public class ShoppingCartControllerTest {
     String body = result.andReturn().getResponse().getContentAsString();
     int status = result.andReturn().getResponse().getStatus();
 
-
     List<ShoppingCartProduct> shoppingCartProductList = em.createQuery("SELECT s FROM ShoppingCartProduct s WHERE s.shoppingCart.user.username = 'manuelito'").getResultList();
     ShoppingCartProduct shoppingCartProductToAssert = shoppingCartProductList.get(0);
 
     Assertions.assertEquals(HttpStatus.OK.value(), status);
     Assertions.assertEquals(1, shoppingCartProductToAssert.getShoppingCart().getId());
     Assertions.assertEquals("manuelito",shoppingCartProductToAssert.getShoppingCart().getUser().getUsername());
-
-
   }
 
   @Test
@@ -83,13 +80,8 @@ public class ShoppingCartControllerTest {
 
     ResultActions result = mockMvc.perform(request);
 
-
     int status = result.andReturn().getResponse().getStatus();
-
-
     Assertions.assertEquals(HttpStatus.OK.value(), status);
-
-
   }
 
   @Test
@@ -109,13 +101,8 @@ public class ShoppingCartControllerTest {
 
     ResultActions result = mockMvc.perform(request);
 
-
     int status = result.andReturn().getResponse().getStatus();
-
-
     Assertions.assertEquals(HttpStatus.NOT_FOUND.value(), status);
-
-
   }
 
   @Test
@@ -135,12 +122,8 @@ public class ShoppingCartControllerTest {
 
     ResultActions result = mockMvc.perform(request);
 
-
     int status = result.andReturn().getResponse().getStatus();
-
-
     Assertions.assertEquals(HttpStatus.NOT_FOUND.value(), status);
-
 
   }
 
@@ -161,12 +144,9 @@ public class ShoppingCartControllerTest {
 
     ResultActions result = mockMvc.perform(request);
 
-
     int status = result.andReturn().getResponse().getStatus();
 
-
     Assertions.assertEquals(HttpStatus.NOT_FOUND.value(), status);
-
 
   }
 }
