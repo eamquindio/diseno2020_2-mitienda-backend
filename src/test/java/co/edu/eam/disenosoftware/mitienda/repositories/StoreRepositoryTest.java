@@ -107,4 +107,18 @@ public class StoreRepositoryTest {
     Store storeToAssert = storeRepository.getStoreByName("store1");
     Assertions.assertEquals("store1",storeToAssert.getName());
   }
+
+  @Test
+  @Sql({"/testdata/get_all_stores_open.sql"})
+  public void getAllStoresOpenTest () {
+    List<Store> storesToAssert = storeRepository.getAllStoresOpen();
+    Assertions.assertEquals(2,storesToAssert.size());
+  }
+
+  @Test
+  public void getAllStoresNotOpenTest () {
+    List<Store> storesToAssert = storeRepository.getAllStoresOpen();
+    Assertions.assertEquals(0,storesToAssert.size());
+  }
+
 }

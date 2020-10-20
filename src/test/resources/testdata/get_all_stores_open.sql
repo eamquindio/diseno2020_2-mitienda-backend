@@ -1,0 +1,4 @@
+INSERT INTO public.stores (id, address, delivery, email, image, is_open, "name", "owner", "password", phone) VALUES(1, 'Calle 13', true, 'tiendita1@gmail.com', 'img.png', true, 'la tiendita1', 'Lucho', '123321', '3212345600');
+INSERT INTO public.stores (id, address, delivery, email, image, is_open, "name", "owner", "password", phone) VALUES(2, 'Calle 14', true, 'tiendita2@gmail.com', 'img.png', true, 'la tiendita2', 'Gustavo', '4444', '3212345606');
+INSERT INTO public.stores (id, address, delivery, email, image, is_open, "name", "owner", "password", phone) VALUES(3, 'Calle 15', true, 'tiendita3@gmail.com', 'img.png', false, 'la tiendita3', 'Andres', '5555', '3212345601');
+INSERT INTO public.stores (id, address, delivery, email, image, is_open, "name", "owner", "password", phone) VALUES(4, 'Calle 16', false, 'tiendita4@gmail.com', 'img.png', false, 'la tiendita4', 'Jaime', '777', '3212345609');
