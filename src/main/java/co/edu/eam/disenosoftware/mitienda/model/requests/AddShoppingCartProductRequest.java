@@ -3,7 +3,7 @@ package co.edu.eam.disenosoftware.mitienda.model.requests;
 /**
  * Request for shopping cart product creation
  */
-public class CreateShoppingCartProductRequest {
+public class AddShoppingCartProductRequest {
 
   /**
    * stores id

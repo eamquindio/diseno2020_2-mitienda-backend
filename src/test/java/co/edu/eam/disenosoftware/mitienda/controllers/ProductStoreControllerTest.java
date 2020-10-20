@@ -1,5 +1,6 @@
 package co.edu.eam.disenosoftware.mitienda.controllers;
 
+import co.edu.eam.disenosoftware.mitienda.model.entities.ProductStore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.coyote.Request;
 import org.junit.jupiter.api.Assertions;
@@ -16,6 +17,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -30,26 +32,10 @@ public class ProductStoreControllerTest {
 
   @Autowired
   private EntityManager em;
- @Test
- @Sql("/testdata/controlles_get_all_product_store_by_store_id.sql")
- public void getAllProductStoreByStoreIdTest() throws Exception{
-
-   RequestBuilder request = MockMvcRequestBuilders.get("/api/products-store/stores/2/products");
-
-   ResultActions result = mockMvc.perform((request));
-
-   String body = result.andReturn().getResponse().getContentAsString();
-   int status = result.andReturn().getResponse().getStatus();
-
-   Assertions.assertEquals(HttpStatus.OK.value(),status);
-
-   System.out.println(body);
-
- }
 
   @Test
-  @Sql("/testdata/controlles_not_existing_product_store_by_store_id.sql")
-  public void notExistingProductStoreByStoreIdTest() throws Exception{
+  @Sql("/testdata/controlles_get_all_product_store_by_store_id.sql")
+  public void getAllProductStoreByStoreIdTest() throws Exception {
 
     RequestBuilder request = MockMvcRequestBuilders.get("/api/products-store/stores/2/products");
 
@@ -58,9 +44,30 @@ public class ProductStoreControllerTest {
     String body = result.andReturn().getResponse().getContentAsString();
     int status = result.andReturn().getResponse().getStatus();
 
-    Assertions.assertEquals(HttpStatus.NOT_FOUND.value(),status);
 
-    System.out.println(body);
+    List<ProductStore> productStore = em.createQuery("select p from ProductStore p where p.store.id = '2'").getResultList();
+    ProductStore productStoreToAssert = productStore.get(0);
+
+    Assertions.assertEquals(HttpStatus.OK.value(), status);
+    Assertions.assertEquals("Margarita", productStoreToAssert.getProduct().getName());
+    Assertions.assertEquals(21, productStoreToAssert.getStock());
+
+
+  }
+
+  @Test
+  @Sql("/testdata/controlles_not_existing_product_store_by_store_id.sql")
+  public void notExistingProductStoreByStoreIdTest() throws Exception {
+
+    RequestBuilder request = MockMvcRequestBuilders.get("/api/products-store/stores/2/products");
+
+    ResultActions result = mockMvc.perform((request));
+
+    String body = result.andReturn().getResponse().getContentAsString();
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(HttpStatus.NOT_FOUND.value(), status);
+
 
   }
 }
