@@ -26,8 +26,7 @@ public class OrderProductController {
    * Retorno: only status.
    * @param orderProductId id from order product
    */
-  @PutMapping
-  @RequestMapping("/{orderProductId}/check-product")
+  @PutMapping("/{orderProductId}/check-product")
   public void checkOrderProduct(@PathVariable Long orderProductId) {
     orderProductService.checkOrderProductById(orderProductId);
   }
