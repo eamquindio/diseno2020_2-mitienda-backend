@@ -28,8 +28,7 @@ public class StoresController {
    * Retorno: Número n de tiendas
    * @return list of stores
    */
-  @GetMapping
-  @RequestMapping("/is-open")
+  @GetMapping("/is-open")
   public List<Store> getAllStoresOpen() {
     return storeService.getOpenStores();
   }
