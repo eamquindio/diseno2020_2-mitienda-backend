@@ -158,5 +158,17 @@ public class OrderService {
 
   }
 
+  /**
+   * Method to get order by orderId
+   * @param id to find
+   * @return order find
+   */
+  public Order getOrderByID(Long id) {
+    Order order = orderRepository.find(id);
+    if (order == null) {
+      throw new BusinessException("Order not found", ErrorCodesEnum.ORDER_NOT_FOUND);
+    }
+    return order;
+  }
 
 }

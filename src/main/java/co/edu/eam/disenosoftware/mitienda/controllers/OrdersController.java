@@ -1,5 +1,11 @@
 package co.edu.eam.disenosoftware.mitienda.controllers;
 
+import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
+import co.edu.eam.disenosoftware.mitienda.services.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,5 +15,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/orders")
 public class OrdersController {
+
+  /**
+   * Injecting OrderService class
+   */
+  @Autowired
+  private OrderService orderService;
+
+  /**
+   * get order by id API
+   * @param id to find
+   * @return order found
+   */
+  @GetMapping("/{id}")
+  public Order getOrderById(@PathVariable("id") Long id) {
+    return orderService.getOrderByID(id);
+  }
+
+  /**
+   * end order API
+   * @param id of order to end
+   */
+  @PatchMapping("/{id}/end")
+  public void endOrder(@PathVariable("id") Long id) {
+    orderService.finalizeOrder(id);
+  }
 
 }
