@@ -30,7 +30,7 @@ public class ShoppingCartController {
    * @param scp , request object for service call
    */
   @PostMapping("/add-product")
-  public void createShoppingCartProduct(@RequestBody @Valid AddShoppingCartProductRequest scp) {
+  public void addProductToShoppingCartRequest(@RequestBody @Valid AddShoppingCartProductRequest scp) {
     shoppingCartProductService.createShoppingCartProduct(scp.getStoreId(), scp.getProductId(), scp.getUserId(),
             scp.getQuantity());
   }
