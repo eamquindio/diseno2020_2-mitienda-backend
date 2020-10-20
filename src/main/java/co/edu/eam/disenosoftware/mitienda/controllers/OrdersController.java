@@ -49,15 +49,7 @@ public class OrdersController {
    */
   @PatchMapping("/{orderId}/delivery")
   public void deliverOrder(@PathVariable("orderId") Long orderId) {
-
     orderService.deliverOrder(orderId);
 
   }
-
-
-
-
-
-
-
 }

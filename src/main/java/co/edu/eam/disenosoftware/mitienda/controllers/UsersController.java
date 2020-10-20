@@ -30,10 +30,8 @@ public class UsersController {
    */
   @PostMapping("/register")
   public void createUser(@RequestBody User request) {
-
     userService.createUser(request.getName(), request.getPhone(),
             request.getUsername(), request.getEmail(),
             request.getPassword());
-
   }
 }

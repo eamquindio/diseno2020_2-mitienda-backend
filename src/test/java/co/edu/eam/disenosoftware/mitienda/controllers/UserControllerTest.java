@@ -34,11 +34,9 @@ public class UserControllerTest {
   @Autowired
   private UserRepository userRepository;
 
-
   @Test
   @Sql({"/testdata/username_all_exist_api.sql"})
   public void usernameAllExistTest() throws Exception {
-
 
     String jsonBody = "{\n" +
             "    \"name\":\"Pedro\",\n" +
@@ -59,7 +57,7 @@ public class UserControllerTest {
     int status = result.andReturn().getResponse().getStatus();
 
     //4. hacer las asersion
-    Assertions.assertEquals(HttpStatus.BAD_REQUEST.value(), status);
+    Assertions.assertEquals(HttpStatus.PRECONDITION_FAILED.value(), status);
     System.out.println(body);
 
     ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
@@ -69,8 +67,6 @@ public class UserControllerTest {
   @Test
   @Sql({"/testdata/email_all_exist_api.sql"})
   public void emailAllExistTest() throws Exception {
-
-
 
     String jsonBody = "{\n" +
             "    \"name\":\"Pedro\",\n" +
@@ -91,7 +87,7 @@ public class UserControllerTest {
     int status = result.andReturn().getResponse().getStatus();
 
     //4. hacer las asersion
-    Assertions.assertEquals(HttpStatus.BAD_REQUEST.value(), status);
+    Assertions.assertEquals(HttpStatus.PRECONDITION_FAILED.value(), status);
     System.out.println(body);
 
     ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
@@ -127,7 +123,6 @@ public class UserControllerTest {
     System.out.println(body);
 
     Assertions.assertEquals("Pedro",user.getName());
-
   }
 
 }
