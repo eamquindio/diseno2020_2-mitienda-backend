@@ -3,7 +3,7 @@ package co.edu.eam.disenosoftware.mitienda.exceptions;
 /**
  * Generic exception
  */
-public class BusinessException extends RuntimeException {
+public class  BusinessException extends RuntimeException {
 
   /**
    * error code
