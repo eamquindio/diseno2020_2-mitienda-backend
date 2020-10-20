@@ -41,4 +41,23 @@ public class OrdersController {
     orderService.finalizeOrder(id);
   }
 
+  /**
+   * URL: orders/{order_id}/delivery
+   * verbo:POST
+   * parametros: {name,phone,username,email,password}
+   * @param orderId  ,Long
+   */
+  @PatchMapping("/{orderId}/delivery")
+  public void deliverOrder(@PathVariable("orderId") Long orderId) {
+
+    orderService.deliverOrder(orderId);
+
+  }
+
+
+
+
+
+
+
 }

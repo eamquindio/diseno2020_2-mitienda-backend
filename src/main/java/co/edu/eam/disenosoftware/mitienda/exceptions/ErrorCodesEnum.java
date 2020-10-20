@@ -89,11 +89,11 @@ public enum ErrorCodesEnum {
   /**
    * email already exist
    */
-  EMAIL_ALREADY_EXIST("0020"),
+  EMAIL_ALREADY_EXIST("0020", HttpStatus.BAD_REQUEST),
   /**
    * username already exist
    */
-  USERNAME_ALREADY_EXIST("0021"),
+  USERNAME_ALREADY_EXIST("0021", HttpStatus.BAD_REQUEST),
 
   /**
    * the user name does not exist
@@ -134,7 +134,7 @@ public enum ErrorCodesEnum {
   /**
    * Order can not be delivered
    */
-  ORDER_CAN_NOT_BE_DELIVERED("0030");
+  ORDER_CAN_NOT_BE_DELIVERED("0030", HttpStatus.BAD_REQUEST);
   /**
    * error code
    */

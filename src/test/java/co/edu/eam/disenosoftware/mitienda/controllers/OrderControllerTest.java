@@ -141,4 +141,61 @@ public class OrderControllerTest {
     Assertions.assertEquals(HttpStatus.OK.value(), status);
   }
 
+  @Test
+  @Sql({"/testdata/deliver_order_api.sql"})
+  public void deliverOrderTest() throws Exception{
+
+  //Crear la peticion :D
+
+    RequestBuilder requestBuilder = MockMvcRequestBuilders.patch("/api/orders/1/delivery");
+    //Hacer La Peticion
+    ResultActions resultActions=  mockMvc.perform(requestBuilder);
+    // Sacar los resultado de la peticion
+    int status=resultActions.andReturn().getResponse().getStatus();
+
+    // Hacer las assertions
+    Order order=orderRepository.find(1L);
+
+    Assertions.assertEquals(HttpStatus.OK.value(), status);
+
+    Assertions.assertEquals("delivered",order.getState());
+
+  }
+  @Test
+  @Sql({"/testdata/delive_order_state_not_finished_api.sql"})
+  public void deliveOrderStateNotFinishedTest() throws Exception {
+
+    //Crear la peticion :D
+
+    RequestBuilder requestBuilder = MockMvcRequestBuilders.patch("/api/orders/1/delivery");
+    //Hacer La Peticion
+    ResultActions resultActions=  mockMvc.perform(requestBuilder);
+    // Sacar los resultado de la peticion
+    int status=resultActions.andReturn().getResponse().getStatus();
+
+    // Hacer las assertions
+
+    Assertions.assertEquals(HttpStatus.BAD_REQUEST.value(), status);
+
+
+  }
+  @Test
+  @Sql({"/testdata/deliver_order_not_found_api.sql"})
+  public void deliverOrderNotFoundTest() throws Exception {
+
+    //Crear la peticion :D
+
+    RequestBuilder requestBuilder = MockMvcRequestBuilders.patch("/api/orders/2/delivery");
+    //Hacer La Peticion
+    ResultActions resultActions=  mockMvc.perform(requestBuilder);
+    // Sacar los resultado de la peticion
+    int status=resultActions.andReturn().getResponse().getStatus();
+
+    // Hacer las assertions
+
+    Assertions.assertEquals(HttpStatus.NOT_FOUND.value(), status);
+
+
+  }
+
 }
