@@ -1,6 +1,8 @@
 package co.edu.eam.disenosoftware.mitienda.controllers;
 
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
+import co.edu.eam.disenosoftware.mitienda.model.entities.OrderProduct;
+import co.edu.eam.disenosoftware.mitienda.model.responses.ErrorResponse;
 import co.edu.eam.disenosoftware.mitienda.repositories.OrderRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
@@ -16,6 +18,9 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
@@ -23,6 +28,9 @@ public class OrderControllerTest {
 
   @Autowired
   private MockMvc mockMvc;
+
+  @PersistenceContext
+  private EntityManager em;
 
   @Autowired
   private ObjectMapper objectMapper;
@@ -145,7 +153,7 @@ public class OrderControllerTest {
   @Sql({"/testdata/deliver_order_api.sql"})
   public void deliverOrderTest() throws Exception{
 
-  //Crear la peticion :D
+  //Crear la peticion
 
     RequestBuilder requestBuilder = MockMvcRequestBuilders.patch("/api/orders/1/delivery");
     //Hacer La Peticion
@@ -164,7 +172,7 @@ public class OrderControllerTest {
   @Sql({"/testdata/delive_order_state_not_finished_api.sql"})
   public void deliveOrderStateNotFinishedTest() throws Exception {
 
-    //Crear la peticion :D
+    //Crear la peticion
 
     RequestBuilder requestBuilder = MockMvcRequestBuilders.patch("/api/orders/1/delivery");
     //Hacer La Peticion
@@ -179,7 +187,7 @@ public class OrderControllerTest {
   @Test
   @Sql({"/testdata/deliver_order_not_found_api.sql"})
   public void deliverOrderNotFoundTest() throws Exception {
-    //Crear la peticion :D
+    //Crear la peticion
     RequestBuilder requestBuilder = MockMvcRequestBuilders.patch("/api/orders/2/delivery");
     //Hacer La Peticion
     ResultActions resultActions=  mockMvc.perform(requestBuilder);
@@ -189,4 +197,116 @@ public class OrderControllerTest {
     Assertions.assertEquals(HttpStatus.NOT_FOUND.value(), status);
   }
 
+  @Test
+  @Sql({"/testdata/controllers/controller_add_product_to_order_test.sql"})
+  public void controllerAddProductToOrderTest() throws Exception  {
+    String jsonBody = "{\n" +
+            "    \"id\": 3,\n" +
+            "    \"quantity\": 1\n" +
+            "}";
+    RequestBuilder request = MockMvcRequestBuilders.put("/api/orders/1/add-product")
+            .contentType("application/json")
+            .content(jsonBody);
+
+    ResultActions result = mockMvc.perform(request);
+
+    String body = result.andReturn().getResponse().getContentAsString();
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(HttpStatus.OK.value(), status);
+
+    OrderProduct orderProduct = objectMapper.readValue(body,OrderProduct.class);
+    Assertions.assertEquals(3L,orderProduct.getProductStore().getId());
+    Assertions.assertEquals(1,orderProduct.getQuantity());
+
+  }
+
+  @Test
+  @Sql({"/testdata/controllers/controller_add_product_to_order_when_canceled_test.sql"})
+  public void controllerAddProductToOrderWhenCanceledTest() throws Exception  {
+    String jsonBody = "{\n" +
+            "    \"id\": 3,\n" +
+            "    \"quantity\": 1\n" +
+            "}";
+    RequestBuilder request = MockMvcRequestBuilders.put("/api/orders/1/add-product")
+            .contentType("application/json")
+            .content(jsonBody);
+
+    ResultActions result = mockMvc.perform(request);
+
+    String body = result.andReturn().getResponse().getContentAsString();
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(HttpStatus.PRECONDITION_FAILED.value(), status);
+
+    ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
+    Assertions.assertEquals("0025", error.getErrorCode());
+
+  }
+
+  @Test
+  @Sql({"/testdata/controllers/controller_add_product_to_order_when_finished_test.sql"})
+  public void controllerAddProductToOrderWhenFinishedTest() throws Exception  {
+    String jsonBody = "{\n" +
+            "    \"id\": 2,\n" +
+            "    \"quantity\": 1\n" +
+            "}";
+    RequestBuilder request = MockMvcRequestBuilders.put("/api/orders/1/add-product")
+            .contentType("application/json")
+            .content(jsonBody);
+
+    ResultActions result = mockMvc.perform(request);
+
+    String body = result.andReturn().getResponse().getContentAsString();
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(HttpStatus.PRECONDITION_FAILED.value(), status);
+
+    ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
+    Assertions.assertEquals("0025", error.getErrorCode());
+  }
+
+  @Test
+  @Sql({"/testdata/controllers/controller_add_product_to_order_when_product_store_not_found_test.sql"})
+  public void controllerAddProductToOrderWhenProductStoreNotFoundTest() throws Exception  {
+    String jsonBody = "{\n" +
+            "    \"id\": 3,\n" +
+            "    \"quantity\": 1\n" +
+            "}";
+    RequestBuilder request = MockMvcRequestBuilders.put("/api/orders/1/add-product")
+            .contentType("application/json")
+            .content(jsonBody);
+
+    ResultActions result = mockMvc.perform(request);
+
+    String body = result.andReturn().getResponse().getContentAsString();
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(HttpStatus.NOT_FOUND.value(), status);
+
+    ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
+    Assertions.assertEquals("0026", error.getErrorCode());
+  }
+
+  @Test
+  @Sql({"/testdata/controllers/controller_add_product_to_order_when_price_limit_is_exceeded_test.sql"})
+  public void controllerAddProductToOrderWhenPriceLimitPercentageIsExceededTest() throws Exception  {
+    String jsonBody = "{\n" +
+            "    \"id\": 3,\n" +
+            "    \"quantity\": 2\n" +
+            "}";
+    RequestBuilder request = MockMvcRequestBuilders.put("/api/orders/1/add-product")
+            .contentType("application/json")
+            .content(jsonBody);
+
+    ResultActions result = mockMvc.perform(request);
+
+    String body = result.andReturn().getResponse().getContentAsString();
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(HttpStatus.PRECONDITION_FAILED.value(), status);
+
+    ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
+    Assertions.assertEquals("0027", error.getErrorCode());
+  }
 }
