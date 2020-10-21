@@ -61,11 +61,11 @@ public class UserService {
     User userName = userRepository.getUserByUserName(username);
 
     if (userName == null) {
-      throw new BusinessException("Error", ErrorCodesEnum.USERNAME_IS_NOT_THE_SAME);
+      throw new BusinessException("The username or password is incorrect", ErrorCodesEnum.LOGIN_INCORRECT);
     }
 
     if (!userName.getPassword().equals(EncrypterUtil.getMD5(password))) {
-      throw new BusinessException("Error", ErrorCodesEnum.PASSWORD_IS_NOT_THE_SAME);
+      throw new BusinessException("The username or password is incorrect", ErrorCodesEnum.LOGIN_INCORRECT);
     }
 
     return true;

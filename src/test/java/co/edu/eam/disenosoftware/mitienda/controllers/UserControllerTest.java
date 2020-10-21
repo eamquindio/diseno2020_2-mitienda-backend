@@ -158,7 +158,7 @@ public class UserControllerTest {
     Assertions.assertEquals(HttpStatus.FORBIDDEN.value(), status);
 
     ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
-    Assertions.assertEquals("0023", error.getErrorCode());
+    Assertions.assertEquals("0019", error.getErrorCode());
   }
 
   @Test
@@ -180,6 +180,6 @@ public class UserControllerTest {
     Assertions.assertEquals(HttpStatus.FORBIDDEN.value(), status);
 
     ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
-    Assertions.assertEquals("0024", error.getErrorCode());
+    Assertions.assertEquals("0019", error.getErrorCode());
   }
 }
