@@ -83,7 +83,6 @@ public class OrderProductServiceTest {
   @Sql({"/testdata/adding_product_to_order_product_can_not_adding_product.sql"})
   public void addingProductToOrderProductCannotAddProductTest(){
 
-
      BusinessException exception = Assertions.assertThrows(BusinessException.class,
             () ->service.addingProductToOrderProduct(77L,1L,1));
      Assertions.assertEquals("El product no puede ser agregado", exception.getMessage());
