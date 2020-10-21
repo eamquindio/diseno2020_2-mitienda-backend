@@ -21,7 +21,6 @@ public class ShoppingCartController {
   /**
    * autowired
    */
-  //ESTE ES EL QUE BUSCAS AMOR
   @Autowired
   private ShoppingCartProductService shoppingCartProductService;
 
