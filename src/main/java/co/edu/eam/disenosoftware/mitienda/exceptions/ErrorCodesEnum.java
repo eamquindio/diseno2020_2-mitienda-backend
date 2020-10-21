@@ -13,11 +13,11 @@ public enum ErrorCodesEnum {
   /**
    * Shopping cart product not found
    */
-  SHOPPING_CART_PRODUCT_NOT_FOUND("0001"),
+  SHOPPING_CART_PRODUCT_NOT_FOUND("0001", HttpStatus.NOT_FOUND),
   /**
    * Product store not found
    */
-  PRODUCT_STORE_NOT_FOUNDED("0002"),
+  PRODUCT_STORE_NOT_FOUNDED("0002", HttpStatus.NOT_FOUND),
   /**
    * Exception when User Exceed Five orders in progress
    */
@@ -28,20 +28,20 @@ public enum ErrorCodesEnum {
   SHOPPING_CART_NOT_FOUND("0004"),
   /**
    * Shopping cart is empty
-    */
+   */
   SHOPPING_CART_EMPTY("0005"),
   /**
    * Store is not founded
    */
-  STORE_NOT_FOUNDED("0006"),
+  STORE_NOT_FOUNDED("0006", HttpStatus.NOT_FOUND),
   /**
    * User is not founded
    */
-  USER_NOT_FOUNDED("0007"),
+  USER_NOT_FOUNDED("0007", HttpStatus.NOT_FOUND),
   /**
    * code for not found store
    */
-  NOT_FOUND_STORE("0008"),
+  NOT_FOUND_STORE("0008", HttpStatus.NOT_FOUND),
   /**
    * code for name category in use
    */
@@ -157,6 +157,7 @@ public enum ErrorCodesEnum {
 
   /**
    * get de error code description
+   *
    * @return error code
    */
   public String getCode() {
@@ -165,6 +166,7 @@ public enum ErrorCodesEnum {
 
   /**
    * Get the status code associated to this error
+   *
    * @return http status code
    */
   public HttpStatus getStatus() {

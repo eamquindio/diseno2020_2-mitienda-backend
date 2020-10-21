@@ -86,6 +86,7 @@ public class ShoppingCart implements Serializable {
   public ShoppingCart(Store store, User user) {
     this.store = store;
     this.user = user;
+    this.totalValue = totalValue;
   }
 
   /**
