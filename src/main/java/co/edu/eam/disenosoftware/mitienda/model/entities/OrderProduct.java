@@ -57,43 +57,12 @@ public class OrderProduct implements Serializable {
   }
 
   /**
-   * Order's products constructor
-   * @param id
+   * Constructor
    * @param order
    * @param productStore
    * @param quantity
    * @param state
    */
-  public OrderProduct(long id, Order order, ProductStore productStore, int quantity, String state) {
-  }
-  /**
-   * Order's products constructor
-   * @param quantity     , quantity parameter
-   * @param state        , state parameter
-   * @param order        , order parameter
-   */
-  public OrderProduct(int quantity, String state, Order order) {
-    this.quantity = quantity;
-    this.state = state;
-    this.order = order;
-  }
-
-  /**
-   * Order's products constructor
-   * @param id           , id parameter
-   * @param order        , order parameter
-   * @param productStore , productStore parameter
-   * @param quantity     , quantity parameter
-   * @param state        , state parameter
-   */
-  public OrderProduct(Long id, Order order, ProductStore productStore, int quantity, String state) {
-    this.id = id;
-    this.order = order;
-    this.productStore = productStore;
-    this.quantity = quantity;
-    this.state = state;
-  }
-
   public OrderProduct(Order order, ProductStore productStore, int quantity, String state) {
     this.order = order;
     this.productStore = productStore;

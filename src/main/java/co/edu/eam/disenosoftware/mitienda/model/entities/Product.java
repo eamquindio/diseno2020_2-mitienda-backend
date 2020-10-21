@@ -35,15 +35,6 @@ public class Product implements Serializable {
   }
 
   /**
-   * Product's constructor to Id
-   *
-   * @param id , id parameter
-   */
-  public Product(Long id) {
-    this.id = id;
-  }
-
-  /**
    * The product's constructor with params
    *
    * @param id    ,product's id

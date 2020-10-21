@@ -75,55 +75,14 @@ public class Store implements Serializable {
   }
 
   /**
-   * Get id
-   *
-   * @return id
+   * Constructor
+   * @param name
+   * @param owner
+   * @param address
+   * @param phone
+   * @param email
+   * @param password
    */
-  public Long getId() {
-    return id;
-  }
-
-  /**
-   * Store's constructor with params
-   *
-   * @param id primary key
-   */
-  public Store(Long id) {
-    this.id = id;
-  }
-
-  /**
-   * Store's constructor with params
-   * @param name store's name
-   */
-  public Store(String name) {
-    this.name = name;
-  }
-
-  /**
-   * Store's constructor with params
-   *
-   * @param id   primary key
-   * @param name Store's name
-   */
-  public Store(Long id, String name) {
-    this.id = id;
-    this.name = name;
-  }
-
-  /**
-   * Store's constructor with params
-   *
-   * @param id    primary key
-   * @param email Store's email
-   * @param name  Store's name
-   */
-  public Store(Long id, String email, String name) {
-    this.id = id;
-    this.email = email;
-    this.name = name;
-  }
-
   public Store(String name, String owner, String address, String phone, String email, String password) {
     this.name = name;
     this.owner = owner;
@@ -131,6 +90,15 @@ public class Store implements Serializable {
     this.phone = phone;
     this.email = email;
     this.password = password;
+  }
+
+  /**
+   * Get id
+   *
+   * @return id
+   */
+  public Long getId() {
+    return id;
   }
 
   /**

@@ -29,8 +29,9 @@ public class UserService {
    * @param username , username
    * @param email    ,    email
    * @param password , password
+   * @return user user created
    */
-  public void createUser(String name, String phone, String username, String email, String password) {
+  public User createUser(String name, String phone, String username, String email, String password) {
 
     User userEmail = userRepository.getUserByEmail(email);
     User userName = userRepository.getUserByUserName(username);
@@ -47,6 +48,8 @@ public class UserService {
     }
     User user = new User(username, phone, email, password, name);
     userRepository.create(user);
+
+    return user;
   }
 
   /**
@@ -56,7 +59,7 @@ public class UserService {
    * @param password , password
    * @return , list
    */
-  public boolean userLogin(String username, String password) {
+  public User userLogin(String username, String password) {
 
     User userName = userRepository.getUserByUserName(username);
 
@@ -68,7 +71,7 @@ public class UserService {
       throw new BusinessException("The username or password is incorrect", ErrorCodesEnum.LOGIN_INCORRECT);
     }
 
-    return true;
+    return userName;
   }
 
 

@@ -60,23 +60,6 @@ public class ShoppingCart implements Serializable {
   public ShoppingCart() {
   }
 
-  public ShoppingCart(Long id) {
-    this.id = id;
-  }
-
-  /**
-   * ShoppingCart constructors with id, store, user
-   *
-   * @param id    , id
-   * @param store , store
-   * @param user  , user
-   */
-  public ShoppingCart(Long id, Store store, User user) {
-    this.id = id;
-    this.store = store;
-    this.user = user;
-  }
-
   /**
    * ShoppingCart constructor with store, user
    *

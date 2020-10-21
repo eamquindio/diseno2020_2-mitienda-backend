@@ -1,5 +1,7 @@
 package co.edu.eam.disenosoftware.mitienda.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -39,6 +41,7 @@ public class User implements Serializable {
   /**
    * User's password
    */
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private String password;
 
   /**
@@ -50,26 +53,6 @@ public class User implements Serializable {
    * User's constructor
    */
   public User() {
-  }
-
-  /**
-   * User's constructor
-   *
-   * @param id primary key
-   */
-  public User(Long id) {
-    this.id = id;
-  }
-
-  /**
-   * User's constructor
-   *
-   * @param id       primary key
-   * @param username username to user
-   */
-  public User(Long id, String username) {
-    this.id = id;
-    this.username = username;
   }
 
   /**
@@ -196,16 +179,4 @@ public class User implements Serializable {
     this.name = name;
   }
 
-  /**
-   * Override
-   *
-   * @return user
-   */
-  @Override
-  public String toString() {
-    return "User{"
-            + "id=" + id
-            + ", username='" + username + '\''
-            + '}';
-  }
 }

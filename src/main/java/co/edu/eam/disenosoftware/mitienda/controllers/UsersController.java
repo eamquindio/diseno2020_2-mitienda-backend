@@ -44,7 +44,7 @@ public class UsersController {
    * @return returns boolean when successfully logged in
    */
   @PostMapping("/login")
-  public boolean userLogin(@RequestBody @Valid UserLoginRequest request) {
+  public User userLogin(@RequestBody @Valid UserLoginRequest request) {
     return userService.userLogin(request.getUsername(), request.getPassword());
   }
 }

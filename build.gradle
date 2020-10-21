@@ -35,8 +35,7 @@ jacocoTestCoverageVerification {
             limit {
                 counter = 'LINE'
                 value = 'COVEREDRATIO'
-                minimum = 0.0
-                excludes = ['*.model.*', '*.exceptions.*']
+                minimum = 0.93
             }
         }
     }

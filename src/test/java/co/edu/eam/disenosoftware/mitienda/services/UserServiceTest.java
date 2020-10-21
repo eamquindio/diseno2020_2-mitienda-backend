@@ -24,12 +24,11 @@ public class UserServiceTest {
 
   @Test
   public void createUserTest() {
-    service.createUser("pedro", "123", "pedrito", "1@1.com", "4567");
-    User userToAssert = userRepository.find(1L);
+    User user = service.createUser("pedro", "123", "pedrito", "1@1.com", "4567");
+    User userToAssert = userRepository.find(user.getId());
     Assertions.assertNotNull(userToAssert);
     Assertions.assertEquals("pedrito", userToAssert.getUsername());
     Assertions.assertEquals(EncrypterUtil.getMD5("4567"), userToAssert.getPassword());
-
   }
 
   @Test
@@ -49,8 +48,8 @@ public class UserServiceTest {
   @Test
   @Sql({"/testdata/user_login_test.sql"})
   public void userLoginTest() {
-    boolean loginToAssert = service.userLogin("nombreusuario", "12345");
-    Assertions.assertEquals(true, loginToAssert);
+    User user = service.userLogin("nombreusuario", "12345");
+    Assertions.assertEquals("nombreusuario", user.getUsername());
   }
 
   @Test

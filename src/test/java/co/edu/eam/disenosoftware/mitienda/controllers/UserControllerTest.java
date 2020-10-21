@@ -135,8 +135,10 @@ public class UserControllerTest {
     String body = result.andReturn().getResponse().getContentAsString();
     int status = result.andReturn().getResponse().getStatus();
 
+    User user = objectMapper.readValue(body, User.class);
+
     Assertions.assertEquals(HttpStatus.OK.value(), status);
-    Assertions.assertEquals("true",body);
+    Assertions.assertEquals("nombreusuario",user.getUsername());
   }
 
   @Test
