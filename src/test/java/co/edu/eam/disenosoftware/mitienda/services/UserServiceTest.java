@@ -57,18 +57,13 @@ public class UserServiceTest {
   @Sql({"/testdata/user_wrong_test.sql"})
   public void userWrongTest() {
     BusinessException exception = Assertions.assertThrows(BusinessException.class, () -> service.userLogin("123", "12345"));
-    Assertions.assertEquals(ErrorCodesEnum.USERNAME_IS_NOT_THE_SAME, exception.getCode());
+    Assertions.assertEquals(ErrorCodesEnum.LOGIN_INCORRECT, exception.getCode());
   }
 
   @Test
   @Sql({"/testdata/password_wrong_test.sql"})
   public void passwordWrongTest() {
     BusinessException exception = Assertions.assertThrows(BusinessException.class, () -> service.userLogin("nombreusuario", "54321"));
-    Assertions.assertEquals(ErrorCodesEnum.PASSWORD_IS_NOT_THE_SAME, exception.getCode());
+    Assertions.assertEquals(ErrorCodesEnum.LOGIN_INCORRECT, exception.getCode());
   }
-
-
-
-
-
 }

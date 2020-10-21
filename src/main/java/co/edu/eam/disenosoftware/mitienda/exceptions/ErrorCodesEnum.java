@@ -85,7 +85,7 @@ public enum ErrorCodesEnum {
   /**
    * login incorrect
    */
-  LOGIN_INCORRECT("0019"),
+  LOGIN_INCORRECT("0019", HttpStatus.FORBIDDEN),
   /**
    * email already exist
    */
