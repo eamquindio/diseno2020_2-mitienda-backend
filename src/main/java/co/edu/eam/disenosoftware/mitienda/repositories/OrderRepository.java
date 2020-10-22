@@ -94,4 +94,16 @@ public class OrderRepository {
     return query.getResultList();
   }
 
+  /**
+   * Method to find the orders by store
+   *
+   * @param idStore prime key of the store
+   * @return list of orders from one store
+   */
+  public List<Order> getOrdersByStore(Long idStore) {
+    String queryStr = "SELECT order FROM Order order WHERE order.store.id = :idStore";
+    Query query = em.createQuery(queryStr);
+    query.setParameter("idStore", idStore);
+    return query.getResultList();
+  }
 }

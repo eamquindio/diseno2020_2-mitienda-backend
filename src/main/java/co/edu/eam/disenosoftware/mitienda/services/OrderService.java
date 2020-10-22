@@ -157,6 +157,14 @@ public class OrderService {
     }
 
   }
+  /**
+   * Method to call List of get orders by user id in service
+   * @param idUser , id of user
+   * @return list of orders
+   */
+  public List<Order> getOrdersByUserId(Long idUser) {
+    return orderRepository.getOrdersInCourseByUserId(idUser);
+  }
 
   /**
    * Method to get order by orderId
@@ -171,4 +179,12 @@ public class OrderService {
     return order;
   }
 
+  /**
+   * Method to call List of get orders by store id in service
+   * @param idStore , id of store
+   * @return list of orders
+   */
+  public List<Order> getOrdersByStoreId(Long idStore) {
+    return orderRepository.getOrdersByStore(idStore);
+  }
 }
