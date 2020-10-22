@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Category service
  */
@@ -50,6 +52,14 @@ public class CategoryService {
     }
     Category newCategory = new Category(icon, name, store);
     categoryRepository.create(newCategory);
+  }
+
+  public List<Category> getAllCategoryByStoreId(Long id){
+    Category category = categoryRepository.find(id);
+    if(category == null){
+      throw new BusinessException("No se encontro la categoria", ErrorCodesEnum.NOT_FOUND_CATEGORY);
+    }
+    return categoryRepository.getCategoryByStoreId(id);
   }
 }
 

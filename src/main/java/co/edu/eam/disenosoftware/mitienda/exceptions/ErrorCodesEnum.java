@@ -53,7 +53,7 @@ public enum ErrorCodesEnum {
   /**
    * code for not found category
    */
-  NOT_FOUND_CATEGORY("0011"),
+  NOT_FOUND_CATEGORY("0011", HttpStatus.NOT_FOUND),
   /**
    * code for not order product found error
    */

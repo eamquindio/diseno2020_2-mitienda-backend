@@ -49,7 +49,7 @@ public class CategoryRepository {
    */
   public List<Category> getCategoryByStoreId(Long id) {
 
-    String quertyStr = "SELECT category FROM Category category WHERE category.store.id = :id";
+    String quertyStr = "select c from Category c where c.store.id = :id";
 
     Query query = em.createQuery(quertyStr);
 
