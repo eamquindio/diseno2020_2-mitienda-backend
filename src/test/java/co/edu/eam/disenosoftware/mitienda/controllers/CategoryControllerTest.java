@@ -27,22 +27,4 @@ public class CategoryControllerTest {
 
   @Autowired
   private ObjectMapper objectMapper;
-
-  @PersistenceContext
-  private EntityManager em;
-
-  @Test
-  @Sql("/testdata/controlles_get_all_category_store_by_store_id.sql")
-  public void getAllCategoryByStoreId() throws Exception{
-
-    RequestBuilder request = MockMvcRequestBuilders.get("/api/categories/stores/3/categories");
-
-    ResultActions result = mockMvc.perform((request));
-
-    String body = result.andReturn().getResponse().getContentAsString();
-    int status = result.andReturn().getResponse().getStatus();
-
-    Category category = objectMapper.readValue(body, Category.class);
-    Assertions.assertEquals("pedro", category.getName());
-  }
 }
