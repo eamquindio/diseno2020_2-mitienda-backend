@@ -54,7 +54,13 @@ public class CategoryService {
     categoryRepository.create(newCategory);
   }
 
-  public List<Category> getAllCategoryByStoreId(Long id){
+  /**
+   * GetAllCategoryByStoreId
+   *
+   * @param id , id
+   * @return list category
+   */
+  public List<Category> getAllCategoryByStoreId(Long id) {
     return categoryRepository.getCategoryByStoreId(id);
   }
 }

@@ -17,11 +17,20 @@ import java.util.List;
 @RequestMapping("/api/categories")
 public class CategoryController {
 
+  /**
+   * Autowired
+   */
   @Autowired
   private CategoryService categoryService;
 
+  /**
+   * GetMapping
+   *
+   * @param id , id
+   * @return , list Category by store id
+   */
   @GetMapping("/stores/{store_id}/categories")
-  public List<Category> listAllCategoryByStoreId(@PathVariable Long id){
+  public List<Category> listAllCategoryByStoreId(@PathVariable Long id) {
     return categoryService.getAllCategoryByStoreId(id);
   }
 }

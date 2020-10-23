@@ -15,10 +15,20 @@ import java.util.List;
 @Transactional
 public class ProductService {
 
+  /**
+   * Autowired
+   */
   @Autowired
-  ProductRepository productRepository;
+  private ProductRepository productRepository;
 
-  public List<Product> getAllProductByName(String name){
+  /**
+   * GetAallProductByName
+   *
+   * @param name , name
+   * @return List product
+   */
+
+  public List<Product> getAllProductByName(String name) {
     return productRepository.getProductsByName(name);
   }
 }

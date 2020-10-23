@@ -80,7 +80,8 @@ public class Category implements Serializable {
 
   /**
    * category's Set method
-   * @param icon, icon we want to set
+   *
+   * @param icon , icon we want to set
    */
   public void setIcon(String icon) {
     this.icon = icon;
@@ -96,7 +97,8 @@ public class Category implements Serializable {
 
   /**
    * category's Set name
-   * @param name, name we want to set
+   *
+   * @param name , name we want to set
    */
   public void setName(String name) {
     this.name = name;
@@ -112,7 +114,8 @@ public class Category implements Serializable {
 
   /**
    * category's Set store
-   * @param store, store we want to set
+   *
+   * @param store , store we want to set
    */
   public void setStore(Store store) {
     this.store = store;

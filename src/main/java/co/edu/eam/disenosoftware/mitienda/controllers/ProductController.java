@@ -17,11 +17,20 @@ import java.util.List;
 @RequestMapping("/api/products")
 public class ProductController {
 
+  /**
+   * Autowired
+   */
   @Autowired
   private ProductService productService;
 
+  /**
+   * GetMapping
+   *
+   * @param name , name
+   * @return , list product by name
+   */
   @GetMapping("/by-name")
-  public List<Product> listAllProductByName(@RequestParam ("name_product") String name){
+  public List<Product> listAllProductByName(@RequestParam("name_product") String name) {
     return productService.getAllProductByName(name);
   }
 }
