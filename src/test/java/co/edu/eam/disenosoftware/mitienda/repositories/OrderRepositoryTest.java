@@ -128,4 +128,12 @@ public class OrderRepositoryTest {
 
     Assertions.assertEquals(5, ordersFinishedToAssert.size());
   }
+
+  @Test
+  @Sql({"/testdata/get_orders_by_store.sql"})
+  public void getOrdersByStoreTest(){
+    List<Order>orders = orderRepository.getOrdersByStore(1L);
+    Assertions.assertEquals(3,orders.size());
+  }
 }
+

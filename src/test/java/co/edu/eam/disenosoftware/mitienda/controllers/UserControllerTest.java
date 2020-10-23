@@ -3,6 +3,9 @@ package co.edu.eam.disenosoftware.mitienda.controllers;
 import co.edu.eam.disenosoftware.mitienda.model.entities.User;
 import co.edu.eam.disenosoftware.mitienda.model.responses.ErrorResponse;
 import co.edu.eam.disenosoftware.mitienda.repositories.UserRepository;
+import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
+import co.edu.eam.disenosoftware.mitienda.repositories.OrderRepository;
+import co.edu.eam.disenosoftware.mitienda.services.OrderService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,6 +20,10 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.swing.text.html.parser.Entity;
+import java.util.List;
+
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
@@ -30,6 +37,12 @@ public class UserControllerTest {
 
   @Autowired
   private UserRepository userRepository;
+
+  @Autowired
+  private OrderService orderService;
+
+  @Autowired
+  private OrderRepository orderRepository;
 
   @Test
   @Sql({"/testdata/username_all_exist_api.sql"})
@@ -183,5 +196,23 @@ public class UserControllerTest {
 
     ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
     Assertions.assertEquals("0019", error.getErrorCode());
+  }
+
+  @Test
+  @Sql({"/testdata/controllers/orders_by_user_id.sql"})
+  public void ordersByUserIdTest() throws Exception {
+    //1. crear la peticion
+    RequestBuilder request = MockMvcRequestBuilders.get("/api/users/1/orders");
+    //2. hacer la peticion
+    ResultActions result = mockMvc.perform(request);
+
+    //3. sacar los resultados de la peticion
+    String body = result.andReturn().getResponse().getContentAsString();
+    int status = result.andReturn().getResponse().getStatus();
+    //4. hacer las asersion
+    Assertions.assertEquals(HttpStatus.OK.value(), status);
+    Order[] orders = objectMapper.readValue(body,Order[].class);
+
+    Assertions.assertEquals(2, orders.length);
   }
 }

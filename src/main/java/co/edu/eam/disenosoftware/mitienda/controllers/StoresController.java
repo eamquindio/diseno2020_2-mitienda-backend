@@ -1,9 +1,12 @@
 package co.edu.eam.disenosoftware.mitienda.controllers;
 
 import co.edu.eam.disenosoftware.mitienda.model.entities.Store;
+import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
+import co.edu.eam.disenosoftware.mitienda.services.OrderService;
 import co.edu.eam.disenosoftware.mitienda.services.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +26,12 @@ public class StoresController {
   private StoreService storeService;
 
   /**
+   *  Order Service
+   */
+  @Autowired
+  private OrderService orderService;
+
+  /**
    * URL: /is_open
    * Verbo: Get
    * Retorno: Número n de tiendas
@@ -31,5 +40,15 @@ public class StoresController {
   @GetMapping("/is-open")
   public List<Store> getAllStoresOpen() {
     return storeService.getOpenStores();
+  }
+
+  /**
+   *  API orders by store ID
+   * @param storeId , id of store
+   * @return a list of orders
+   */
+  @GetMapping("/{store_id}/orders")
+  public List<Order> ordersByStoreId(@PathVariable("store_id")Long storeId) {
+    return orderService.getOrdersByStoreId(storeId);
   }
 }
