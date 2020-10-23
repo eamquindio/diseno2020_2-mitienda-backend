@@ -185,6 +185,40 @@ public class OrderServiceTest {
 
   }
 
+  @Test
+  @Sql({"/testdata/get_orders_by_user_id.sql"})
+  public void getOrdersByUserIdTest(){
+    List<Order>orders = service.getOrdersByUserId(1L);
+    Assertions.assertEquals(3,orders.size());
+  }
+
+  @Test
+  @Sql({"/testdata/get_orders_by_user_id_not_found.sql"})
+  public void getOrdersByUserIdNotFoundTest(){
+    BusinessException exception = Assertions.assertThrows(BusinessException.class,
+            () ->service.getOrdersByUserId(2L));
+
+    Assertions.assertEquals("User does not exist.",exception.getMessage());
+    Assertions.assertEquals(ErrorCodesEnum.USER_NOT_FOUNDED,exception.getCode());
+  }
+
+  @Test
+  @Sql({"/testdata/get_orders_by_store_id.sql"})
+  public void getOrdersByStoreIdTest(){
+    List<Order>orders = service.getOrdersByStoreId(1L);
+    Assertions.assertEquals(3,orders.size());
+  }
+
+  @Test
+  @Sql({"/testdata/get_orders_by_store_id_not_found.sql"})
+  public void getOrdersByStoreIdNotFoundTest(){
+    BusinessException exception = Assertions.assertThrows(BusinessException.class,
+            () ->service.getOrdersByStoreId(2L));
+
+    Assertions.assertEquals("Store does not exist.",exception.getMessage());
+    Assertions.assertEquals(ErrorCodesEnum.STORE_NOT_FOUNDED,exception.getCode());
+  }
+
 }
 
 

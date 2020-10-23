@@ -12,6 +12,8 @@ import co.edu.eam.disenosoftware.mitienda.repositories.OrderProductRepository;
 import co.edu.eam.disenosoftware.mitienda.repositories.OrderRepository;
 import co.edu.eam.disenosoftware.mitienda.repositories.ShoppingCartProductRepository;
 import co.edu.eam.disenosoftware.mitienda.repositories.ShoppingCartRepository;
+import co.edu.eam.disenosoftware.mitienda.repositories.StoreRepository;
+import co.edu.eam.disenosoftware.mitienda.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,6 +53,17 @@ public class OrderService {
   @Autowired
   private OrderRepository orderRepository;
 
+  /**
+   * Injecting userRepository class
+   */
+  @Autowired
+  private UserRepository userRepository;
+
+  /**
+   * Injecting storeRepository class
+   */
+  @Autowired
+  private StoreRepository storeRepository;
   /**
    * Create an order by the shopping cart
    * @param shoppingCartId id of the shoppingCart that we are
@@ -163,6 +176,10 @@ public class OrderService {
    * @return list of orders
    */
   public List<Order> getOrdersByUserId(Long idUser) {
+    User user = userRepository.find(idUser);
+    if (user == null){
+      throw new BusinessException("User does not exist.", ErrorCodesEnum.USER_NOT_FOUNDED);
+    }
     return orderRepository.getOrdersInCourseByUserId(idUser);
   }
 
@@ -185,6 +202,10 @@ public class OrderService {
    * @return list of orders
    */
   public List<Order> getOrdersByStoreId(Long idStore) {
+    Store store = storeRepository.find(idStore);
+    if (store == null){
+      throw new BusinessException("Store does not exist.", ErrorCodesEnum.STORE_NOT_FOUNDED);
+    }
     return orderRepository.getOrdersByStore(idStore);
   }
 }
