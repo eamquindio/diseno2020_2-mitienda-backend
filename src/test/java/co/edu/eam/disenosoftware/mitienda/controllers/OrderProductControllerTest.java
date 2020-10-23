@@ -83,4 +83,16 @@ public class OrderProductControllerTest {
     Assertions.assertEquals(200, status);
   }
 
+  @Test
+  @Sql({"/testdata/controllers/not_exist_product_request.sql"})
+  public void NotExistProductRequest() throws Exception {
+    RequestBuilder request = MockMvcRequestBuilders.delete("/api/order-products/44");
+
+    ResultActions result = mockMvc.perform(request);
+
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(404, status);
+  }
+
 }

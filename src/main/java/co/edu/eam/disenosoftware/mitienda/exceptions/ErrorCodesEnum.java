@@ -125,7 +125,7 @@ public enum ErrorCodesEnum {
   /**
    * code for NOT_EXIST_ORDER_PRODUCT
    */
-  NOT_EXIST_ORDER_PRODUCT("0028"),
+  NOT_EXIST_ORDER_PRODUCT("0028", HttpStatus.NOT_FOUND),
 
   /**
    * code for NOT_STATE
