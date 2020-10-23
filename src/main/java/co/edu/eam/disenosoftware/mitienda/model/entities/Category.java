@@ -70,26 +70,50 @@ public class Category implements Serializable {
     this.id = id;
   }
 
+  /**
+   * category's Get method
+   * @return icon
+   */
   public String getIcon() {
     return icon;
   }
 
+  /**
+   * category's Set method
+   * @param icon, icon we want to set
+   */
   public void setIcon(String icon) {
     this.icon = icon;
   }
 
+  /**
+   * category's Get name
+   * @return name
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * category's Set name
+   * @param name, name we want to set
+   */
   public void setName(String name) {
     this.name = name;
   }
 
+  /**
+   * category's Get store
+   * @return  store
+   */
   public Store getStore() {
     return store;
   }
 
+  /**
+   * category's Set store
+   * @param store, store we want to set
+   */
   public void setStore(Store store) {
     this.store = store;
   }
