@@ -52,6 +52,17 @@ public class OrderProduct implements Serializable {
 
   /**
    * OrdersProduct constructor default
+   * @param l
+   * @param i
+   * @param removed
+   * @param l1
+   * @param l2
+   */
+  public OrderProduct(long l, int i, String removed, long l1, long l2) {
+  }
+
+  /**
+   * OrdersProduct constructor default
    */
   public OrderProduct() {
   }

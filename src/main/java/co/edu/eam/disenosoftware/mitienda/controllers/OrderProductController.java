@@ -2,6 +2,7 @@ package co.edu.eam.disenosoftware.mitienda.controllers;
 
 import co.edu.eam.disenosoftware.mitienda.services.OrderProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,15 @@ public class OrderProductController {
   @PutMapping("/{orderProductId}/check-product")
   public void checkOrderProduct(@PathVariable Long orderProductId) {
     orderProductService.checkOrderProductById(orderProductId);
+  }
+
+  /**
+   * function to delete a product to order
+   * @param orderProductId orderProductId
+   */
+  @DeleteMapping("/{orderProductId}")
+  public void deleteProductRequest(@PathVariable Long orderProductId) {
+    orderProductService.delete(orderProductId);
   }
 
 }

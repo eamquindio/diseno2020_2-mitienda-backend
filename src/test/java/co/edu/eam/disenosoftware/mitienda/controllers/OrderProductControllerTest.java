@@ -71,4 +71,16 @@ public class OrderProductControllerTest {
     Assertions.assertEquals(404,numberStatus);
   }
 
+  @Test
+  @Sql({"/testdata/controllers/delete_product_request.sql"})
+  public void deleteProductRequest() throws Exception {
+    RequestBuilder request = MockMvcRequestBuilders.delete("/api/order-products/1");
+
+    ResultActions result = mockMvc.perform(request);
+
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(200, status);
+  }
+
 }

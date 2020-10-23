@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
@@ -148,5 +149,17 @@ public class ShoppingCartControllerTest {
 
     Assertions.assertEquals(HttpStatus.NOT_FOUND.value(), status);
 
+  }
+
+  @Test
+  @Sql({"/testdata/controllers/delete_to_product_shopping_cart_request.sql"})
+  public void deleteProductToShoppingCartRequest() throws Exception {
+    RequestBuilder request = MockMvcRequestBuilders.delete("/api/shopping-cart/1/shopping-cart-product/1");
+
+    ResultActions result = mockMvc.perform(request);
+
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(200, status);
   }
 }
