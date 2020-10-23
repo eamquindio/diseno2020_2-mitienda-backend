@@ -160,7 +160,7 @@ public class ShoppingCartControllerTest {
 
     int status = result.andReturn().getResponse().getStatus();
 
-    Assertions.assertEquals(200, status);
+    Assertions.assertEquals(HttpStatus.OK.value(), status);
   }
 
   @Test
@@ -172,7 +172,7 @@ public class ShoppingCartControllerTest {
 
     int status = result.andReturn().getResponse().getStatus();
 
-    Assertions.assertEquals(404, status);
+    Assertions.assertEquals(HttpStatus.NOT_FOUND.value(), status);
   }
 
 

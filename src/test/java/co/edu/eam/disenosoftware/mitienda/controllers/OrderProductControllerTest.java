@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
@@ -41,7 +42,7 @@ public class OrderProductControllerTest {
     OrderProduct orderProduct = orderProductRepository.find(1L);
 
     Assertions.assertEquals("checked",orderProduct.getState());
-    Assertions.assertEquals(200,numberStatus);
+    Assertions.assertEquals(HttpStatus.OK.value(),numberStatus);
   }
 
   @Test
@@ -53,7 +54,7 @@ public class OrderProductControllerTest {
 
     int numberStatus = result.andReturn().getResponse().getStatus();
 
-    Assertions.assertEquals(412,numberStatus);
+    Assertions.assertEquals(HttpStatus.PRECONDITION_FAILED.value(),numberStatus);
   }
 
   @Test
@@ -68,7 +69,7 @@ public class OrderProductControllerTest {
     OrderProduct orderProduct = orderProductRepository.find(1L);
 
     Assertions.assertNull(orderProduct);
-    Assertions.assertEquals(404,numberStatus);
+    Assertions.assertEquals(HttpStatus.NOT_FOUND.value(),numberStatus);
   }
 
   @Test
@@ -80,7 +81,7 @@ public class OrderProductControllerTest {
 
     int status = result.andReturn().getResponse().getStatus();
 
-    Assertions.assertEquals(200, status);
+    Assertions.assertEquals(HttpStatus.OK.value(), status);
   }
 
   @Test
@@ -92,7 +93,7 @@ public class OrderProductControllerTest {
 
     int status = result.andReturn().getResponse().getStatus();
 
-    Assertions.assertEquals(404, status);
+    Assertions.assertEquals(HttpStatus.NOT_FOUND.value(), status);
   }
 
 }
