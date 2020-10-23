@@ -55,10 +55,6 @@ public class CategoryService {
   }
 
   public List<Category> getAllCategoryByStoreId(Long id){
-    Category category = categoryRepository.find(id);
-    if(category == null){
-      throw new BusinessException("No se encontro la categoria", ErrorCodesEnum.NOT_FOUND_CATEGORY);
-    }
     return categoryRepository.getCategoryByStoreId(id);
   }
 }
