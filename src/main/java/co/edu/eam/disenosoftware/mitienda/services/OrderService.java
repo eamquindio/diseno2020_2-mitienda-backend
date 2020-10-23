@@ -177,7 +177,7 @@ public class OrderService {
    */
   public List<Order> getOrdersByUserId(Long idUser) {
     User user = userRepository.find(idUser);
-    if (user == null){
+    if (user == null) {
       throw new BusinessException("User does not exist.", ErrorCodesEnum.USER_NOT_FOUNDED);
     }
     return orderRepository.getOrdersInCourseByUserId(idUser);
@@ -203,7 +203,7 @@ public class OrderService {
    */
   public List<Order> getOrdersByStoreId(Long idStore) {
     Store store = storeRepository.find(idStore);
-    if (store == null){
+    if (store == null) {
       throw new BusinessException("Store does not exist.", ErrorCodesEnum.STORE_NOT_FOUNDED);
     }
     return orderRepository.getOrdersByStore(idStore);
