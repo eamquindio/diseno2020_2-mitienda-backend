@@ -1,6 +1,7 @@
 package co.edu.eam.disenosoftware.mitienda.controllers;
 
 import co.edu.eam.disenosoftware.mitienda.model.entities.OrderProduct;
+import co.edu.eam.disenosoftware.mitienda.model.responses.ErrorResponse;
 import co.edu.eam.disenosoftware.mitienda.repositories.OrderProductRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
@@ -91,9 +92,11 @@ public class OrderProductControllerTest {
 
     ResultActions result = mockMvc.perform(request);
 
+    String body = result.andReturn().getResponse().getContentAsString();
     int status = result.andReturn().getResponse().getStatus();
 
-    Assertions.assertEquals(HttpStatus.NOT_FOUND.value(), status);
+    ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
+    Assertions.assertEquals("0028", error.getErrorCode());
   }
 
 }

@@ -2,6 +2,7 @@ package co.edu.eam.disenosoftware.mitienda.controllers;
 
 
 import co.edu.eam.disenosoftware.mitienda.model.entities.ShoppingCartProduct;
+import co.edu.eam.disenosoftware.mitienda.model.responses.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -170,9 +171,11 @@ public class ShoppingCartControllerTest {
 
     ResultActions result = mockMvc.perform(request);
 
+    String body = result.andReturn().getResponse().getContentAsString();
     int status = result.andReturn().getResponse().getStatus();
 
-    Assertions.assertEquals(HttpStatus.NOT_FOUND.value(), status);
+    ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
+    Assertions.assertEquals("0001", error.getErrorCode());
   }
 
 
