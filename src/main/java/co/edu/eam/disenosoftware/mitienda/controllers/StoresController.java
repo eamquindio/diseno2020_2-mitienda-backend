@@ -67,7 +67,7 @@ public class StoresController {
    * @param storeId , storeId
    * @return , list Category by store id
    */
-  @GetMapping("/stores/{storeId}/categories")
+  @GetMapping("/{storeId}/categories")
   public List<Category> listAllCategoryByStoreId(@PathVariable Long storeId) {
     return categoryService.getAllCategoryByStoreId(storeId);
   }
