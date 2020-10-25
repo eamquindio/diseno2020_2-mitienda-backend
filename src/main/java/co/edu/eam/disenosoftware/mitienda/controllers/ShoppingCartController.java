@@ -46,5 +46,4 @@ public class ShoppingCartController {
                                                  @PathVariable Long idShoppingCartProduct) {
     shoppingCartProductService.removeProductFromShoppingCart(idShoppingCart, idShoppingCartProduct);
   }
-
 }

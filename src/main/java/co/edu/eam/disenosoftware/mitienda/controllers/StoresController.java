@@ -2,9 +2,11 @@ package co.edu.eam.disenosoftware.mitienda.controllers;
 
 import co.edu.eam.disenosoftware.mitienda.model.entities.Category;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
+import co.edu.eam.disenosoftware.mitienda.model.entities.ShoppingCart;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Store;
 import co.edu.eam.disenosoftware.mitienda.services.CategoryService;
 import co.edu.eam.disenosoftware.mitienda.services.OrderService;
+import co.edu.eam.disenosoftware.mitienda.services.ShoppingCartService;
 import co.edu.eam.disenosoftware.mitienda.services.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +34,12 @@ public class StoresController {
    */
   @Autowired
   private OrderService orderService;
+
+  /**
+   * shopping cart service
+   */
+  @Autowired
+  private ShoppingCartService shoppingCartService;
 
   /**
    * URL: /is_open
@@ -62,7 +70,7 @@ public class StoresController {
   private CategoryService categoryService;
 
   /**
-   * GetMapping
+   * Get categories
    *
    * @param storeId , storeId
    * @return , list Category by store id
@@ -70,5 +78,16 @@ public class StoresController {
   @GetMapping("/{storeId}/categories")
   public List<Category> listAllCategoryByStoreId(@PathVariable Long storeId) {
     return categoryService.getAllCategoryByStoreId(storeId);
+  }
+
+  /**
+   * Get a shopping cart by its user an store
+   * @param userId user id
+   * @param storeId store id
+   * @return shoppingCart Object
+   */
+  @GetMapping("/{storeId}/users/{userId}/shopping-carts")
+  public ShoppingCart getShoppingCart(@PathVariable Long storeId, Long userId) {
+    return shoppingCartService.getShoppingCart(userId, storeId);
   }
 }
