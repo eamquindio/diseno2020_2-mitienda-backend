@@ -87,7 +87,8 @@ public class StoresController {
    * @return shoppingCart Object
    */
   @GetMapping("/{storeId}/users/{userId}/shopping-carts")
-  public ShoppingCart getShoppingCart(@PathVariable Long storeId, Long userId) {
+  public ShoppingCart getShoppingCart(@PathVariable Long storeId,
+                                      @PathVariable Long userId) {
     return shoppingCartService.getShoppingCart(userId, storeId);
   }
 }
