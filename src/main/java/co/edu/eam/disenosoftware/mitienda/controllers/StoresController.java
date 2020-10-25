@@ -1,7 +1,9 @@
 package co.edu.eam.disenosoftware.mitienda.controllers;
 
-import co.edu.eam.disenosoftware.mitienda.model.entities.Store;
+import co.edu.eam.disenosoftware.mitienda.model.entities.Category;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
+import co.edu.eam.disenosoftware.mitienda.model.entities.Store;
+import co.edu.eam.disenosoftware.mitienda.services.CategoryService;
 import co.edu.eam.disenosoftware.mitienda.services.OrderService;
 import co.edu.eam.disenosoftware.mitienda.services.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,12 +45,30 @@ public class StoresController {
   }
 
   /**
-   *  API orders by store ID
+   * API orders by store ID
+   *
    * @param storeId , id of store
    * @return a list of orders
    */
   @GetMapping("/{store_id}/orders")
-  public List<Order> ordersByStoreId(@PathVariable("store_id")Long storeId) {
+  public List<Order> ordersByStoreId(@PathVariable("store_id") Long storeId) {
     return orderService.getOrdersByStoreId(storeId);
+  }
+
+  /**
+   * Autowired
+   */
+  @Autowired
+  private CategoryService categoryService;
+
+  /**
+   * GetMapping
+   *
+   * @param storeId , storeId
+   * @return , list Category by store id
+   */
+  @GetMapping("/{storeId}/categories")
+  public List<Category> listAllCategoryByStoreId(@PathVariable Long storeId) {
+    return categoryService.getAllCategoryByStoreId(storeId);
   }
 }

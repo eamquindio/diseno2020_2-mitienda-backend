@@ -1,9 +1,10 @@
 package co.edu.eam.disenosoftware.mitienda.controllers;
 
-import co.edu.eam.disenosoftware.mitienda.model.entities.Store;
-import co.edu.eam.disenosoftware.mitienda.repositories.StoreRepository;
+import co.edu.eam.disenosoftware.mitienda.model.entities.Category;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
+import co.edu.eam.disenosoftware.mitienda.model.entities.Store;
 import co.edu.eam.disenosoftware.mitienda.repositories.OrderRepository;
+import co.edu.eam.disenosoftware.mitienda.repositories.StoreRepository;
 import co.edu.eam.disenosoftware.mitienda.services.OrderService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
@@ -11,14 +12,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -73,5 +76,25 @@ public class StoresControllerTest {
     Order[] orders = objectMapper.readValue(body,Order[].class);
 
     Assertions.assertEquals(3, orders.length);
+  }
+
+  @PersistenceContext
+  private EntityManager em;
+
+  @Test
+  @Sql("/testdata/controlles_get_all_category_store_by_store_id.sql")
+  public void getAllCategoryByStoreId() throws Exception{
+
+    RequestBuilder request = MockMvcRequestBuilders.get("/api/stores/3/categories");
+
+    ResultActions result = mockMvc.perform((request));
+
+    String body = result.andReturn().getResponse().getContentAsString();
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(200,status);
+
+    Category[] category = objectMapper.readValue(body, Category[].class);
+    Assertions.assertEquals(1, category.length);
   }
 }
