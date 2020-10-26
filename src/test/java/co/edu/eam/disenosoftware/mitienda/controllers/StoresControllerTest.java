@@ -103,7 +103,7 @@ public class StoresControllerTest {
   public void controllerStoreLoginTest() throws Exception{
     String jsonBody = "{\n" +
         "    \"email\": \"tienda@gmail.com\",\n" +
-        "    \"password\": \"12345\"\n" +
+        "    \"password\": \"1234\"\n" +
         "}";
     RequestBuilder request = MockMvcRequestBuilders.post("/api/stores/login")
         .contentType("application/json")
@@ -123,7 +123,7 @@ public class StoresControllerTest {
   public void controllerStoreLoginWrongEmailTest() throws Exception{
     String jsonBody = "{\n" +
         "    \"email\": \"ti@gmail.com\",\n" +
-        "    \"password\": \"12345\"\n" +
+        "    \"password\": \"1234\"\n" +
         "}";
     RequestBuilder request = MockMvcRequestBuilders.post("/api/stores/login")
         .contentType("application/json")
@@ -141,7 +141,7 @@ public class StoresControllerTest {
   public void controllerUserLoginWrongPasswordTest() throws Exception{
     String jsonBody = "{\n" +
         "    \"email\": \"tienda@gmail.com\",\n" +
-        "    \"password\": \"1234\"\n" +
+        "    \"password\": \"123\"\n" +
         "}";
     RequestBuilder request = MockMvcRequestBuilders.post("/api/stores/login")
         .contentType("application/json")
