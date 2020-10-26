@@ -339,7 +339,7 @@ public class OrderControllerTest {
     RequestBuilder request = MockMvcRequestBuilders.post("/api/orders/from-shoppingcart/1");
 
     ResultActions result = mockMvc.perform(request);
-
+    
     int status = result.andReturn().getResponse().getStatus();
 
     Assertions.assertEquals(412, status);
@@ -352,9 +352,11 @@ public class OrderControllerTest {
 
     ResultActions result = mockMvc.perform(request);
 
+    String body = result.andReturn().getResponse().getContentAsString();
     int status = result.andReturn().getResponse().getStatus();
 
     Assertions.assertEquals(200, status);
+    Assertions.assertEquals("",body);
   }
 
 }
