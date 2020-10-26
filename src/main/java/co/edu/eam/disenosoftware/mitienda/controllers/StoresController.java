@@ -7,14 +7,19 @@ import co.edu.eam.disenosoftware.mitienda.model.entities.Store;
 import co.edu.eam.disenosoftware.mitienda.services.CategoryService;
 import co.edu.eam.disenosoftware.mitienda.services.OrderService;
 import co.edu.eam.disenosoftware.mitienda.services.ShoppingCartService;
+import co.edu.eam.disenosoftware.mitienda.model.requests.StoreRequest;
 import co.edu.eam.disenosoftware.mitienda.services.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
+import javax.validation.Valid;
 
 /**
  * Controller for stores entity
@@ -91,4 +96,14 @@ public class StoresController {
                                       @PathVariable Long userId) {
     return shoppingCartService.getShoppingCart(userId, storeId);
   }
+  /**
+   * login - store
+   * @param request request store
+   * @return boolean
+   */
+  @PostMapping("/login")
+  public boolean storeLogin(@RequestBody @Valid StoreRequest request) {
+    return storeService.loginStore(request.getEmail(), request.getPassword());
+  }
+
 }

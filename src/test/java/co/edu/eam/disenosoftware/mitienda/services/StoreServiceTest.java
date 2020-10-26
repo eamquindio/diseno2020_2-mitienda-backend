@@ -44,9 +44,9 @@ public class StoreServiceTest {
 
   @Test
   public void registerStoreSuccessful() {
-    service.registerStore("store","a", "s", "phone", "store@gmail.com", "1234");
+    service.registerStore("store","a", "s", "phone", "store@gmail.com", "12345");
     Store store = em.find(Store.class, 1L);
-    Assertions.assertEquals("81dc9bdb52d04dc20036dbd8313ed055",store.getPassword());
+    Assertions.assertEquals("827ccb0eea8a706c4c34a16891f84e7b",store.getPassword());
     Assertions.assertNotNull(store);
     Assertions.assertEquals("store", store.getName());
   }

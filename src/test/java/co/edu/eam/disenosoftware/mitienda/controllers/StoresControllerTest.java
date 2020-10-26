@@ -97,4 +97,60 @@ public class StoresControllerTest {
     Category[] category = objectMapper.readValue(body, Category[].class);
     Assertions.assertEquals(1, category.length);
   }
+
+  @Test
+  @Sql({"/testdata/controllers/controller_store_login_test.sql"})
+  public void controllerStoreLoginTest() throws Exception{
+    String jsonBody = "{\n" +
+        "    \"email\": \"tienda@gmail.com\",\n" +
+        "    \"password\": \"12345\"\n" +
+        "}";
+    RequestBuilder request = MockMvcRequestBuilders.post("/api/stores/login")
+        .contentType("application/json")
+        .content(jsonBody);
+
+    ResultActions result = mockMvc.perform(request);
+
+    String body = result.andReturn().getResponse().getContentAsString();
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(200, status);
+    Assertions.assertEquals("true",body);
+  }
+
+  @Test
+  @Sql({"/testdata/controllers/controller_store_login_wrong_email_test.sql"})
+  public void controllerStoreLoginWrongEmailTest() throws Exception{
+    String jsonBody = "{\n" +
+        "    \"email\": \"ti@gmail.com\",\n" +
+        "    \"password\": \"12345\"\n" +
+        "}";
+    RequestBuilder request = MockMvcRequestBuilders.post("/api/stores/login")
+        .contentType("application/json")
+        .content(jsonBody);
+
+    ResultActions result = mockMvc.perform(request);
+
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(403, status);
+  }
+
+  @Test
+  @Sql({"/testdata/controllers/controller_store_login_wrong_password_test.sql"})
+  public void controllerUserLoginWrongPasswordTest() throws Exception{
+    String jsonBody = "{\n" +
+        "    \"email\": \"tienda@gmail.com\",\n" +
+        "    \"password\": \"1234\"\n" +
+        "}";
+    RequestBuilder request = MockMvcRequestBuilders.post("/api/stores/login")
+        .contentType("application/json")
+        .content(jsonBody);
+
+    ResultActions result = mockMvc.perform(request);
+
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(403, status);
+  }
 }
