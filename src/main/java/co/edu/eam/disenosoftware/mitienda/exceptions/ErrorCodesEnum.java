@@ -21,15 +21,15 @@ public enum ErrorCodesEnum {
   /**
    * Exception when User Exceed Five orders in progress
    */
-  NUMBER_OF_ORDERS_EXCEDED("0003"),
+  NUMBER_OF_ORDERS_EXCEDED("0003", HttpStatus.PRECONDITION_FAILED),
   /**
    * Exception when shopping cart doesnt exist
    */
-  SHOPPING_CART_NOT_FOUND("0004"),
+  SHOPPING_CART_NOT_FOUND("0004", HttpStatus.NOT_FOUND),
   /**
    * Shopping cart is empty
    */
-  SHOPPING_CART_EMPTY("0005"),
+  SHOPPING_CART_EMPTY("0005", HttpStatus.PRECONDITION_FAILED),
   /**
    * Store is not founded
    */

@@ -3,6 +3,7 @@ package co.edu.eam.disenosoftware.mitienda.services;
 import co.edu.eam.disenosoftware.mitienda.exceptions.BusinessException;
 import co.edu.eam.disenosoftware.mitienda.exceptions.ErrorCodesEnum;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Store;
+import co.edu.eam.disenosoftware.mitienda.repositories.StoreRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,20 @@ public class StoreServiceTest {
   @Autowired
   private StoreService service;
 
+  @Autowired
+  private StoreRepository storeRepository;
+
   @PersistenceContext
   private EntityManager em;
+
+  @Test
+  public void registerStoreSuccessful() {
+    service.registerStore("store","a", "s", "phone", "store@gmail.com", "1234567891");
+    Store store = storeRepository.getStoreByName("store");
+    Assertions.assertEquals("0f7e44a922df352c05c5f73cb40ba115",store.getPassword());
+    Assertions.assertNotNull(store);
+    Assertions.assertEquals("store", store.getName());
+  }
 
   @Test
   @Sql({"/testdata/register_store_name_in_use.sql"})
@@ -40,15 +53,6 @@ public class StoreServiceTest {
             () ->service.registerStore("store","a", "s", "phone", "store@gmail.com", "dae"));
     Assertions.assertEquals("Ya existe el email ingresado", exception.getMessage());
     Assertions.assertEquals(ErrorCodesEnum.STORE_EMAIL_ALREADY_REGISTER, exception.getCode());
-  }
-
-  @Test
-  public void registerStoreSuccessful() {
-    service.registerStore("store","a", "s", "phone", "store@gmail.com", "1234");
-    Store store = em.find(Store.class, 1L);
-    Assertions.assertEquals("81dc9bdb52d04dc20036dbd8313ed055",store.getPassword());
-    Assertions.assertNotNull(store);
-    Assertions.assertEquals("store", store.getName());
   }
 
   @Test

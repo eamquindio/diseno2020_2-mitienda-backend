@@ -11,6 +11,7 @@ import co.edu.eam.disenosoftware.mitienda.model.requests.AddProductToOrderReques
 import co.edu.eam.disenosoftware.mitienda.services.OrderProductService;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -82,5 +83,16 @@ public class OrdersController {
             id,
             addProductToOrderRequest.getQuantity());
   }
+
+  /**
+   * URL: /api/orders/from-shoppingcart/{idShoppingcart}
+   * Verbo: POST
+   * @param idShoppingcart {idShoppingcart}
+   */
+  @PostMapping("/from-shoppingcart/{idShoppingcart}")
+  public void createOrder(@PathVariable Long idShoppingcart) {
+    orderService.createOrderByShoppingCart(idShoppingcart);
+  }
+
 
 }

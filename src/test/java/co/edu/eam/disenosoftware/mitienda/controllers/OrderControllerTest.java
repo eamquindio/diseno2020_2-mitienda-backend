@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultActions;
@@ -110,7 +110,7 @@ public class OrderControllerTest {
 
     //hacer las asersiones
 
-    Assertions.assertEquals(HttpStatus.PRECONDITION_FAILED.value(), status);
+    Assertions.assertEquals(404, status);
   }
 
   @Test
@@ -309,4 +309,54 @@ public class OrderControllerTest {
     ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
     Assertions.assertEquals("0027", error.getErrorCode());
   }
+
+  @Test
+  public void controllerShoppingCartNullTest() throws Exception {
+    RequestBuilder request = MockMvcRequestBuilders.post("/api/orders/from-shoppingcart/1");
+
+    ResultActions result = mockMvc.perform(request);
+
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(404, status);
+  }
+
+  @Test
+  @Sql({"/testdata/controllers/controller_not_found_products.sql"})
+  public void controllerNotFoundProductsTest() throws Exception {
+    RequestBuilder request = MockMvcRequestBuilders.post("/api/orders/from-shoppingcart/1");
+
+    ResultActions result = mockMvc.perform(request);
+
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(412, status);
+  }
+
+  @Test
+  @Sql({"/testdata/controllers/controller_user_orders_exceed_five.sql"})
+  public void controllerUserOrdersExceedFiveTest() throws Exception {
+    RequestBuilder request = MockMvcRequestBuilders.post("/api/orders/from-shoppingcart/1");
+
+    ResultActions result = mockMvc.perform(request);
+    
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(412, status);
+  }
+
+  @Test
+  @Sql({"/testdata/controllers/controller_create_order_test.sql"})
+  public void controllerCreateOrderTest() throws Exception {
+    RequestBuilder request = MockMvcRequestBuilders.post("/api/orders/from-shoppingcart/1");
+
+    ResultActions result = mockMvc.perform(request);
+
+    String body = result.andReturn().getResponse().getContentAsString();
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(200, status);
+    Assertions.assertEquals("",body);
+  }
+
 }
