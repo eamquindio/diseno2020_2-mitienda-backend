@@ -76,8 +76,10 @@ public class StoreServiceTest {
   @Test
   @Sql({"/testdata/login_store_successful.sql"})
   public void loginStoreSuccessful() {
-    boolean successful = service.loginStore("store@gmail.com", "1234");
-    Assertions.assertEquals(true, successful);
+    Store successful = service.loginStore("store@gmail.com", "1234");
+    Assertions.assertEquals("Calle13", successful.getAddress());
+    Assertions.assertEquals(true, successful.isDelivery());
+    Assertions.assertEquals("store1", successful.getName());
   }
 
   @Test

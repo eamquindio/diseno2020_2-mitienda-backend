@@ -102,7 +102,7 @@ public class StoresController {
    * @return boolean
    */
   @PostMapping("/login")
-  public boolean storeLogin(@RequestBody @Valid StoreRequest request) {
+  public Store storeLogin(@RequestBody @Valid StoreRequest request) {
     return storeService.loginStore(request.getEmail(), request.getPassword());
   }
 

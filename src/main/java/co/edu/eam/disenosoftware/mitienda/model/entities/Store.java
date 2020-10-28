@@ -1,5 +1,7 @@
 package co.edu.eam.disenosoftware.mitienda.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -66,6 +68,7 @@ public class Store implements Serializable {
   /**
    * Store's password
    */
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private String password;
 
   /**
