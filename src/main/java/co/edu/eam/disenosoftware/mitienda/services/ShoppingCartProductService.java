@@ -69,6 +69,12 @@ public class ShoppingCartProductService {
       throw new BusinessException("El producto no existe", ErrorCodesEnum.SHOPPING_CART_PRODUCT_NOT_FOUND);
     }
 
+    ShoppingCart shoppingCart = shoppingCartRepository.find(idShoppingCart);
+
+    if (shoppingCart == null) {
+      throw new BusinessException("The shopping cart is not found", ErrorCodesEnum.SHOPPING_CART_NOT_FOUND);
+    }
+
     List<ShoppingCartProduct> products =
             shoppingCartProductRepository.getShoppingCartProductsByShoppingCartId(idShoppingCart);
 
@@ -76,11 +82,6 @@ public class ShoppingCartProductService {
       shoppingCartProductRepository.delete(idShoppingCartProduct);
       shoppingCartRepository.delete(idShoppingCart);
     } else {
-      ShoppingCart shoppingCart = shoppingCartRepository.find(idShoppingCart);
-
-      if (shoppingCart == null) {
-        throw new BusinessException("The shopping cart is not found", ErrorCodesEnum.SHOPPING_CART_NOT_FOUND);
-      }
 
       double totalValue = shoppingCart.getTotalValue() - (
               shoppingCartProduct.getProduct().getPrice() * shoppingCartProduct.getQuantity()
