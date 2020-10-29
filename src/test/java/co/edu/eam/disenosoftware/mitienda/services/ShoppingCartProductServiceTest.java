@@ -148,4 +148,11 @@ public class ShoppingCartProductServiceTest {
     Assertions.assertEquals(ErrorCodesEnum.STORE_NOT_FOUNDED, exception.getCode());
   }
 
+  @Test
+  @Sql({"/testdata/remove_product_from_shopping_cart_when_shopping_cart_does_not_exist_test.sql"})
+  public void removeProductFromShoppingCartWhenShoppingCartDoesNotExistTest() {
+    BusinessException exception = Assertions.assertThrows(BusinessException.class, () -> shoppingCartProductService.removeProductFromShoppingCart(2L,1L));
+    Assertions.assertEquals(ErrorCodesEnum.SHOPPING_CART_NOT_FOUND, exception.getCode());
+  }
+
 }

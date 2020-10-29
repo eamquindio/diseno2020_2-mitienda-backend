@@ -178,5 +178,20 @@ public class ShoppingCartControllerTest {
     Assertions.assertEquals("0001", error.getErrorCode());
   }
 
+  @Test
+  @Sql({"/testdata/controllers/controller_remove_product_from_shopping_cart_when_shopping_cart_does_not_exist_test.sql"})
+  public void controllerRemoveProductFromShoppingCartWhenShoppingCartDoesNotExistTest() throws Exception {
+    RequestBuilder request = MockMvcRequestBuilders.delete("/api/shopping-cart/2/shopping-cart-product/1");
+
+    ResultActions result = mockMvc.perform(request);
+
+    String body = result.andReturn().getResponse().getContentAsString();
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(HttpStatus.NOT_FOUND.value(), status);
+
+    ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
+    Assertions.assertEquals("0004", error.getErrorCode());
+  }
 
 }
