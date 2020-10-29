@@ -94,12 +94,16 @@ public class ShoppingCartProductServiceTest {
     List<ShoppingCartProduct> shoppingCartProductList = em.createQuery("SELECT s from ShoppingCartProduct s WHERE s.shoppingCart.user.username = 'carlos'").getResultList();
     ShoppingCartProduct shoppingCartProductToAssert = shoppingCartProductList.get(0);
 
+    List<ShoppingCart> shoppingCartList = em.createQuery("SELECT sc from ShoppingCart sc").getResultList();
+    ShoppingCart shoppingCartToAssert = shoppingCartList.get(0);
+
     Assertions.assertNotNull(shoppingCartProductToAssert);
     Assertions.assertEquals("carlos",shoppingCartProductToAssert.getShoppingCart().getUser().getUsername());
 
     ShoppingCartProduct shoppingCartProductProvement = shoppingCartProductRepository.find(shoppingCartProductToAssert.getId());
     Assertions.assertEquals(shoppingCartProductProvement.getId(),shoppingCartProductToAssert.getId());
 
+    Assertions.assertEquals(120, shoppingCartToAssert.getTotalValue());
   }
 
   @Test
