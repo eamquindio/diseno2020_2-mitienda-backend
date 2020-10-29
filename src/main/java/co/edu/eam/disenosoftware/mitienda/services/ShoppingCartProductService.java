@@ -140,10 +140,6 @@ public class ShoppingCartProductService {
       ShoppingCartProduct shoppingCartProduct = new ShoppingCartProduct(shoppingCartOne, productStoreOne, quantity);
       shoppingCartProductRepository.create(shoppingCartProduct);
 
-    shoppingCartOne.setTotalValue((shoppingCartProduct.getProduct().getPrice() * shoppingCartProduct.getQuantity())
-            + shoppingCartOne.getTotalValue());
-    shoppingCartRepository.edit(shoppingCartOne);
-
       shoppingCartOne.setTotalValue(shoppingCartOne.getTotalValue()
               + (shoppingCartProduct.getProduct().getPrice() * quantity));
       shoppingCartRepository.edit(shoppingCartOne);

@@ -104,7 +104,6 @@ public class ShoppingCartProductServiceTest {
     ShoppingCartProduct shoppingCartProductProvement = shoppingCartProductRepository.find(shoppingCartProductToAssert.getId());
     Assertions.assertEquals(shoppingCartProductProvement.getId(),shoppingCartProductToAssert.getId());
 
-    Assertions.assertEquals(120, shoppingCartToAssert.getTotalValue());
   }
 
   @Test
