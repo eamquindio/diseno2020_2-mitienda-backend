@@ -73,16 +73,22 @@ public class ShoppingCartProductService {
             shoppingCartProductRepository.getShoppingCartProductsByShoppingCartId(idShoppingCart);
 
     if (products.size() == 1) {
-      shoppingCartRepository.delete(idShoppingCart);
       shoppingCartProductRepository.delete(idShoppingCartProduct);
+      shoppingCartRepository.delete(idShoppingCart);
     } else {
-      ShoppingCartProduct delete = shoppingCartProductRepository.delete(idShoppingCartProduct);
       ShoppingCart shoppingCart = shoppingCartRepository.find(idShoppingCart);
 
-      double totalValue = shoppingCart.getTotalValue() - delete.getProduct().getPrice() * delete.getQuantity();
+      if (shoppingCart == null) {
+        throw new BusinessException("The shopping cart is not found", ErrorCodesEnum.SHOPPING_CART_NOT_FOUND);
+      }
+
+      double totalValue = shoppingCart.getTotalValue() - (
+              shoppingCartProduct.getProduct().getPrice() * shoppingCartProduct.getQuantity()
+      );
 
       shoppingCart.setTotalValue(totalValue);
       shoppingCartRepository.edit(shoppingCart);
+      shoppingCartProductRepository.delete(idShoppingCartProduct);
     }
   }
 
