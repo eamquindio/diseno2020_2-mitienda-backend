@@ -100,6 +100,7 @@ public class ShoppingCartProductServiceTest {
     Assertions.assertNotNull(shoppingCartProductToAssert);
     Assertions.assertEquals("carlos",shoppingCartProductToAssert.getShoppingCart().getUser().getUsername());
 
+
     ShoppingCartProduct shoppingCartProductProvement = shoppingCartProductRepository.find(shoppingCartProductToAssert.getId());
     Assertions.assertEquals(shoppingCartProductProvement.getId(),shoppingCartProductToAssert.getId());
 
@@ -157,7 +158,7 @@ public class ShoppingCartProductServiceTest {
 
   @Test
   @Sql({"/testdata/product_all_ready_exist_in_shopping_cart.sql"})
-  public void productAllReadyExistInShoppingCartTes(){
+  public void productAllReadyExistInShoppingCartTest(){
 
     shoppingCartProductService.createShoppingCartProduct(1L, 1L, 1L, 2);
 
@@ -166,9 +167,11 @@ public class ShoppingCartProductServiceTest {
 
     Assertions.assertNotNull(shoppingCartProductToAssert);
     Assertions.assertEquals(120,shoppingCartProductToAssert.getShoppingCart().getTotalValue());
+    Assertions.assertEquals(3,shoppingCartProductToAssert.getQuantity());
 
     ShoppingCartProduct shoppingCartProductProvement = shoppingCartProductRepository.find(shoppingCartProductToAssert.getId());
     Assertions.assertEquals(shoppingCartProductProvement.getId(),shoppingCartProductToAssert.getId());
+
 
   }
 

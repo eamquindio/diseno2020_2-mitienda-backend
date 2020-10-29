@@ -149,9 +149,11 @@ public class ShoppingCartProductService {
       shoppingCartRepository.edit(shoppingCartOne);
 
     } else {
+
       shoppingCartProductToFind.setQuantity(shoppingCartProductToFind.getQuantity() + quantity);
       shoppingCartOne.setTotalValue(shoppingCartOne.getTotalValue()
               + (shoppingCartProductToFind.getProduct().getPrice() * quantity));
+
       shoppingCartProductRepository.edit(shoppingCartProductToFind);
       shoppingCartRepository.edit(shoppingCartOne);
     }
