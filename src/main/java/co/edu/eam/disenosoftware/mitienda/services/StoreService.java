@@ -57,19 +57,19 @@ public class StoreService {
    * @param password for login store
    * @return true
    */
-  public Boolean loginStore(String email, String password) {
-    Store emailToFind = storeRepository.getStoreByEmail(email);
+  public Store loginStore(String email, String password) {
+    Store storeToFind = storeRepository.getStoreByEmail(email);
 
-    if (emailToFind == null) {
+    if (storeToFind == null) {
       throw new BusinessException("email or password incorrect", ErrorCodesEnum.LOGIN_INCORRECT);
     }
 
     String passwordMD5 = EncrypterUtil.getMD5(password);
 
-    if (!emailToFind.getPassword().equals(passwordMD5)) {
+    if (!storeToFind.getPassword().equals(passwordMD5)) {
       throw new BusinessException("email or password incorrect", ErrorCodesEnum.LOGIN_INCORRECT);
     }
-    return true;
+    return storeToFind;
   }
 
   /**

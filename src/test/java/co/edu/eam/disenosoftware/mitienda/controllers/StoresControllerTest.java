@@ -114,8 +114,13 @@ public class StoresControllerTest {
     String body = result.andReturn().getResponse().getContentAsString();
     int status = result.andReturn().getResponse().getStatus();
 
-    Assertions.assertEquals(200, status);
-    Assertions.assertEquals("true",body);
+    Store storeToAssert = objectMapper.readValue(body,Store.class);
+
+    System.out.println(body);
+
+    Assertions.assertEquals(HttpStatus.OK.value(), status);
+    Assertions.assertEquals("cra 12",storeToAssert.getAddress());
+    Assertions.assertEquals("Pepito",storeToAssert.getOwner());
   }
 
   @Test
