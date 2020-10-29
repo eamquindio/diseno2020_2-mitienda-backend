@@ -99,7 +99,7 @@ public class ShoppingCartProductServiceTest {
 
     Assertions.assertNotNull(shoppingCartProductToAssert);
     Assertions.assertEquals("carlos",shoppingCartProductToAssert.getShoppingCart().getUser().getUsername());
-
+    Assertions.assertEquals(102, shoppingCartToAssert.getTotalValue());
 
     ShoppingCartProduct shoppingCartProductProvement = shoppingCartProductRepository.find(shoppingCartProductToAssert.getId());
     Assertions.assertEquals(shoppingCartProductProvement.getId(),shoppingCartProductToAssert.getId());
