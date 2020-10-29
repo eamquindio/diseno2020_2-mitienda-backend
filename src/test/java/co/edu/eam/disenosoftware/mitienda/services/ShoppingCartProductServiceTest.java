@@ -155,4 +155,21 @@ public class ShoppingCartProductServiceTest {
     Assertions.assertEquals(ErrorCodesEnum.SHOPPING_CART_NOT_FOUND, exception.getCode());
   }
 
+  @Test
+  @Sql({"/testdata/product_all_ready_exist_in_shopping_cart.sql"})
+  public void productAllReadyExistInShoppingCartTes(){
+
+    shoppingCartProductService.createShoppingCartProduct(1L, 1L, 1L, 2);
+
+    List<ShoppingCartProduct> shoppingCartProductList = em.createQuery("SELECT s from ShoppingCartProduct s WHERE s.id = '10'").getResultList();
+    ShoppingCartProduct shoppingCartProductToAssert = shoppingCartProductList.get(0);
+
+    Assertions.assertNotNull(shoppingCartProductToAssert);
+    Assertions.assertEquals(120,shoppingCartProductToAssert.getShoppingCart().getTotalValue());
+
+    ShoppingCartProduct shoppingCartProductProvement = shoppingCartProductRepository.find(shoppingCartProductToAssert.getId());
+    Assertions.assertEquals(shoppingCartProductProvement.getId(),shoppingCartProductToAssert.getId());
+
+  }
+
 }

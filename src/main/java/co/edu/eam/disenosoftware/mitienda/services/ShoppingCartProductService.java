@@ -130,12 +130,30 @@ public class ShoppingCartProductService {
       throw new BusinessException("El producto no existe", ErrorCodesEnum.PRODUCT_STORE_NOT_FOUNDED);
     }
 
-    ShoppingCartProduct shoppingCartProduct = new ShoppingCartProduct(shoppingCartOne, productStoreOne, quantity);
-    shoppingCartProductRepository.create(shoppingCartProduct);
+    ShoppingCartProduct shoppingCartProductToFind =
+            shoppingCartProductRepository.getShoppingCartProductsByShoppingCartIdAndProductId(
+                    shoppingCartOne.getId(), productStoreOne.getId()
+            );
+
+    if (shoppingCartProductToFind == null) {
+
+      ShoppingCartProduct shoppingCartProduct = new ShoppingCartProduct(shoppingCartOne, productStoreOne, quantity);
+      shoppingCartProductRepository.create(shoppingCartProduct);
 
     shoppingCartOne.setTotalValue((shoppingCartProduct.getProduct().getPrice() * shoppingCartProduct.getQuantity())
             + shoppingCartOne.getTotalValue());
     shoppingCartRepository.edit(shoppingCartOne);
 
+      shoppingCartOne.setTotalValue(shoppingCartOne.getTotalValue()
+              + (shoppingCartProduct.getProduct().getPrice() * quantity));
+      shoppingCartRepository.edit(shoppingCartOne);
+
+    } else {
+      shoppingCartProductToFind.setQuantity(shoppingCartProductToFind.getQuantity() + quantity);
+      shoppingCartOne.setTotalValue(shoppingCartOne.getTotalValue()
+              + (shoppingCartProductToFind.getProduct().getPrice() * quantity));
+      shoppingCartProductRepository.edit(shoppingCartProductToFind);
+      shoppingCartRepository.edit(shoppingCartOne);
+    }
   }
 }
