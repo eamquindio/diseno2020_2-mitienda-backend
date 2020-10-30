@@ -94,7 +94,7 @@ public class OrderProductServiceTest {
   @Sql({"/testdata/adding_product_to_order_product_is_not_existing.sql"})
   public void addingProductToOrderProductTest(){
 
-    OrderProduct orderProduct= service.addingProductToOrderProduct(77L,1L,1);
+    service.addingProductToOrderProduct(77L,1L,1);
     Order order=orderRepository.find(1L);
     Assertions.assertEquals(1,order.getProduct().get(1).getQuantity());
 
@@ -126,7 +126,7 @@ public class OrderProductServiceTest {
   @Sql({"/testdata/adding_product_to_order_product_is_existing.sql"})
   public void addingProductToOrderProductIsNotRegister(){
 
-    OrderProduct orderProduct= service.addingProductToOrderProduct(77L,1L,1);
+    service.addingProductToOrderProduct(77L,1L,1);
     Order order=orderRepository.find(1L);
     Assertions.assertEquals(2,order.getProduct().get(0).getQuantity());
 

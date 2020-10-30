@@ -215,10 +215,10 @@ public class OrderControllerTest {
 
     Assertions.assertEquals(HttpStatus.OK.value(), status);
 
-    OrderProduct orderProduct = objectMapper.readValue(body,OrderProduct.class);
-    Assertions.assertEquals(3L,orderProduct.getProductStore().getId());
-    Assertions.assertEquals(1,orderProduct.getQuantity());
+    Order order = objectMapper.readValue(body,Order.class);
 
+    Assertions.assertEquals(3L,order.getProduct().get(2).getProductStore().getId());
+    Assertions.assertEquals(1,order.getProduct().get(2).getQuantity());
   }
 
   @Test

@@ -1,17 +1,16 @@
 package co.edu.eam.disenosoftware.mitienda.controllers;
 
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
+import co.edu.eam.disenosoftware.mitienda.model.requests.AddProductToOrderRequest;
+import co.edu.eam.disenosoftware.mitienda.services.OrderProductService;
 import co.edu.eam.disenosoftware.mitienda.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import co.edu.eam.disenosoftware.mitienda.model.entities.OrderProduct;
-import co.edu.eam.disenosoftware.mitienda.model.requests.AddProductToOrderRequest;
-import co.edu.eam.disenosoftware.mitienda.services.OrderProductService;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,6 +38,7 @@ public class OrdersController {
 
   /**
    * get order by id API
+   *
    * @param id to find
    * @return order found
    */
@@ -49,6 +49,7 @@ public class OrdersController {
 
   /**
    * end order API
+   *
    * @param id of order to end
    */
   @PatchMapping("/{id}/end")
@@ -60,7 +61,8 @@ public class OrdersController {
    * URL: orders/{order_id}/delivery
    * verbo:POST
    * parametros: {name,phone,username,email,password}
-   * @param orderId  ,Long
+   *
+   * @param orderId ,Long
    */
   @PatchMapping("/{orderId}/delivery")
   public void deliverOrder(@PathVariable("orderId") Long orderId) {
@@ -72,13 +74,14 @@ public class OrdersController {
    * URI: ("/{id_order}/add-product")
    * Verb: PUT
    * Add product to Order
-   * @param id primary key
+   *
+   * @param id                       primary key
    * @param addProductToOrderRequest request from add product to order
    * @return Order Product
    */
   @PutMapping("/{id_order}/add-product")
-  public OrderProduct addProductToOrder(@PathVariable("id_order") Long id,
-                                        @RequestBody @Valid AddProductToOrderRequest addProductToOrderRequest) {
+  public Order addProductToOrder(@PathVariable("id_order") Long id,
+                                 @RequestBody @Valid AddProductToOrderRequest addProductToOrderRequest) {
     return orderProductService.addingProductToOrderProduct(addProductToOrderRequest.getId(),
             id,
             addProductToOrderRequest.getQuantity());
@@ -87,6 +90,7 @@ public class OrdersController {
   /**
    * URL: /api/orders/from-shoppingcart/{idShoppingcart}
    * Verbo: POST
+   *
    * @param idShoppingcart {idShoppingcart}
    */
   @PostMapping("/from-shoppingcart/{idShoppingcart}")

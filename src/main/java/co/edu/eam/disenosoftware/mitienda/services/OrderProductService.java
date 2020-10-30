@@ -28,6 +28,19 @@ public class OrderProductService {
   @Autowired
   private OrderProductRepository orderProductRepository;
 
+
+  /**
+   * Autowired orderRepository
+   */
+  @Autowired
+  private OrderRepository orderRepository;
+
+  /**
+   * Repository for find productStore
+   */
+  @Autowired
+  private ProductStoreRepository productStoreRepository;
+
   /**
    * method to check if an order product is in state "pending"
    * @param idOrderProduct id to find
@@ -51,17 +64,6 @@ public class OrderProductService {
     }
 
   }
-  /**
-   * Repository for find order
-   */
-  @Autowired
-  private OrderRepository ordenRepository;
-
-  /**
-   * Repository for find productStore
-   */
-  @Autowired
-  private ProductStoreRepository productStoreRepository;
 
   /**
    * Adding a product to Order
@@ -71,9 +73,9 @@ public class OrderProductService {
    * @param quantity , Integer
    * @return a order or null if not exists
    */
-  public OrderProduct addingProductToOrderProduct(Long idProduct, Long idOrder, Integer quantity) {
+  public Order addingProductToOrderProduct(Long idProduct, Long idOrder, Integer quantity) {
     final double porcent = 0.1;
-    Order orderToFind = ordenRepository.find(idOrder);
+    Order orderToFind = orderRepository.find(idOrder);
 
     if (orderToFind.getState().equals("canceled") || orderToFind.getState().equals("finished")) {
 
@@ -91,7 +93,6 @@ public class OrderProductService {
     }
 
     for (OrderProduct product:orderToFind.getProduct()) {
-
       if (productStoreToFind.getId() == product.getProductStore().getId()) {
         product.setQuantity(product.getQuantity() + quantity);
 
@@ -101,12 +102,12 @@ public class OrderProductService {
           throw new BusinessException("El total del product excede el 10% del total de la Orden",
                    ErrorCodesEnum.PRODUCT_EXCIT_TOTALVALUE);
         }
-        ordenRepository.edit(orderToFind);
+        orderRepository.edit(orderToFind);
 
-        return product;
-
+        return orderToFind;
       }
     }
+
     if (productStoreToFind.getPrice() * quantity > orderToFind.getTotalValue() * porcent) {
       throw new BusinessException("El total del product excede el 10% del total de la Orden",
                ErrorCodesEnum.PRODUCT_EXCIT_TOTALVALUE);
@@ -114,15 +115,9 @@ public class OrderProductService {
 
     OrderProduct orderProduct = new OrderProduct(orderToFind, productStoreToFind, quantity, "created");
     orderToFind.getProduct().add(orderProduct);
-    ordenRepository.edit(orderToFind);
-    return orderProduct;
+    orderRepository.edit(orderToFind);
+    return orderToFind;
   }
-
-  /**
-   * Autowired orderRepository
-   */
-  @Autowired
-  private OrderRepository orderRepository;
 
   /**
    * Method delete
