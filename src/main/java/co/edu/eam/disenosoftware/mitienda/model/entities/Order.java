@@ -86,6 +86,22 @@ public class Order implements Serializable {
   }
 
   /**
+   *
+   * @param store Order Store
+   * @param user  Order User
+   * @param state Order State
+   * @param date Order Date
+   * @param totalValue order TotalValue
+   */
+  public Order(Store store, User user, String state, Date date, Double totalValue) {
+    this.store = store;
+    this.user = user;
+    this.state = state;
+    this.date = date;
+    this.totalValue = totalValue;
+  }
+
+  /**
    * Order's Get totalValue method
    * @return totalValue
    */

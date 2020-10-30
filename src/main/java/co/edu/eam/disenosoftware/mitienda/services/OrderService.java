@@ -90,7 +90,7 @@ public class OrderService {
       throw new BusinessException("User's Orders Exceed five.", ErrorCodesEnum.NUMBER_OF_ORDERS_EXCEDED);
     }
 
-    Order order = new Order(store, user, "created", new Date());
+    Order order = new Order(store, user, "created", new Date(),totalValue);
 
     List<OrderProduct> orderProducts = new ArrayList<>();
     for (ShoppingCartProduct shoppingCartProduct:shoppingCart.getProduct()) {
@@ -101,7 +101,7 @@ public class OrderService {
     }
 
     order.setProduct(orderProducts);
-    order.setTotalValue(totalValue);
+    order.setTotalValue(order.getTotalValue()+totalValue);
 
     orderRepository.create(order);
   }
