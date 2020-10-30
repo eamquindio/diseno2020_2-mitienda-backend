@@ -132,15 +132,15 @@ public class OrderProductService {
       throw new BusinessException("No existe el orderProduct", ErrorCodesEnum.NOT_EXIST_ORDER_PRODUCT);
     }
 
-    if (!(orderToFind.getState().equals("PENDING") || orderToFind.getState().equals("CHECKED"))) {
-      throw new BusinessException("El estado no es 'PENDING' ni 'CHECKED'", ErrorCodesEnum.NOT_STATE);
+    if (!(orderToFind.getState().equals("pending") || orderToFind.getState().equals("checked"))) {
+      throw new BusinessException("El estado no es 'pending' ni 'checked'", ErrorCodesEnum.NOT_STATE);
     }
 
     List<OrderProduct> list = orderProductRepository.getAllOrderProductsByIdOrder(orderToFind.getOrder().getId());
 
     if (list.size() == 1) {
-      orderToFind.setState("REMOVED");
-      orderToFind.getOrder().setState("CANCELED");
+      orderToFind.setState("removed");
+      orderToFind.getOrder().setState("canceled");
       orderProductRepository.edit(orderToFind);
       orderRepository.edit(orderToFind.getOrder());
     } else {
@@ -148,18 +148,18 @@ public class OrderProductService {
 
       for (OrderProduct product : list) {
 
-        if (product.getState().equals("REMOVED")) {
+        if (product.getState().equals("removed")) {
           contador++;
         }
       }
 
       if (contador == (list.size() - 1)) {
-        orderToFind.setState("REMOVED");
-        orderToFind.getOrder().setState("CANCELED");
+        orderToFind.setState("removed");
+        orderToFind.getOrder().setState("canceled");
         orderProductRepository.edit(orderToFind);
         orderRepository.edit(orderToFind.getOrder());
       } else {
-        orderToFind.setState("REMOVED");
+        orderToFind.setState("removed");
         orderProductRepository.edit(orderToFind);
         Order orderToUpdate = orderToFind.getOrder();
         Double newTotalValue = orderToUpdate.getTotalValue()

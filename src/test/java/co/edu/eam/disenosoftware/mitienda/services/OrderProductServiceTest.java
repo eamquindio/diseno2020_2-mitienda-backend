@@ -149,7 +149,7 @@ public class OrderProductServiceTest {
     BusinessException exception = Assertions.assertThrows(BusinessException.class,
         () ->service.delete(2L));
 
-    Assertions.assertEquals("El estado no es 'PENDING' ni 'CHECKED'",exception.getMessage());
+    Assertions.assertEquals("El estado no es 'pending' ni 'checked'",exception.getMessage());
     Assertions.assertEquals(ErrorCodesEnum.NOT_STATE,exception.getCode());
   }
 
@@ -160,8 +160,8 @@ public class OrderProductServiceTest {
 
     OrderProduct orderProductToAssert = orderProductRepository.find(2L);
 
-    Assertions.assertEquals("REMOVED", orderProductToAssert.getState());
-    Assertions.assertEquals("CANCELED", orderProductToAssert.getOrder().getState());
+    Assertions.assertEquals("removed", orderProductToAssert.getState());
+    Assertions.assertEquals("canceled", orderProductToAssert.getOrder().getState());
   }
 
   @Test
@@ -171,8 +171,8 @@ public class OrderProductServiceTest {
 
     OrderProduct orderProductToAssert = orderProductRepository.find(3L);
 
-    Assertions.assertEquals("REMOVED", orderProductToAssert.getState());
-    Assertions.assertEquals("CANCELED", orderProductToAssert.getOrder().getState());
+    Assertions.assertEquals("removed", orderProductToAssert.getState());
+    Assertions.assertEquals("canceled", orderProductToAssert.getOrder().getState());
   }
 
   @Test
@@ -182,7 +182,7 @@ public class OrderProductServiceTest {
 
     OrderProduct orderProductToAssert = orderProductRepository.find(3L);
 
-    Assertions.assertEquals("REMOVED", orderProductToAssert.getState());
+    Assertions.assertEquals("removed", orderProductToAssert.getState());
     Assertions.assertEquals(800, orderProductToAssert.getOrder().getTotalValue());
   }
 }
