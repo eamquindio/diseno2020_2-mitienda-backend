@@ -113,6 +113,7 @@ public class OrderProductService {
                ErrorCodesEnum.PRODUCT_EXCIT_TOTALVALUE);
     }
 
+    orderToFind.setTotalValue(orderToFind.getTotalValue() + (productStoreToFind.getPrice() * quantity));
     OrderProduct orderProduct = new OrderProduct(orderToFind, productStoreToFind, quantity, "created");
     orderToFind.getProduct().add(orderProduct);
     orderRepository.edit(orderToFind);

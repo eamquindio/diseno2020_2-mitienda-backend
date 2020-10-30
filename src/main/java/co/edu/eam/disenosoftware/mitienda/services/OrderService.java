@@ -101,7 +101,7 @@ public class OrderService {
     }
 
     order.setProduct(orderProducts);
-    order.setTotalValue(order.getTotalValue() + totalValue);gi
+    order.setTotalValue(order.getTotalValue() + totalValue);
 
     orderRepository.create(order);
   }

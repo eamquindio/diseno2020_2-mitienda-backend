@@ -93,9 +93,10 @@ public class OrderProductServiceTest {
   @Test
   @Sql({"/testdata/adding_product_to_order_product_is_not_existing.sql"})
   public void addingProductToOrderProductTest(){
-
+    List<Order> orderToAssert = orderRepository.getOrdersInCourseByUserId(1L);
     service.addingProductToOrderProduct(77L,1L,1);
     Order order=orderRepository.find(1L);
+    Assertions.assertEquals(2200, order.getTotalValue());
     Assertions.assertEquals(1,order.getProduct().get(1).getQuantity());
 
   }
