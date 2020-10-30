@@ -99,11 +99,11 @@ public class ShoppingCartProductServiceTest {
 
     Assertions.assertNotNull(shoppingCartProductToAssert);
     Assertions.assertEquals("carlos",shoppingCartProductToAssert.getShoppingCart().getUser().getUsername());
+    Assertions.assertEquals(102, shoppingCartToAssert.getTotalValue());
 
     ShoppingCartProduct shoppingCartProductProvement = shoppingCartProductRepository.find(shoppingCartProductToAssert.getId());
     Assertions.assertEquals(shoppingCartProductProvement.getId(),shoppingCartProductToAssert.getId());
 
-    Assertions.assertEquals(120, shoppingCartToAssert.getTotalValue());
   }
 
   @Test
@@ -153,6 +153,25 @@ public class ShoppingCartProductServiceTest {
   public void removeProductFromShoppingCartWhenShoppingCartDoesNotExistTest() {
     BusinessException exception = Assertions.assertThrows(BusinessException.class, () -> shoppingCartProductService.removeProductFromShoppingCart(2L,1L));
     Assertions.assertEquals(ErrorCodesEnum.SHOPPING_CART_NOT_FOUND, exception.getCode());
+  }
+
+  @Test
+  @Sql({"/testdata/product_all_ready_exist_in_shopping_cart.sql"})
+  public void productAllReadyExistInShoppingCartTest(){
+
+    shoppingCartProductService.createShoppingCartProduct(1L, 1L, 1L, 2);
+
+    List<ShoppingCartProduct> shoppingCartProductList = em.createQuery("SELECT s from ShoppingCartProduct s WHERE s.id = '10'").getResultList();
+    ShoppingCartProduct shoppingCartProductToAssert = shoppingCartProductList.get(0);
+
+    Assertions.assertNotNull(shoppingCartProductToAssert);
+    Assertions.assertEquals(120,shoppingCartProductToAssert.getShoppingCart().getTotalValue());
+    Assertions.assertEquals(3,shoppingCartProductToAssert.getQuantity());
+
+    ShoppingCartProduct shoppingCartProductProvement = shoppingCartProductRepository.find(shoppingCartProductToAssert.getId());
+    Assertions.assertEquals(shoppingCartProductProvement.getId(),shoppingCartProductToAssert.getId());
+
+
   }
 
 }

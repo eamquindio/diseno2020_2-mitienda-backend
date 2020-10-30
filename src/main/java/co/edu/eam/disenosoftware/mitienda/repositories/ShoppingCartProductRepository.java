@@ -77,4 +77,22 @@ public class ShoppingCartProductRepository {
     return query.getResultList();
   }
 
+  /**
+   * get all products from shopping cart by the shopping cart id and product id
+   *
+   * @param idShoppingCart , shopping cart id
+   * @param productId      , product id
+   * @return , list of shoppingCartProducts
+   */
+  public ShoppingCartProduct getShoppingCartProductsByShoppingCartIdAndProductId(Long idShoppingCart, Long productId) {
+    String queryStr = "SELECT scp FROM ShoppingCartProduct scp WHERE scp.shoppingCart.id = :shoppingCartId "
+            + "AND scp.product.id = :productId";
+    Query query = em.createQuery(queryStr);
+    query.setParameter("shoppingCartId", idShoppingCart);
+    query.setParameter("productId", productId);
+    List<ShoppingCartProduct> list = query.getResultList();
+
+    return list.size() != 0 ? list.get(0) : null;
+  }
+
 }
