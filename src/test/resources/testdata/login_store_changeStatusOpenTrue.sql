@@ -1,0 +1,1 @@
+INSERT INTO public.stores(id, address, delivery, email, image, is_open, "name", "owner", "password", phone)VALUES(1,'Calle13', true, 'store@gmail.com', 'image.jpg', false, 'store1', 'chucho', '81dc9bdb52d04dc20036dbd8313ed055', '456789');

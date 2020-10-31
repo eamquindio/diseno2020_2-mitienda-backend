@@ -69,6 +69,7 @@ public class StoreService {
     if (!storeToFind.getPassword().equals(passwordMD5)) {
       throw new BusinessException("email or password incorrect", ErrorCodesEnum.LOGIN_INCORRECT);
     }
+    storeToFind.setOpen(true);
     return storeToFind;
   }
 

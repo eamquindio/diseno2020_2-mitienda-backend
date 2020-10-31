@@ -259,6 +259,15 @@ public class Store implements Serializable {
   public void setEmail(String email) {
     this.email = email;
   }
+
+  /**
+   * Get Status Open Store
+   *
+   * @return Store's status Open
+   */
+  public boolean getOpen() {
+    return isOpen;
+  }
 }
 
 
