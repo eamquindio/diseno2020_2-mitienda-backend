@@ -107,11 +107,11 @@ public class UserControllerTest {
   public void createUserTest() throws Exception {
 
     String jsonBody = "{\n" +
-            "    \"name\":\"Pedro\",\n" +
-            "    \"phone\": \"3105093214\",\n" +
-            "    \"username\": \"Joselito\",\n" +
-            "    \"email\":\"jose@gmail.com\",\n" +
-            "    \"password\":\"1123\"\n" +
+            "    \"name\":\"pedro\",\n" +
+            "    \"phone\": \"3185757311\",\n" +
+            "    \"username\": \"pedrito\",\n" +
+            "    \"email\":\"pedrito@gmail.com\",\n" +
+            "    \"password\":\"4567\"\n" +
             "}\n";
     RequestBuilder request = MockMvcRequestBuilders.post("/api/users/register")
             .contentType("application/json")
@@ -129,7 +129,7 @@ public class UserControllerTest {
     User user=userRepository.find(1L);
     Assertions.assertEquals(HttpStatus.OK.value(), status);
 
-    Assertions.assertEquals("Pedro",user.getName());
+    Assertions.assertEquals("pedro",user.getName());
   }
 
   @Test

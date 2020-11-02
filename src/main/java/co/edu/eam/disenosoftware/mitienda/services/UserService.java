@@ -38,14 +38,50 @@ public class UserService {
 
     password = EncrypterUtil.getMD5(password);
 
+    int longitud = email.length();
+    char letraCorreo;
+    boolean validadorArroba = false;
+    boolean validadorPunto = false;
+
     if (userEmail != null) {
       throw new BusinessException("Error", ErrorCodesEnum.EMAIL_ALREADY_EXIST);
 
     }
+
     if (userName != null) {
       throw new BusinessException("Error", ErrorCodesEnum.USERNAME_ALREADY_EXIST);
 
     }
+
+    for (char i = 0; i < longitud; i++) {
+      letraCorreo = email.charAt(i);
+      if (letraCorreo == '@' && i == 0) {
+        throw new BusinessException("El correo es incorrecto", ErrorCodesEnum.EMAIL_ERROR);
+      }
+
+      if (letraCorreo == '@') {
+        validadorArroba = true;
+      }
+
+      if (letraCorreo == '.') {
+        validadorPunto = true;
+      }
+    }
+
+    if (!validadorArroba) {
+      throw new BusinessException("El correo es incorrecto", ErrorCodesEnum.EMAIL_ERROR);
+    }
+
+    if (!validadorPunto) {
+      throw new BusinessException("El correo es incorrecto", ErrorCodesEnum.EMAIL_ERROR);
+    }
+
+    boolean userPhone = userRepository.isNumeric(phone);
+
+    if (!userPhone) {
+      throw new BusinessException("El telefono es incorrecto", ErrorCodesEnum.PHONE_NUMBERS);
+    }
+
     User user = new User(username, phone, email, password, name);
     userRepository.create(user);
 

@@ -68,6 +68,20 @@ public class UserRepository {
   }
 
   /**
+   * is numeric
+   * @param cadena cadena
+   * @return boolean
+   */
+  public boolean isNumeric(String cadena) {
+    try {
+      Long.parseLong(cadena);
+      return true;
+    } catch (NumberFormatException nfe) {
+      return false;
+    }
+  }
+
+  /**
    * Consulta que buscar User por Email
    *
    * @param email parametro para seleccionar usuarios por Email

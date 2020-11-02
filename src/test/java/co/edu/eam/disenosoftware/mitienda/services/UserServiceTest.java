@@ -24,7 +24,7 @@ public class UserServiceTest {
 
   @Test
   public void createUserTest() {
-    User user = service.createUser("pedro", "123", "pedrito", "1@1.com", "4567");
+    User user = service.createUser("pedro", "3185757311", "pedrito", "pedrito@gmail.com", "4567");
     User userToAssert = userRepository.find(user.getId());
     Assertions.assertNotNull(userToAssert);
     Assertions.assertEquals("pedrito", userToAssert.getUsername());
@@ -65,4 +65,29 @@ public class UserServiceTest {
     BusinessException exception = Assertions.assertThrows(BusinessException.class, () -> service.userLogin("nombreusuario", "54321"));
     Assertions.assertEquals(ErrorCodesEnum.LOGIN_INCORRECT, exception.getCode());
   }
+
+  @Test
+  public void emailIncorrectStartTest() {
+    BusinessException exception = Assertions.assertThrows(BusinessException.class, () -> service.createUser("pedro", "123", "nombreusuario", "@pedritohotmail.com", "1224"));
+    Assertions.assertEquals(ErrorCodesEnum.EMAIL_ERROR, exception.getCode());
+  }
+
+  @Test
+  public void emailIncorrectTest() {
+    BusinessException exception = Assertions.assertThrows(BusinessException.class, () -> service.createUser("pedro", "123", "nombreusuario", "pedritohotmail.com", "1224"));
+    Assertions.assertEquals(ErrorCodesEnum.EMAIL_ERROR, exception.getCode());
+  }
+
+  @Test
+  public void emailIncorrectPointTest() {
+    BusinessException exception = Assertions.assertThrows(BusinessException.class, () -> service.createUser("pedro", "123", "nombreusuario", "pedrito@hotmailcom", "1224"));
+    Assertions.assertEquals(ErrorCodesEnum.EMAIL_ERROR, exception.getCode());
+  }
+
+  @Test
+  public void phoneNumbersTest() {
+    BusinessException exception = Assertions.assertThrows(BusinessException.class, () -> service.createUser("pedro", "aaa", "nombreusuario", "pedrito@hotmail.com", "1224"));
+    Assertions.assertEquals(ErrorCodesEnum.PHONE_NUMBERS, exception.getCode());
+  }
+
 }
