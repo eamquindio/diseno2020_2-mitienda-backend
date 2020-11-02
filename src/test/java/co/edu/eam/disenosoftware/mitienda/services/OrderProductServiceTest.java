@@ -96,6 +96,7 @@ public class OrderProductServiceTest {
 
     service.addingProductToOrderProduct(77L,1L,1);
     Order order=orderRepository.find(1L);
+    Assertions.assertEquals(2200, order.getTotalValue());
     Assertions.assertEquals(1,order.getProduct().get(1).getQuantity());
 
   }
