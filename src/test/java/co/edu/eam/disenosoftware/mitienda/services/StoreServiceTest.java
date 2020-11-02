@@ -88,4 +88,14 @@ public class StoreServiceTest {
     List<Store> storesToAssert = service.getOpenStores();
     Assertions.assertEquals(2,storesToAssert.size());
   }
+  @Test
+  @Sql({"/testdata/login_store_changeStatusOpenTrue.sql"})
+  public void validateOpenStatusStore(){
+
+    Store successful = service.loginStore("store@gmail.com", "1234");
+    Assertions.assertEquals(true, successful.getOpen());
+
+
+
+  }
 }
