@@ -14,6 +14,6 @@ INSERT INTO public.products_store (id, price, stock, id_category, id_product, id
 
 INSERT INTO public.orders (id, "date", state, total_value, id_store, id_user) VALUES(1,'2016-06-22 19:10:25-07', 'in course', 1200, 1, 1);
 
-INSERT INTO public.order_products (id, quantity, state, id_order, id_product) VALUES(1, 4, 'PENDING', 1, 1);
-INSERT INTO public.order_products (id, quantity, state, id_order, id_product) VALUES(2, 4, 'PENDING', 1, 2);
-INSERT INTO public.order_products (id, quantity, state, id_order, id_product) VALUES(3, 4, 'PENDING', 1, 3);
+INSERT INTO public.order_products (id, quantity, state, id_order, id_product) VALUES(1, 4, 'pending', 1, 1);
+INSERT INTO public.order_products (id, quantity, state, id_order, id_product) VALUES(2, 4, 'pending', 1, 2);
+INSERT INTO public.order_products (id, quantity, state, id_order, id_product) VALUES(3, 4, 'pending', 1, 3);
