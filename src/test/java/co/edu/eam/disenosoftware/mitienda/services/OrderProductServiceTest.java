@@ -186,4 +186,15 @@ public class OrderProductServiceTest {
     Assertions.assertEquals("removed", orderProductToAssert.getState());
     Assertions.assertEquals(800, orderProductToAssert.getOrder().getTotalValue());
   }
+
+  @Test
+  @Sql({"/testdata/update_order_when_product_is_deleted.sql"})
+  public void updateOrderWhenProductIsDeletedTest(){
+    service.delete(2L);
+
+    OrderProduct orderProductToAssert = orderProductRepository.find(2L);
+
+    Assertions.assertEquals("REMOVED", orderProductToAssert.getState());
+    Assertions.assertEquals(800, orderProductToAssert.getOrder().getTotalValue());
+  }
 }

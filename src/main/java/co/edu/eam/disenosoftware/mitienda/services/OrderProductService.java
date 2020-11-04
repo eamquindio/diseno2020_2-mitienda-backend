@@ -140,8 +140,9 @@ public class OrderProductService {
     List<OrderProduct> list = orderProductRepository.getAllOrderProductsByIdOrder(orderToFind.getOrder().getId());
 
     if (list.size() == 1) {
-      orderToFind.setState("removed");
-      orderToFind.getOrder().setState("canceled");
+      orderToFind.setState("REMOVED");
+      orderToFind.getOrder().setState("CANCELED");
+      orderToFind.getOrder().setTotalValue(orderToFind.getOrder().getTotalValue()-orderToFind.getProductStore().getPrice());
       orderProductRepository.edit(orderToFind);
       orderRepository.edit(orderToFind.getOrder());
     } else {
