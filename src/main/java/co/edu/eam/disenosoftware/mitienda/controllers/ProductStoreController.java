@@ -33,4 +33,9 @@ public class ProductStoreController {
     return productStoreService.getAllProductStoreByStoreId(storeId);
   }
 
+  @GetMapping("/{productId}")
+  public ProductStore getProductStoreById(@PathVariable Long productId) {
+    return productStoreService.getProductStoreById(productId);
+  }
+
 }

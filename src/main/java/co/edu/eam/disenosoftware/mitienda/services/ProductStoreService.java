@@ -94,4 +94,8 @@ public class ProductStoreService {
     }
     return repositoryProductStore.getProductsStoreByStoreId(storeId);
   }
+
+  public ProductStore getProductStoreById(Long id) {
+    return repositoryProductStore.find(id);
+  }
 }
