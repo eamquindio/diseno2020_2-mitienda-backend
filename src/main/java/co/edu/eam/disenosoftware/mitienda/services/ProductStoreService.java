@@ -95,6 +95,11 @@ public class ProductStoreService {
     return repositoryProductStore.getProductsStoreByStoreId(storeId);
   }
 
+  /**
+   * Find a product Store by product store id
+   * @param id , product store id
+   * @return , the product store finded
+   */
   public ProductStore getProductStoreById(Long id) {
     return repositoryProductStore.find(id);
   }

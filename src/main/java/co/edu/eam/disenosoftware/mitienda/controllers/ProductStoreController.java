@@ -33,6 +33,11 @@ public class ProductStoreController {
     return productStoreService.getAllProductStoreByStoreId(storeId);
   }
 
+  /**
+   * Get Product Store By Product Store Id
+   * @param productId , Product Store Id
+   * @return , The product Store Finded
+   */
   @GetMapping("/{productId}")
   public ProductStore getProductStoreById(@PathVariable Long productId) {
     return productStoreService.getProductStoreById(productId);
