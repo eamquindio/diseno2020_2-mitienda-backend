@@ -258,7 +258,7 @@ public class StoresControllerTest {
     Assertions.assertEquals(HttpStatus.PRECONDITION_FAILED.value(), status);
 
     ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
-    Assertions.assertEquals("0032", error.getErrorCode());
+    Assertions.assertEquals("0031", error.getErrorCode());
   }
 
   @Test

@@ -59,16 +59,16 @@ public class StoreServiceTest {
   public void registerStoresWhenPhoneNumberIsIncorrect() {
     BusinessException exception = Assertions.assertThrows(BusinessException.class,
             () ->service.registerStore("stores","owner", "address", "phone", "store@gmail.com", "123"));
-    Assertions.assertEquals("El número de teléfono ingresado no es correcto", exception.getMessage());
-    Assertions.assertEquals(ErrorCodesEnum.PHONE_NUMBER_INCORRECT, exception.getCode());
+    Assertions.assertEquals("El correo electrónico y/o teléfono ingresado son incorrectos", exception.getMessage());
+    Assertions.assertEquals(ErrorCodesEnum.WRONG_EMAIL_OR_PHONE, exception.getCode());
   }
 
   @Test
   public void registerStoresWhenEmailIsIncorrect() {
     BusinessException exception = Assertions.assertThrows(BusinessException.class,
             () ->service.registerStore("stores","owner", "address", "1", "@store@gmail.com", "123"));
-    Assertions.assertEquals("El correo electrónico ingresado no es correcto", exception.getMessage());
-    Assertions.assertEquals(ErrorCodesEnum.EMAIL_INCORRECT, exception.getCode());
+    Assertions.assertEquals("El correo electrónico y/o teléfono ingresado son incorrectos", exception.getMessage());
+    Assertions.assertEquals(ErrorCodesEnum.WRONG_EMAIL_OR_PHONE, exception.getCode());
   }
 
   @Test

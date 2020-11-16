@@ -136,13 +136,10 @@ public enum ErrorCodesEnum {
    */
   ORDER_CAN_NOT_BE_DELIVERED("0030", HttpStatus.PRECONDITION_FAILED),
   /**
-   * The phone number is incorrect
+   * The phone number or email is incorrect
    */
-  PHONE_NUMBER_INCORRECT("0031", HttpStatus.PRECONDITION_FAILED),
-  /**
-   * The email is incorrect
-   */
-  EMAIL_INCORRECT("0032", HttpStatus.PRECONDITION_FAILED);
+  WRONG_EMAIL_OR_PHONE("0031", HttpStatus.PRECONDITION_FAILED);
+
   /**
    * error code
    */
