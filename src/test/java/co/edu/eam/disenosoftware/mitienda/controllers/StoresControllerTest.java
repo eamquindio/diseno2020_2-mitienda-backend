@@ -3,6 +3,7 @@ package co.edu.eam.disenosoftware.mitienda.controllers;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Category;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Store;
+import co.edu.eam.disenosoftware.mitienda.model.responses.ErrorResponse;
 import co.edu.eam.disenosoftware.mitienda.repositories.OrderRepository;
 import co.edu.eam.disenosoftware.mitienda.repositories.StoreRepository;
 import co.edu.eam.disenosoftware.mitienda.services.OrderService;
@@ -116,8 +117,6 @@ public class StoresControllerTest {
 
     Store storeToAssert = objectMapper.readValue(body,Store.class);
 
-    System.out.println(body);
-
     Assertions.assertEquals(HttpStatus.OK.value(), status);
     Assertions.assertEquals("cra 12",storeToAssert.getAddress());
     Assertions.assertEquals("Pepito",storeToAssert.getOwner());
@@ -149,13 +148,141 @@ public class StoresControllerTest {
         "    \"password\": \"123\"\n" +
         "}";
     RequestBuilder request = MockMvcRequestBuilders.post("/api/stores/login")
-        .contentType("application/json")
-        .content(jsonBody);
+            .contentType("application/json")
+            .content(jsonBody);
 
     ResultActions result = mockMvc.perform(request);
 
     int status = result.andReturn().getResponse().getStatus();
 
     Assertions.assertEquals(403, status);
+  }
+
+  @Test
+  public void controllerCreateStoreTest() throws Exception {
+
+    String jsonBody = "{\n" +
+            "    \"name\":\"Store potatoes\",\n" +
+            "    \"owner\": \"Sara Lucia Carmona Cuartas\",\n" +
+            "    \"address\": \"Dirección x\",\n" +
+            "    \"phone\":\"3105402020\",\n" +
+            "    \"email\":\"sara@gmail.com\",\n" +
+            "    \"password\":\"123\"\n" +
+            "}\n";
+    RequestBuilder request = MockMvcRequestBuilders.post("/api/stores/register")
+            .contentType("application/json")
+            .content(jsonBody);
+
+    ResultActions result = mockMvc.perform(request);
+    String body = result.andReturn().getResponse().getContentAsString();
+    int status = result.andReturn().getResponse().getStatus();
+
+    Store store = storeRepository.find(4L);
+
+    Assertions.assertEquals(HttpStatus.OK.value(), status);
+
+    Assertions.assertEquals("Sara Lucia Carmona Cuartas", store.getOwner());
+  }
+
+  @Test
+  @Sql({"/testdata/controllers/register_store_name_in_use_api.sql"})
+  public void controllerCreateStoreWhenNameIsInUseTest() throws Exception {
+    String jsonBody = "{\n" +
+            "    \"name\":\"Store potatoes\",\n" +
+            "    \"owner\": \"Sara Lucia Carmona Cuartas\",\n" +
+            "    \"address\": \"Dirección x\",\n" +
+            "    \"phone\":\"3105402020\",\n" +
+            "    \"email\":\"sara@gmail.com\",\n" +
+            "    \"password\":\"123\"\n" +
+            "}\n";
+    RequestBuilder request = MockMvcRequestBuilders.post("/api/stores/register")
+            .contentType("application/json")
+            .content(jsonBody);
+
+    ResultActions result = mockMvc.perform(request);
+
+    String body = result.andReturn().getResponse().getContentAsString();
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(HttpStatus.PRECONDITION_FAILED.value(), status);
+
+    ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
+    Assertions.assertEquals("0017", error.getErrorCode());
+  }
+
+  @Test
+  @Sql({"/testdata/controllers/register_store_email_in_use_api.sql"})
+  public void controllerCreateStoreWhenEmailIsInUseTest() throws Exception {
+    String jsonBody = "{\n" +
+            "    \"name\":\"Store potatoes\",\n" +
+            "    \"owner\": \"Sara Lucia Carmona Cuartas\",\n" +
+            "    \"address\": \"Dirección x\",\n" +
+            "    \"phone\":\"3105402020\",\n" +
+            "    \"email\":\"sara@gmail.com\",\n" +
+            "    \"password\":\"123\"\n" +
+            "}\n";
+    RequestBuilder request = MockMvcRequestBuilders.post("/api/stores/register")
+            .contentType("application/json")
+            .content(jsonBody);
+
+    ResultActions result = mockMvc.perform(request);
+
+    String body = result.andReturn().getResponse().getContentAsString();
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(HttpStatus.PRECONDITION_FAILED.value(), status);
+
+    ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
+    Assertions.assertEquals("0018", error.getErrorCode());
+  }
+
+  @Test
+  public void controllerCreateStoreWhenEmailIsIncorrectTest() throws Exception {
+    String jsonBody = "{\n" +
+            "    \"name\":\"Store potatooes\",\n" +
+            "    \"owner\": \"Sara Lucia Carmona Cuartas\",\n" +
+            "    \"address\": \"Dirección x\",\n" +
+            "    \"phone\":\"3105402020\",\n" +
+            "    \"email\":\"@sara@gmail.com\",\n" +
+            "    \"password\":\"123\"\n" +
+            "}\n";
+    RequestBuilder request = MockMvcRequestBuilders.post("/api/stores/register")
+            .contentType("application/json")
+            .content(jsonBody);
+
+    ResultActions result = mockMvc.perform(request);
+
+    String body = result.andReturn().getResponse().getContentAsString();
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(HttpStatus.PRECONDITION_FAILED.value(), status);
+
+    ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
+    Assertions.assertEquals("0032", error.getErrorCode());
+  }
+
+  @Test
+  public void controllerCreateStoreWhenPhoneNumberIsIncorrectTest() throws Exception {
+    String jsonBody = "{\n" +
+            "    \"name\":\"Store potatooes\",\n" +
+            "    \"owner\": \"Sara Lucia Carmona Cuartas\",\n" +
+            "    \"address\": \"Dirección x\",\n" +
+            "    \"phone\":\"phone\",\n" +
+            "    \"email\":\"sara@gmail.com\",\n" +
+            "    \"password\":\"123\"\n" +
+            "}\n";
+    RequestBuilder request = MockMvcRequestBuilders.post("/api/stores/register")
+            .contentType("application/json")
+            .content(jsonBody);
+
+    ResultActions result = mockMvc.perform(request);
+
+    String body = result.andReturn().getResponse().getContentAsString();
+    int status = result.andReturn().getResponse().getStatus();
+
+    Assertions.assertEquals(HttpStatus.PRECONDITION_FAILED.value(), status);
+
+    ErrorResponse error = objectMapper.readValue(body, ErrorResponse.class);
+    Assertions.assertEquals("0031", error.getErrorCode());
   }
 }

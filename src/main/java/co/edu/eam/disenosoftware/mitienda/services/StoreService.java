@@ -5,6 +5,7 @@ import co.edu.eam.disenosoftware.mitienda.exceptions.ErrorCodesEnum;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Store;
 import co.edu.eam.disenosoftware.mitienda.repositories.StoreRepository;
 import co.edu.eam.disenosoftware.mitienda.utils.EncrypterUtil;
+import co.edu.eam.disenosoftware.mitienda.utils.PhoneNumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,9 +47,19 @@ public class StoreService {
       throw new BusinessException("Ya existe el email ingresado", ErrorCodesEnum.STORE_EMAIL_ALREADY_REGISTER);
     }
 
+    if (!PhoneNumberUtil.isNumeric(phone)) {
+      throw new BusinessException("El número de teléfono ingresado no es correcto",
+              ErrorCodesEnum.PHONE_NUMBER_INCORRECT);
+    }
+
     String passwordMD5 = EncrypterUtil.getMD5(password);
-    Store store = new Store(name, owner, address, phone, email, passwordMD5);
-    storeRepository.create(store);
+
+    try {
+      Store store = new Store(name, owner, address, phone, email, passwordMD5);
+      storeRepository.create(store);
+    } catch (Exception ex) {
+      throw new BusinessException("El correo electrónico ingresado no es correcto", ErrorCodesEnum.EMAIL_INCORRECT);
+    }
   }
 
   /**

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import java.io.Serializable;
 
 /**
@@ -63,6 +64,7 @@ public class Store implements Serializable {
   /**
    * Store's email
    */
+  @Email
   private String email;
 
   /**
