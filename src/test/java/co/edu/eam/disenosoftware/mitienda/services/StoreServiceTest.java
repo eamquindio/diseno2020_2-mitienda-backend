@@ -30,7 +30,7 @@ public class StoreServiceTest {
 
   @Test
   public void registerStoreSuccessful() {
-    service.registerStore("store","a", "s", "phone", "store@gmail.com", "1234567891");
+    service.registerStore("store","a", "s", "1", "store@gmail.com", "1234567891");
     Store store = storeRepository.getStoreByName("store");
     Assertions.assertEquals("0f7e44a922df352c05c5f73cb40ba115",store.getPassword());
     Assertions.assertNotNull(store);
@@ -41,7 +41,7 @@ public class StoreServiceTest {
   @Sql({"/testdata/register_store_name_in_use.sql"})
   public void registerStoreNameInUse() {
     BusinessException exception = Assertions.assertThrows(BusinessException.class,
-            () ->service.registerStore("store1","a", "s", "phone", "store123@gmail.com", "dae"));
+            () ->service.registerStore("store1","a", "s", "1", "store123@gmail.com", "dae"));
     Assertions.assertEquals("Ya existe el nombre ingresado", exception.getMessage());
     Assertions.assertEquals(ErrorCodesEnum.STORE_NAME_ALREADY_REGISTER, exception.getCode());
   }
@@ -50,9 +50,25 @@ public class StoreServiceTest {
   @Sql({"/testdata/register_store_email_in_use.sql"})
   public void registerStoreEmailInUse() {
     BusinessException exception = Assertions.assertThrows(BusinessException.class,
-            () ->service.registerStore("store","a", "s", "phone", "store@gmail.com", "dae"));
+            () ->service.registerStore("store","a", "s", "1", "store@gmail.com", "dae"));
     Assertions.assertEquals("Ya existe el email ingresado", exception.getMessage());
     Assertions.assertEquals(ErrorCodesEnum.STORE_EMAIL_ALREADY_REGISTER, exception.getCode());
+  }
+
+  @Test
+  public void registerStoresWhenPhoneNumberIsIncorrect() {
+    BusinessException exception = Assertions.assertThrows(BusinessException.class,
+            () ->service.registerStore("stores","owner", "address", "phone", "store@gmail.com", "123"));
+    Assertions.assertEquals("El correo electrónico y/o teléfono ingresado son incorrectos", exception.getMessage());
+    Assertions.assertEquals(ErrorCodesEnum.WRONG_EMAIL_OR_PHONE, exception.getCode());
+  }
+
+  @Test
+  public void registerStoresWhenEmailIsIncorrect() {
+    BusinessException exception = Assertions.assertThrows(BusinessException.class,
+            () ->service.registerStore("stores","owner", "address", "1", "@store@gmail.com", "123"));
+    Assertions.assertEquals("El correo electrónico y/o teléfono ingresado son incorrectos", exception.getMessage());
+    Assertions.assertEquals(ErrorCodesEnum.WRONG_EMAIL_OR_PHONE, exception.getCode());
   }
 
   @Test

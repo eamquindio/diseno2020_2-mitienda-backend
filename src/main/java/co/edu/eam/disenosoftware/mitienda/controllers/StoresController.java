@@ -4,10 +4,10 @@ import co.edu.eam.disenosoftware.mitienda.model.entities.Category;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Order;
 import co.edu.eam.disenosoftware.mitienda.model.entities.ShoppingCart;
 import co.edu.eam.disenosoftware.mitienda.model.entities.Store;
+import co.edu.eam.disenosoftware.mitienda.model.requests.StoreRequest;
 import co.edu.eam.disenosoftware.mitienda.services.CategoryService;
 import co.edu.eam.disenosoftware.mitienda.services.OrderService;
 import co.edu.eam.disenosoftware.mitienda.services.ShoppingCartService;
-import co.edu.eam.disenosoftware.mitienda.model.requests.StoreRequest;
 import co.edu.eam.disenosoftware.mitienda.services.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Controller for stores entity
@@ -96,8 +95,22 @@ public class StoresController {
                                       @PathVariable Long userId) {
     return shoppingCartService.getShoppingCart(userId, storeId);
   }
+
+  /**
+   * Register - Store
+   *
+   * @param request Store
+   */
+  @PostMapping("/register")
+  public void createStore(@RequestBody Store request) {
+    storeService.registerStore(request.getName(), request.getOwner(),
+            request.getAddress(), request.getPhone(),
+            request.getEmail(), request.getPassword());
+  }
+
   /**
    * login - store
+   *
    * @param request request store
    * @return boolean
    */

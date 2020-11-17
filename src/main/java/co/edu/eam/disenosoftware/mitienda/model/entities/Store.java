@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 /**
@@ -58,11 +60,13 @@ public class Store implements Serializable {
   /**
    * Store's phone
    */
+  @Pattern(regexp = "[0-9]*")
   private String phone;
 
   /**
    * Store's email
    */
+  @Email
   private String email;
 
   /**

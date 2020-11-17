@@ -47,8 +47,14 @@ public class StoreService {
     }
 
     String passwordMD5 = EncrypterUtil.getMD5(password);
-    Store store = new Store(name, owner, address, phone, email, passwordMD5);
-    storeRepository.create(store);
+
+    try {
+      Store store = new Store(name, owner, address, phone, email, passwordMD5);
+      storeRepository.create(store);
+    } catch (Exception ex) {
+      throw new BusinessException("El correo electrónico y/o teléfono ingresado son incorrectos",
+              ErrorCodesEnum.WRONG_EMAIL_OR_PHONE);
+    }
   }
 
   /**

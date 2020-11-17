@@ -77,11 +77,11 @@ public enum ErrorCodesEnum {
   /**
    * store name already register
    */
-  STORE_NAME_ALREADY_REGISTER("0017"),
+  STORE_NAME_ALREADY_REGISTER("0017", HttpStatus.PRECONDITION_FAILED),
   /**
    * store email already register
    */
-  STORE_EMAIL_ALREADY_REGISTER("0018"),
+  STORE_EMAIL_ALREADY_REGISTER("0018", HttpStatus.PRECONDITION_FAILED),
   /**
    * login incorrect
    */
@@ -134,7 +134,12 @@ public enum ErrorCodesEnum {
   /**
    * Order can not be delivered
    */
-  ORDER_CAN_NOT_BE_DELIVERED("0030", HttpStatus.PRECONDITION_FAILED);
+  ORDER_CAN_NOT_BE_DELIVERED("0030", HttpStatus.PRECONDITION_FAILED),
+  /**
+   * The phone number or email is incorrect
+   */
+  WRONG_EMAIL_OR_PHONE("0031", HttpStatus.PRECONDITION_FAILED);
+
   /**
    * error code
    */

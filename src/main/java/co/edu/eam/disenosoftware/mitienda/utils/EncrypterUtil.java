@@ -27,7 +27,6 @@ public class EncrypterUtil {
       }
       return hashtext;
     } catch (NoSuchAlgorithmException e) {
-      System.out.println("entre AQUI");
       throw new RuntimeException(e);
     }
   }
