@@ -114,7 +114,7 @@ public class OrderProductService {
     }
 
     orderToFind.setTotalValue(orderToFind.getTotalValue() + (productStoreToFind.getPrice() * quantity));
-    OrderProduct orderProduct = new OrderProduct(orderToFind, productStoreToFind, quantity, "created");
+    OrderProduct orderProduct = new OrderProduct(orderToFind, productStoreToFind, quantity, "pending");
     orderToFind.getProduct().add(orderProduct);
     orderRepository.edit(orderToFind);
     return orderToFind;
